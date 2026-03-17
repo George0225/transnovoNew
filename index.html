@@ -345,6 +345,160 @@
       font-weight: 600;
     }
 
+    /* ─── VIDEO CAROUSEL SECTION ─── */
+    #video-showcase {
+      background: var(--dark);
+      padding: 0;
+      position: relative;
+    }
+
+    .video-showcase-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .video-showcase-header {
+      margin-bottom: 48px;
+    }
+
+    .video-showcase-header .section-label {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .video-showcase-header .section-title {
+      color: #fff;
+    }
+
+    .video-showcase-header .section-desc {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .video-carousel {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      min-height: 500px;
+    }
+
+    .video-main {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16/10;
+    }
+
+    .video-main video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-main-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .video-main-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px;
+      z-index: 10;
+    }
+
+    .video-main-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .video-main-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+
+    .video-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .video-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #000;
+      flex: 1;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .video-card:hover {
+      transform: translateX(-8px);
+      box-shadow: 0 12px 40px rgba(230,30,108,0.2);
+    }
+
+    .video-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 40%, rgba(0,0,0,0.4) 100%);
+      display: flex;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .video-card-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: all 0.2s;
+    }
+
+    .video-card:hover .video-card-play {
+      background: var(--pink);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .video-card-info {
+      position: relative;
+      z-index: 10;
+    }
+
+    .video-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .video-card-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
     /* ─── SECTION COMMON ─── */
     section { padding: 100px 24px; }
 
@@ -923,6 +1077,7 @@
       .hero-content { padding: 0 32px; }
       .research-content { padding: 80px 32px; }
       .china-inner { padding: 0 32px; }
+      .video-showcase-inner { padding: 60px 32px; }
 
       .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .about-grid { grid-template-columns: 1fr; gap: 56px; }
@@ -936,6 +1091,10 @@
       .footer-qrcodes { justify-content: center; }
       .footer-links { align-items: center; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+
+      .video-carousel { grid-template-columns: 1fr; min-height: auto; }
+      .video-main { aspect-ratio: 16/9; }
+      .video-sidebar { flex-direction: row; }
     }
 
     @media (max-width: 768px) {
@@ -949,6 +1108,7 @@
       .research-content { padding: 60px 20px; }
       .china-inner { padding: 0 20px; flex-direction: column; align-items: flex-start; }
       .china-btn { width: 100%; text-align: center; }
+      .video-showcase-inner { padding: 40px 20px; }
 
       .hero-h1 { font-size: clamp(32px, 10vw, 48px); }
       .hero-sub { font-size: clamp(15px, 4vw, 17px); }
@@ -962,6 +1122,10 @@
       .research-stats { grid-template-columns: 1fr; }
 
       .region-list { grid-template-columns: 1fr; }
+
+      .video-carousel { grid-template-columns: 1fr; }
+      .video-sidebar { flex-direction: column; }
+      .video-card { aspect-ratio: 16/9; }
 
       .stat-cards { grid-template-columns: repeat(2, 1fr); }
 
@@ -1067,6 +1231,58 @@
       <div class="stat-item animate-on-scroll delay-3">
         <div class="stat-number">49<span>+</span></div>
         <div class="stat-label">覆盖国家</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── VIDEO SHOWCASE SECTION ─── -->
+<section id="video-showcase">
+  <div class="video-showcase-inner">
+    <div class="video-showcase-header animate-on-scroll">
+      <span class="section-label">产品视频</span>
+      <h2 class="section-title">LifePort® 器官灌注运转箱</h2>
+      <p class="section-desc">先进的器官灌注技术，为移植手术提供更好的器官保存方案。</p>
+    </div>
+
+    <div class="video-carousel">
+      <!-- Main Video -->
+      <div class="video-main animate-on-scroll">
+        <video autoplay muted loop playsinline poster="images/lifeport-kidney.png">
+          <source src="https://life-port-test.oss-cn-shanghai.aliyuncs.com/视频/LKT101 多支动脉连接方法.mp4" type="video/mp4" />
+        </video>
+        <div class="video-main-overlay"></div>
+        <div class="video-main-info">
+          <h3 class="video-main-title">LKT101 多支动脉连接方法</h3>
+          <p class="video-main-desc">演示 LifePort® 肾脏灌注运转箱的多支动脉连接操作流程</p>
+        </div>
+      </div>
+
+      <!-- Sidebar Videos -->
+      <div class="video-sidebar">
+        <div class="video-card animate-on-scroll delay-1" onclick="swapMainVideo(this, 'https://life-port-test.oss-cn-shanghai.aliyuncs.com/视频/LKT101 废弃耗材处理及设备消毒.mp4', 'LKT101 废弃耗材处理及设备消毒', '演示设备消毒和废弃耗材的正确处理方法')">
+          <video muted playsinline preload="metadata">
+            <source src="https://life-port-test.oss-cn-shanghai.aliyuncs.com/视频/LKT101 废弃耗材处理及设备消毒.mp4" type="video/mp4" />
+          </video>
+          <div class="video-card-overlay">
+            <div class="video-card-play">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;margin-left:4px"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="video-card-info">
+              <h4 class="video-card-title">废弃耗材处理及设备消毒</h4>
+              <p class="video-card-desc">设备消毒流程</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="video-card animate-on-scroll delay-2" style="background: linear-gradient(135deg, #2B3A6D 0%, #1a254a 100%); display:flex; align-items:center; justify-content:center;" onclick="window.location.href='#products'">
+          <div style="text-align:center; padding:24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;color:rgba(255,255,255,0.6); margin-bottom:16px;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <h4 style="color:#fff; font-size:16px; margin-bottom:8px;">探索更多产品</h4>
+            <p style="color:rgba(255,255,255,0.5); font-size:14px;">查看完整产品线 →</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1511,6 +1727,37 @@
       nav.classList.remove('scrolled');
     }
   });
+
+  // Video swap function for video showcase
+  function swapMainVideo(card, videoUrl, title, desc) {
+    const mainVideo = card.closest('.video-carousel').querySelector('.video-main video');
+    const mainTitle = card.closest('.video-carousel').querySelector('.video-main-title');
+    const mainDesc = card.closest('.video-carousel').querySelector('.video-main-desc');
+
+    if (mainVideo && mainTitle && mainDesc) {
+      // Pause current video
+      mainVideo.pause();
+
+      // Update source and load
+      mainVideo.querySelector('source').src = videoUrl;
+      mainVideo.load();
+
+      // Update info
+      mainTitle.textContent = title;
+      mainDesc.textContent = desc;
+
+      // Play new video
+      mainVideo.play().catch(() => {
+        // Autoplay may be blocked, ignore
+      });
+
+      // Visual feedback - remove active class from all cards
+      card.closest('.video-sidebar').querySelectorAll('.video-card').forEach(c => {
+        c.style.boxShadow = 'none';
+      });
+      card.style.boxShadow = '0 12px 40px rgba(230,30,108,0.3)';
+    }
+  }
 
   // Scroll-triggered animations with Intersection Observer
   document.addEventListener('DOMContentLoaded', function() {
