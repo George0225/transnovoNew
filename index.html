@@ -499,6 +499,188 @@
       color: rgba(255,255,255,0.6);
     }
 
+    /* ─── GLASSMORPHISM PRODUCT SHOWCASE ─── */
+    #product-showcase {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f0f1a 100%);
+      padding: 100px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Ambient glow effects */
+    #product-showcase::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 60%;
+      height: 150%;
+      background: radial-gradient(ellipse, rgba(43,58,109,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #product-showcase::after {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      right: -20%;
+      width: 60%;
+      height: 150%;
+      background: radial-gradient(ellipse, rgba(230,30,108,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .product-showcase-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .product-showcase-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .product-showcase-header .section-label {
+      color: rgba(255,255,255,0.6);
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      backdrop-filter: blur(10px);
+    }
+
+    .product-showcase-header .section-title {
+      color: #fff;
+      font-size: clamp(40px, 5vw, 64px);
+      margin-top: 20px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .product-showcase-header .section-desc {
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+      margin: 20px auto 0;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .glass-card {
+      position: relative;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.08) 0%,
+        rgba(255,255,255,0.02) 100%
+      );
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(230,30,108,0.3);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(230,30,108,0.1),
+        inset 0 0 60px rgba(255,255,255,0.02);
+    }
+
+    .glass-card-image {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(43,58,109,0.2) 0%, rgba(26,37,74,0.1) 100%);
+    }
+
+    .glass-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      padding: 40px;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+    }
+
+    .glass-card:hover .glass-card-image img {
+      transform: scale(1.08) translateY(-10px);
+    }
+
+    /* Reflection effect */
+    .glass-card-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(
+        to top,
+        rgba(255,255,255,0.03) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    .glass-card-content {
+      padding: 32px 28px;
+    }
+
+    .glass-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .glass-card-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .glass-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--pink);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .glass-card-link:hover {
+      gap: 12px;
+    }
+
+    .glass-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    /* Featured large card */
+    .glass-card.featured {
+      grid-column: span 2;
+    }
+
+    .glass-card.featured .glass-card-image {
+      height: 400px;
+    }
+
     /* ─── SECTION COMMON ─── */
     section { padding: 100px 24px; }
 
@@ -1078,6 +1260,7 @@
       .research-content { padding: 80px 32px; }
       .china-inner { padding: 0 32px; }
       .video-showcase-inner { padding: 60px 32px; }
+      .product-showcase-inner { padding: 0 32px; }
 
       .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
       .about-grid { grid-template-columns: 1fr; gap: 56px; }
@@ -1095,6 +1278,10 @@
       .video-carousel { grid-template-columns: 1fr; min-height: auto; }
       .video-main { aspect-ratio: 16/9; }
       .video-sidebar { flex-direction: row; }
+
+      .glass-grid { grid-template-columns: 1fr; }
+      .glass-card.featured { grid-column: span 1; }
+      .glass-card.featured .glass-card-image { height: 320px; }
     }
 
     @media (max-width: 768px) {
@@ -1109,6 +1296,7 @@
       .china-inner { padding: 0 20px; flex-direction: column; align-items: flex-start; }
       .china-btn { width: 100%; text-align: center; }
       .video-showcase-inner { padding: 40px 20px; }
+      .product-showcase-inner { padding: 0 20px; }
 
       .hero-h1 { font-size: clamp(32px, 10vw, 48px); }
       .hero-sub { font-size: clamp(15px, 4vw, 17px); }
@@ -1282,6 +1470,80 @@
             <h4 style="color:#fff; font-size:16px; margin-bottom:8px;">探索更多产品</h4>
             <p style="color:rgba(255,255,255,0.5); font-size:14px;">查看完整产品线 →</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── GLASSMORPHISM PRODUCT SHOWCASE ─── -->
+<section id="product-showcase">
+  <div class="product-showcase-inner">
+    <div class="product-showcase-header animate-on-scroll">
+      <span class="section-label">核心产品</span>
+      <h2 class="section-title">LifePort® 器官灌注运转箱系列</h2>
+      <p class="section-desc">先进的机械灌注技术，为器官移植提供更好的保存方案，延长器官活性，提高移植成功率。</p>
+    </div>
+
+    <div class="glass-grid">
+      <!-- Featured Card - Kidney -->
+      <div class="glass-card featured animate-on-scroll">
+        <div class="glass-card-image">
+          <img src="images/lifeport-kidney.png" alt="LifePort® 肾脏灌注运转箱" />
+        </div>
+        <div class="glass-card-content">
+          <h3 class="glass-card-title">LifePort® 肾脏灌注运转箱</h3>
+          <p class="glass-card-desc">全球领先的肾脏保存设备，采用先进的机械灌注技术，显著延长供肾活性，改善移植预后。已在全球 100+ 国家和地区使用，成为肾脏移植领域的金标准设备。</p>
+          <a href="#products" class="glass-card-link">
+            了解更多
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card - Liver -->
+      <div class="glass-card animate-on-scroll delay-1">
+        <div class="glass-card-image">
+          <img src="images/lifeport-liver.png" alt="LifePort® 肝脏灌注运转箱" />
+        </div>
+        <div class="glass-card-content">
+          <h3 class="glass-card-title">LifePort® 肝脏灌注运转箱</h3>
+          <p class="glass-card-desc">专为肝脏移植设计的机械灌注设备，提供稳定的低温灌注，评估和维护供肝质量。</p>
+          <a href="#products" class="glass-card-link">
+            了解更多
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card - KPS-1 -->
+      <div class="glass-card animate-on-scroll delay-2">
+        <div class="glass-card-image">
+          <img src="images/category-background-1.jpg" alt="KPS-1® 器官保存液" style="object-fit:cover;" />
+        </div>
+        <div class="glass-card-content">
+          <h3 class="glass-card-title">KPS-1® 器官保存液</h3>
+          <p class="glass-card-desc">创新配方的器官保存液，适用于肾脏、肝脏等多种器官的低温保存。</p>
+          <a href="#products" class="glass-card-link">
+            了解更多
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card - Solutions -->
+      <div class="glass-card animate-on-scroll delay-3" style="background: linear-gradient(135deg, rgba(43,58,109,0.3) 0%, rgba(230,30,108,0.1) 100%);">
+        <div class="glass-card-image" style="display:flex; align-items:center; justify-content:center; background: transparent;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:120px;height:120px; color:rgba(255,255,255,0.3);"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="glass-card-content">
+          <h3 class="glass-card-title">完整产品解决方案</h3>
+          <p class="glass-card-desc">从器官保存、机械灌注到药物浓度监测、配型检测，我们提供全链条移植解决方案。</p>
+          <a href="#products" class="glass-card-link">
+            查看全部产品
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </div>
