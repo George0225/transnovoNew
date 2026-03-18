@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系我们 - tranSnovo 健耕医药</title>
+  <meta name="description" content"联系健耕医药，获取更多产品信息和专业服务。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fc;
+      --bg-tertiary: #f0f2f8;
+      --border: #e0e4ed;
+      --border-light: rgba(43, 58, 109, 0.08);
+      --text-primary: #1a1f2e;
+      --text-secondary: #4a5568;
+      --text-tertiary: #718096;
+      --accent: #2B3A6D;
+      --accent-light: #3d508a;
+      --accent-glow: rgba(43, 58, 109, 0.15);
+      --accent-soft: rgba(43, 58, 109, 0.08);
+      --pink: #E61E6C;
+      --tech-blue: #5B8FF9;
+      --tech-glow: rgba(91, 143, 249, 0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links > li > a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .nav-links > li > a:hover,
+    .nav-links > li > a.active {
+      color: var(--tech-blue);
+      background: var(--accent-soft);
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--tech-glow);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sub-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      list-style: none;
+      padding: 12px 0;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-links > li:hover .sub-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .sub-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .sub-menu li a:hover {
+      color: var(--tech-blue);
+      background: var(--bg-secondary);
+    }
+
+    .dropdown-arrow {
+      width: 12px;
+      height: 12px;
+      margin-left: 4px;
+      transition: transform 0.3s;
+    }
+
+    .nav-links > li:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .page-header {
+      margin-top: 80px;
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-section {
+      padding: 100px 24px;
+    }
+
+    .contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contact-info h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .contact-info p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    .contact-item .label {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+
+    .contact-item .value {
+      font-size: 16px;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .contact-form {
+      background: var(--bg-secondary);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    .contact-form h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      background: #fff;
+      color: var(--text-primary);
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--tech-blue);
+      box-shadow: 0 0 0 3px var(--tech-glow);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--tech-glow);
+    }
+
+    .map-section {
+      padding: 0 24px 100px;
+    }
+
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+    }
+
+    #partners {
+      padding: 80px 24px;
+      background: var(--bg-secondary);
+    }
+
+    .partners-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .partners-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .partner-logo {
+      opacity: 0.6;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .partner-logo:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .partner-logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    #footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      padding: 80px 24px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1.5fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .logo {
+      height: 48px;
+      margin-bottom: 24px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .footer-section h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .footer-qrcodes {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-qr {
+      text-align: center;
+    }
+
+    .footer-qr img {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .footer-qr span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      list-style: none;
+    }
+
+    .footer-contact svg {
+      width: 20px;
+      height: 20px;
+      color: var(--tech-blue);
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-icp a:hover {
+      color: var(--tech-blue);
+    }
+
+    @media (max-width: 1200px) {
+      .nav-inner { padding: 0 32px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .footer-qrcodes { justify-content: center; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-btn { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-inner { height: 72px; padding: 0 20px; }
+      .page-header { padding: 60px 20px; }
+      .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
+      .contact-section { padding: 80px 20px; }
+      .contact-form { padding: 24px; }
+      .map-container iframe { height: 300px; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-qrcodes { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="tranSnovo 健耕医药" />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li>
+        <a href="products.html">
+          产品中心
+          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="#">机械灌注</a></li>
+          <li><a href="#">器官保存</a></li>
+          <li><a href="#">药物浓度检测</a></li>
+          <li><a href="#">免疫抑制剂</a></li>
+          <li><a href="#">配型产品</a></li>
+          <li><a href="#">抗体检测</a></li>
+          <li><a href="#">术后动态监测</a></li>
+          <li><a href="#">服务与支持</a></li>
+        </ul>
+      </li>
+      <li><a href="research.html">研发生产中心</a></li>
+      <li><a href="patients.html">关爱患者</a></li>
+      <li>
+        <a href="talent.html">
+          人才中心
+          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="#">社会招聘</a></li>
+          <li><a href="#">校园招聘</a></li>
+          <li><a href="#">企业文化</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <a href="contact.html" class="nav-btn active">联系我们</a>
+
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" onclick="closeMenu()">首页</a>
+    <a href="products.html" onclick="closeMenu()">产品中心</a>
+    <a href="research.html" onclick="closeMenu()">研发生产中心</a>
+    <a href="patients.html" onclick="closeMenu()">关爱患者</a>
+    <a href="talent.html" onclick="closeMenu()">人才中心</a>
+    <a href="contact.html" onclick="closeMenu()">联系我们</a>
+  </div>
+</nav>
+
+<section class="page-header">
+  <h1>联系我们</h1>
+  <p>期待与您携手 共创美好未来</p>
+</section>
+
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="contact-info animate-on-scroll">
+        <h2>联系方式</h2>
+        <p>无论您有任何问题或需求，欢迎随时与我们联系。我们的专业团队将竭诚为您服务。</p>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="label">电话</div>
+            <div class="value">021-61763507</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+          </div>
+          <div>
+            <div class="label">传真</div>
+            <div class="value">021-52370879</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="label">地址</div>
+            <div class="value">上海市闵行区浦江镇陈行公路 2388 号 科技广场 2 号楼 1101 室</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form animate-on-scroll delay-1">
+        <h3>在线留言</h3>
+        <form>
+          <div class="form-group">
+            <label for="name">姓名</label>
+            <input type="text" id="name" name="name" placeholder="请输入您的姓名" required>
+          </div>
+          <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" id="email" name="email" placeholder="请输入您的邮箱" required>
+          </div>
+          <div class="form-group">
+            <label for="message">留言内容</label>
+            <textarea id="message" name="message" placeholder="请输入您想咨询的内容" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">提交留言</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="map-container">
+    <iframe src="https://ditu.amap.com/regeo?l=15&latlng=31.063692,121.507933" title="公司位置地图"></iframe>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="partners-inner">
+    <h3 class="partners-title">合作伙伴</h3>
+    <div class="partners-grid">
+      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
+      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
+      <div class="partner-logo"><img src="images/part3.png" alt="合作伙伴 3" /></div>
+      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
+      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
+      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="健耕医药" class="logo" />
+        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>关注我们</h4>
+        <div class="footer-qrcodes">
+          <div class="footer-qr">
+            <img src="images/qcode.png" alt="官网二维码" />
+            <span>官网二维码</span>
+          </div>
+          <div class="footer-qr">
+            <img src="images/wechat-2.png" alt="微信公众号" />
+            <span>微信公众号</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span>021-61763507</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+            <span>021-52370879</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>上海市闵行区浦江镇陈行公路 2388 号 科技广场 2 号楼 1101 室</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        &copy; 2014 - 2026 上海健耕医药科技股份有限公司
+      </div>
+      <div class="footer-icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 12033151 号</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>公司介绍 - tranSnovo 健耕医药</title>
+  <meta name="description" content="健耕医药成立于 2004 年，专注移植领域，提供创新的医疗器械、药品、诊断试剂与服务。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fc;
+      --bg-tertiary: #f0f2f8;
+      --border: #e0e4ed;
+      --border-light: rgba(43, 58, 109, 0.08);
+      --text-primary: #1a1f2e;
+      --text-secondary: #4a5568;
+      --text-tertiary: #718096;
+      --accent: #2B3A6D;
+      --accent-light: #3d508a;
+      --accent-glow: rgba(43, 58, 109, 0.15);
+      --accent-soft: rgba(43, 58, 109, 0.08);
+      --pink: #E61E6C;
+      --tech-blue: #5B8FF9;
+      --tech-blue-light: #8ab6ff;
+      --tech-glow: rgba(91, 143, 249, 0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img {
+      height: 42px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links > li > a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .nav-links > li > a:hover,
+    .nav-links > li > a.active {
+      color: var(--tech-blue);
+      background: var(--accent-soft);
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--tech-glow);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .nav-mobile.open {
+      display: block;
+    }
+
+    .nav-mobile a {
+      display: block;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sub-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      list-style: none;
+      padding: 12px 0;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-links > li:hover .sub-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .sub-menu li a {
+      display: block;
+      padding: 10px 20px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .sub-menu li a:hover {
+      color: var(--tech-blue);
+      background: var(--bg-secondary);
+    }
+
+    .dropdown-arrow {
+      width: 12px;
+      height: 12px;
+      margin-left: 4px;
+      transition: transform 0.3s;
+    }
+
+    .nav-links > li:hover .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-top: 80px;
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* About Section */
+    #about {
+      padding: 120px 24px;
+      background: var(--bg-primary);
+    }
+
+    .about-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    .about-image {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 24px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      transition: all 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px var(--accent-glow);
+    }
+
+    .stat-box .num {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-box .label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* Values Section */
+    #values {
+      padding: 120px 24px;
+      background: var(--bg-secondary);
+    }
+
+    .values-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .values-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .value-card {
+      text-align: center;
+      padding: 48px 32px;
+      background: #fff;
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--border);
+    }
+
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      border-color: var(--tech-blue);
+    }
+
+    .value-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+
+    .value-card:hover .value-icon {
+      background: var(--tech-blue);
+    }
+
+    .value-icon svg {
+      width: 48px;
+      height: 48px;
+      color: var(--accent);
+      transition: color 0.3s;
+    }
+
+    .value-card:hover .value-icon svg {
+      color: #fff;
+    }
+
+    .value-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    /* Partners Section */
+    #partners {
+      padding: 80px 24px;
+      background: var(--bg-primary);
+    }
+
+    .partners-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .partners-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .partner-logo {
+      opacity: 0.6;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .partner-logo:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .partner-logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Footer */
+    #footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      padding: 80px 24px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1.5fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .logo {
+      height: 48px;
+      margin-bottom: 24px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .footer-section h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .footer-qrcodes {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-qr {
+      text-align: center;
+    }
+
+    .footer-qr img {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .footer-qr span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      list-style: none;
+    }
+
+    .footer-contact svg {
+      width: 20px;
+      height: 20px;
+      color: var(--tech-blue);
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-icp a:hover {
+      color: var(--tech-blue);
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .nav-inner { padding: 0 32px; }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .footer-qrcodes { justify-content: center; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-btn { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-inner { height: 72px; padding: 0 20px; }
+      .page-header { padding: 60px 20px; }
+      .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
+      #about, #values { padding: 80px 20px; }
+      .about-stats { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-qrcodes { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="tranSnovo 健耕医药" />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li>
+        <a href="products.html">
+          产品中心
+          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="#">机械灌注</a></li>
+          <li><a href="#">器官保存</a></li>
+          <li><a href="#">药物浓度检测</a></li>
+          <li><a href="#">免疫抑制剂</a></li>
+          <li><a href="#">配型产品</a></li>
+          <li><a href="#">抗体检测</a></li>
+          <li><a href="#">术后动态监测</a></li>
+          <li><a href="#">服务与支持</a></li>
+        </ul>
+      </li>
+      <li><a href="research.html">研发生产中心</a></li>
+      <li><a href="patients.html">关爱患者</a></li>
+      <li>
+        <a href="talent.html">
+          人才中心
+          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="#">社会招聘</a></li>
+          <li><a href="#">校园招聘</a></li>
+          <li><a href="#">企业文化</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <a href="contact.html" class="nav-btn">联系我们</a>
+
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" onclick="closeMenu()">首页</a>
+    <a href="products.html" onclick="closeMenu()">产品中心</a>
+    <a href="research.html" onclick="closeMenu()">研发生产中心</a>
+    <a href="patients.html" onclick="closeMenu()">关爱患者</a>
+    <a href="talent.html" onclick="closeMenu()">人才中心</a>
+    <a href="contact.html" onclick="closeMenu()">联系我们</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>公司介绍</h1>
+  <p>专注移植领域，助力全球医疗创新</p>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-grid">
+      <div class="animate-on-scroll">
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">关于健耕医药</h2>
+        <div class="about-text">
+          <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
+          <p>公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。</p>
+          <p>健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，主要提供移植器官保存、运输、评估及修复的产品以及移植个体化精准诊断的体外诊断试剂，远销全球约 49 个国家和地区。</p>
+        </div>
+
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="num">300+</div>
+            <div class="label">专利</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">20+</div>
+            <div class="label">年</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">100+</div>
+            <div class="label">医院</div>
+          </div>
+          <div class="stat-box">
+            <div class="num">49+</div>
+            <div class="label">国家</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-image animate-on-scroll delay-1">
+        <img src="images/about-m1.jpg" alt="健耕医药" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES SECTION -->
+<section id="values">
+  <div class="values-inner">
+    <div class="values-header animate-on-scroll">
+      <span class="section-label">Core Values</span>
+      <h2 class="section-title">核心价值观</h2>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card animate-on-scroll">
+        <div class="value-icon">
+          <svg viewBox="0 0 742 816" fill="currentColor"><path d="M.6 233.8c0-19.2 13.9-42.7 30.9-52.3L340.1 7.3c17-9.6 44.8-9.6 61.8 0l308.6 174.2c17 9.6 30.9 33.1 30.9 52.3v348.5c0 19.1-13.9 42.7-30.9 52.2L401.9 808.8c-17 9.6-44.8 9.6-61.8 0L31.5 634.5C14.5 625 .6 601.4.6 582.3z"/></svg>
+        </div>
+        <h3 class="value-title">专注移植</h3>
+      </div>
+
+      <div class="value-card animate-on-scroll delay-1">
+        <div class="value-icon">
+          <svg viewBox="0 0 121 106" fill="currentColor"><path d="M30.38 0h11.05c7.04 1.09 13.74 4.17 18.97 9.02C65.71 4.34 72.27 1.16 79.27 0h10.96c15.75 2.08 29.49 15.53 30.77 31.55v7.82c-.66 8.54-5.07 16.56-11.27 22.38-13.8 13.53-27.52 27.15-41.32 40.67-4.15 4.34-11.72 4.33-15.87.01-13.8-13.51-27.52-27.11-41.32-40.63C5.22 56.1.93 48.48 0 40.18v-9.3C1.6 15.21 15 2.3 30.38 0"/></svg>
+        </div>
+        <h3 class="value-title">精益求精</h3>
+      </div>
+
+      <div class="value-card animate-on-scroll delay-2">
+        <div class="value-icon">
+          <svg viewBox="0 0 200 189" fill="currentColor"><path d="M109.1 14.13C120.13 6.19 133.18.05 147.03.2c11.59-.09 22.77 4.9 31.38 12.49 11.77 10.07 21.16 24.22 21.59 40.14v3.1c-.86 19.8-12.41 38.14-28.71 49.04 3.78 3.77 7.44 8.34 7.25 14 .97 9.58-7.99 17.77-17.3 17.53.45 9.14-7.27 16.94-16.2 17.58-.33 4.4-1.31 9.08-4.81 12.11-3.11 3.73-7.97 4.92-12.6 5.36-.42 4.41-1.38 9.12-4.92 12.16-4.55 5.28-12.7 6.45-18.82 3.41-2.95-1.44-4.63-4.39-6.51-6.92-3.62 1.39-7.48 2.91-11.41 2.05-6.65-1.31-12.3-6.64-13.92-13.24-8.69.22-17.86-5.85-18.67-14.97-8.44-.28-16.4-6.42-17.57-15-3.34-.62-7.01-.89-9.73-3.17-4.84-3.98-7.35-10.59-6.45-16.78.69-4.53 3.94-7.97 6.54-11.52C12.92 93.82 1.24 76.79 0 57.16v-3.64c.53-13.71 7.14-26.99 17.63-35.81 8.39-7.09 18.27-13 29.3-14.64C59.1 1.12 71.61 4.6 82.06 10.85c6.19 3.86 12.43 8.05 16.68 14.12 3.21-3.83 6.22-7.95 10.36-10.84"/></svg>
+        </div>
+        <h3 class="value-title">敬畏生命</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS SECTION -->
+<section id="partners">
+  <div class="partners-inner">
+    <h3 class="partners-title">合作伙伴</h3>
+    <div class="partners-grid">
+      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
+      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
+      <div class="partner-logo"><img src="images/part3.png" alt="合作伙伴 3" /></div>
+      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
+      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
+      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="健耕医药" class="logo" />
+        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>关注我们</h4>
+        <div class="footer-qrcodes">
+          <div class="footer-qr">
+            <img src="images/qcode.png" alt="官网二维码" />
+            <span>官网二维码</span>
+          </div>
+          <div class="footer-qr">
+            <img src="images/wechat-2.png" alt="微信公众号" />
+            <span>微信公众号</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span>021-61763507</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+            <span>021-52370879</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>上海市闵行区浦江镇陈行公路 2388 号 科技广场 2 号楼 1101 室</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        &copy; 2014 - 2026 上海健耕医药科技股份有限公司
+      </div>
+      <div class="footer-icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 12033151 号</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navigation scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
