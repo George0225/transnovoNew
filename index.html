@@ -13,40 +13,47 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-primary: #ffffff;
-      --bg-dark: #0a0a0a;
-      --bg-secondary: #111111;
+      --bg-dark: #0a1628;
+      --bg-navy: #112240;
+      --bg-light: #f8f9fc;
       --text-primary: #1d1d1f;
-      --text-secondary: #6e6e73;
       --text-light: #f5f5f7;
+      --text-muted: rgba(255,255,255,0.7);
       --accent: #2B3A6D;
       --pink: #E61E6C;
       --tech-blue: #5B8FF9;
       --border: #e0e4ed;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: var(--text-primary);
-      background: var(--bg-primary);
+      background: var(--bg-light);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* SCROLL PROGRESS INDICATOR */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 4px;
+      height: 100%;
+      background: rgba(91, 143, 249, 0.2);
+      z-index: 9999;
+      transform-origin: top;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .scroll-progress-bar {
+      width: 100%;
+      background: linear-gradient(to bottom, var(--tech-blue), var(--pink));
+      transform-origin: top;
     }
 
     /* NAVIGATION */
@@ -60,6 +67,11 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       transition: all 0.3s;
+    }
+
+    #nav.dark {
+      background: rgba(10, 22, 40, 0.95);
+      border-color: rgba(255,255,255,0.1);
     }
 
     .nav-inner {
@@ -94,9 +106,13 @@
       transition: all 0.2s;
     }
 
+    #nav.dark .nav-links > li > a {
+      color: var(--text-light);
+    }
+
     .nav-links > li > a:hover {
       color: var(--tech-blue);
-      background: var(--accent);
+      background: rgba(91, 143, 249, 0.1);
     }
 
     .nav-links .sub-menu {
@@ -146,65 +162,68 @@
       font-weight: 600;
       border-radius: 100px;
       text-decoration: none;
-      box-shadow: 0 4px 15px var(--accent-glow);
+      box-shadow: 0 4px 15px rgba(43, 58, 109, 0.3);
     }
 
     .nav-toggle { display: none; }
 
-    /* HERO BANNER */
-    #hero-banner {
+    /* CHAPTER 1: HERO */
+    #chapter-1 {
       position: relative;
-      height: 70vh;
-      min-height: 500px;
-      overflow: hidden;
+      height: 100vh;
+      min-height: 700px;
       background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    .hero-video-wrapper {
+    .hero-parallax-bg {
       position: absolute;
       inset: 0;
       z-index: 1;
+      overflow: hidden;
     }
 
-    .hero-video-wrapper video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-overlay {
+    .hero-parallax-bg::before {
+      content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(10,10,10,0.8) 0%, rgba(10,10,10,0.5) 100%);
+      background: linear-gradient(135deg, rgba(10,22,40,0.8) 0%, rgba(17,34,64,0.6) 100%);
       z-index: 2;
+    }
+
+    .hero-parallax-bg img {
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      transform: translateY(0);
+      transition: transform 0.1s linear;
     }
 
     .hero-content {
       position: relative;
       z-index: 10;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 48px;
-      height: 100%;
-      display: flex;
-      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 900px;
     }
-
-    .hero-text { max-width: 800px; }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 10px 24px;
-      border: 1px solid rgba(255,255,255,0.3);
+      padding: 12px 28px;
+      border: 1px solid rgba(91, 143, 249, 0.5);
       border-radius: 100px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: #fff;
-      margin-bottom: 24px;
-      letter-spacing: 0.15em;
-      background: rgba(255,255,255,0.1);
+      color: var(--tech-blue);
+      margin-bottom: 32px;
+      letter-spacing: 0.2em;
+      background: rgba(91, 143, 249, 0.1);
+      backdrop-filter: blur(10px);
     }
 
     .hero-badge::before {
@@ -214,44 +233,92 @@
       border-radius: 50%;
       background: var(--pink);
       box-shadow: 0 0 20px var(--pink);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
     .hero-h1 {
-      font-size: clamp(48px, 6vw, 80px);
+      font-size: clamp(48px, 8vw, 96px);
       font-weight: 900;
       color: #fff;
       line-height: 1.05;
       letter-spacing: -0.02em;
       margin-bottom: 24px;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     }
 
     .hero-sub {
-      font-size: clamp(16px, 2vw, 20px);
-      color: rgba(255,255,255,0.9);
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: rgba(255,255,255,0.85);
       line-height: 1.8;
-      max-width: 650px;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
     }
 
-    /* COMPANY INTRO SECTION */
-    #company-intro {
-      padding: 100px 24px;
-      background: var(--bg-primary);
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
     }
 
-    .company-intro-inner {
+    .scroll-hint svg {
+      width: 24px;
+      height: 24px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
+
+    /* CHAPTER 2: COMPANY INTRO */
+    #chapter-2 {
+      padding: 120px 24px;
+      background: var(--bg-light);
+    }
+
+    .chapter-inner {
       max-width: 1400px;
       margin: 0 auto;
     }
 
-    .company-grid {
+    .chapter-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
     }
 
-    .company-label {
+    .chapter-label {
       display: inline-block;
       padding: 8px 20px;
       background: var(--accent);
@@ -259,90 +326,179 @@
       border-radius: 100px;
       font-size: 13px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       letter-spacing: 0.1em;
     }
 
-    .company-title {
+    .chapter-title {
       font-size: clamp(36px, 4vw, 52px);
       font-weight: 800;
       color: var(--text-primary);
       line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .company-text {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.9;
       margin-bottom: 32px;
     }
 
-    .company-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+    .chapter-text {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 24px;
     }
 
-    .stat-card {
-      text-align: center;
-      padding: 24px 16px;
-      background: var(--bg-secondary);
-      color: #fff;
-      border-radius: 16px;
-    }
-
-    .stat-num {
-      display: block;
-      font-size: 42px;
-      font-weight: 900;
-      color: var(--tech-blue);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .stat-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .company-image {
+    .chapter-image {
+      position: relative;
       border-radius: 24px;
       overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.12);
     }
 
-    .company-image img {
+    .chapter-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s;
     }
 
-    .company-image:hover img {
+    .chapter-image:hover img {
       transform: scale(1.05);
     }
 
-    /* TIMELINE SECTION */
-    #timeline {
-      padding: 100px 24px;
-      background: var(--bg-secondary);
-      color: #fff;
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
     }
 
-    .timeline-inner {
-      max-width: 1400px;
-      margin: 0 auto;
+    .stat-item {
+      text-align: center;
+      padding: 32px 24px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+
+    .stat-num {
+      display: block;
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--tech-blue), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stat-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* CHAPTER 3: VIDEO */
+    #chapter-3 {
+      position: relative;
+      padding: 0;
+      background: var(--bg-dark);
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      height: 80vh;
+      min-height: 600px;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 22, 40, 0.5);
+      z-index: 2;
+    }
+
+    .video-content {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 24px;
+    }
+
+    .video-title {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .video-text {
+      font-size: 16px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.8;
+    }
+
+    .video-controls {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 20;
+    }
+
+    .video-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .video-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.1);
+    }
+
+    /* CHAPTER 4: TIMELINE */
+    #chapter-4 {
+      padding: 120px 24px;
+      background: var(--bg-navy);
+      color: #fff;
     }
 
     .section-header {
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 80px;
     }
 
     .section-label {
       display: inline-block;
       padding: 8px 20px;
-      background: rgba(91,143,249,0.2);
+      background: rgba(91, 143, 249, 0.2);
       border: 1px solid var(--tech-blue);
       border-radius: 100px;
       font-size: 13px;
@@ -361,6 +517,8 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .timeline-item {
@@ -390,15 +548,10 @@
       line-height: 1.8;
     }
 
-    /* PRODUCTS SECTION */
-    #products {
-      padding: 100px 24px;
-      background: var(--bg-primary);
-    }
-
-    .products-inner {
-      max-width: 1400px;
-      margin: 0 auto;
+    /* CHAPTER 5: PRODUCTS */
+    #chapter-5 {
+      padding: 120px 24px;
+      background: var(--bg-light);
     }
 
     .products-header {
@@ -420,6 +573,8 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .product-card {
@@ -429,6 +584,8 @@
       background: #fff;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       transition: all 0.4s;
+      text-decoration: none;
+      color: inherit;
     }
 
     .product-card:hover {
@@ -459,6 +616,7 @@
     .product-title {
       font-size: 18px;
       font-weight: 700;
+      color: var(--text-primary);
       margin-bottom: 8px;
     }
 
@@ -467,9 +625,9 @@
       color: var(--text-secondary);
     }
 
-    /* GLOBAL SECTION */
-    #global {
-      padding: 100px 24px;
+    /* CHAPTER 6: GLOBAL */
+    #chapter-6 {
+      padding: 120px 24px;
       background: linear-gradient(135deg, var(--accent) 0%, var(--tech-blue) 100%);
       color: #fff;
     }
@@ -490,10 +648,9 @@
     }
 
     .global-text {
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.9;
-      opacity: 0.9;
-      margin-bottom: 32px;
+      opacity: 0.95;
     }
 
     .global-stats {
@@ -504,13 +661,14 @@
 
     .global-stat {
       background: rgba(255,255,255,0.1);
-      padding: 32px;
-      border-radius: 16px;
+      padding: 40px 32px;
+      border-radius: 20px;
       backdrop-filter: blur(10px);
+      text-align: center;
     }
 
     .global-stat .num {
-      font-size: 48px;
+      font-size: 56px;
       font-weight: 900;
       display: block;
       margin-bottom: 8px;
@@ -518,7 +676,7 @@
 
     .global-stat .label {
       font-size: 14px;
-      opacity: 0.8;
+      opacity: 0.85;
     }
 
     /* FOOTER */
@@ -586,13 +744,13 @@
     /* RESPONSIVE */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .hero-content { padding: 0 32px; }
-      .company-grid { grid-template-columns: 1fr; gap: 48px; }
-      .company-image { order: -1; }
+      .chapter-grid { grid-template-columns: 1fr; gap: 48px; }
+      .chapter-image { order: -1; }
       .timeline-grid { grid-template-columns: repeat(3, 1fr); }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .global-inner { grid-template-columns: 1fr; gap: 48px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
@@ -600,19 +758,24 @@
       .nav-toggle { display: block; }
       .hero-h1 { font-size: 36px; }
       .hero-sub { font-size: 16px; }
-      .company-stats { grid-template-columns: repeat(2, 1fr); }
       .timeline-grid { grid-template-columns: 1fr; }
       .products-grid { grid-template-columns: 1fr; }
       .global-stats { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress">
+  <div class="scroll-progress-bar" id="scroll-bar"></div>
+</div>
+
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#hero-banner" class="nav-logo">
+    <a href="#chapter-1" class="nav-logo">
       <img src="images/logo.png" alt="tranSnovo 健耕医药" />
     </a>
     <ul class="nav-links">
@@ -635,62 +798,63 @@
   </div>
 </nav>
 
-<!-- HERO BANNER -->
-<section id="hero-banner">
-  <div class="hero-video-wrapper">
-    <video autoplay muted loop playsinline>
-      <source src="images/hero-video.mp4" type="video/mp4" />
-    </video>
+<!-- CHAPTER 1: HERO -->
+<section id="chapter-1">
+  <div class="hero-parallax-bg">
+    <img src="images/幻灯片 1.jpg" alt="背景" id="parallax-img" />
   </div>
-  <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-badge">器官移植创新</div>
-      <h1 class="hero-h1">为生命 重塑未来</h1>
-      <p class="hero-sub">
-        提供创新的器械、药品、诊断试剂与服务，
-        改善移植器官的保存、评估、运输，
-        助力移植患者长期存活，推动移植领域创新与发展。
-      </p>
-    </div>
+    <div class="hero-badge">器官移植创新</div>
+    <h1 class="hero-h1">为生命 重塑未来</h1>
+    <p class="hero-sub">
+      提供创新的器械、药品、诊断试剂与服务，
+      改善移植器官的保存、评估、运输，
+      助力移植患者长期存活，推动移植领域创新与发展。
+    </p>
+  </div>
+  <div class="scroll-hint">
+    <span>向下滚动</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
   </div>
 </section>
 
-<!-- COMPANY INTRO -->
-<section id="company-intro">
-  <div class="company-intro-inner">
-    <div class="company-grid">
-      <div class="company-content">
-        <span class="company-label">关于健耕</span>
-        <h2 class="company-title">专注移植领域，围绕移植全程</h2>
-        <p class="company-text">
+<!-- CHAPTER 2: COMPANY INTRO -->
+<section id="chapter-2">
+  <div class="chapter-inner">
+    <div class="chapter-grid">
+      <div class="chapter-content">
+        <span class="chapter-label">关于健耕</span>
+        <h2 class="chapter-title">专注移植领域，围绕移植全程</h2>
+        <p class="chapter-text">
           成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。
           公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。
         </p>
-        <p class="company-text">
+        <p class="chapter-text">
           健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，
           主要提供移植器官保存、运输、评估及修复的产品以及移植个体化精准诊断的体外诊断试剂，
           远销全球约 49 个国家和地区。
         </p>
       </div>
-      <div class="company-image">
+      <div class="chapter-image">
         <img src="images/about-m1.jpg" alt="健耕医药" />
       </div>
     </div>
-    <div class="company-stats">
-      <div class="stat-card">
+    <div class="stats-row">
+      <div class="stat-item">
         <span class="stat-num">2004</span>
         <span class="stat-desc">成立年份</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-item">
         <span class="stat-num">185+</span>
         <span class="stat-desc">全球员工</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-item">
         <span class="stat-num">49+</span>
         <span class="stat-desc">国家地区</span>
       </div>
-      <div class="stat-card">
+      <div class="stat-item">
         <span class="stat-num">26</span>
         <span class="stat-desc">研发人员</span>
       </div>
@@ -698,9 +862,32 @@
   </div>
 </section>
 
-<!-- TIMELINE -->
-<section id="timeline">
-  <div class="timeline-inner">
+<!-- CHAPTER 3: VIDEO -->
+<section id="chapter-3">
+  <div class="video-wrapper">
+    <video autoplay muted loop playsinline id="hero-video">
+      <source src="images/hero-video.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-controls">
+      <button class="video-btn" id="video-toggle" aria-label="Toggle video">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="video-content">
+      <h3 class="video-title">创新科技 守护生命</h3>
+      <p class="video-text">
+        从器官获取到移植手术，健耕医药提供全流程解决方案
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTER 4: TIMELINE -->
+<section id="chapter-4">
+  <div class="chapter-inner">
     <div class="section-header">
       <span class="section-label">发展历程</span>
       <h2 class="section-title">二十年深耕 砥砺前行</h2>
@@ -750,9 +937,9 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="products">
-  <div class="products-inner">
+<!-- CHAPTER 5: PRODUCTS -->
+<section id="chapter-5">
+  <div class="chapter-inner">
     <div class="products-header">
       <span class="section-label">产品中心</span>
       <h2 class="section-title">创新产品矩阵</h2>
@@ -798,8 +985,8 @@
   </div>
 </section>
 
-<!-- GLOBAL NETWORK -->
-<section id="global">
+<!-- CHAPTER 6: GLOBAL -->
+<section id="chapter-6">
   <div class="global-inner">
     <div>
       <h2 class="global-title">全球网络布局</h2>
@@ -868,14 +1055,66 @@
 </footer>
 
 <script>
-  // Nav scroll effect
+  // Scroll Progress Indicator
+  const scrollBar = document.getElementById('scroll-bar');
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('nav');
-    if (window.scrollY > 50) {
-      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.1)';
-    } else {
-      nav.style.boxShadow = 'none';
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const scrollPercent = scrollTop / docHeight;
+    scrollBar.style.transform = `scaleY(${scrollPercent})`;
+  });
+
+  // Parallax Effect for Hero
+  const parallaxImg = document.getElementById('parallax-img');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const maxScroll = window.innerHeight;
+    if (scrolled < maxScroll) {
+      const translateY = scrolled * 0.5;
+      parallaxImg.style.transform = `translateY(${translateY}px)`;
     }
+  });
+
+  // Nav Dark Mode on Hero
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 600) {
+      nav.classList.add('dark');
+    } else {
+      nav.classList.remove('dark');
+    }
+  });
+
+  // Video Toggle
+  const video = document.getElementById('hero-video');
+  const videoToggle = document.getElementById('video-toggle');
+  videoToggle.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      videoToggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+    } else {
+      video.pause();
+      videoToggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
+    }
+  });
+
+  // Smooth Reveal on Scroll
+  const revealElements = document.querySelectorAll('.stat-item, .timeline-item, .product-card, .global-stat');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  revealElements.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+    revealObserver.observe(el);
   });
 </script>
 
