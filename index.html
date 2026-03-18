@@ -49,6 +49,27 @@
       box-shadow: 0 2px 20px rgba(0,0,0,0.08);
     }
 
+    /* Silver top band for logo */
+    .nav-top-band {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(180deg,
+        rgba(230,230,230,0.95) 0%,
+        rgba(245,245,245,0.9) 40%,
+        rgba(255,255,255,0.85) 100%);
+      backdrop-filter: blur(20px);
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: -1;
+    }
+
+    #nav .nav-top-band {
+      opacity: 1;
+    }
+
     .nav-inner {
       max-width: 1400px;
       margin: 0 auto;
@@ -885,6 +906,7 @@
 
 <!-- NAVIGATION -->
 <nav id="nav">
+  <div class="nav-top-band"></div>
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
       <img src="images/logo.png" alt="tranSnovo" />
