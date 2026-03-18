@@ -139,40 +139,49 @@
       position: relative; z-index: 10;
     }
 
-    /* Futuristic Logo */
+    /* Futuristic Logo with Enhanced Highlight */
     .nav-logo {
       display: flex; align-items: center; gap: 14px;
       text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 12px;
+      padding: 10px 18px;
+      border-radius: 14px;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 100%);
+      border: 1px solid rgba(255,255,255,0.15);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 4px 20px rgba(0,0,0,0.3);
     }
 
     .nav-logo::before {
       content: '';
       position: absolute;
       inset: -2px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--pink) 0%, var(--blue) 100%);
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--blue-dark) 100%);
       opacity: 0;
       transition: opacity 0.3s;
       z-index: -1;
     }
 
     .nav-logo:hover::before {
-      opacity: 0.1;
+      opacity: 0.2;
     }
 
     .nav-logo img {
       height: 40px; width: auto;
-      filter: drop-shadow(0 2px 8px rgba(43,58,109,0.2));
+      filter: drop-shadow(0 4px 12px rgba(88, 166, 255, 0.3))
+              brightness(1.1)
+              contrast(1.05);
       transition: filter 0.3s, transform 0.3s;
     }
 
     .nav-logo:hover img {
-      filter: drop-shadow(0 4px 16px rgba(230,30,108,0.4));
-      transform: scale(1.02);
+      filter: drop-shadow(0 8px 24px rgba(88, 166, 255, 0.5))
+              brightness(1.2)
+              contrast(1.1);
+      transform: scale(1.05);
     }
 
     /* Animated logo glow effect */
@@ -183,12 +192,12 @@
       left: -4px;
       width: 4px;
       height: 4px;
-      background: var(--pink);
+      background: var(--accent);
       border-radius: 50%;
       opacity: 0;
       box-shadow:
-        0 0 20px 4px var(--pink),
-        0 0 40px 8px rgba(230,30,108,0.3);
+        0 0 20px 4px var(--accent),
+        0 0 40px 8px rgba(88, 166, 255, 0.3);
       transition: opacity 0.3s;
     }
 
@@ -875,16 +884,60 @@
       border-radius: 24px;
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+
+    /* 3D Platform base effect */
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%) rotateX(90deg);
+      width: 80%;
+      height: 40px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      opacity: 0;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: blur(20px);
+      z-index: -1;
     }
 
     .glass-card:hover {
-      transform: translateY(-12px);
+      transform: perspective(1000px) translateY(-16px) scale(1.02) rotateX(0) rotateY(0);
       border-color: var(--accent);
       box-shadow:
         0 30px 80px rgba(0,0,0,0.6),
         0 0 0 1px var(--accent),
-        0 0 40px var(--accent-glow),
-        inset 0 0 60px rgba(88,166,255,0.02);
+        0 0 60px var(--accent-glow),
+        inset 0 0 80px rgba(88,166,255,0.05);
+    }
+
+    .glass-card:hover::before {
+      opacity: 0.6;
+      bottom: -40px;
+    }
+
+    /* Light sweep animation on hover */
+    .glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(88, 166, 255, 0.1) 50%,
+        transparent 100%
+      );
+      transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .glass-card:hover::after {
+      left: 100%;
     }
 
     .glass-card-image {
@@ -892,6 +945,7 @@
       height: 320px;
       overflow: hidden;
       background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+      perspective: 1000px;
     }
 
     .glass-card-image img {
@@ -900,28 +954,55 @@
       object-fit: contain;
       object-position: center;
       padding: 40px;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6))
+              contrast(1.05)
+              brightness(0.95);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Remove white background from LifePort images */
+    .glass-card-image img[src*="lifeport"] {
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 25px 50px rgba(0,0,0,0.7))
+              contrast(1.1)
+              brightness(0.9);
+    }
+
+    /* 3D floating platform - only for non-LifePort cards */
+    .glass-card-image:not(.lifeport-image)::before {
+      content: '';
+      position: absolute;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%) rotateX(60deg);
+      width: 60%;
+      height: 60px;
+      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+      filter: blur(15px);
+      opacity: 0.3;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 0;
+    }
+
+    .glass-card:hover .glass-card-image:not(.lifeport-image)::before {
+      opacity: 0.6;
+      bottom: 40px;
+      transform: translateX(-50%) rotateX(70deg) scale(1.2);
     }
 
     .glass-card:hover .glass-card-image img {
-      transform: scale(1.08) translateY(-10px);
+      transform: scale(1.1) translateY(-15px) rotateY(-3deg);
+      filter: drop-shadow(0 40px 80px rgba(88, 166, 255, 0.4))
+              contrast(1.1)
+              brightness(1.05);
     }
 
-    /* Reflection effect */
-    .glass-card-image::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40%;
-      background: linear-gradient(
-        to top,
-        rgba(88,166,255,0.03) 0%,
-        transparent 100%
-      );
-      pointer-events: none;
+    .glass-card:hover .glass-card-image img[src*="lifeport"] {
+      filter: drop-shadow(0 40px 80px rgba(88, 166, 255, 0.5))
+              contrast(1.15)
+              brightness(1.05);
     }
 
     .glass-card-content {
@@ -1834,7 +1915,7 @@
     <div class="glass-grid">
       <!-- Featured Card - Kidney -->
       <div class="glass-card featured animate-on-scroll">
-        <div class="glass-card-image">
+        <div class="glass-card-image lifeport-image">
           <img src="images/lifeport-kidney.png" alt="LifePort® 肾脏灌注运转箱" />
         </div>
         <div class="glass-card-content">
@@ -1849,7 +1930,7 @@
 
       <!-- Card - Liver -->
       <div class="glass-card animate-on-scroll delay-1">
-        <div class="glass-card-image">
+        <div class="glass-card-image lifeport-image">
           <img src="images/lifeport-liver.png" alt="LifePort® 肝脏灌注运转箱" />
         </div>
         <div class="glass-card-content">
@@ -2387,6 +2468,26 @@
     document.querySelectorAll('.animate-on-scroll, .delay-1, .delay-2, .delay-3, .delay-4').forEach(el => {
       el.style.opacity = '0';
       observer.observe(el);
+    });
+
+    // 3D Tilt effect for glass cards
+    const glassCards = document.querySelectorAll('.glass-card');
+    glassCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+
+        card.style.transform = `perspective(1000px) translateZ(20px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) translateZ(0) rotateX(0) rotateY(0) scale(1)';
+      });
     });
   });
 </script>
