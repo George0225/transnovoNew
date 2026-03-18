@@ -139,7 +139,7 @@
 
     .nav-toggle { display: none; }
 
-    /* HERO SECTION - Full Screen Video */
+    /* HERO SECTION - 9-Grid Mirror Effect */
     #hero {
       position: relative;
       height: 100vh;
@@ -150,12 +150,69 @@
       justify-content: center;
     }
 
-    .hero-video {
+    .hero-video-grid {
       position: absolute;
       inset: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 2px;
+      width: 100%;
+      height: 100%;
+      padding: 2px;
+    }
+
+    .hero-video-cell {
+      position: relative;
+      overflow: hidden;
+      background: rgba(10, 22, 40, 0.3);
+    }
+
+    .hero-video-cell video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    /* Mirror reflections for different cells */
+    .hero-video-cell:nth-child(1) video { /* top-left */
+      transform: scaleX(-1);
+    }
+    .hero-video-cell:nth-child(2) video { /* top-center */
+      transform: scaleY(-1);
+    }
+    .hero-video-cell:nth-child(3) video { /* top-right */
+      /* normal */
+    }
+    .hero-video-cell:nth-child(4) video { /* middle-left */
+      transform: scaleX(-1) scaleY(-1);
+    }
+    .hero-video-cell:nth-child(5) video { /* center */
+      transform: scale(1.02);
+    }
+    .hero-video-cell:nth-child(6) video { /* middle-right */
+      transform: scaleX(-1);
+    }
+    .hero-video-cell:nth-child(7) video { /* bottom-left */
+      /* normal */
+    }
+    .hero-video-cell:nth-child(8) video { /* bottom-center */
+      transform: scaleY(-1);
+    }
+    .hero-video-cell:nth-child(9) video { /* bottom-right */
+      transform: scaleX(-1) scaleY(-1);
+    }
+
+    /* Subtle border glow effect */
+    .hero-video-cell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(91,143,249,0.1) 0%, transparent 50%, rgba(230,30,108,0.1) 100%);
+      pointer-events: none;
     }
 
     .hero-overlay {
@@ -438,15 +495,17 @@
     }
 
     .product-mini-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
       margin: 0 auto 12px;
-      background: linear-gradient(135deg, var(--tech-blue), var(--accent));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
+      overflow: hidden;
+    }
+
+    .product-mini-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .product-mini-name {
@@ -614,11 +673,19 @@
   </div>
 </nav>
 
-<!-- HERO: Video + Slogan Only -->
+<!-- HERO: 9-Grid Mirror Video + Slogan Only -->
 <section id="hero">
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="images/hero-video.mp4" type="video/mp4" />
-  </video>
+  <div class="hero-video-grid">
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+    <div class="hero-video-cell"><video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video></div>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge">器官移植创新</div>
@@ -737,19 +804,27 @@
         <p class="card-text">创新产品矩阵，覆盖移植全流程</p>
         <div class="products-mini">
           <div class="product-mini-card">
-            <div class="product-mini-img">💙</div>
+            <div class="product-mini-img">
+              <img src="images/幻灯片 1.jpg" alt="机械灌注" />
+            </div>
             <div class="product-mini-name">机械灌注</div>
           </div>
           <div class="product-mini-card">
-            <div class="product-mini-img">💙</div>
+            <div class="product-mini-img">
+              <img src="images/幻灯片 2.jpg" alt="器官保存" />
+            </div>
             <div class="product-mini-name">器官保存</div>
           </div>
           <div class="product-mini-card">
-            <div class="product-mini-img">💙</div>
+            <div class="product-mini-img">
+              <img src="images/幻灯片 3.jpg" alt="药物检测" />
+            </div>
             <div class="product-mini-name">药物检测</div>
           </div>
           <div class="product-mini-card">
-            <div class="product-mini-img">💙</div>
+            <div class="product-mini-img">
+              <img src="images/幻灯片 4.jpg" alt="免疫抑制剂" />
+            </div>
             <div class="product-mini-name">免疫抑制剂</div>
           </div>
         </div>
