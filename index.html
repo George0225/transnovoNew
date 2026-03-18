@@ -59,7 +59,26 @@
       justify-content: space-between;
     }
 
-    .nav-logo img { height: 42px; }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo img {
+      height: 52px;
+      filter: drop-shadow(0 2px 8px rgba(91,143,249,0.3));
+      transition: all 0.3s;
+    }
+
+    .nav-logo:hover img {
+      filter: drop-shadow(0 4px 15px rgba(91,143,249,0.5));
+      transform: scale(1.02);
+    }
+
+    #nav.scrolled .nav-logo img {
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+    }
 
     .nav-links {
       display: flex;
