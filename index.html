@@ -435,7 +435,7 @@
       transform: scaleY(1);
     }
 
-    /* ─── HERO SECTION ─── */
+    /* ─── HERO SECTION - United Imaging Style Mirror Cut ─── */
     #hero {
       position: relative; min-height: 100vh;
       display: flex; align-items: center;
@@ -444,6 +444,71 @@
       background: var(--bg-primary);
     }
 
+    /* Video background */
+    .hero-video-wrapper {
+      position: absolute; inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-video-wrapper video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+
+    /* Dark overlay */
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(13,17,23,0.85) 0%, rgba(22,27,34,0.75) 100%);
+    }
+
+    /* Glass grid overlay - United Imaging mirror effect */
+    .hero-glass-grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .hero-glass-cell {
+      position: relative;
+      border-right: 1px solid rgba(88, 166, 255, 0.06);
+      border-bottom: 1px solid rgba(88, 166, 255, 0.06);
+      backdrop-filter: blur(2px);
+    }
+
+    /* Remove outer borders */
+    .hero-glass-cell:nth-child(6n) {
+      border-right: none;
+    }
+    .hero-glass-cell:nth-last-child(-n+6) {
+      border-bottom: none;
+    }
+
+    /* Diagonal mirror cut line */
+    .hero-mirror-cut {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 45%,
+        rgba(88, 166, 255, 0.08) 45%,
+        rgba(88, 166, 255, 0.15) 50%,
+        rgba(88, 166, 255, 0.08) 55%,
+        transparent 55%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 6;
+    }
+
+    /* Ambient glow effects */
     #hero::before {
       content: '';
       position: absolute;
@@ -469,21 +534,6 @@
     @keyframes ambientPulse {
       0%, 100% { opacity: 0.3; transform: scale(1); }
       50% { opacity: 0.6; transform: scale(1.1); }
-    }
-
-    .hero-video-wrapper {
-      position: absolute; inset: 0;
-      overflow: hidden;
-    }
-
-    .hero-video-wrapper video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(13,17,23,0.85) 0%, rgba(22,27,34,0.75) 100%);
     }
 
     .hero-content {
@@ -1717,6 +1767,8 @@
       .nav-inner { padding: 0 32px; }
       .inner { padding: 0 32px; }
       .hero-content { padding: 0 32px; }
+      .hero-glass-grid { display: none; }
+      .hero-mirror-cut { display: none; }
       .research-content { padding: 80px 32px; }
       .china-inner { padding: 0 32px; }
       .video-showcase-inner { padding: 60px 32px; }
@@ -1830,6 +1882,37 @@
     </video>
   </div>
   <div class="hero-overlay"></div>
+
+  <!-- Glass grid overlay - mirror effect -->
+  <div class="hero-glass-grid">
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div>
+  </div>
+
+  <!-- Diagonal mirror cut line -->
+  <div class="hero-mirror-cut"></div>
 
   <div class="hero-content">
     <div class="hero-text">
