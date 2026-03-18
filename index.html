@@ -13,49 +13,36 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Linear inspired dark theme palette */
-      --bg-primary:   #0D1117;
-      --bg-secondary: #161B22;
-      --bg-tertiary:  #21262D;
-      --border:       #30363D;
-      --border-light: rgba(240, 246, 252, 0.1);
-      --text-primary: #F0F6FC;
-      --text-secondary: #8B949E;
-      --text-tertiary: #6E7681;
+      /* Bright tech palette */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f8f9fc;
+      --bg-tertiary: #f0f2f8;
+      --border: #e0e4ed;
+      --border-light: rgba(43, 58, 109, 0.08);
+      --text-primary: #1a1f2e;
+      --text-secondary: #4a5568;
+      --text-tertiary: #718096;
 
-      /* Brand accent - refined blue with glow */
-      --accent:       #58A6FF;
-      --accent-glow:  rgba(88, 166, 255, 0.4);
-      --accent-soft:  rgba(88, 166, 255, 0.15);
+      /* Brand colors */
+      --accent: #2B3A6D;
+      --accent-light: #3d508a;
+      --accent-glow: rgba(43, 58, 109, 0.15);
+      --accent-soft: rgba(43, 58, 109, 0.08);
+      --pink: #E61E6C;
 
-      /* Legacy vars for compatibility */
-      --blue:       #58A6FF;
-      --blue-dark:  #1f6feb;
-      --blue-light: #58A6FF;
-      --pink:       #58A6FF;
-      --pink-hover: #388bfd;
-      --dark:       #0D1117;
-      --dark-alt:   #161B22;
-      --text:       #F0F6FC;
-      --text-light: #8B949E;
-      --bg:         #0D1117;
-      --bg-alt:     #161B22;
-      --white:      #0D1117;
-    }
-
-    body {
-      background: var(--bg-primary);
+      /* Tech blue accents */
+      --tech-blue: #5B8FF9;
+      --tech-blue-light: #8ab6ff;
+      --tech-glow: rgba(91, 143, 249, 0.2);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      background: var(--bg);
+      color: var(--text-primary);
+      background: var(--bg-primary);
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
@@ -70,9 +57,20 @@
       to { opacity: 1; }
     }
 
-    @keyframes countUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .animate-on-scroll {
@@ -87,529 +85,362 @@
 
     /* ─── NAVIGATION ─── */
     #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: linear-gradient(
-        180deg,
-        rgba(255,255,255,0.95) 0%,
-        rgba(240,246,252,0.85) 100%
-      );
-      backdrop-filter: blur(30px) saturate(180%);
-      -webkit-backdrop-filter: blur(30px) saturate(180%);
-      border-bottom: 1px solid rgba(88, 166, 255, 0.2);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow:
-        0 0 40px rgba(88, 166, 255, 0.15),
-        0 0 0 1px rgba(88, 166, 255, 0.1);
-    }
-
-    /* Top highlight bar - tech blue glow */
-    #nav::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        #58A6FF 15%,
-        #8Bd4FF 50%,
-        #58A6FF 85%,
-        transparent 100%
-      );
-      box-shadow:
-        0 0 30px 4px rgba(88, 166, 255, 0.6),
-        0 -2px 20px rgba(88, 166, 255, 0.4);
-      z-index: 1001;
-    }
-
-    /* Ambient glow - always on */
-    #nav::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 50%;
-      height: 100%;
-      background: radial-gradient(ellipse, rgba(88, 166, 255, 0.15) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0.6;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
     }
 
     #nav.scrolled {
-      background: linear-gradient(
-        180deg,
-        rgba(255,255,255,0.98) 0%,
-        rgba(240,246,252,0.92) 100%
-      );
-      backdrop-filter: blur(40px) saturate(200%);
-      -webkit-backdrop-filter: blur(40px) saturate(200%);
-      box-shadow:
-        0 4px 40px rgba(88, 166, 255, 0.2),
-        0 0 0 1px rgba(88, 166, 255, 0.15),
-        0 -2px 30px rgba(88, 166, 255, 0.1);
-      border-bottom-color: rgba(88, 166, 255, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
     }
 
     .nav-inner {
-      max-width: 1400px; margin: 0 auto; padding: 0 48px;
-      height: 80px; display: flex; align-items: center; justify-content: space-between;
-      position: relative; z-index: 10;
-    }
-
-    /* Futuristic Logo with Enhanced Highlight */
-    .nav-logo {
-      display: flex; align-items: center; gap: 14px;
-      text-decoration: none;
-      padding: 10px 18px;
-      border-radius: 14px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       position: relative;
-      /* Light tech background that stands out on white navbar */
-      background: linear-gradient(135deg, rgba(88, 166, 255, 0.08) 0%, rgba(88, 166, 255, 0.02) 100%);
-      border: 1px solid rgba(88, 166, 255, 0.25);
-      box-shadow:
-        0 0 0 1px rgba(88, 166, 255, 0.1),
-        0 4px 20px rgba(88, 166, 255, 0.15);
     }
 
-    .nav-logo::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--blue-dark) 100%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: -1;
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      z-index: 1001;
+      transition: transform 0.3s;
     }
 
-    .nav-logo:hover::before {
-      opacity: 0.25;
+    .nav-logo:hover {
+      transform: scale(1.02);
     }
 
     .nav-logo img {
-      height: 40px; width: auto;
-      filter: drop-shadow(0 4px 12px rgba(88, 166, 255, 0.4))
-              brightness(1.05)
-              contrast(1.1);
-      transition: filter 0.3s, transform 0.3s;
+      height: 42px;
+      width: auto;
     }
 
-    .nav-logo:hover img {
-      filter: drop-shadow(0 8px 24px rgba(88, 166, 255, 0.6))
-              brightness(1.15)
-              contrast(1.15);
-      transform: scale(1.05);
-    }
-
-    /* Animated logo glow effect */
-    .nav-logo::after {
+    /* Top accent line */
+    #nav::before {
       content: '';
-      position: absolute;
-      top: 50%;
-      left: -4px;
-      width: 4px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 50%;
-      opacity: 0;
-      box-shadow:
-        0 0 20px 4px var(--accent),
-        0 0 40px 8px rgba(88, 166, 255, 0.3);
-      transition: opacity 0.3s;
-    }
-
-    .nav-logo:hover::after {
-      opacity: 1;
-      animation: logoGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes logoGlow {
-      0%, 100% {
-        opacity: 0.5;
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: translateY(-2px) scale(1.2);
-      }
-    }
-
-    .nav-logo-text {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -0.3px;
-      transition: all 0.3s;
-    }
-
-    .nav-logo:hover .nav-logo-text {
-      color: var(--accent);
-      text-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .nav-logo-text span {
-      color: var(--accent);
-      position: relative;
-    }
-
-    .nav-logo-text span::before {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0.5;
-    }
-
-    /* Navigation Links - Linear Style */
-    .nav-links { display: flex; align-items: center; gap: 48px; list-style: none; }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 500;
-      color: #1a1f2e;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      padding: 8px 0;
-    }
-
-    .nav-links a::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 4px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 10px 2px var(--accent-glow);
-      opacity: 0;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-      text-shadow: 0 0 16px var(--accent-glow);
-    }
-
-    .nav-links a:hover::before {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    .nav-links a:hover::after {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    /* Linear Style CTA Button */
-    .nav-btn {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--bg-primary);
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%);
-      padding: 12px 28px;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow:
-        0 0 0 1px var(--border),
-        0 4px 16px var(--accent-glow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-btn::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.2),
-        transparent
-      );
-      transition: left 0.6s;
-    }
-
-    .nav-btn:hover::before {
-      left: 100%;
-    }
-
-    .nav-btn:hover {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--blue-dark) 100%);
-      transform: translateY(-2px);
-      box-shadow:
-        0 0 0 1px var(--accent),
-        0 8px 32px var(--accent-glow),
-        0 0 0 4px var(--accent-soft);
-    }
-
-    .nav-btn:active {
-      transform: translateY(-1px);
-    }
-
-    .nav-toggle {
-      display: none; flex-direction: column; gap: 6px;
-      background: none; border: none; cursor: pointer; padding: 8px;
-      transition: transform 0.2s;
-    }
-
-    .nav-toggle:hover {
-      transform: scale(1.1);
-    }
-
-    .nav-toggle span {
-      display: block; width: 24px; height: 2px;
-      background: #1a1f2e;
-      border-radius: 2px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .nav-toggle:hover span {
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    .nav-toggle:hover span:nth-child(1) {
-      width: 20px;
-    }
-
-    .nav-toggle:hover span:nth-child(3) {
-      width: 20px;
-    }
-
-    .nav-mobile {
-      display: none; flex-direction: column;
-      border-top: 1px solid rgba(88, 166, 255, 0.2);
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      padding: 16px 0;
-    }
-
-    .nav-mobile.open { display: flex; }
-
-    .nav-mobile a {
-      padding: 16px 24px; font-size: 15px; font-weight: 500;
-      color: #1a1f2e; text-decoration: none;
-      border-bottom: 1px solid rgba(88, 166, 255, 0.1);
-      transition: all 0.2s;
-      position: relative;
-    }
-
-    .nav-mobile a::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      background: var(--accent);
-      transform: scaleY(0);
-      transition: transform 0.2s;
-    }
-
-    .nav-mobile a:hover {
-      background: rgba(88, 166, 255, 0.08);
-      padding-left: 28px;
-    }
-
-    .nav-mobile a:hover::before {
-      transform: scaleY(1);
-    }
-
-    /* ─── HERO SECTION - United Imaging Style Mirror Cut ─── */
-    #hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center;
-      overflow: hidden;
-      padding-top: 72px;
-      background: var(--bg-primary);
-    }
-
-    /* Video background */
-    .hero-video-wrapper {
-      position: absolute; inset: 0;
-      overflow: hidden;
-    }
-
-    .hero-video-wrapper video {
-      width: 100%; height: 100%;
-      object-fit: cover;
-    }
-
-    /* Dark overlay */
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(13,17,23,0.85) 0%, rgba(22,27,34,0.75) 100%);
-    }
-
-    /* Glass grid overlay - United Imaging mirror effect */
-    .hero-glass-grid {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      pointer-events: none;
-      z-index: 5;
-    }
-
-    .hero-glass-cell {
-      position: relative;
-      border-right: 1px solid rgba(88, 166, 255, 0.06);
-      border-bottom: 1px solid rgba(88, 166, 255, 0.06);
-      backdrop-filter: blur(2px);
-    }
-
-    /* Remove outer borders */
-    .hero-glass-cell:nth-child(6n) {
-      border-right: none;
-    }
-    .hero-glass-cell:nth-last-child(-n+6) {
-      border-bottom: none;
-    }
-
-    /* Diagonal mirror cut line */
-    .hero-mirror-cut {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: linear-gradient(
-        135deg,
+      height: 3px;
+      background: linear-gradient(90deg,
         transparent 0%,
-        transparent 45%,
-        rgba(88, 166, 255, 0.08) 45%,
-        rgba(88, 166, 255, 0.15) 50%,
-        rgba(88, 166, 255, 0.08) 55%,
-        transparent 55%,
+        var(--tech-blue) 20%,
+        var(--accent) 50%,
+        var(--tech-blue) 80%,
         transparent 100%
       );
-      pointer-events: none;
-      z-index: 6;
+      opacity: 0.8;
     }
 
-    /* Ambient glow effects */
-    #hero::before {
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links > li {
+      position: relative;
+    }
+
+    .nav-links > li > a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .nav-links > li > a::after {
       content: '';
       position: absolute;
-      top: -20%; left: -10%;
-      width: 60%; height: 80%;
-      background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0.5;
-      animation: ambientPulse 8s ease-in-out infinite;
+      bottom: 8px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: var(--tech-blue);
+      transform: scaleX(0);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    #hero::after {
-      content: '';
+    .nav-links > li > a:hover {
+      color: var(--tech-blue);
+      background: var(--accent-soft);
+    }
+
+    .nav-links > li > a:hover::after {
+      transform: scaleX(1);
+    }
+
+    /* Dropdown menu */
+    .nav-links .sub-menu {
       position: absolute;
-      bottom: -30%; right: -5%;
-      width: 50%; height: 70%;
-      background: radial-gradient(ellipse, rgba(88, 166, 255, 0.1) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0.4;
-      animation: ambientPulse 10s ease-in-out infinite reverse;
+      top: 100%;
+      left: 0;
+      min-width: 200px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 8px;
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
     }
 
-    @keyframes ambientPulse {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.1); }
+    .nav-links > li:hover > .sub-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .nav-links .sub-menu li a {
+      display: block;
+      padding: 12px 16px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links .sub-menu li a:hover {
+      color: var(--tech-blue);
+      background: var(--accent-soft);
+    }
+
+    /* Dropdown arrow */
+    .nav-links > li > a .dropdown-arrow {
+      display: inline-block;
+      margin-left: 6px;
+      transition: transform 0.3s;
+    }
+
+    .nav-links > li:hover > a .dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--accent-glow);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      padding: 16px 0;
+    }
+
+    .nav-mobile.open {
+      display: flex;
+    }
+
+    .nav-mobile a {
+      padding: 16px 24px;
+      font-size: 15px;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-light);
+      transition: all 0.2s;
+    }
+
+    .nav-mobile a:hover {
+      background: var(--bg-secondary);
+      padding-left: 32px;
+    }
+
+    /* ─── HERO SECTION ─── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+
+    .hero-swiper {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+    }
+
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(26, 31, 46, 0.4) 0%,
+        rgba(26, 31, 46, 0.2) 50%,
+        rgba(26, 31, 46, 0.3) 100%
+      );
+      z-index: 2;
     }
 
     .hero-content {
-      position: relative; z-index: 10;
+      position: relative;
+      z-index: 10;
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 48px;
-      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero-text {
-      max-width: 800px;
+      max-width: 700px;
     }
 
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 8px 20px;
-      border: 1px solid var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 100px;
-      font-size: 12px; font-weight: 600;
-      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
       margin-bottom: 32px;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      background: var(--accent-soft);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px var(--accent-glow);
     }
 
     .hero-badge::before {
-      content: ''; width: 8px; height: 8px;
-      border-radius: 50%; background: var(--accent);
-      flex-shrink: 0;
-      box-shadow: 0 0 10px var(--accent-glow);
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
       animation: pulse 2s ease-in-out infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
     }
 
     .hero-h1 {
       font-size: clamp(48px, 6vw, 80px);
-      font-weight: 900; color: var(--text-primary);
-      line-height: 1.05; letter-spacing: -0.03em;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       margin-bottom: 24px;
-      text-shadow: 0 0 40px rgba(88, 166, 255, 0.3);
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     }
 
     .hero-sub {
       font-size: clamp(16px, 2vw, 20px);
-      color: var(--text-secondary);
-      max-width: 600px;
+      color: rgba(255, 255, 255, 0.9);
       line-height: 1.8;
       margin-bottom: 48px;
-      font-weight: 300;
+      font-weight: 400;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     }
 
     .hero-actions {
-      display: flex; flex-wrap: wrap; gap: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     .btn-primary {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       padding: 16px 36px;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--blue-dark) 100%);
+      background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent) 100%);
       color: #fff;
-      font-size: 15px; font-weight: 600; border-radius: 999px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 100px;
       text-decoration: none;
       transition: all 0.3s;
-      box-shadow: 0 4px 20px var(--accent-glow), 0 0 0 1px var(--accent);
+      box-shadow: 0 8px 30px rgba(91, 143, 249, 0.4);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px var(--accent-glow), 0 0 0 1px var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(91, 143, 249, 0.5);
     }
 
     .btn-primary svg {
@@ -621,1097 +452,400 @@
     }
 
     .btn-secondary {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       padding: 16px 36px;
-      background: var(--bg-tertiary);
-      color: var(--text-primary);
-      font-size: 15px; font-weight: 600; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 100px;
       text-decoration: none;
       backdrop-filter: blur(10px);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       transition: all 0.2s;
     }
 
     .btn-secondary:hover {
-      background: var(--bg-secondary);
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--accent-glow);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .hero-pagination {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
+      z-index: 20;
+    }
+
+    .hero-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .hero-dot.active {
+      background: #fff;
+      border-color: #fff;
+      transform: scale(1.2);
     }
 
     .scroll-indicator {
-      position: absolute; bottom: 32px; left: 50%;
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
       transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 8px;
-      color: rgba(255,255,255,0.5);
-      font-size: 12px; font-weight: 500;
-      animation: bounce 2s ease-in-out infinite;
-      z-index: 10;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      z-index: 20;
     }
 
     .scroll-indicator svg {
-      width: 20px; height: 20px;
+      width: 20px;
+      height: 20px;
+      animation: bounce 2s ease-in-out infinite;
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
     }
 
-    /* ─── STATS SECTION ─── */
-    #stats {
-      background: var(--bg-secondary);
-      padding: 80px 24px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .stats-inner {
-      max-width: 1400px; margin: 0 auto;
-    }
-
-    .stats-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 48px;
-    }
-
-    .stat-item {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: clamp(48px, 5vw, 80px);
-      font-weight: 900;
-      color: var(--text-primary);
-      line-height: 1;
-      letter-spacing: -0.03em;
-      margin-bottom: 12px;
-      background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .stat-number span {
-      color: var(--accent);
-      -webkit-text-fill-color: var(--accent);
-      text-shadow: 0 0 30px var(--accent-glow);
-    }
-
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-weight: 600;
-    }
-
-    /* ─── VIDEO CAROUSEL SECTION ─── */
-    #video-showcase {
+    /* ─── ABOUT SECTION ─── */
+    #about {
+      padding: 120px 24px;
       background: var(--bg-primary);
-      padding: 0;
-      position: relative;
-      border-bottom: 1px solid var(--border);
     }
 
-    .video-showcase-inner {
+    .about-inner {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 80px 48px;
     }
 
-    .video-showcase-header {
-      margin-bottom: 48px;
-    }
-
-    .video-showcase-header .section-label {
-      color: var(--accent);
-    }
-
-    .video-showcase-header .section-title {
-      color: var(--text-primary);
-    }
-
-    .video-showcase-header .section-desc {
-      color: var(--text-secondary);
-    }
-
-    .video-carousel {
+    .about-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-      min-height: 500px;
-    }
-
-    .video-main {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      background: #000;
-      aspect-ratio: 16/10;
-    }
-
-    .video-main video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .video-main-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .video-main-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 32px;
-      z-index: 10;
-    }
-
-    .video-main-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-
-    .video-main-desc {
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.6;
-    }
-
-    .video-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .video-card {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #000;
-      flex: 1;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .video-card:hover {
-      transform: translateX(-8px);
-      box-shadow: 0 12px 40px rgba(230,30,108,0.2);
-    }
-
-    .video-card video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .video-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 40%, rgba(0,0,0,0.4) 100%);
-      display: flex;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
       align-items: center;
-      padding: 24px;
     }
 
-    .video-card-play {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      transition: all 0.2s;
-    }
-
-    .video-card:hover .video-card-play {
-      background: var(--pink);
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    .video-card-info {
-      position: relative;
-      z-index: 10;
-    }
-
-    .video-card-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .video-card-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-    }
-
-    /* ─── GLASSMORPHISM PRODUCT SHOWCASE ─── */
-    #product-showcase {
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
-      padding: 100px 24px;
-      position: relative;
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    /* Ambient glow effects */
-    #product-showcase::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -20%;
-      width: 60%;
-      height: 150%;
-      background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0.5;
-      animation: ambientPulse 8s ease-in-out infinite;
-    }
-
-    #product-showcase::after {
-      content: '';
-      position: absolute;
-      bottom: -50%;
-      right: -20%;
-      width: 60%;
-      height: 150%;
-      background: radial-gradient(ellipse, rgba(88, 166, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0.3;
-      animation: ambientPulse 10s ease-in-out infinite reverse;
-    }
-
-    .product-showcase-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 48px;
-      position: relative;
-      z-index: 10;
-    }
-
-    .product-showcase-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .product-showcase-header .section-label {
-      color: var(--accent);
+    .section-label {
       display: inline-block;
       padding: 8px 20px;
       background: var(--accent-soft);
       border: 1px solid var(--accent);
       border-radius: 100px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .product-showcase-header .section-title {
-      color: var(--text-primary);
-      font-size: clamp(40px, 5vw, 64px);
-      margin-top: 20px;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .product-showcase-header .section-desc {
-      color: rgba(255,255,255,0.6);
-      max-width: 600px;
-      margin: 20px auto 0;
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .glass-card {
-      position: relative;
-      background: linear-gradient(
-        135deg,
-        rgba(240,246,252,0.05) 0%,
-        rgba(240,246,252,0.01) 100%
-      );
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-light);
-      border-radius: 24px;
-      overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      transform-style: preserve-3d;
-    }
-
-    /* 3D Platform base effect */
-    .glass-card::before {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      transform: translateX(-50%) rotateX(90deg);
-      width: 80%;
-      height: 40px;
-      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
-      opacity: 0;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      filter: blur(20px);
-      z-index: -1;
-    }
-
-    .glass-card:hover {
-      transform: perspective(1000px) translateY(-16px) scale(1.02) rotateX(0) rotateY(0);
-      border-color: var(--accent);
-      box-shadow:
-        0 30px 80px rgba(0,0,0,0.6),
-        0 0 0 1px var(--accent),
-        0 0 60px var(--accent-glow),
-        inset 0 0 80px rgba(88,166,255,0.05);
-    }
-
-    .glass-card:hover::before {
-      opacity: 0.6;
-      bottom: -40px;
-    }
-
-    /* Light sweep animation on hover */
-    .glass-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent 0%,
-        rgba(88, 166, 255, 0.1) 50%,
-        transparent 100%
-      );
-      transition: left 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
-    }
-
-    .glass-card:hover::after {
-      left: 100%;
-    }
-
-    .glass-card-image {
-      position: relative;
-      height: 320px;
-      overflow: hidden;
-      /* Gradient background that blends with LifePort white background */
-      background: radial-gradient(ellipse at center, #1a1f2e 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
-      perspective: 1000px;
-    }
-
-    .glass-card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center;
-      padding: 40px;
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s;
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
-      position: relative;
-      z-index: 1;
-    }
-
-    /* LifePort images - blend white background */
-    .glass-card-image.lifeport-image {
-      /* Create gradient overlay to soften white background edges */
-    }
-
-    .glass-card-image.lifeport-image::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 35%, var(--bg-tertiary) 70%);
-      pointer-events: none;
-      z-index: 2;
-      opacity: 0.6;
-    }
-
-    .glass-card-image img[src*="lifeport"] {
-      filter: brightness(1.2) contrast(1.05)
-              drop-shadow(0 25px 50px rgba(88, 166, 255, 0.3));
-    }
-
-    .glass-card:hover .glass-card-image.lifeport-image::after {
-      opacity: 0.3;
-    }
-
-    /* 3D floating platform - only for non-LifePort cards */
-    .glass-card-image:not(.lifeport-image)::before {
-      content: '';
-      position: absolute;
-      bottom: 60px;
-      left: 50%;
-      transform: translateX(-50%) rotateX(60deg);
-      width: 60%;
-      height: 60px;
-      background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
-      filter: blur(15px);
-      opacity: 0.3;
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 0;
-    }
-
-    .glass-card:hover .glass-card-image:not(.lifeport-image)::before {
-      opacity: 0.6;
-      bottom: 40px;
-      transform: translateX(-50%) rotateX(70deg) scale(1.2);
-    }
-
-    .glass-card:hover .glass-card-image img {
-      transform: scale(1.1) translateY(-15px) rotateY(-3deg);
-      filter: drop-shadow(0 40px 80px rgba(88, 166, 255, 0.4))
-              brightness(1.1);
-    }
-
-    .glass-card:hover .glass-card-image img[src*="lifeport"] {
-      filter: drop-shadow(0 40px 80px rgba(88, 166, 255, 0.5))
-              brightness(1.25) contrast(1.1);
-    }
-
-    .glass-card:hover .glass-card-image.lifeport-image::after {
-      opacity: 0.2;
-    }
-
-    .glass-card-content {
-      padding: 32px 28px;
-    }
-
-    .glass-card-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .glass-card-desc {
-      font-size: 14px;
-      color: var(--text-secondary);
-      color: rgba(255,255,255,0.6);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .glass-card-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      color: var(--pink);
-      text-decoration: none;
-      transition: gap 0.2s;
-    }
-
-    .glass-card-link:hover {
-      gap: 12px;
-    }
-
-    .glass-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    /* Featured large card */
-    .glass-card.featured {
-      grid-column: span 2;
-    }
-
-    .glass-card.featured .glass-card-image {
-      height: 400px;
-    }
-
-    /* ─── SECTION COMMON ─── */
-    section { padding: 100px 24px; }
-
-    .inner { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
-
-    .section-label {
-      font-size: 12px; font-weight: 700;
       color: var(--accent);
-      text-transform: uppercase; letter-spacing: 0.2em;
-      margin-bottom: 16px;
-      display: block;
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     .section-title {
-      font-size: clamp(36px, 4vw, 56px);
-      font-weight: 800; color: var(--text-primary);
-      line-height: 1.1; letter-spacing: -0.02em;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
       margin-bottom: 24px;
     }
 
-    .section-desc {
-      font-size: 17px; color: var(--text-secondary);
-      max-width: 640px; line-height: 1.8;
-    }
-
-    .section-header {
-      margin-bottom: 64px;
-    }
-
-    /* ─── ABOUT SECTION ─── */
-    #about { background: var(--bg-primary); border-top: 1px solid var(--border); }
-
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-    }
-
     .about-text p {
-      font-size: 16px; color: var(--text-secondary);
-      line-height: 1.9; margin-bottom: 24px;
-    }
-
-    .about-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 24px; font-size: 15px; font-weight: 600;
-      color: var(--accent); text-decoration: none;
-      transition: gap 0.2s;
-    }
-
-    .about-link:hover {
-      gap: 12px;
-      text-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    .about-image-wrapper {
-      position: relative;
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 16px;
     }
 
     .about-image {
-      width: 100%; border-radius: 20px;
+      position: relative;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
     }
 
     .about-image img {
-      width: 100%; height: auto; display: block;
-    }
-
-    .stat-cards {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px; margin-top: 40px;
-    }
-
-    .stat-card {
-      background: var(--bg-secondary);
-      padding: 28px 20px; border-radius: 16px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      border: 1px solid var(--border-light);
-    }
-
-    .stat-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 48px rgba(0,0,0,0.3);
-      border-color: var(--accent);
-    }
-
-    .stat-card-val {
-      font-size: 36px; font-weight: 900;
-      color: var(--accent);
-      line-height: 1; letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .stat-card.highlight .stat-card-val {
-      color: var(--accent);
-      text-shadow: 0 0 20px var(--accent-glow);
-    }
-
-    .stat-card-lbl {
-      font-size: 12px; color: var(--text-tertiary);
-      text-transform: uppercase; letter-spacing: 0.1em;
-      font-weight: 600;
-    }
-
-    /* ─── SOLUTIONS SECTION ─── */
-    #solutions { background: var(--bg-secondary); border-top: 1px solid var(--border); }
-
-    .solutions-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .solution-card {
-      background: var(--bg-tertiary);
-      border-radius: 20px; overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-      border: 1px solid var(--border-light);
-    }
-
-    .solution-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--accent);
-    }
-
-    .solution-image {
-      position: relative; height: 220px; overflow: hidden;
-    }
-
-    .solution-image img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .solution-card:hover .solution-image img {
-      transform: scale(1.1);
+    .about-image:hover img {
+      transform: scale(1.05);
     }
 
-    .solution-content {
-      padding: 32px 28px;
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
     }
 
-    .solution-title {
-      font-size: 20px; font-weight: 700;
-      color: var(--text-primary); margin-bottom: 12px;
+    .stat-box {
+      text-align: center;
+      padding: 24px;
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      transition: all 0.3s;
     }
 
-    .solution-desc {
-      font-size: 15px; color: var(--text-secondary);
-      line-height: 1.7;
+    .stat-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px var(--accent-glow);
     }
 
-    .solution-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 20px; font-size: 14px; font-weight: 600;
-      color: var(--accent); text-decoration: none;
-      transition: gap 0.2s;
+    .stat-box .num {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
     }
 
-    .solution-link:hover {
-      gap: 12px;
-      text-shadow: 0 0 10px var(--accent-glow);
+    .stat-box .label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* ─── VALUES SECTION ─── */
+    #values {
+      padding: 120px 24px;
+      background: var(--bg-secondary);
+    }
+
+    .values-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .values-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .value-card {
+      text-align: center;
+      padding: 48px 32px;
+      background: #fff;
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--border);
+    }
+
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      border-color: var(--tech-blue);
+    }
+
+    .value-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+
+    .value-card:hover .value-icon {
+      background: var(--tech-blue);
+    }
+
+    .value-icon svg {
+      width: 48px;
+      height: 48px;
+      color: var(--accent);
+      transition: color 0.3s;
+    }
+
+    .value-card:hover .value-icon svg {
+      color: #fff;
+    }
+
+    .value-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
     }
 
     /* ─── PRODUCTS SECTION ─── */
-    #products { background: var(--bg-primary); border-top: 1px solid var(--border); }
+    #products {
+      padding: 120px 24px;
+      background: var(--bg-primary);
+    }
+
+    .products-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .products-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
 
     .products-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 24px;
     }
 
     .product-card {
       position: relative;
-      border-radius: 20px; overflow: hidden;
-      text-decoration: none;
-      aspect-ratio: 3/4;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid var(--border-light);
     }
 
     .product-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--accent);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      border-color: var(--tech-blue);
     }
 
     .product-image {
-      position: absolute; inset: 0;
+      height: 180px;
       overflow: hidden;
+      background: var(--bg-secondary);
     }
 
     .product-image img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.6s;
     }
 
     .product-card:hover .product-image img {
       transform: scale(1.1);
     }
 
-    .product-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-    }
-
-    .product-content {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 28px 24px;
-      z-index: 10;
+    .product-info {
+      padding: 24px;
     }
 
     .product-title {
-      font-size: 18px; font-weight: 700;
-      color: var(--text-primary); margin-bottom: 8px;
-    }
-
-    .product-desc {
-      font-size: 13px; color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ─── R&D SECTION ─── */
-    #research {
-      position: relative;
-      background: var(--bg-secondary);
-      padding: 0;
-      min-height: 600px;
-      display: flex; align-items: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .research-bg {
-      position: absolute; inset: 0;
-    }
-
-    .research-bg img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.3;
-    }
-
-    .research-content {
-      position: relative; z-index: 10;
-      max-width: 1400px; margin: 0 auto;
-      padding: 100px 48px;
-      width: 100%;
-    }
-
-    .research-text {
-      max-width: 600px;
-    }
-
-    .research-text .section-label {
-      color: var(--accent);
-    }
-
-    .research-text .section-title {
+      font-size: 16px;
+      font-weight: 700;
       color: var(--text-primary);
-    }
-
-    .research-text .section-desc {
-      color: var(--text-secondary);
-      color: rgba(255,255,255,0.7);
-    }
-
-    .research-stats {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 32px; margin-top: 48px;
-    }
-
-    .research-stat {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
-      padding: 32px 28px;
-      backdrop-filter: blur(10px);
-    }
-
-    .research-stat-num {
-      font-size: 48px; font-weight: 900;
-      color: #fff;
-      line-height: 1; letter-spacing: -0.02em;
       margin-bottom: 8px;
     }
 
-    .research-stat-lbl {
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 600;
-    }
-
-    /* ─── GLOBAL SECTION ─── */
-    #global { background: var(--bg-primary); border-top: 1px solid var(--border); }
-
-    .global-grid {
-      display: grid; grid-template-columns: 1.2fr 0.8fr;
-      gap: 80px; align-items: center;
-    }
-
-    .region-list {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 16px; margin-top: 40px;
-    }
-
-    .region-item {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 15px; color: var(--text-secondary);
-    }
-
-    .region-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-      box-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    .global-card {
-      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
-      border-radius: 24px;
-      padding: 48px 40px;
-      text-align: center;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
-      border: 1px solid var(--border);
-    }
-
-    .global-stat {
-      margin-bottom: 32px;
-    }
-
-    .global-num {
-      font-size: clamp(56px, 6vw, 80px);
-      font-weight: 900;
-      background: linear-gradient(180deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1; letter-spacing: -0.03em;
-    }
-
-    .global-num span {
-      color: var(--accent);
-      -webkit-text-fill-color: var(--accent);
-      text-shadow: 0 0 30px var(--accent-glow);
-    }
-
-    .global-lbl {
-      font-size: 13px;
+    .product-desc {
+      font-size: 14px;
       color: var(--text-tertiary);
-      margin-top: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      font-weight: 600;
+      line-height: 1.6;
     }
 
-    .global-divider {
-      margin: 32px 0;
-      border-top: 1px solid var(--border-light);
+    /* ─── PARTNERS SECTION ─── */
+    #partners {
+      padding: 80px 24px;
+      background: var(--bg-secondary);
     }
 
-    /* ─── CTA SECTION ─── */
-    #cta {
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-      padding: 120px 24px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    #cta::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: 50%;
-      transform: translateX(-50%);
-      width: 80%; height: 200%;
-      background: radial-gradient(ellipse, var(--accent-soft) 0%, transparent 70%);
-      pointer-events: none;
-      opacity: 0.4;
-      animation: ambientPulse 8s ease-in-out infinite;
-    }
-
-    .cta-content {
-      max-width: 800px;
+    .partners-inner {
+      max-width: 1200px;
       margin: 0 auto;
-      position: relative;
-      z-index: 10;
     }
 
-    .cta-title {
-      font-size: clamp(36px, 5vw, 64px);
-      font-weight: 900;
-      color: var(--text-primary);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-
-    .cta-desc {
-      font-size: 18px;
+    .partners-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
       color: var(--text-secondary);
-      line-height: 1.8;
       margin-bottom: 48px;
     }
 
-    .cta-actions {
-      display: flex; flex-wrap: wrap; gap: 16px;
-      justify-content: center;
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 32px;
+      align-items: center;
     }
 
-    /* ─── CONTACT SECTION ─── */
-    #contact { background: var(--bg-primary); border-top: 1px solid var(--border); }
-
-    .contact-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: start;
+    .partner-logo {
+      opacity: 0.6;
+      transition: opacity 0.3s, transform 0.3s;
     }
 
-    .contact-info {
-      margin-top: 32px;
+    .partner-logo:hover {
+      opacity: 1;
+      transform: scale(1.05);
     }
 
-    .contact-item {
-      display: flex; align-items: flex-start; gap: 20px;
-      padding: 24px 0; border-bottom: 1px solid var(--border);
-    }
-
-    .contact-icon {
-      width: 48px; height: 48px; flex-shrink: 0;
-      border-radius: 12px;
-      background: var(--bg-alt);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--pink);
-      transition: all 0.2s;
-    }
-
-    .contact-item:hover .contact-icon {
-      background: var(--pink);
-      color: #fff;
-    }
-
-    .contact-label {
-      font-size: 11px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.15em;
-      color: var(--text-light);
-      margin-bottom: 4px;
-    }
-
-    .contact-value {
-      font-size: 15px; color: var(--text);
-    }
-
-    .contact-value a {
-      color: var(--pink); text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .contact-value a:hover { color: var(--pink-hover); }
-
-    .contact-card {
-      background: linear-gradient(135deg, var(--bg-alt) 0%, #f0f0f2 100%);
-      border-radius: 24px; padding: 48px 40px;
-      text-align: center;
-    }
-
-    .contact-card h3 {
-      font-size: 26px; font-weight: 700;
-      color: var(--text); margin-bottom: 16px;
-    }
-
-    .contact-card p {
-      font-size: 15px; color: var(--text-light);
-      line-height: 1.7; margin-bottom: 32px;
-    }
-
-    /* ─── CHINA NOTICE ─── */
-    .china-notice {
-      background: linear-gradient(135deg, #EBF3FF 0%, #F0F5FF 100%);
-      border-top: 3px solid var(--pink);
-      padding: 32px 24px;
-    }
-
-    .china-inner {
-      max-width: 1400px; margin: 0 auto; padding: 0 48px;
-      display: flex; flex-wrap: wrap; align-items: center;
-      justify-content: space-between; gap: 20px;
-    }
-
-    .china-text {
-      font-size: 14px; color: var(--text-secondary);
-      max-width: 700px;
-    }
-
-    .china-text strong { color: var(--text-primary); font-weight: 600; }
-
-    .china-zh {
-      display: block; margin-top: 8px;
-      font-size: 14px; color: var(--text-secondary);
-    }
-
-    .china-text a {
-      color: var(--accent); font-weight: 600; text-decoration: none;
-    }
-
-    .china-text a:hover {
-      text-decoration: underline;
-      text-shadow: 0 0 10px var(--accent-glow);
-    }
-
-    .china-btn {
-      white-space: nowrap;
+    .partner-logo img {
+      width: 100%;
+      height: auto;
     }
 
     /* ─── FOOTER ─── */
-    footer {
+    #footer {
       background: var(--bg-primary);
-      padding: 64px 24px 32px;
       border-top: 1px solid var(--border);
+      padding: 80px 24px 40px;
     }
 
     .footer-inner {
-      max-width: 1400px; margin: 0 auto;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 48px;
-      align-items: center;
-      padding-bottom: 48px;
-      border-bottom: 1px solid var(--border);
+      grid-template-columns: 1.5fr 1fr 1.5fr;
+      gap: 60px;
+      margin-bottom: 60px;
     }
 
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .footer-brand .logo {
+      height: 48px;
+      margin-bottom: 24px;
     }
 
-    .footer-logo {
-      display: flex; align-items: center; gap: 12px;
-      text-decoration: none;
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.8;
+      margin-bottom: 20px;
     }
 
-    .footer-logo img { height: 36px; width: auto; }
-
-    .footer-desc {
-      font-size: 14px; color: var(--text-tertiary);
-      max-width: 400px; line-height: 1.7;
-    }
-
-    .footer-links {
-      display: flex; flex-direction: column; gap: 12px;
-    }
-
-    .footer-links a {
-      font-size: 14px; color: var(--text-secondary);
-      text-decoration: none; transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent);
-      text-shadow: 0 0 10px var(--accent-glow);
+    .footer-section h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
     }
 
     .footer-qrcodes {
-      display: flex; gap: 16px;
+      display: flex;
+      gap: 20px;
     }
 
     .footer-qr {
@@ -1719,128 +853,96 @@
     }
 
     .footer-qr img {
-      width: 80px; height: 80px;
-      border-radius: 8px;
-      background: #fff;
-      padding: 4px;
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
 
     .footer-qr span {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-tertiary);
       margin-top: 8px;
     }
 
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center;
-      padding-top: 32px;
-    }
-
-    .footer-copy {
-      font-size: 13px; color: var(--text-tertiary);
-    }
-
-    .footer-social {
-      display: flex; gap: 16px;
-    }
-
-    .footer-social a {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--bg-tertiary);
-      display: flex; align-items: center; justify-content: center;
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
       color: var(--text-secondary);
-      transition: all 0.2s;
-      border: 1px solid var(--border-light);
+      margin-bottom: 16px;
+      list-style: none;
     }
 
-    .footer-social a:hover {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 20px var(--accent-glow);
-      border-color: var(--accent);
+    .footer-contact svg {
+      width: 20px;
+      height: 20px;
+      color: var(--tech-blue);
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-icp a:hover {
+      color: var(--tech-blue);
     }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .inner { padding: 0 32px; }
       .hero-content { padding: 0 32px; }
-      .hero-glass-grid { display: none; }
-      .hero-mirror-cut { display: none; }
-      .research-content { padding: 80px 32px; }
-      .china-inner { padding: 0 32px; }
-      .video-showcase-inner { padding: 60px 32px; }
-      .product-showcase-inner { padding: 0 32px; }
-
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-      .about-grid { grid-template-columns: 1fr; gap: 56px; }
-      .solutions-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .global-grid { grid-template-columns: 1fr; gap: 56px; }
-      .contact-grid { grid-template-columns: 1fr; gap: 56px; }
-      .stat-cards { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr; text-align: center; }
-      .footer-brand { align-items: center; }
+      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
       .footer-qrcodes { justify-content: center; }
-      .footer-links { align-items: center; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-
-      .video-carousel { grid-template-columns: 1fr; min-height: auto; }
-      .video-main { aspect-ratio: 16/9; }
-      .video-sidebar { flex-direction: row; }
-
-      .glass-grid { grid-template-columns: 1fr; }
-      .glass-card.featured { grid-column: span 1; }
-      .glass-card.featured .glass-card-image { height: 320px; }
-
-      .nav-links { gap: 32px; }
     }
 
     @media (max-width: 768px) {
       .nav-links, .nav-btn { display: none; }
       .nav-toggle { display: flex; }
-
-      section { padding: 72px 20px; }
-      .inner { padding: 0 20px; }
-      .nav-inner { padding: 0 20px; height: 72px; }
-      .hero-content { padding: 0 20px; padding-top: 72px; }
-      .research-content { padding: 60px 20px; }
-      .china-inner { padding: 0 20px; flex-direction: column; align-items: flex-start; }
-      .china-btn { width: 100%; text-align: center; }
-      .video-showcase-inner { padding: 40px 20px; }
-      .product-showcase-inner { padding: 0 20px; }
+      .nav-inner { height: 72px; padding: 0 20px; }
 
       .hero-h1 { font-size: clamp(32px, 10vw, 48px); }
       .hero-sub { font-size: clamp(15px, 4vw, 17px); }
 
-      .stats-grid { grid-template-columns: 1fr; gap: 24px; }
-      .stat-number { font-size: 48px; }
+      #about, #values, #products { padding: 80px 20px; }
+      .about-stats { grid-template-columns: repeat(2, 1fr); }
+      .values-grid, .products-grid { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
 
-      .solutions-grid, .products-grid { grid-template-columns: 1fr; }
-      .product-card { aspect-ratio: auto; min-height: 300px; }
-
-      .research-stats { grid-template-columns: 1fr; }
-
-      .region-list { grid-template-columns: 1fr; }
-
-      .video-carousel { grid-template-columns: 1fr; }
-      .video-sidebar { flex-direction: column; }
-      .video-card { aspect-ratio: 16/9; }
-
-      .stat-cards { grid-template-columns: repeat(2, 1fr); }
-
-      #cta { padding: 80px 20px; }
-      .cta-title { font-size: clamp(28px, 6vw, 42px); }
-
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .footer-qrcodes { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- ─── NAVIGATION ─── -->
+<!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">
@@ -1848,12 +950,36 @@
     </a>
 
     <ul class="nav-links">
-      <li><a href="#about">关于我们</a></li>
-      <li><a href="#solutions">解决方案</a></li>
-      <li><a href="#products">产品中心</a></li>
-      <li><a href="#research">研发中心</a></li>
-      <li><a href="#global">全球网络</a></li>
-      <li><a href="#contact">联系我们</a></li>
+      <li><a href="#hero">首页</a></li>
+      <li>
+        <a href="#products">
+          产品中心
+          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="#">机械灌注</a></li>
+          <li><a href="#">器官保存</a></li>
+          <li><a href="#">药物浓度检测</a></li>
+          <li><a href="#">免疫抑制剂</a></li>
+          <li><a href="#">配型产品</a></li>
+          <li><a href="#">抗体检测</a></li>
+          <li><a href="#">术后动态监测</a></li>
+          <li><a href="#">服务与支持</a></li>
+        </ul>
+      </li>
+      <li><a href="#research">研发生产中心</a></li>
+      <li><a href="#patients">关爱患者</a></li>
+      <li>
+        <a href="#talent">
+          人才中心
+          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="#">社会招聘</a></li>
+          <li><a href="#">校园招聘</a></li>
+          <li><a href="#">企业文化</a></li>
+        </ul>
+      </li>
     </ul>
 
     <a href="#contact" class="nav-btn">联系我们</a>
@@ -1864,79 +990,50 @@
   </div>
 
   <div class="nav-mobile" id="mobileMenu">
-    <a href="#about" onclick="closeMenu()">关于我们</a>
-    <a href="#solutions" onclick="closeMenu()">解决方案</a>
+    <a href="#hero" onclick="closeMenu()">首页</a>
     <a href="#products" onclick="closeMenu()">产品中心</a>
-    <a href="#research" onclick="closeMenu()">研发中心</a>
-    <a href="#global" onclick="closeMenu()">全球网络</a>
+    <a href="#research" onclick="closeMenu()">研发生产中心</a>
+    <a href="#patients" onclick="closeMenu()">关爱患者</a>
+    <a href="#talent" onclick="closeMenu()">人才中心</a>
     <a href="#contact" onclick="closeMenu()">联系我们</a>
   </div>
 </nav>
 
-
-<!-- ─── HERO SECTION ─── -->
+<!-- HERO SECTION -->
 <section id="hero">
-  <div class="hero-video-wrapper">
-    <video autoplay muted loop playsinline>
-      <source src="images/hero-video.mp4" type="video/mp4" />
-    </video>
+  <div class="hero-swiper" id="heroSwiper">
+    <div class="hero-slide active"><img src="images/幻灯片1.jpg" alt="幻灯片 1"></div>
+    <div class="hero-slide"><img src="images/幻灯片2.jpg" alt="幻灯片 2"></div>
+    <div class="hero-slide"><img src="images/幻灯片3.jpg" alt="幻灯片 3"></div>
+    <div class="hero-slide"><img src="images/幻灯片4.jpg" alt="幻灯片 4"></div>
+    <div class="hero-slide"><img src="images/幻灯片5.jpg" alt="幻灯片 5"></div>
+    <div class="hero-slide"><img src="images/幻灯片6.jpg" alt="幻灯片 6"></div>
+    <div class="hero-slide"><img src="images/幻灯片7.jpg" alt="幻灯片 7"></div>
+    <div class="hero-slide"><img src="images/幻灯片9.jpg" alt="幻灯片 9"></div>
+    <div class="hero-slide"><img src="images/幻灯片10.jpg" alt="幻灯片 10"></div>
   </div>
   <div class="hero-overlay"></div>
-
-  <!-- Glass grid overlay - mirror effect -->
-  <div class="hero-glass-grid">
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-    <div class="hero-glass-cell"></div>
-  </div>
-
-  <!-- Diagonal mirror cut line -->
-  <div class="hero-mirror-cut"></div>
 
   <div class="hero-content">
     <div class="hero-text">
       <div class="hero-badge">器官移植创新</div>
-
       <h1 class="hero-h1">为生命 重塑未来</h1>
-
       <p class="hero-sub">
-        提供创新的医疗器械、药品、诊断试剂与服务，
+        提供创新的器械、药品、诊断试剂与服务，
         改善移植器官的保存、评估、运输，
         助力移植患者长期存活，推动移植领域创新与发展。
       </p>
-
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">
           联系我们
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="#solutions" class="btn-secondary">
-          探索解决方案
-        </a>
+        <a href="#about" class="btn-secondary">了解更多</a>
       </div>
     </div>
   </div>
+
+  <div class="hero-pagination" id="heroPagination"></div>
 
   <div class="scroll-indicator">
     <span>向下滚动</span>
@@ -1944,571 +1041,250 @@
   </div>
 </section>
 
-
-<!-- ─── STATS SECTION ─── -->
-<section id="stats">
-  <div class="stats-inner">
-    <div class="stats-grid">
-      <div class="stat-item animate-on-scroll">
-        <div class="stat-number">300<span>+</span></div>
-        <div class="stat-label">授权专利</div>
-      </div>
-      <div class="stat-item animate-on-scroll delay-1">
-        <div class="stat-number">20<span>+</span></div>
-        <div class="stat-label">年行业经验</div>
-      </div>
-      <div class="stat-item animate-on-scroll delay-2">
-        <div class="stat-number">100<span>+</span></div>
-        <div class="stat-label">合作医院</div>
-      </div>
-      <div class="stat-item animate-on-scroll delay-3">
-        <div class="stat-number">49<span>+</span></div>
-        <div class="stat-label">覆盖国家</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── VIDEO SHOWCASE SECTION ─── -->
-<section id="video-showcase">
-  <div class="video-showcase-inner">
-    <div class="video-showcase-header animate-on-scroll">
-      <span class="section-label">产品视频</span>
-      <h2 class="section-title">LifePort® 器官灌注运转箱</h2>
-      <p class="section-desc">先进的器官灌注技术，为移植手术提供更好的器官保存方案。</p>
-    </div>
-
-    <div class="video-carousel">
-      <!-- Main Video -->
-      <div class="video-main animate-on-scroll">
-        <video autoplay muted loop playsinline poster="images/lifeport-kidney.png">
-          <source src="https://life-port-test.oss-cn-shanghai.aliyuncs.com/视频/LKT101 多支动脉连接方法.mp4" type="video/mp4" />
-        </video>
-        <div class="video-main-overlay"></div>
-        <div class="video-main-info">
-          <h3 class="video-main-title">LKT101 多支动脉连接方法</h3>
-          <p class="video-main-desc">演示 LifePort® 肾脏灌注运转箱的多支动脉连接操作流程</p>
-        </div>
-      </div>
-
-      <!-- Sidebar Videos -->
-      <div class="video-sidebar">
-        <div class="video-card animate-on-scroll delay-1" onclick="swapMainVideo(this, 'https://life-port-test.oss-cn-shanghai.aliyuncs.com/视频/LKT101 废弃耗材处理及设备消毒.mp4', 'LKT101 废弃耗材处理及设备消毒', '演示设备消毒和废弃耗材的正确处理方法')">
-          <video muted playsinline preload="metadata">
-            <source src="https://life-port-test.oss-cn-shanghai.aliyuncs.com/视频/LKT101 废弃耗材处理及设备消毒.mp4" type="video/mp4" />
-          </video>
-          <div class="video-card-overlay">
-            <div class="video-card-play">
-              <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px;margin-left:4px"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="video-card-info">
-              <h4 class="video-card-title">废弃耗材处理及设备消毒</h4>
-              <p class="video-card-desc">设备消毒流程</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="video-card animate-on-scroll delay-2" style="background: linear-gradient(135deg, #2B3A6D 0%, #1a254a 100%); display:flex; align-items:center; justify-content:center;" onclick="window.location.href='#products'">
-          <div style="text-align:center; padding:24px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;color:rgba(255,255,255,0.6); margin-bottom:16px;"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            <h4 style="color:#fff; font-size:16px; margin-bottom:8px;">探索更多产品</h4>
-            <p style="color:rgba(255,255,255,0.5); font-size:14px;">查看完整产品线 →</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── GLASSMORPHISM PRODUCT SHOWCASE ─── -->
-<section id="product-showcase">
-  <div class="product-showcase-inner">
-    <div class="product-showcase-header animate-on-scroll">
-      <span class="section-label">核心产品</span>
-      <h2 class="section-title">LifePort® 器官灌注运转箱系列</h2>
-      <p class="section-desc">先进的机械灌注技术，为器官移植提供更好的保存方案，延长器官活性，提高移植成功率。</p>
-    </div>
-
-    <div class="glass-grid">
-      <!-- Featured Card - Kidney -->
-      <div class="glass-card featured animate-on-scroll">
-        <div class="glass-card-image lifeport-image">
-          <img src="images/lifeport-kidney.png" alt="LifePort® 肾脏灌注运转箱" />
-        </div>
-        <div class="glass-card-content">
-          <h3 class="glass-card-title">LifePort® 肾脏灌注运转箱</h3>
-          <p class="glass-card-desc">全球领先的肾脏保存设备，采用先进的机械灌注技术，显著延长供肾活性，改善移植预后。已在全球 100+ 国家和地区使用，成为肾脏移植领域的金标准设备。</p>
-          <a href="#products" class="glass-card-link">
-            了解更多
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Card - Liver -->
-      <div class="glass-card animate-on-scroll delay-1">
-        <div class="glass-card-image lifeport-image">
-          <img src="images/lifeport-liver.png" alt="LifePort® 肝脏灌注运转箱" />
-        </div>
-        <div class="glass-card-content">
-          <h3 class="glass-card-title">LifePort® 肝脏灌注运转箱</h3>
-          <p class="glass-card-desc">专为肝脏移植设计的机械灌注设备，提供稳定的低温灌注，评估和维护供肝质量。</p>
-          <a href="#products" class="glass-card-link">
-            了解更多
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Card - KPS-1 -->
-      <div class="glass-card animate-on-scroll delay-2">
-        <div class="glass-card-image">
-          <img src="images/category-background-1.jpg" alt="KPS-1® 器官保存液" style="object-fit:cover;" />
-        </div>
-        <div class="glass-card-content">
-          <h3 class="glass-card-title">KPS-1® 器官保存液</h3>
-          <p class="glass-card-desc">创新配方的器官保存液，适用于肾脏、肝脏等多种器官的低温保存。</p>
-          <a href="#products" class="glass-card-link">
-            了解更多
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <!-- Card - Solutions -->
-      <div class="glass-card animate-on-scroll delay-3" style="background: linear-gradient(135deg, rgba(43,58,109,0.3) 0%, rgba(230,30,108,0.1) 100%);">
-        <div class="glass-card-image" style="display:flex; align-items:center; justify-content:center; background: transparent;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="width:120px;height:120px; color:rgba(255,255,255,0.3);"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/><circle cx="12" cy="12" r="3"/></svg>
-        </div>
-        <div class="glass-card-content">
-          <h3 class="glass-card-title">完整产品解决方案</h3>
-          <p class="glass-card-desc">从器官保存、机械灌注到药物浓度监测、配型检测，我们提供全链条移植解决方案。</p>
-          <a href="#products" class="glass-card-link">
-            查看全部产品
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── ABOUT SECTION ─── -->
+<!-- ABOUT SECTION -->
 <section id="about">
-  <div class="inner">
+  <div class="about-inner">
     <div class="about-grid">
       <div class="animate-on-scroll">
-        <span class="section-label">关于我们</span>
-        <h2 class="section-title">二十年专注<br/>为生命</h2>
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">公司介绍</h2>
         <div class="about-text">
-          <p>健耕医药（tranSnovo）是中国率先专注于器官移植领域的创新医疗企业，致力于改善移植器官的保存、运输、评估和监测方式。</p>
-          <p>我们的研发中心成立于 2010 年，已建立行业领先的技术平台，包括胶乳增强竞争免疫比浊分析、化学发光、分子诊断、悬液芯片和生物原料制备。</p>
-          <p>作为国内器官移植领域唯一以原创药物为核心的企业，健耕医药服务全球六大洲的移植中心、医院和研究机构，拥有 300 多项授权专利和 FDA 关键检查认证。</p>
+          <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
+          <p>公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。</p>
+          <p>健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，主要提供移植器官保存、运输、评估及修复的产品以及移植个体化精准诊断的体外诊断试剂，远销全球约 49 个国家和地区。</p>
         </div>
-        <a href="https://www.transnovo.com" target="_blank" rel="noopener" class="about-link">
-          访问官网了解更多
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
 
-        <div class="stat-cards">
-          <div class="stat-card highlight">
-            <div class="stat-card-val">300+</div>
-            <div class="stat-card-lbl">专利</div>
+        <div class="about-stats">
+          <div class="stat-box">
+            <div class="num">300+</div>
+            <div class="label">专利</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-val">20+</div>
-            <div class="stat-card-lbl">年</div>
+          <div class="stat-box">
+            <div class="num">20+</div>
+            <div class="label">年</div>
           </div>
-          <div class="stat-card">
-            <div class="stat-card-val">100+</div>
-            <div class="stat-card-lbl">医院</div>
+          <div class="stat-box">
+            <div class="num">100+</div>
+            <div class="label">医院</div>
           </div>
-          <div class="stat-card highlight">
-            <div class="stat-card-val">FDA</div>
-            <div class="stat-card-lbl">认证</div>
+          <div class="stat-box">
+            <div class="num">49+</div>
+            <div class="label">国家</div>
           </div>
         </div>
       </div>
 
-      <div class="about-image-wrapper animate-on-scroll delay-1">
-        <div class="about-image">
-          <img src="images/about-m1.jpg" alt="tranSnovo 健耕医药" />
-        </div>
+      <div class="about-image animate-on-scroll delay-1">
+        <img src="images/about-m1.jpg" alt="健耕医药" />
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ─── SOLUTIONS SECTION ─── -->
-<section id="solutions">
-  <div class="inner">
-    <div class="section-header animate-on-scroll">
-      <span class="section-label">解决方案</span>
-      <h2 class="section-title">全链条移植解决方案</h2>
-      <p class="section-desc">从器官获取到移植后长期护理，我们的产品线覆盖移植旅程中的每一个关键步骤。</p>
+<!-- VALUES SECTION -->
+<section id="values">
+  <div class="values-inner">
+    <div class="values-header animate-on-scroll">
+      <span class="section-label">Core Values</span>
+      <h2 class="section-title">核心价值观</h2>
     </div>
 
-    <div class="solutions-grid">
-      <div class="solution-card animate-on-scroll">
-        <div class="solution-image">
-          <img src="images/category-background-1.jpg" alt="器官保存" />
+    <div class="values-grid">
+      <div class="value-card animate-on-scroll">
+        <div class="value-icon">
+          <svg viewBox="0 0 742 816" fill="currentColor"><path d="M.6 233.8c0-19.2 13.9-42.7 30.9-52.3L340.1 7.3c17-9.6 44.8-9.6 61.8 0l308.6 174.2c17 9.6 30.9 33.1 30.9 52.3v348.5c0 19.1-13.9 42.7-30.9 52.2L401.9 808.8c-17 9.6-44.8 9.6-61.8 0L31.5 634.5C14.5 625 .6 601.4.6 582.3z"/></svg>
         </div>
-        <div class="solution-content">
-          <h3 class="solution-title">器官保存</h3>
-          <p class="solution-desc">自主研制的器官保存液（KPS 系列），显著延长离体器官活性，提高移植成功率。</p>
-          <a href="#" class="solution-link">了解更多 →</a>
-        </div>
+        <h3 class="value-title">专注移植</h3>
       </div>
 
-      <div class="solution-card animate-on-scroll delay-1">
-        <div class="solution-image">
-          <img src="images/category-background-4.jpg" alt="机械灌注" />
+      <div class="value-card animate-on-scroll delay-1">
+        <div class="value-icon">
+          <svg viewBox="0 0 121 106" fill="currentColor"><path d="M30.38 0h11.05c7.04 1.09 13.74 4.17 18.97 9.02C65.71 4.34 72.27 1.16 79.27 0h10.96c15.75 2.08 29.49 15.53 30.77 31.55v7.82c-.66 8.54-5.07 16.56-11.27 22.38-13.8 13.53-27.52 27.15-41.32 40.67-4.15 4.34-11.72 4.33-15.87.01-13.8-13.51-27.52-27.11-41.32-40.63C5.22 56.1.93 48.48 0 40.18v-9.3C1.6 15.21 15 2.3 30.38 0"/></svg>
         </div>
-        <div class="solution-content">
-          <h3 class="solution-title">机械灌注</h3>
-          <p class="solution-desc">先进的机械灌注技术，支持常温/低温灌注，离体维持和评估器官功能。</p>
-          <a href="#" class="solution-link">了解更多 →</a>
-        </div>
+        <h3 class="value-title">精益求精</h3>
       </div>
 
-      <div class="solution-card animate-on-scroll delay-2">
-        <div class="solution-image">
-          <img src="images/category-background-2.jpg" alt="药物浓度监测" />
+      <div class="value-card animate-on-scroll delay-2">
+        <div class="value-icon">
+          <svg viewBox="0 0 200 189" fill="currentColor"><path d="M109.1 14.13C120.13 6.19 133.18.05 147.03.2c11.59-.09 22.77 4.9 31.38 12.49 11.77 10.07 21.16 24.22 21.59 40.14v3.1c-.86 19.8-12.41 38.14-28.71 49.04 3.78 3.77 7.44 8.34 7.25 14 .97 9.58-7.99 17.77-17.3 17.53.45 9.14-7.27 16.94-16.2 17.58-.33 4.4-1.31 9.08-4.81 12.11-3.11 3.73-7.97 4.92-12.6 5.36-.42 4.41-1.38 9.12-4.92 12.16-4.55 5.28-12.7 6.45-18.82 3.41-2.95-1.44-4.63-4.39-6.51-6.92-3.62 1.39-7.48 2.91-11.41 2.05-6.65-1.31-12.3-6.64-13.92-13.24-8.69.22-17.86-5.85-18.67-14.97-8.44-.28-16.4-6.42-17.57-15-3.34-.62-7.01-.89-9.73-3.17-4.84-3.98-7.35-10.59-6.45-16.78.69-4.53 3.94-7.97 6.54-11.52C12.92 93.82 1.24 76.79 0 57.16v-3.64c.53-13.71 7.14-26.99 17.63-35.81 8.39-7.09 18.27-13 29.3-14.64C59.1 1.12 71.61 4.6 82.06 10.85c6.19 3.86 12.43 8.05 16.68 14.12 3.21-3.83 6.22-7.95 10.36-10.84"/></svg>
         </div>
-        <div class="solution-content">
-          <h3 class="solution-title">药物浓度监测</h3>
-          <p class="solution-desc">高精度免疫抑制剂（他克莫司、环孢素、西罗莫司、MPA）检测，支持个体化给药。</p>
-          <a href="#" class="solution-link">了解更多 →</a>
-        </div>
-      </div>
-
-      <div class="solution-card animate-on-scroll">
-        <div class="solution-image">
-          <img src="images/category-background-3.jpg" alt="配型与抗体检测" />
-        </div>
-        <div class="solution-content">
-          <h3 class="solution-title">配型与抗体检测</h3>
-          <p class="solution-desc">全面的 HLA 分型和供体特异性抗体（DSA）检测，指导最优供受体匹配决策。</p>
-          <a href="#" class="solution-link">了解更多 →</a>
-        </div>
-      </div>
-
-      <div class="solution-card animate-on-scroll delay-1">
-        <div class="solution-image">
-          <img src="images/production-center-5.jpg" alt="移植后监测" />
-        </div>
-        <div class="solution-content">
-          <h3 class="solution-title">移植后监测</h3>
-          <p class="solution-desc">生物标志物组合和诊断试剂盒，早期发现排斥反应、感染和移植物功能异常。</p>
-          <a href="#" class="solution-link">了解更多 →</a>
-        </div>
-      </div>
-
-      <div class="solution-card animate-on-scroll delay-2">
-        <div class="solution-image">
-          <img src="images/production-center-4.jpg" alt="器官运输系统" />
-        </div>
-        <div class="solution-content">
-          <h3 class="solution-title">器官运输系统</h3>
-          <p class="solution-desc">智能温控运输容器，实时监测，确保运输过程中的最佳条件。</p>
-          <a href="#" class="solution-link">了解更多 →</a>
-        </div>
+        <h3 class="value-title">敬畏生命</h3>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ─── PRODUCTS SECTION ─── -->
+<!-- PRODUCTS SECTION -->
 <section id="products">
-  <div class="inner">
-    <div class="section-header animate-on-scroll">
-      <span class="section-label">产品中心</span>
-      <h2 class="section-title">核心产品系列</h2>
-      <p class="section-desc">专为器官移植护理设计的创新产品。</p>
+  <div class="products-inner">
+    <div class="products-header animate-on-scroll">
+      <span class="section-label">Products</span>
+      <h2 class="section-title">产品中心</h2>
     </div>
 
     <div class="products-grid">
-      <a href="#" class="product-card animate-on-scroll">
+      <div class="product-card animate-on-scroll">
         <div class="product-image">
-          <img src="images/category-background-1.jpg" alt="器官保存液" />
+          <img src="images/mechanical-perfusion.jpg" alt="机械灌注" />
         </div>
-        <div class="product-overlay"></div>
-        <div class="product-content">
-          <h3 class="product-title">器官保存液</h3>
-          <p class="product-desc">KPS 系列器官保存液，创新配方显著延长器官离体保存时间，提升移植成功率。</p>
+        <div class="product-info">
+          <h3 class="product-title">机械灌注</h3>
+          <p class="product-desc">器官保存与运输设备</p>
         </div>
-      </a>
+      </div>
 
-      <a href="#" class="product-card animate-on-scroll delay-1">
+      <div class="product-card animate-on-scroll delay-1">
+        <div class="product-image">
+          <img src="images/category-background-1.jpg" alt="器官保存" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">器官保存</h3>
+          <p class="product-desc">保存液与相关试剂</p>
+        </div>
+      </div>
+
+      <div class="product-card animate-on-scroll delay-2">
         <div class="product-image">
           <img src="images/category-background-2.jpg" alt="药物浓度检测" />
         </div>
-        <div class="product-overlay"></div>
-        <div class="product-content">
+        <div class="product-info">
           <h3 class="product-title">药物浓度检测</h3>
-          <p class="product-desc">他克莫司、环孢素、西罗莫司、MPA 等免疫抑制剂血药浓度监测试剂盒。</p>
+          <p class="product-desc">TDM 检测系统</p>
         </div>
-      </a>
+      </div>
 
-      <a href="#" class="product-card animate-on-scroll delay-2">
+      <div class="product-card animate-on-scroll delay-3">
         <div class="product-image">
-          <img src="images/category-background-3.jpg" alt="HLA 分型与 DSA 检测" />
+          <img src="images/category-background-3.jpg" alt="免疫抑制剂" />
         </div>
-        <div class="product-overlay"></div>
-        <div class="product-content">
-          <h3 class="product-title">HLA 分型与 DSA 检测</h3>
-          <p class="product-desc">悬液芯片技术，高通量配型检测，精准评估排斥风险。</p>
+        <div class="product-info">
+          <h3 class="product-title">免疫抑制剂</h3>
+          <p class="product-desc">抗排斥药物</p>
         </div>
-      </a>
+      </div>
 
-      <a href="#" class="product-card animate-on-scroll delay-3">
+      <div class="product-card animate-on-scroll">
         <div class="product-image">
-          <img src="images/category-background-4.jpg" alt="机械灌注设备" />
+          <img src="images/category-background-4.jpg" alt="配型产品" />
         </div>
-        <div class="product-overlay"></div>
-        <div class="product-content">
-          <h3 class="product-title">机械灌注系统</h3>
-          <p class="product-desc">肾脏/肝脏低温机械灌注设备，离体维持和评估器官功能。</p>
+        <div class="product-info">
+          <h3 class="product-title">配型产品</h3>
+          <p class="product-desc">HLA 分型检测</p>
         </div>
-      </a>
-    </div>
-  </div>
-</section>
+      </div>
 
-
-<!-- ─── R&D SECTION ─── -->
-<section id="research">
-  <div class="research-bg">
-    <img src="images/rd-center.jpg" alt="研发中心" />
-  </div>
-  <div class="research-content">
-    <div class="research-text animate-on-scroll">
-      <span class="section-label">研发中心</span>
-      <h2 class="section-title">IVD 研发平台<br/>创新驱动力</h2>
-      <p class="section-desc">
-        我们建立了国际领先的体外诊断（IVD）研发平台，专注于器官移植领域的诊断试剂、医疗器械和创新药物研发。
-      </p>
-
-      <div class="research-stats">
-        <div class="research-stat">
-          <div class="research-stat-num">300+</div>
-          <div class="research-stat-lbl">授权专利</div>
+      <div class="product-card animate-on-scroll delay-1">
+        <div class="product-image">
+          <img src="images/production-center-4.jpg" alt="抗体检测" />
         </div>
-        <div class="research-stat">
-          <div class="research-stat-num">26+</div>
-          <div class="research-stat-lbl">研发人员</div>
+        <div class="product-info">
+          <h3 class="product-title">抗体检测</h3>
+          <p class="product-desc">群体反应性抗体筛查</p>
+        </div>
+      </div>
+
+      <div class="product-card animate-on-scroll delay-2">
+        <div class="product-image">
+          <img src="images/production-center-5.jpg" alt="术后动态监测" />
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">术后动态监测</h3>
+          <p class="product-desc">移植后随访与管理</p>
+        </div>
+      </div>
+
+      <div class="product-card animate-on-scroll delay-3">
+        <div class="product-image" style="display:flex;align-items:center;justify-content:center;background:var(--bg-secondary);">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M3 9h18"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">服务与支持</h3>
+          <p class="product-desc">专业技术支持与服务</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ─── GLOBAL SECTION ─── -->
-<section id="global">
-  <div class="inner">
-    <div class="global-grid">
-      <div class="animate-on-scroll">
-        <span class="section-label">全球网络</span>
-        <h2 class="section-title">服务全球 49+ 国家和地区</h2>
-        <p class="section-desc">我们的产品与解决方案深受欧洲、北美、东南亚、中东等地移植中心、医院和研究机构的信赖。</p>
-
-        <div class="region-list">
-          <div class="region-item"><span class="region-dot"></span>欧洲 Europe</div>
-          <div class="region-item"><span class="region-dot"></span>北美 North America</div>
-          <div class="region-item"><span class="region-dot"></span>东南亚 Southeast Asia</div>
-          <div class="region-item"><span class="region-dot"></span>中东 Middle East</div>
-          <div class="region-item"><span class="region-dot"></span>南亚 South Asia</div>
-          <div class="region-item"><span class="region-dot"></span>拉丁美洲 Latin America</div>
-          <div class="region-item"><span class="region-dot"></span>非洲 Africa</div>
-          <div class="region-item"><span class="region-dot"></span>大洋洲 Oceania</div>
-        </div>
-      </div>
-
-      <div class="global-card animate-on-scroll delay-1">
-        <div class="global-stat">
-          <div class="global-num">49<span>+</span></div>
-          <div class="global-lbl">国家和地区</div>
-        </div>
-        <div class="global-divider"></div>
-        <div class="global-stat">
-          <div class="global-num" style="font-size:56px">100<span>+</span></div>
-          <div class="global-lbl">合作移植中心</div>
-        </div>
-      </div>
+<!-- PARTNERS SECTION -->
+<section id="partners">
+  <div class="partners-inner">
+    <h3 class="partners-title">合作伙伴</h3>
+    <div class="partners-grid">
+      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
+      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
+      <div class="partner-logo"><img src="images/part3.png" alt="合作伙伴 3" /></div>
+      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
+      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
+      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
     </div>
   </div>
 </section>
 
-
-<!-- ─── CTA SECTION ─── -->
-<section id="cta">
-  <div class="cta-content animate-on-scroll">
-    <h2 class="cta-title">携手共进 推动移植未来</h2>
-    <p class="cta-desc">
-      我们欢迎来自全球医院、经销商、研究机构和投资者的垂询。<br/>
-      无论是产品分销、科研合作，还是了解我们的完整解决方案，我们都期待与您交流。
-    </p>
-    <div class="cta-actions">
-      <a href="#contact" class="btn-primary">
-        联系我们
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <a href="mailto:info@transnovo.com" class="btn-secondary">
-        发送邮件
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── CONTACT SECTION ─── -->
-<section id="contact">
-  <div class="inner">
-    <div class="contact-grid">
-      <div class="animate-on-scroll">
-        <span class="section-label">联系我们</span>
-        <h2 class="section-title">期待与您合作</h2>
-        <p class="section-desc" style="margin-bottom:32px">我们欢迎来自全球医院、经销商、研究机构和投资者的垂询。</p>
-
-        <div class="contact-info">
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <div>
-              <div class="contact-label">地址</div>
-              <div class="contact-value">上海市闵行区浦江镇陈行公路 2388 号 科技广场 2 号楼 1101 室</div>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <div class="contact-label">邮箱</div>
-              <div class="contact-value"><a href="mailto:info@transnovo.com">info@transnovo.com</a></div>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <div>
-              <div class="contact-label">电话</div>
-              <div class="contact-value"><a href="tel:02161763507">021-61763507</a></div>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div>
-              <div class="contact-label">传真</div>
-              <div class="contact-value"><a href="tel:02152370879">021-52370879</a></div>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </div>
-            <div>
-              <div class="contact-label">官网</div>
-              <div class="contact-value"><a href="https://www.transnovo.com" target="_blank" rel="noopener">www.transnovo.com</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-card animate-on-scroll delay-1">
-        <h3>准备合作？</h3>
-        <p>无论是产品分销、科研合作，还是了解我们的完整解决方案，我们都期待与您交流。</p>
-        <a href="mailto:info@transnovo.com" class="btn-primary">
-          发送邮件
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);">
-          <p style="font-size:13px;color:var(--text-light);margin-bottom:8px;">获取完整产品目录和技术文档：</p>
-          <a href="https://www.transnovo.com" target="_blank" rel="noopener" style="font-size:14px;color:var(--pink);font-weight:600;text-decoration:none;">访问 www.transnovo.com →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─── CHINA NOTICE ─── -->
-<div class="china-notice">
-  <div class="china-inner">
-    <div class="china-text">
-      <strong>中国大陆用户请注意</strong> — 请访问我们的国内官网，获取完整产品线、中文服务和本地支持。
-      <span class="china-zh">中国大陆用户请访问我们的国内官网：<a href="https://www.transnovo.com">www.transnovo.com</a></span>
-    </div>
-    <a href="https://www.transnovo.com" target="_blank" rel="noopener" class="nav-btn china-btn">访问国内官网 →</a>
-  </div>
-</div>
-
-
-<!-- ─── FOOTER ─── -->
-<footer>
+<!-- FOOTER -->
+<footer id="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#hero" class="footer-logo">
-          <img src="images/logo.png" alt="tranSnovo" style="filter: brightness(0) invert(1); opacity: 0.9;" />
-        </a>
-        <p class="footer-desc">
-          上海健耕医药科技股份有限公司<br/>
-          Shanghai tranSnovo Biotechnology Co., Ltd.
-        </p>
+        <img src="images/logo.png" alt="健耕医药" class="logo" />
+        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。</p>
       </div>
 
-      <div class="footer-links">
-        <a href="#about">关于我们</a>
-        <a href="#solutions">解决方案</a>
-        <a href="#products">产品中心</a>
-        <a href="#research">研发中心</a>
-        <a href="#global">全球网络</a>
-        <a href="#contact">联系我们</a>
+      <div class="footer-section">
+        <h4>关注我们</h4>
+        <div class="footer-qrcodes">
+          <div class="footer-qr">
+            <img src="images/qcode.png" alt="官网二维码" />
+            <span>官网二维码</span>
+          </div>
+          <div class="footer-qr">
+            <img src="images/wechat-2.png" alt="微信公众号" />
+            <span>微信公众号</span>
+          </div>
+        </div>
       </div>
 
-      <div class="footer-qrcodes">
-        <div class="footer-qr">
-          <img src="images/qcode.png" alt="官网二维码" />
-          <span>官网</span>
-        </div>
-        <div class="footer-qr">
-          <img src="images/wechat-2.png" alt="微信公众号" />
-          <span>微信公众号</span>
-        </div>
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span>021-61763507</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+            <span>021-52370879</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>上海市闵行区浦江镇陈行公路 2388 号 科技广场 2 号楼 1101 室</span>
+          </li>
+        </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 tranSnovo 健耕医药。保留所有权利。</p>
-      <div class="footer-social">
-        <a href="#" aria-label="WeChat">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M8.5 11.5c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5-1.5.7-1.5 1.5.7 1.5 1.5 1.5zm4 0c.8 0 1.5-.7 1.5-1.5s-.7-1.5-1.5-1.5-1.5.7-1.5 1.5.7 1.5 1.5 1.5zm6 5.5c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5.7 1.5 1.5 1.5 1.5-.7 1.5-1.5zm-5 0c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5.7 1.5 1.5 1.5 1.5-.7 1.5-1.5zM12 2C6.5 2 2 5.8 2 10.5c0 2.5 1.5 4.7 3.9 6.1-.1.6-.4 1.5-.8 2.2-.1.2.1.4.3.3 1-.4 2.1-1 2.8-1.6.5.1 1 .2 1.5.2.3 0 .5 0 .8-.1.5.9 1.5 1.4 2.5 1.4.2 0 .4 0 .6-.1.5.7 1.3 1.1 2.2 1.1.2 0 .4 0 .6-.1.9 1.3 2.5 2.1 4.3 2.1.2 0 .4 0 .6-.1.3 0 .5-.3.4-.6-.3-.9-.5-1.8-.5-2.4 2.5-1.3 4.1-3.6 4.1-6.2C22 5.8 17.5 2 12 2z"/></svg>
-        </a>
-        <a href="#" aria-label="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
+      <div class="footer-copyright">
+        &copy; 2014 - 2026 上海健耕医药科技股份有限公司
+      </div>
+      <div class="footer-icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 12033151 号</a>
       </div>
     </div>
   </div>
 </footer>
 
-
 <script>
+  // Navigation scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
   // Mobile menu toggle
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
@@ -2518,96 +1294,51 @@
     document.getElementById('mobileMenu').classList.remove('open');
   }
 
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!document.getElementById('nav').contains(e.target)) {
-      closeMenu();
-    }
+  // Hero slider
+  const slides = document.querySelectorAll('.hero-slide');
+  const pagination = document.getElementById('heroPagination');
+  let currentSlide = 0;
+
+  // Create pagination dots
+  slides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'hero-dot' + (index === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(index));
+    pagination.appendChild(dot);
   });
 
-  // Navbar scroll effect
-  window.addEventListener('scroll', function() {
-    const nav = document.getElementById('nav');
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
+  const dots = document.querySelectorAll('.hero-dot');
 
-  // Video swap function for video showcase
-  function swapMainVideo(card, videoUrl, title, desc) {
-    const mainVideo = card.closest('.video-carousel').querySelector('.video-main video');
-    const mainTitle = card.closest('.video-carousel').querySelector('.video-main-title');
-    const mainDesc = card.closest('.video-carousel').querySelector('.video-main-desc');
-
-    if (mainVideo && mainTitle && mainDesc) {
-      // Pause current video
-      mainVideo.pause();
-
-      // Update source and load
-      mainVideo.querySelector('source').src = videoUrl;
-      mainVideo.load();
-
-      // Update info
-      mainTitle.textContent = title;
-      mainDesc.textContent = desc;
-
-      // Play new video
-      mainVideo.play().catch(() => {
-        // Autoplay may be blocked, ignore
-      });
-
-      // Visual feedback - remove active class from all cards
-      card.closest('.video-sidebar').querySelectorAll('.video-card').forEach(c => {
-        c.style.boxShadow = 'none';
-      });
-      card.style.boxShadow = '0 12px 40px rgba(230,30,108,0.3)';
-    }
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
   }
 
-  // Scroll-triggered animations with Intersection Observer
-  document.addEventListener('DOMContentLoaded', function() {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
+  // Auto advance slides
+  setInterval(() => {
+    goToSlide((currentSlide + 1) % slides.length);
+  }, 4000);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-on-scroll');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
+  // Scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
 
-    // Observe elements that should animate on scroll
-    document.querySelectorAll('.animate-on-scroll, .delay-1, .delay-2, .delay-3, .delay-4').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+      }
     });
+  }, observerOptions);
 
-    // 3D Tilt effect for glass cards
-    const glassCards = document.querySelectorAll('.glass-card');
-    glassCards.forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = (y - centerY) / 10;
-        const rotateY = (centerX - x) / 10;
-
-        card.style.transform = `perspective(1000px) translateZ(20px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) translateZ(0) rotateX(0) rotateY(0) scale(1)';
-      });
-    });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
   });
 </script>
 
