@@ -618,31 +618,93 @@
       margin-top: 48px;
     }
 
-    .stat-box {
+    .stat-item {
       text-align: center;
-      padding: 24px;
-      background: var(--bg-secondary);
-      border-radius: 16px;
-      transition: all 0.3s;
+      padding: 16px;
     }
 
-    .stat-box:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px var(--accent-glow);
-    }
-
-    .stat-box .num {
+    .stat-value {
+      display: block;
       font-size: 42px;
       font-weight: 900;
       color: var(--accent);
       line-height: 1;
+      margin-bottom: 8px;
     }
 
-    .stat-box .label {
+    .stat-label {
       font-size: 14px;
       color: var(--text-tertiary);
-      margin-top: 8px;
       font-weight: 500;
+    }
+
+    /* ─── TIMELINE SECTION ─── */
+    #timeline {
+      padding: 120px 24px;
+      background: var(--bg-secondary);
+    }
+
+    .timeline-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    #timeline .section-label {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    #timeline .section-title {
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 64px;
+      text-align: center;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 32px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 32px 24px;
+      background: #fff;
+      border-radius: 16px;
+      border-left: 3px solid var(--tech-blue);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      border-left-color: var(--pink);
+    }
+
+    .timeline-year {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--tech-blue);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .timeline-event {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
     }
 
     /* ─── VALUES SECTION ─── */
@@ -828,93 +890,6 @@
       height: auto;
     }
 
-    /* ─── ABOUT SECTION ─── */
-    #about {
-      padding: 120px 24px;
-      background: var(--bg-primary);
-    }
-
-    .about-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .section-label {
-      display: inline-block;
-      padding: 8px 20px;
-      background: var(--accent-soft);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 20px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .about-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .about-text {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.9;
-      margin-bottom: 24px;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      margin-top: 48px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .stat-value {
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--tech-blue);
-      margin-bottom: 8px;
-    }
-
-    .stat-label {
-      font-size: 14px;
-      color: var(--text-tertiary);
-    }
-
-    .about-image {
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
     /* ─── FOOTER ─── */
     #footer {
       background: var(--bg-primary);
@@ -1026,6 +1001,7 @@
       .hero-content { padding: 0 32px; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
       .about-image { order: -1; }
+      .timeline-grid { grid-template-columns: repeat(3, 1fr); }
       .values-grid { grid-template-columns: repeat(2, 1fr); }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .partners-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1041,10 +1017,11 @@
       .hero-h1 { font-size: clamp(32px, 10vw, 48px); }
       .hero-sub { font-size: clamp(15px, 4vw, 17px); }
 
-      #about, #values, #products { padding: 80px 20px; }
+      #about, #values, #products, #timeline { padding: 80px 20px; }
       .about-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
       .stat-value { font-size: 28px; }
       .stat-label { font-size: 12px; }
+      .timeline-grid { grid-template-columns: 1fr; }
       .values-grid, .products-grid { grid-template-columns: 1fr; }
       .partners-grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -1173,7 +1150,59 @@
         </div>
       </div>
       <div class="about-image">
-        <img src="images/about-hero.jpg" alt="健耕医药" />
+        <img src="images/about-m1.jpg" alt="健耕医药" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE SECTION -->
+<section id="timeline">
+  <div class="timeline-inner">
+    <span class="section-label">发展历程</span>
+    <h2 class="section-title">二十年深耕 砥砺前行</h2>
+
+    <div class="timeline-grid">
+      <!-- Row 1 -->
+      <div class="timeline-item">
+        <div class="timeline-year">2004</div>
+        <div class="timeline-event">· 公司成立</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2005</div>
+        <div class="timeline-event">· 开展海外移植产品代理<br>· 国内移植覆盖华东市场</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2008</div>
+        <div class="timeline-event">· 代理海正业务，扩展全国销售</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2013</div>
+        <div class="timeline-event">· 云泽移植 IVD 生产建立</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2015</div>
+        <div class="timeline-event">· 新三板上市</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2016</div>
+        <div class="timeline-event">· 完成收购 LSI<br>· 布局全球市场</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2018</div>
+        <div class="timeline-event">· 研发生产中心落地</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2019</div>
+        <div class="timeline-event">· 第一个自主研发的产品他克莫司测定试剂盒获得中国注册证</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-event">· TDM 全产品获 CE 证</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-event">· 他克莫司测定试剂盒完成 FDA 注册</div>
       </div>
     </div>
   </div>
