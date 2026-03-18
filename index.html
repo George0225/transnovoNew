@@ -828,6 +828,93 @@
       height: auto;
     }
 
+    /* ─── ABOUT SECTION ─── */
+    #about {
+      padding: 120px 24px;
+      background: var(--bg-primary);
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-title {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .about-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--tech-blue);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    .about-image {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* ─── FOOTER ─── */
     #footer {
       background: var(--bg-primary);
@@ -938,6 +1025,7 @@
       .nav-inner { padding: 0 32px; }
       .hero-content { padding: 0 32px; }
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-image { order: -1; }
       .values-grid { grid-template-columns: repeat(2, 1fr); }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .partners-grid { grid-template-columns: repeat(3, 1fr); }
@@ -954,7 +1042,9 @@
       .hero-sub { font-size: clamp(15px, 4vw, 17px); }
 
       #about, #values, #products { padding: 80px 20px; }
-      .about-stats { grid-template-columns: repeat(2, 1fr); }
+      .about-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .stat-value { font-size: 28px; }
+      .stat-label { font-size: 12px; }
       .values-grid, .products-grid { grid-template-columns: 1fr; }
       .partners-grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -1043,20 +1133,50 @@
         改善移植器官的保存、评估、运输，
         助力移植患者长期存活，推动移植领域创新与发展。
       </p>
-      <div class="hero-actions">
-        <a href="contact.html" class="btn-primary">
-          联系我们
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
-        <a href="about.html" class="btn-secondary">了解更多</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-grid">
+      <div class="about-content">
+        <span class="section-label">关于健耕</span>
+        <h2 class="about-title">专注移植领域，围绕移植全程</h2>
+        <p class="about-text">
+          成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。
+          公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。
+        </p>
+        <p class="about-text">
+          健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，
+          主要提供移植器官保存、运输、评估及修复的产品以及移植个体化精准诊断的体外诊断试剂，
+          远销全球约 49 个国家和地区。
+        </p>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="stat-value">2004</span>
+            <span class="stat-label">成立年份</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">185+</span>
+            <span class="stat-label">全球员工</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">49+</span>
+            <span class="stat-label">国家和地区</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">26</span>
+            <span class="stat-label">研发人员</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <img src="images/about-hero.jpg" alt="健耕医药" />
       </div>
     </div>
   </div>
-
-  <a href="about.html" class="scroll-indicator">
-    <span>了解更多</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </a>
 </section>
 
 <!-- FOOTER -->
