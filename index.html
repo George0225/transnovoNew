@@ -308,7 +308,7 @@
       padding-left: 32px;
     }
 
-    /* ─── HERO SECTION ─── */
+    /* ─── HERO SECTION - Video with Mirror Cut Effect ─── */
     #hero {
       position: relative;
       min-height: 100vh;
@@ -316,39 +316,82 @@
       background: var(--bg-primary);
     }
 
-    .hero-swiper {
+    /* Video background */
+    .hero-video-wrapper {
       position: absolute;
       inset: 0;
       z-index: 1;
     }
 
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .hero-slide.active {
-      opacity: 1;
-    }
-
-    .hero-slide img {
+    .hero-video-wrapper video {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
+    /* Dark overlay */
     .hero-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         135deg,
-        rgba(26, 31, 46, 0.4) 0%,
-        rgba(26, 31, 46, 0.2) 50%,
-        rgba(26, 31, 46, 0.3) 100%
+        rgba(26, 31, 46, 0.75) 0%,
+        rgba(26, 31, 46, 0.5) 50%,
+        rgba(26, 31, 46, 0.65) 100%
       );
       z-index: 2;
+    }
+
+    /* Glass grid overlay - mirror cut effect */
+    .hero-glass-grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .hero-glass-cell {
+      position: relative;
+      border-right: 1px solid rgba(91, 143, 249, 0.15);
+      border-bottom: 1px solid rgba(91, 143, 249, 0.15);
+      backdrop-filter: blur(3px);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.02) 0%,
+        transparent 100%
+      );
+    }
+
+    /* Remove outer borders */
+    .hero-glass-cell:nth-child(6n) {
+      border-right: none;
+    }
+    .hero-glass-cell:nth-last-child(-n+6) {
+      border-bottom: none;
+    }
+
+    /* Diagonal mirror cut line */
+    .hero-mirror-cut {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        135deg,
+        transparent 0%,
+        transparent 45%,
+        rgba(91, 143, 249, 0.12) 45%,
+        rgba(91, 143, 249, 0.25) 50%,
+        rgba(91, 143, 249, 0.12) 55%,
+        transparent 55%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 4;
     }
 
     .hero-content {
@@ -472,32 +515,6 @@
       border-color: rgba(255, 255, 255, 0.5);
     }
 
-    .hero-pagination {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 12px;
-      z-index: 20;
-    }
-
-    .hero-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .hero-dot.active {
-      background: #fff;
-      border-color: #fff;
-      transform: scale(1.2);
-    }
-
     .scroll-indicator {
       position: absolute;
       bottom: 32px;
@@ -521,6 +538,12 @@
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(8px); }
+    }
+
+    /* Hide glass grid on mobile */
+    @media (max-width: 1200px) {
+      .hero-glass-grid { display: none; }
+      .hero-mirror-cut { display: none; }
     }
 
     /* ─── ABOUT SECTION ─── */
@@ -1001,18 +1024,19 @@
 
 <!-- HERO SECTION -->
 <section id="hero">
-  <div class="hero-swiper" id="heroSwiper">
-    <div class="hero-slide active"><img src="images/幻灯片1.jpg" alt="幻灯片 1"></div>
-    <div class="hero-slide"><img src="images/幻灯片2.jpg" alt="幻灯片 2"></div>
-    <div class="hero-slide"><img src="images/幻灯片3.jpg" alt="幻灯片 3"></div>
-    <div class="hero-slide"><img src="images/幻灯片4.jpg" alt="幻灯片 4"></div>
-    <div class="hero-slide"><img src="images/幻灯片5.jpg" alt="幻灯片 5"></div>
-    <div class="hero-slide"><img src="images/幻灯片6.jpg" alt="幻灯片 6"></div>
-    <div class="hero-slide"><img src="images/幻灯片7.jpg" alt="幻灯片 7"></div>
-    <div class="hero-slide"><img src="images/幻灯片9.jpg" alt="幻灯片 9"></div>
-    <div class="hero-slide"><img src="images/幻灯片10.jpg" alt="幻灯片 10"></div>
+  <div class="hero-video-wrapper">
+    <video autoplay muted loop playsinline>
+      <source src="images/hero-video.mp4" type="video/mp4" />
+    </video>
   </div>
   <div class="hero-overlay"></div>
+  <div class="hero-glass-grid">
+    <div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div>
+    <div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div><div class="hero-glass-cell"></div>
+  </div>
+  <div class="hero-mirror-cut"></div>
 
   <div class="hero-content">
     <div class="hero-text">
@@ -1033,7 +1057,6 @@
     </div>
   </div>
 
-  <div class="hero-pagination" id="heroPagination"></div>
 
   <div class="scroll-indicator">
     <span>向下滚动</span>
@@ -1293,34 +1316,6 @@
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
   }
-
-  // Hero slider
-  const slides = document.querySelectorAll('.hero-slide');
-  const pagination = document.getElementById('heroPagination');
-  let currentSlide = 0;
-
-  // Create pagination dots
-  slides.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.className = 'hero-dot' + (index === 0 ? ' active' : '');
-    dot.addEventListener('click', () => goToSlide(index));
-    pagination.appendChild(dot);
-  });
-
-  const dots = document.querySelectorAll('.hero-dot');
-
-  function goToSlide(index) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = index;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-  }
-
-  // Auto advance slides
-  setInterval(() => {
-    goToSlide((currentSlide + 1) % slides.length);
-  }, 4000);
 
   // Scroll animations
   const observerOptions = {
