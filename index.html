@@ -311,7 +311,7 @@
     /* ─── HERO SECTION - Video with Mirror Cut Effect ─── */
     #hero {
       position: relative;
-      min-height: 80vh;
+      height: 80vh;
       overflow: hidden;
       background: var(--bg-primary);
     }
@@ -400,7 +400,7 @@
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 48px;
-      min-height: 80vh;
+      height: 100%;
       display: flex;
       align-items: center;
     }
@@ -547,21 +547,20 @@
     }
 
     /* Company Intro Banner */
-    .hero-company-intro {
-      position: relative;
-      z-index: 10;
-      max-width: 1400px;
-      margin: 0 auto;
+    #company-intro {
       padding: 0 48px 80px;
+      background: var(--bg-primary);
     }
 
     .company-intro-inner {
+      max-width: 1400px;
+      margin: 0 auto;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       border-radius: 24px;
       padding: 48px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border);
     }
 
     .company-intro-grid {
@@ -995,7 +994,7 @@
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
       .hero-content { padding: 0 32px; }
-      .hero-company-intro { padding: 0 32px 80px; }
+      #company-intro { padding: 0 32px 80px; }
       .company-intro-inner { padding: 32px; }
       .company-intro-grid { grid-template-columns: 1fr; gap: 32px; }
       .timeline-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1014,8 +1013,8 @@
       .hero-h1 { font-size: clamp(32px, 10vw, 48px); }
       .hero-sub { font-size: clamp(15px, 4vw, 17px); }
 
-      #about, #values, #products, #timeline { padding: 80px 20px; }
-      .hero-company-intro { padding: 0 20px 60px; }
+      #values, #products, #timeline { padding: 80px 20px; }
+      #company-intro { padding: 0 20px 60px; }
       .company-intro-inner { padding: 24px; }
       .company-intro-stats { grid-template-columns: repeat(2, 1fr); }
       .timeline-grid { grid-template-columns: 1fr; }
@@ -1109,34 +1108,34 @@
       </p>
     </div>
   </div>
+</section>
 
-  <!-- Company Intro Banner -->
-  <div class="hero-company-intro">
-    <div class="company-intro-inner">
-      <div class="company-intro-grid">
-        <div class="company-intro-content">
-          <span class="intro-label">关于健耕</span>
-          <h3>专注移植领域，围绕移植全程</h3>
-          <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
-          <p>健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，远销全球约 49 个国家和地区。</p>
+<!-- Company Intro Banner -->
+<section id="company-intro">
+  <div class="company-intro-inner">
+    <div class="company-intro-grid">
+      <div class="company-intro-content">
+        <span class="intro-label">关于健耕</span>
+        <h3>专注移植领域，围绕移植全程</h3>
+        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
+        <p>健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，远销全球约 49 个国家和地区。</p>
+      </div>
+      <div class="company-intro-stats">
+        <div class="intro-stat">
+          <span class="stat-num">2004</span>
+          <span class="stat-desc">成立年份</span>
         </div>
-        <div class="company-intro-stats">
-          <div class="intro-stat">
-            <span class="stat-num">2004</span>
-            <span class="stat-desc">成立年份</span>
-          </div>
-          <div class="intro-stat">
-            <span class="stat-num">185+</span>
-            <span class="stat-desc">全球员工</span>
-          </div>
-          <div class="intro-stat">
-            <span class="stat-num">49+</span>
-            <span class="stat-desc">国家和地区</span>
-          </div>
-          <div class="intro-stat">
-            <span class="stat-num">26</span>
-            <span class="stat-desc">研发人员</span>
-          </div>
+        <div class="intro-stat">
+          <span class="stat-num">185+</span>
+          <span class="stat-desc">全球员工</span>
+        </div>
+        <div class="intro-stat">
+          <span class="stat-num">49+</span>
+          <span class="stat-desc">国家和地区</span>
+        </div>
+        <div class="intro-stat">
+          <span class="stat-num">26</span>
+          <span class="stat-desc">研发人员</span>
         </div>
       </div>
     </div>
