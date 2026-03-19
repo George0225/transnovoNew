@@ -927,43 +927,66 @@
   });
 
   // =============================================
-  // 滚动解锁逻辑 (Genentech 风格)
+  // 滚动解锁逻辑 (Genentech 风格 - 双向滚动)
   // =============================================
   const hero = document.getElementById('hero');
   const heroContent = document.getElementById('heroContent');
   const progressBar = document.querySelector('.scroll-progress');
+  const firstSection = document.getElementById('section-about');
 
   let isUnlocked = false;
   let scrollAccumulator = 0;
   const UNLOCK_THRESHOLD = 500; // 需要累积滚动多少像素才解锁
+  let heroScale = 1;
+  let heroOpacity = 1;
+  let canvasOpacity = 0.8;
 
-  // 监听鼠标滚轮
+  // 监听鼠标滚轮 - 双向滚动
   window.addEventListener('wheel', (e) => {
-    if (isUnlocked) return;
+    const isScrollingDown = e.deltaY > 0;
+    const scrollAmount = Math.abs(e.deltaY);
 
-    e.preventDefault();
-    scrollAccumulator += e.deltaY;
+    if (!isUnlocked) {
+      // 向下滚动：累积解锁
+      if (isScrollingDown) {
+        e.preventDefault();
+        scrollAccumulator += scrollAmount;
 
-    // 计算滚动进度 (0 到 1)
-    const scrollProgress = Math.min(Math.abs(scrollAccumulator) / UNLOCK_THRESHOLD, 1);
+        // 计算滚动进度 (0 到 1)
+        const scrollProgress = Math.min(scrollAccumulator / UNLOCK_THRESHOLD, 1);
 
-    // 标题放大效果 - Genentech 风格：逐渐放大直到超出屏幕
-    const scale = 1 + scrollProgress * 3; // 从 1 倍放大到 4 倍
-    const opacity = Math.max(0, 1 - scrollProgress * 0.8); // 慢慢淡出
+        // 标题放大效果
+        heroScale = 1 + scrollProgress * 3;
+        heroOpacity = Math.max(0, 1 - scrollProgress * 0.8);
+        canvasOpacity = 0.8 * (1 - scrollProgress);
 
-    if (heroContent) {
-      heroContent.style.transform = `scale(${scale})`;
-      heroContent.style.opacity = opacity;
-    }
+        if (heroContent) {
+          heroContent.style.transform = `scale(${heroScale})`;
+          heroContent.style.opacity = heroOpacity;
+        }
 
-    // 背景淡出
-    if (canvas) {
-      canvas.style.opacity = 0.8 * (1 - scrollProgress);
-    }
+        if (canvas) {
+          canvas.style.opacity = canvasOpacity;
+        }
 
-    // 达到阈值，解锁页面
-    if (scrollProgress >= 0.95 && !isUnlocked) {
-      unlockPage();
+        // 达到阈值，解锁页面
+        if (scrollProgress >= 0.95) {
+          unlockPage();
+        }
+      }
+      // 向上滚动：忽略（保持在 Hero）
+      else {
+        e.preventDefault();
+      }
+    } else {
+      // 已解锁状态：检查是否需要重新锁定
+      const scrollTop = window.scrollY;
+
+      // 如果滚动到接近顶部，重新锁定
+      if (scrollTop < 100 && isScrollingDown === false) {
+        e.preventDefault();
+        relockPage();
+      }
     }
   }, { passive: false });
 
@@ -1002,6 +1025,42 @@
       }
       checkSections();
     }, 500);
+  }
+
+  function relockPage() {
+    isUnlocked = false;
+    scrollAccumulator = 0;
+
+    // 重新显示 Hero 层
+    if (hero) {
+      hero.classList.remove('hidden');
+      hero.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      hero.style.opacity = '1';
+    }
+
+    // 恢复标题状态
+    if (heroContent) {
+      heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      heroContent.style.transform = 'scale(1)';
+      heroContent.style.opacity = '1';
+    }
+
+    // 恢复 Canvas 背景
+    if (canvas) {
+      canvas.style.transition = 'opacity 0.6s ease';
+      canvas.style.opacity = '0.8';
+    }
+
+    // 隐藏滚动进度条
+    if (progressBar) {
+      progressBar.classList.remove('visible');
+    }
+
+    // 重新锁定页面
+    document.body.classList.add('locked');
+
+    // 滚动到顶部
+    window.scrollTo(0, 0);
   }
 
   // =============================================
@@ -1083,6 +1142,14 @@
 
     if (progressBar) {
       progressBar.style.transform = `scaleY(${Math.max(0.01, scrollPercent)})`;
+    }
+
+    // 检测是否滚动到接近顶部，准备重新锁定
+    if (scrollY < 50 && isUnlocked) {
+      // 用户滚动回顶部，但不立即锁定，等待向上滚动意图
+      window.isNearTop = true;
+    } else {
+      window.isNearTop = false;
     }
   });
 </script>
