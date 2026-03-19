@@ -324,20 +324,63 @@
       will-change: transform, opacity;
     }
 
-    /* 镂空文字效果 - 文字内部显示抽象背景 */
+    /* 渐变文字效果 - 医疗科技风格 */
     .cutout-title {
       font-size: clamp(64px, 12vw, 160px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.03em;
-      /* 文字本身是透明的，显示背景 */
-      color: rgba(10, 22, 40, 0.7);
-      /* 文字外部轮廓 */
+      /* 渐变填充：从左到右，蓝色 → 粉色 → 深色 */
+      background: linear-gradient(
+        135deg,
+        #5B8FF9 0%,
+        #7B68EE 25%,
+        #E61E6C 50%,
+        #1d1d1f 75%,
+        #1d1d1f 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       position: relative;
       display: inline-block;
+      /* 光晕效果 */
+      filter: drop-shadow(0 0 30px rgba(91, 143, 249, 0.4));
+      animation: gradientShift 8s ease infinite;
     }
 
-    /* 文字轮廓效果 */
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    /* 发光外轮廓 */
+    .cutout-title::before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(91, 143, 249, 0.5) 0%,
+        rgba(123, 104, 238, 0.4) 25%,
+        rgba(230, 30, 108, 0.5) 50%,
+        rgba(29, 29, 31, 0.6) 75%,
+        rgba(29, 29, 31, 0.6) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: blur(20px);
+      z-index: -1;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    /* 细腻轮廓线 */
     .cutout-title::after {
       content: attr(data-text);
       position: absolute;
@@ -345,19 +388,30 @@
       top: 0;
       width: 100%;
       height: 100%;
-      color: transparent;
-      -webkit-text-stroke: 1.5px rgba(10, 22, 40, 0.15);
-      z-index: -1;
+      -webkit-text-stroke: 0.5px rgba(10, 22, 40, 0.1);
+      z-index: 2;
+      pointer-events: none;
     }
 
     /* 副标题 */
     .hero-subtitle {
       font-size: clamp(14px, 1.8vw, 18px);
-      color: rgba(10, 22, 40, 0.8);
+      /* 渐变文字 */
+      background: linear-gradient(
+        135deg,
+        rgba(91, 143, 249, 0.9) 0%,
+        rgba(123, 104, 238, 0.8) 50%,
+        rgba(230, 30, 108, 0.9) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       line-height: 1.8;
       max-width: 600px;
       margin: 32px auto 0;
       text-align: center;
+      font-weight: 400;
+      letter-spacing: 0.02em;
     }
 
     /* 滚动提示 */
