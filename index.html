@@ -67,6 +67,13 @@
       z-index: 1000;
       background: transparent;
       transition: all 0.4s;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #nav.visible {
+      opacity: 1;
+      visibility: visible;
     }
 
     #nav::before {
@@ -322,6 +329,43 @@
       z-index: 10;
       text-align: center;
       will-change: transform, opacity;
+    }
+
+    /* Logo + Slogan 组合样式 */
+    .logo-slogan {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .slogan-text {
+      font-size: clamp(48px, 8vw, 120px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #1d1d1f;
+    }
+
+    .slogan-text.gradient-text {
+      background: linear-gradient(
+        135deg,
+        #5B8FF9 0%,
+        #7B68EE 25%,
+        #E61E6C 50%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(91, 143, 249, 0.3));
+    }
+
+    .slogan-logo {
+      height: clamp(60px, 10vw, 140px);
+      width: auto;
+      filter: drop-shadow(0 4px 20px rgba(91, 143, 249, 0.4));
+      transition: filter 0.3s;
     }
 
     /* 渐变文字效果 - 医疗科技风格 */
@@ -810,7 +854,11 @@
 
   <!-- 标题内容 -->
   <div class="hero-content" id="heroContent">
-    <h1 class="cutout-title" data-text="为生命重塑未来">为生命重塑未来</h1>
+    <h1 class="logo-slogan">
+      <span class="slogan-text">为生命</span>
+      <img src="images/logo.png" alt="tranSnovo" class="slogan-logo" />
+      <span class="slogan-text gradient-text">重塑未来</span>
+    </h1>
   </div>
 
   <!-- 滚动提示 -->
@@ -1248,6 +1296,11 @@
       progressBar.classList.add('visible');
     }
 
+    // 显示导航栏
+    if (nav) {
+      nav.classList.add('visible');
+    }
+
     // 稍后移除锁定类，让过渡完成
     setTimeout(() => {
       document.body.classList.remove('locked');
@@ -1285,6 +1338,11 @@
     // 隐藏滚动进度条
     if (progressBar) {
       progressBar.classList.remove('visible');
+    }
+
+    // 隐藏导航栏
+    if (nav) {
+      nav.classList.remove('visible');
     }
 
     // 重新锁定页面
