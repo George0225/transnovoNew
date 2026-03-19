@@ -221,7 +221,7 @@
     .nav-toggle { display: none; }
 
     /* =============================================
-       HERO SECTION - 初始锁定屏幕
+       HERO SECTION - 初始锁定屏幕 (Genentech 风格)
        ============================================= */
     #hero {
       position: fixed;
@@ -234,7 +234,8 @@
       align-items: center;
       justify-content: center;
       z-index: 100;
-      transition: opacity 0.8s ease;
+      background: #f5f5f7; /* 浅色背景，类似 Genentech */
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     #hero.hidden {
@@ -249,41 +250,7 @@
       width: 100%;
       height: 100%;
       z-index: 0;
-      background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 50%, #0d1f3c 100%);
-    }
-
-    /* Hero 视频层 - 初始隐藏 */
-    .hero-video-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.8s ease;
-    }
-
-    .hero-video-layer.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .hero-video-layer video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.7) contrast(1.1);
-    }
-
-    .hero-video-layer::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg,
-        rgba(10,22,40,0.85) 0%,
-        rgba(10,22,40,0.65) 40%,
-        rgba(10,22,40,0.75) 100%);
+      opacity: 0.8;
     }
 
     /* 标题容器 */
@@ -291,36 +258,48 @@
       position: relative;
       z-index: 10;
       text-align: center;
-      transition: none; /* 移除过渡，完全由滚动驱动 */
       will-change: transform, opacity;
     }
 
-    /* 镂空文字效果 */
+    /* 镂空文字效果 - 文字内部显示抽象背景 */
     .cutout-title {
-      font-size: clamp(56px, 10vw, 120px);
+      font-size: clamp(64px, 12vw, 160px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.03em;
+      /* 文字本身是透明的，显示背景 */
       color: transparent;
-      background: linear-gradient(135deg,
-        rgba(91,143,249,0.95) 0%,
-        rgba(230,30,108,0.9) 50%,
-        rgba(91,143,249,0.95) 100%);
+      /* 镂空效果：文字形状裁剪背景 */
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="techPattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="8" fill="rgba(91,143,249,0.3)"/><circle cx="40" cy="40" r="4" fill="rgba(230,30,108,0.2)"/><path d="M0 0 L40 40" stroke="rgba(91,143,249,0.1)" stroke-width="1"/></pattern></defs><rect width="200" height="200" fill="url(%23techPattern)"/></svg>');
+      background-size: 60px 60px;
       -webkit-background-clip: text;
       background-clip: text;
+      /* 文字外部轮廓 */
       position: relative;
       display: inline-block;
+    }
+
+    /* 文字轮廓效果 */
+    .cutout-title::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      color: rgba(10, 22, 40, 0.3);
+      -webkit-text-stroke: 1px rgba(10, 22, 40, 0.2);
+      z-index: -1;
     }
 
     /* 副标题 */
     .hero-subtitle {
       font-size: clamp(14px, 1.8vw, 18px);
-      color: rgba(255,255,255,0.85);
+      color: rgba(10, 22, 40, 0.8);
       line-height: 1.8;
       max-width: 600px;
       margin: 32px auto 0;
       text-align: center;
-      opacity: 0.9;
     }
 
     /* 滚动提示 */
@@ -333,7 +312,7 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
-      color: rgba(255,255,255,0.6);
+      color: rgba(10, 22, 40, 0.5);
       font-size: 12px;
       letter-spacing: 0.2em;
       animation: hintPulse 2s ease-in-out infinite;
@@ -521,7 +500,7 @@
       opacity: 0.8;
     }
 
-    /* 视频章节 */
+    /* 视频章节 - 这是唯一的 Hero 视频 */
     .video-section {
       position: relative;
       height: 100vh;
@@ -662,21 +641,14 @@
   </div>
 </nav>
 
-<!-- HERO: 初始锁定屏幕 -->
+<!-- HERO: 初始锁定屏幕 - Genentech 风格 -->
 <section id="hero">
   <!-- Canvas 抽象科技背景 -->
   <canvas class="tech-bg-canvas" id="techCanvas"></canvas>
 
-  <!-- 视频层：滚动时切换显示 -->
-  <div class="hero-video-layer" id="heroVideoLayer">
-    <video autoplay muted loop playsinline>
-      <source src="images/hero-video.mp4" type="video/mp4" />
-    </video>
-  </div>
-
   <!-- 标题内容 -->
   <div class="hero-content" id="heroContent">
-    <h1 class="cutout-title">为生命重塑未来</h1>
+    <h1 class="cutout-title" data-text="为生命重塑未来">为生命重塑未来</h1>
     <p class="hero-subtitle">
       提供创新的器械、药品、诊断试剂与服务，<br />
       改善移植器官的保存、评估、运输，<br />
@@ -774,7 +746,7 @@
   </div>
 </section>
 
-<!-- VIDEO SECTION -->
+<!-- VIDEO SECTION - 唯一的 Hero 视频 -->
 <section class="video-section" id="section-video">
   <video autoplay muted loop playsinline>
     <source src="images/hero-video.mp4" type="video/mp4" />
@@ -955,16 +927,15 @@
   });
 
   // =============================================
-  // 滚动解锁逻辑
+  // 滚动解锁逻辑 (Genentech 风格)
   // =============================================
   const hero = document.getElementById('hero');
   const heroContent = document.getElementById('heroContent');
-  const heroVideoLayer = document.getElementById('heroVideoLayer');
   const progressBar = document.querySelector('.scroll-progress');
 
   let isUnlocked = false;
   let scrollAccumulator = 0;
-  const UNLOCK_THRESHOLD = 400; // 需要累积滚动多少像素才解锁（增大到 400，更慢）
+  const UNLOCK_THRESHOLD = 500; // 需要累积滚动多少像素才解锁
 
   // 监听鼠标滚轮
   window.addEventListener('wheel', (e) => {
@@ -976,23 +947,22 @@
     // 计算滚动进度 (0 到 1)
     const scrollProgress = Math.min(Math.abs(scrollAccumulator) / UNLOCK_THRESHOLD, 1);
 
-    // 标题放大效果 - 更缓慢：从 1 倍到 2.5 倍
-    const scale = 1 + scrollProgress * 1.5; // 放大到最大 2.5 倍（原来是 3 倍）
-    const opacity = Math.max(0, 1 - scrollProgress * 1.2); // 更慢淡出
+    // 标题放大效果 - Genentech 风格：逐渐放大直到超出屏幕
+    const scale = 1 + scrollProgress * 3; // 从 1 倍放大到 4 倍
+    const opacity = Math.max(0, 1 - scrollProgress * 0.8); // 慢慢淡出
 
     if (heroContent) {
       heroContent.style.transform = `scale(${scale})`;
       heroContent.style.opacity = opacity;
     }
 
-    // 视频层淡入 - 更早开始，更平滑
-    if (heroVideoLayer && scrollProgress > 0.2) {
-      const videoOpacity = Math.min(1, (scrollProgress - 0.2) / 0.8);
-      heroVideoLayer.style.opacity = videoOpacity * 0.6; // 视频初始透明度低一些
+    // 背景淡出
+    if (canvas) {
+      canvas.style.opacity = 0.8 * (1 - scrollProgress);
     }
 
     // 达到阈值，解锁页面
-    if (scrollProgress >= 1 && !isUnlocked) {
+    if (scrollProgress >= 0.95 && !isUnlocked) {
       unlockPage();
     }
   }, { passive: false });
@@ -1001,14 +971,27 @@
     isUnlocked = true;
 
     // 平滑过渡到最终状态
-    heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-    heroContent.style.transform = 'scale(3)';
-    heroContent.style.opacity = '0';
+    if (heroContent) {
+      heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      heroContent.style.transform = 'scale(5)';
+      heroContent.style.opacity = '0';
+    }
 
-    // 视频层完全显示
-    if (heroVideoLayer) {
-      heroVideoLayer.style.transition = 'opacity 0.8s ease';
-      heroVideoLayer.style.opacity = '1';
+    // 背景完全淡出
+    if (canvas) {
+      canvas.style.transition = 'opacity 0.6s ease';
+      canvas.style.opacity = '0';
+    }
+
+    // Hero 层淡出
+    if (hero) {
+      hero.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      hero.style.opacity = '0';
+    }
+
+    // 显示滚动进度条
+    if (progressBar) {
+      progressBar.classList.add('visible');
     }
 
     // 稍后移除锁定类，让过渡完成
@@ -1017,14 +1000,8 @@
       if (hero) {
         hero.classList.add('hidden');
       }
-      if (heroVideoLayer) {
-        heroVideoLayer.classList.add('visible');
-      }
-      if (progressBar) {
-        progressBar.classList.add('visible');
-      }
       checkSections();
-    }, 600);
+    }, 500);
   }
 
   // =============================================
