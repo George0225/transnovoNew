@@ -665,6 +665,21 @@
   </div>
 </section>
 
+<!-- VIDEO SECTION - 解锁后首先显示 Hero 视频 -->
+<section class="video-section" id="section-video">
+  <video autoplay muted loop playsinline>
+    <source src="images/hero-video.mp4" type="video/mp4" />
+  </video>
+  <div class="video-content">
+    <h2>创新引领未来</h2>
+    <p>
+      提供创新的器械、药品、诊断试剂与服务，<br/>
+      改善移植器官的保存、评估、运输，<br/>
+      助力移植患者长期存活。
+    </p>
+  </div>
+</section>
+
 <!-- ABOUT SECTION -->
 <section class="content-section section-white" id="section-about">
   <div class="section-inner">
@@ -743,21 +758,6 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- VIDEO SECTION - 唯一的 Hero 视频 -->
-<section class="video-section" id="section-video">
-  <video autoplay muted loop playsinline>
-    <source src="images/hero-video.mp4" type="video/mp4" />
-  </video>
-  <div class="video-content">
-    <h2>创新引领未来</h2>
-    <p>
-      提供创新的器械、药品、诊断试剂与服务，<br/>
-      改善移植器官的保存、评估、运输，<br/>
-      助力移植患者长期存活。
-    </p>
   </div>
 </section>
 
@@ -982,8 +982,8 @@
       // 已解锁状态：检查是否需要重新锁定
       const scrollTop = window.scrollY;
 
-      // 如果滚动到接近顶部，重新锁定
-      if (scrollTop < 100 && isScrollingDown === false) {
+      // 如果滚动到 video section 顶部附近且继续向上滚动，重新锁定
+      if (scrollTop < window.innerHeight * 0.3 && !isScrollingDown) {
         e.preventDefault();
         relockPage();
       }
@@ -1145,7 +1145,7 @@
     }
 
     // 检测是否滚动到接近顶部，准备重新锁定
-    if (scrollY < 50 && isUnlocked) {
+    if (scrollY < window.innerHeight * 0.3) {
       // 用户滚动回顶部，但不立即锁定，等待向上滚动意图
       window.isNearTop = true;
     } else {
