@@ -22,7 +22,6 @@
       --pink: #E61E6C;
       --tech-blue: #5B8FF9;
       --border: #e0e4ed;
-      --silver: #e8e8e8;
     }
 
     html { scroll-behavior: smooth; }
@@ -32,6 +31,12 @@
       background: var(--bg-light);
       line-height: 1.6;
       overflow-x: hidden;
+    }
+
+    /* 初始锁定滚动 */
+    body.locked {
+      overflow: hidden;
+      height: 100vh;
     }
 
     /* SCROLL PROGRESS BAR */
@@ -45,6 +50,12 @@
       z-index: 9999;
       transform-origin: top;
       transition: transform 0.1s ease-out;
+      opacity: 0;
+      transition: opacity 0.5s, transform 0.1s ease-out;
+    }
+
+    .scroll-progress.visible {
+      opacity: 1;
     }
 
     /* NAVIGATION */
@@ -58,7 +69,6 @@
       transition: all 0.4s;
     }
 
-    /* Silver top band background */
     #nav::before {
       content: '';
       position: absolute;
@@ -98,8 +108,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      transition: transform 0.1s ease-out;
-      transform-origin: left center;
     }
 
     .nav-logo img {
@@ -213,21 +221,28 @@
     .nav-toggle { display: none; }
 
     /* =============================================
-       HERO SECTION - 镂空文字 + 抽象科技背景
+       HERO SECTION - 初始锁定屏幕
        ============================================= */
     #hero {
-      position: relative;
-      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100vh;
       overflow: hidden;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      padding: 0 24px;
+      z-index: 100;
+      transition: opacity 0.8s ease;
     }
 
-    /* 抽象科技背景 - Canvas 粒子动画 */
+    #hero.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* 抽象科技背景 - Canvas */
     .tech-bg-canvas {
       position: absolute;
       inset: 0;
@@ -237,125 +252,14 @@
       background: linear-gradient(135deg, #0a1628 0%, #1a2a4a 50%, #0d1f3c 100%);
     }
 
-    /* 初始 Hero 内容 - 仅标题 + Logo */
-    .hero-initial {
-      position: relative;
-      z-index: 10;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    /* 镂空文字效果容器 */
-    .cutout-title-wrapper {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 40px;
-    }
-
-    /* 镂空文字效果 */
-    .cutout-title {
-      font-size: clamp(64px, 12vw, 160px);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -0.03em;
-      color: transparent;
-      background: linear-gradient(135deg,
-        rgba(91,143,249,0.9) 0%,
-        rgba(230,30,108,0.8) 50%,
-        rgba(91,143,249,0.9) 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      position: relative;
-      opacity: 0;
-      animation: titleFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
-    }
-
-    /* 镂空文字的动态背景效果 */
-    .cutout-title::before {
-      content: attr(data-text);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(91,143,249,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-      background-size: 20px 20px;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: techGridMove 20s linear infinite;
-    }
-
-    @keyframes techGridMove {
-      from { background-position: 0 0; }
-      to { background-position: 100px 100px; }
-    }
-
-    @keyframes titleFadeIn {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 副标题 */
-    .hero-subtitle {
-      font-size: clamp(16px, 2vw, 22px);
-      color: rgba(255,255,255,0.85);
-      line-height: 1.8;
-      max-width: 700px;
-      opacity: 0;
-      animation: subtitleFadeIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
-    }
-
-    @keyframes subtitleFadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 滚动提示 */
-    .scroll-hint {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      color: rgba(255,255,255,0.6);
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      opacity: 0;
-      animation: hintFadeIn 1s ease 1.5s forwards, hintPulse 3s ease-in-out infinite;
-    }
-
-    @keyframes hintFadeIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes hintPulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    .scroll-hint svg {
-      width: 20px;
-      height: 20px;
-      animation: arrowBounce 2s ease-in-out infinite;
-    }
-
-    @keyframes arrowBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
-
-    /* Hero 视频层 - 初始隐藏，滚动后显示 */
+    /* Hero 视频层 - 初始隐藏 */
     .hero-video-layer {
       position: absolute;
       inset: 0;
-      z-index: 5;
+      z-index: 1;
       opacity: 0;
       visibility: hidden;
-      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.8s ease;
     }
 
     .hero-video-layer.visible {
@@ -382,16 +286,71 @@
         rgba(10,22,40,0.75) 100%);
     }
 
-    /* 初始内容淡出 */
-    .hero-initial.fade-out {
-      opacity: 0;
-      transform: translateY(-60px);
-      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-      pointer-events: none;
+    /* 标题容器 */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      transition: all 0.1s linear;
+      will-change: transform, opacity;
+    }
+
+    /* 镂空文字效果 */
+    .cutout-title {
+      font-size: clamp(56px, 10vw, 120px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: transparent;
+      background: linear-gradient(135deg,
+        rgba(91,143,249,0.95) 0%,
+        rgba(230,30,108,0.9) 50%,
+        rgba(91,143,249,0.95) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* 副标题 */
+    .hero-subtitle {
+      font-size: clamp(14px, 1.8vw, 18px);
+      color: rgba(255,255,255,0.85);
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 32px auto 0;
+      text-align: center;
+      opacity: 0.9;
+    }
+
+    /* 滚动提示 */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(8px); }
+    }
+
+    .scroll-hint svg {
+      width: 20px;
+      height: 20px;
     }
 
     /* =============================================
-       SECTION 通用样式
+       内容 Sections
        ============================================= */
     .content-section {
       min-height: 100vh;
@@ -520,7 +479,6 @@
       overflow: hidden;
       aspect-ratio: 3/4;
       cursor: pointer;
-      group: product;
     }
 
     .product-card img {
@@ -676,7 +634,7 @@
     }
   </style>
 </head>
-<body>
+<body class="locked">
 
 <!-- NAVIGATION -->
 <nav id="nav">
@@ -704,14 +662,21 @@
   </div>
 </nav>
 
-<!-- HERO: 镂空文字 + 抽象科技背景 -->
+<!-- HERO: 初始锁定屏幕 -->
 <section id="hero">
   <!-- Canvas 抽象科技背景 -->
   <canvas class="tech-bg-canvas" id="techCanvas"></canvas>
 
-  <!-- 初始内容：标题 + 副标题 -->
-  <div class="hero-initial" id="heroInitial">
-    <h1 class="cutout-title" data-text="为生命重塑未来">为生命重塑未来</h1>
+  <!-- 视频层：滚动时切换显示 -->
+  <div class="hero-video-layer" id="heroVideoLayer">
+    <video autoplay muted loop playsinline>
+      <source src="images/hero-video.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- 标题内容 -->
+  <div class="hero-content" id="heroContent">
+    <h1 class="cutout-title">为生命重塑未来</h1>
     <p class="hero-subtitle">
       提供创新的器械、药品、诊断试剂与服务，<br />
       改善移植器官的保存、评估、运输，<br />
@@ -719,16 +684,9 @@
     </p>
   </div>
 
-  <!-- 视频层：滚动后显示 -->
-  <div class="hero-video-layer" id="heroVideoLayer">
-    <video autoplay muted loop playsinline>
-      <source src="images/hero-video.mp4" type="video/mp4" />
-    </video>
-  </div>
-
   <!-- 滚动提示 -->
   <div class="scroll-hint">
-    <span>向下滚动探索</span>
+    <span>滚动探索</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>
@@ -997,16 +955,72 @@
   });
 
   // =============================================
-  // Logo 滚动放大效果
+  // 滚动解锁逻辑
   // =============================================
-  const navLogo = document.querySelector('.nav-logo img');
-  window.addEventListener('scroll', () => {
-    const scrollY = Math.min(window.scrollY, window.innerHeight * 0.8);
-    const scale = 1 + (scrollY / 4000);
-    if (navLogo) {
-      navLogo.style.transform = `scale(${scale})`;
+  const hero = document.getElementById('hero');
+  const heroContent = document.getElementById('heroContent');
+  const heroVideoLayer = document.getElementById('heroVideoLayer');
+  const progressBar = document.querySelector('.scroll-progress');
+
+  let isUnlocked = false;
+  let scrollAccumulator = 0;
+  const UNLOCK_THRESHOLD = 100; // 需要累积滚动多少像素才解锁
+
+  // 监听鼠标滚轮
+  window.addEventListener('wheel', (e) => {
+    if (isUnlocked) return;
+
+    e.preventDefault();
+    scrollAccumulator += e.deltaY;
+
+    // 计算滚动进度 (0 到 1)
+    const scrollProgress = Math.min(Math.abs(scrollAccumulator) / UNLOCK_THRESHOLD, 1);
+
+    // 标题放大效果
+    const scale = 1 + scrollProgress * 2; // 放大到最大 3 倍
+    const opacity = 1 - scrollProgress;
+
+    if (heroContent) {
+      heroContent.style.transform = `scale(${scale})`;
+      heroContent.style.opacity = opacity;
     }
-  });
+
+    // 视频层淡入
+    if (heroVideoLayer && scrollProgress > 0.3) {
+      const videoOpacity = (scrollProgress - 0.3) / 0.7;
+      heroVideoLayer.style.opacity = videoOpacity;
+    }
+
+    // 达到阈值，解锁页面
+    if (scrollProgress >= 1 && !isUnlocked) {
+      unlockPage();
+    }
+  }, { passive: false });
+
+  function unlockPage() {
+    isUnlocked = true;
+
+    // 移除锁定类
+    document.body.classList.remove('locked');
+
+    // 隐藏 Hero 层
+    if (hero) {
+      hero.classList.add('hidden');
+    }
+
+    // 显示视频层
+    if (heroVideoLayer) {
+      heroVideoLayer.classList.add('visible');
+    }
+
+    // 显示滚动进度条
+    if (progressBar) {
+      progressBar.classList.add('visible');
+    }
+
+    // 触发 section 检查
+    checkSections();
+  }
 
   // =============================================
   // Nav background on scroll
@@ -1021,47 +1035,6 @@
   });
 
   // =============================================
-  // Hero 视频层顺序呈现
-  // =============================================
-  const heroInitial = document.getElementById('heroInitial');
-  const heroVideoLayer = document.getElementById('heroVideoLayer');
-  let videoRevealed = false;
-
-  function revealHeroVideo() {
-    if (videoRevealed) return;
-    videoRevealed = true;
-
-    // 淡出初始内容
-    if (heroInitial) {
-      heroInitial.classList.add('fade-out');
-    }
-
-    // 显示视频层
-    if (heroVideoLayer) {
-      heroVideoLayer.classList.add('visible');
-    }
-  }
-
-  // 监听滚动触发视频显示
-  function checkHeroReveal() {
-    const scrollPercent = window.scrollY / window.innerHeight;
-    if (scrollPercent > 0.6 && !videoRevealed) {
-      revealHeroVideo();
-    }
-  }
-
-  window.addEventListener('scroll', () => {
-    requestAnimationFrame(checkHeroReveal);
-  });
-
-  // =============================================
-  // Scroll Progress Bar
-  // =============================================
-  const progressBar = document.createElement('div');
-  progressBar.className = 'scroll-progress';
-  document.body.appendChild(progressBar);
-
-  // =============================================
   // Section 滚动揭示效果
   // =============================================
   const sections = document.querySelectorAll('.content-section, .video-section');
@@ -1072,13 +1045,12 @@
     const target = parseInt(stat.dataset.count);
     const duration = 2000;
     const start = performance.now();
-    const startValue = 0;
 
     function update(currentTime) {
       const elapsed = currentTime - start;
       const progress = Math.min(elapsed / duration, 1);
       const easeOut = 1 - Math.pow(1 - progress, 4);
-      const currentValue = Math.floor(startValue + (target - startValue) * easeOut);
+      const currentValue = Math.floor(target * easeOut);
       stat.textContent = currentValue + '+';
 
       if (progress < 1) {
@@ -1091,43 +1063,46 @@
     requestAnimationFrame(update);
   }
 
-  function updateSections() {
-    const scrollY = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = scrollY / docHeight;
+  function checkSections() {
+    const windowHeight = window.innerHeight;
 
-    // 更新进度条
-    progressBar.style.transform = `scaleY(${Math.max(0.01, scrollPercent)})`;
-
-    // 揭示 Section
     sections.forEach((section) => {
       const rect = section.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
       const triggerPoint = windowHeight * 0.75;
 
-      if (rect.top <= triggerPoint && rect.bottom >= triggerPoint) {
+      if (rect.top <= triggerPoint) {
         section.classList.add('visible');
 
         // 触发数字动画
-        if (section.classList.contains('visible')) {
-          const statsInView = section.querySelectorAll('.stat-number');
-          statsInView.forEach(stat => {
-            if (!animatedStats.has(stat)) {
-              animatedStats.add(stat);
-              animateStat(stat);
-            }
-          });
-        }
+        const statsInView = section.querySelectorAll('.stat-number');
+        statsInView.forEach(stat => {
+          if (!animatedStats.has(stat)) {
+            animatedStats.add(stat);
+            animateStat(stat);
+          }
+        });
       }
     });
   }
 
   window.addEventListener('scroll', () => {
-    requestAnimationFrame(updateSections);
+    requestAnimationFrame(checkSections);
   });
 
-  // 初始化
-  updateSections();
+  // =============================================
+  // Scroll Progress Bar
+  // =============================================
+  window.addEventListener('scroll', () => {
+    if (!isUnlocked) return;
+
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = scrollY / docHeight;
+
+    if (progressBar) {
+      progressBar.style.transform = `scaleY(${Math.max(0.01, scrollPercent)})`;
+    }
+  });
 </script>
 
 </body>
