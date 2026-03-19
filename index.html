@@ -291,7 +291,7 @@
       position: relative;
       z-index: 10;
       text-align: center;
-      transition: all 0.1s linear;
+      transition: none; /* 移除过渡，完全由滚动驱动 */
       will-change: transform, opacity;
     }
 
@@ -964,7 +964,7 @@
 
   let isUnlocked = false;
   let scrollAccumulator = 0;
-  const UNLOCK_THRESHOLD = 100; // 需要累积滚动多少像素才解锁
+  const UNLOCK_THRESHOLD = 400; // 需要累积滚动多少像素才解锁（增大到 400，更慢）
 
   // 监听鼠标滚轮
   window.addEventListener('wheel', (e) => {
@@ -976,19 +976,19 @@
     // 计算滚动进度 (0 到 1)
     const scrollProgress = Math.min(Math.abs(scrollAccumulator) / UNLOCK_THRESHOLD, 1);
 
-    // 标题放大效果
-    const scale = 1 + scrollProgress * 2; // 放大到最大 3 倍
-    const opacity = 1 - scrollProgress;
+    // 标题放大效果 - 更缓慢：从 1 倍到 2.5 倍
+    const scale = 1 + scrollProgress * 1.5; // 放大到最大 2.5 倍（原来是 3 倍）
+    const opacity = Math.max(0, 1 - scrollProgress * 1.2); // 更慢淡出
 
     if (heroContent) {
       heroContent.style.transform = `scale(${scale})`;
       heroContent.style.opacity = opacity;
     }
 
-    // 视频层淡入
-    if (heroVideoLayer && scrollProgress > 0.3) {
-      const videoOpacity = (scrollProgress - 0.3) / 0.7;
-      heroVideoLayer.style.opacity = videoOpacity;
+    // 视频层淡入 - 更早开始，更平滑
+    if (heroVideoLayer && scrollProgress > 0.2) {
+      const videoOpacity = Math.min(1, (scrollProgress - 0.2) / 0.8);
+      heroVideoLayer.style.opacity = videoOpacity * 0.6; // 视频初始透明度低一些
     }
 
     // 达到阈值，解锁页面
@@ -1000,26 +1000,31 @@
   function unlockPage() {
     isUnlocked = true;
 
-    // 移除锁定类
-    document.body.classList.remove('locked');
+    // 平滑过渡到最终状态
+    heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+    heroContent.style.transform = 'scale(3)';
+    heroContent.style.opacity = '0';
 
-    // 隐藏 Hero 层
-    if (hero) {
-      hero.classList.add('hidden');
-    }
-
-    // 显示视频层
+    // 视频层完全显示
     if (heroVideoLayer) {
-      heroVideoLayer.classList.add('visible');
+      heroVideoLayer.style.transition = 'opacity 0.8s ease';
+      heroVideoLayer.style.opacity = '1';
     }
 
-    // 显示滚动进度条
-    if (progressBar) {
-      progressBar.classList.add('visible');
-    }
-
-    // 触发 section 检查
-    checkSections();
+    // 稍后移除锁定类，让过渡完成
+    setTimeout(() => {
+      document.body.classList.remove('locked');
+      if (hero) {
+        hero.classList.add('hidden');
+      }
+      if (heroVideoLayer) {
+        heroVideoLayer.classList.add('visible');
+      }
+      if (progressBar) {
+        progressBar.classList.add('visible');
+      }
+      checkSections();
+    }, 600);
   }
 
   // =============================================
