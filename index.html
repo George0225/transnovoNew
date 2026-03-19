@@ -331,17 +331,9 @@
       will-change: transform, opacity;
     }
 
-    /* Logo + Slogan 组合样式 */
-    .logo-slogan {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-
+    /* Logo 样式 */
     .slogan-logo {
-      height: clamp(80px, 15vw, 180px);
+      height: clamp(100px, 20vw, 220px);
       width: auto;
       filter: drop-shadow(0 4px 20px rgba(91, 143, 249, 0.4));
       transition: filter 0.3s;
@@ -349,29 +341,6 @@
 
     .slogan-logo:hover {
       filter: drop-shadow(0 8px 30px rgba(91, 143, 249, 0.6));
-    }
-
-    .slogan-text {
-      font-size: clamp(28px, 5vw, 56px);
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: 0.05em;
-    }
-
-    .slogan-text.gradient-text {
-      background: linear-gradient(
-        135deg,
-        #5B8FF9 0%,
-        #7B68EE 25%,
-        #E61E6C 50%,
-        #E61E6C 100%
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 20px rgba(91, 143, 249, 0.4));
-      animation: gradientShift 8s ease infinite;
     }
 
     /* 渐变文字效果 - 医疗科技风格 */
@@ -860,10 +829,7 @@
 
   <!-- 标题内容 -->
   <div class="hero-content" id="heroContent">
-    <div class="logo-slogan">
-      <img src="images/logo-en.png" alt="tranSnovo" class="slogan-logo" />
-      <span class="slogan-text gradient-text">Reshape the future for life</span>
-    </div>
+    <img src="images/logo-en.png" alt="tranSnovo" class="slogan-logo" />
   </div>
 
   <!-- 滚动提示 -->
