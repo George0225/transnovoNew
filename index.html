@@ -269,6 +269,11 @@
       will-change: transform, opacity;
     }
 
+    /* 粒子 Canvas */
+    #techCanvas {
+      display: block;
+    }
+
     /* Logo 样式 */
     .slogan-logo {
       height: clamp(60px, 12vw, 150px);
@@ -883,65 +888,132 @@
 
 <script>
   // =============================================
-  // Canvas 背景动画 - 低调粒子效果
-  // 配合背景图，只做轻微点缀
+  // Canvas 背景动画 - 科技感粒子网络
+  // 蓝色/粉色粒子 + 动态连接线 + 脉动光晕
   // =============================================
   const canvas = document.getElementById('techCanvas');
   const ctx = canvas.getContext('2d');
 
   let width, height;
   let particles = [];
+  let connectionLines = [];
 
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
 
-  // 简单粒子（微弱光点）
+  // 科技感粒子 - 蓝粉双色
   class Particle {
     constructor() {
-      this.x = Math.random() * width;
+      this.reset();
+      // 初始随机位置
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.2;
-      this.vy = (Math.random() - 0.5) * 0.2;
-      this.radius = Math.random() * 1.5 + 0.5;
-      this.baseAlpha = Math.random() * 0.3 + 0.1;
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + 10;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = -Math.random() * 0.5 - 0.3; // 向上浮动
+      this.radius = Math.random() * 2 + 1;
+      // 蓝色或粉色
+      this.isPink = Math.random() > 0.6;
+      this.baseAlpha = Math.random() * 0.5 + 0.3;
+      this.pulseSpeed = Math.random() * 0.03 + 0.02;
       this.phase = Math.random() * Math.PI * 2;
-      this.speed = Math.random() * 0.02 + 0.01;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      this.phase += this.speed;
+      this.phase += this.pulseSpeed;
 
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
+      // 轻微左右摆动
+      this.x += Math.sin(this.phase) * 0.3;
+
+      // 超出边界重置
+      if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+        this.reset();
+      }
     }
 
     draw() {
-      const alpha = this.baseAlpha * (0.5 + 0.5 * Math.sin(this.phase));
+      const alpha = this.baseAlpha * (0.6 + 0.4 * Math.sin(this.phase));
+      const color = this.isPink
+        ? `rgba(230, 30, 108, ${alpha})`
+        : `rgba(91, 143, 249, ${alpha})`;
+
+      // 发光效果
+      const gradient = ctx.createRadialGradient(
+        this.x, this.y, 0,
+        this.x, this.y, this.radius * 3
+      );
+      gradient.addColorStop(0, color);
+      gradient.addColorStop(0.5, color.replace(/[\d.]+\)$/, '0.3)'));
+      gradient.addColorStop(1, 'transparent');
+
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // 核心
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.fillStyle = color;
       ctx.fill();
     }
   }
 
+  // 初始化粒子
   function initParticles() {
     particles = [];
-    const particleCount = Math.min(40, Math.floor((width * height) / 40000));
+    const particleCount = Math.min(100, Math.floor((width * height) / 15000));
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
   }
 
+  // 绘制连接线
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 150) {
+          const alpha = (1 - dist / 150) * 0.4;
+          const isPink = particles[i].isPink && particles[j].isPink;
+          const color = isPink
+            ? `rgba(230, 30, 108, ${alpha})`
+            : `rgba(91, 143, 249, ${alpha})`;
+
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // 动画循环
   function animate() {
     ctx.clearRect(0, 0, width, height);
+
+    // 绘制连接线
+    drawConnections();
+
+    // 更新和绘制粒子
     particles.forEach(p => {
       p.update();
       p.draw();
     });
+
     requestAnimationFrame(animate);
   }
 
