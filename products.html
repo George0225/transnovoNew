@@ -179,7 +179,7 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
-      width: 900px;
+      width: 1000px;
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -190,7 +190,7 @@
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 240px 1fr 280px;
       overflow: hidden;
     }
 
@@ -200,32 +200,33 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* 左侧菜单 */
+    /* 左侧菜单 - 主分类 */
     .sub-menu-sidebar {
-      background: linear-gradient(180deg, var(--bg-secondary) 0%, #fff 100%);
-      padding: 24px 0;
+      background: var(--bg-secondary);
+      padding: 0;
       border-right: 1px solid var(--border);
     }
 
     .sub-menu-sidebar-item {
       display: block;
-      padding: 16px 24px;
+      padding: 18px 24px;
       color: var(--text-primary);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
       text-decoration: none;
       transition: all 0.2s;
       border-left: 3px solid transparent;
+      border-bottom: 1px solid rgba(224, 228, 237, 0.3);
     }
 
     .sub-menu-sidebar-item:hover,
     .sub-menu-sidebar-item.active {
-      background: var(--accent-soft);
+      background: #fff;
       color: var(--tech-blue);
       border-left-color: var(--tech-blue);
     }
 
-    /* 右侧内容区 */
+    /* 中间内容区 */
     .sub-menu-content {
       padding: 32px;
       background: #fff;
@@ -239,26 +240,19 @@
       display: block;
     }
 
-    .sub-menu-panel-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--border);
-    }
-
     .sub-menu-panel-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 12px;
     }
 
     .sub-menu-panel-item {
-      display: block;
-      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
       background: var(--bg-secondary);
-      border-radius: 12px;
+      border-radius: 10px;
       text-decoration: none;
       transition: all 0.3s;
       border: 1px solid transparent;
@@ -267,19 +261,41 @@
     .sub-menu-panel-item:hover {
       background: var(--accent-soft);
       border-color: var(--tech-blue);
-      transform: translateX(8px);
+      padding-left: 22px;
     }
 
-    .sub-menu-panel-item h4 {
-      font-size: 15px;
-      font-weight: 600;
+    .sub-menu-panel-item span {
+      font-size: 14px;
+      font-weight: 500;
       color: var(--text-primary);
-      margin-bottom: 4px;
     }
 
-    .sub-menu-panel-item p {
-      font-size: 13px;
+    .sub-menu-panel-item svg {
+      width: 16px;
+      height: 16px;
       color: var(--text-tertiary);
+      transition: transform 0.3s;
+    }
+
+    .sub-menu-panel-item:hover svg {
+      transform: translateX(4px);
+      color: var(--tech-blue);
+    }
+
+    /* 右侧图片区 */
+    .sub-menu-image {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .sub-menu-image img {
+      max-width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      border-radius: 12px;
     }
 
     .dropdown-arrow {
@@ -576,65 +592,83 @@
           <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
         </a>
         <ul class="sub-menu">
-          <!-- 左侧侧边栏 -->
+          <!-- 左侧主分类 -->
           <div class="sub-menu-sidebar">
-            <a href="products.html" class="sub-menu-sidebar-item active" data-panel="products">产品</a>
-            <a href="solutions.html" class="sub-menu-sidebar-item" data-panel="solutions">解决方案</a>
+            <a href="#panel-devices" class="sub-menu-sidebar-item active" data-panel="devices">器械</a>
+            <a href="#panel-drugs" class="sub-menu-sidebar-item" data-panel="drugs">药品</a>
+            <a href="#panel-ivd" class="sub-menu-sidebar-item" data-panel="ivd">体外诊断</a>
+            <a href="solutions.html" class="sub-menu-sidebar-item">解决方案</a>
           </div>
-          <!-- 右侧内容区 -->
+          <!-- 中间内容区 -->
           <div class="sub-menu-content">
-            <!-- 产品面板 -->
-            <div class="sub-menu-panel active" id="panel-products">
-              <h4 class="sub-menu-panel-title">产品中心</h4>
+            <!-- 器械面板 -->
+            <div class="sub-menu-panel active" id="panel-devices">
               <div class="sub-menu-panel-grid">
-                <a href="products.html#category-devices" class="sub-menu-panel-item">
-                  <h4>器械</h4>
-                  <p>机械灌注、静态冷藏设备与耗材</p>
+                <a href="machine-perfusion.html" class="sub-menu-panel-item">
+                  <span>机械灌注</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="products.html#category-drugs" class="sub-menu-panel-item">
-                  <h4>药品</h4>
-                  <p>免疫抑制剂、抗感染药</p>
+                <a href="organ-preservation.html" class="sub-menu-panel-item">
+                  <span>静态冷藏</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="products.html#category-ivd" class="sub-menu-panel-item">
-                  <h4>体外诊断</h4>
-                  <p>TDM 药物监测、HLA 检测试剂</p>
+              </div>
+            </div>
+            <!-- 药品面板 -->
+            <div class="sub-menu-panel" id="panel-drugs">
+              <div class="sub-menu-panel-grid">
+                <a href="immunosuppressant.html" class="sub-menu-panel-item">
+                  <span>免疫抑制剂</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
-                <a href="products.html" class="sub-menu-panel-item">
-                  <h4>查看全部产品</h4>
-                  <p>完整产品列表与应用方案</p>
+                <a href="immunosuppressant.html" class="sub-menu-panel-item">
+                  <span>抗感染药</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+              </div>
+            </div>
+            <!-- 体外诊断面板 -->
+            <div class="sub-menu-panel" id="panel-ivd">
+              <div class="sub-menu-panel-grid">
+                <a href="tdm.html" class="sub-menu-panel-item">
+                  <span>治疗药物监测（TDM）</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="hla-antibody.html" class="sub-menu-panel-item">
+                  <span>人类白细胞抗原和抗体检测</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
               </div>
             </div>
             <!-- 解决方案面板 -->
             <div class="sub-menu-panel" id="panel-solutions">
-              <h4 class="sub-menu-panel-title">解决方案</h4>
               <div class="sub-menu-panel-grid">
                 <a href="solutions.html#step1" class="sub-menu-panel-item">
-                  <h4>器官获取与评估</h4>
-                  <p>供体评估与获取器械套装</p>
+                  <span>器官获取与评估</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <a href="solutions.html#step2" class="sub-menu-panel-item">
-                  <h4>器官保存与灌注</h4>
-                  <p>机械灌注与静态冷保存方案</p>
+                  <span>器官保存与灌注</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <a href="solutions.html#step3" class="sub-menu-panel-item">
-                  <h4>器官运输</h4>
-                  <p>便携灌注系统与运输容器</p>
+                  <span>器官运输</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <a href="solutions.html#step4" class="sub-menu-panel-item">
-                  <h4>植入手术支持</h4>
-                  <p>手术器械与术中监测设备</p>
+                  <span>植入手术支持</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
                 <a href="solutions.html#step5" class="sub-menu-panel-item">
-                  <h4>术后管理与随访</h4>
-                  <p>药物浓度监测与排斥反应检测</p>
-                </a>
-                <a href="solutions.html#services" class="sub-menu-panel-item">
-                  <h4>专业服务与支持</h4>
-                  <p>技术培训、设备维护与学术合作</p>
+                  <span>术后管理与随访</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
               </div>
             </div>
+          </div>
+          <!-- 右侧图片区 -->
+          <div class="sub-menu-image">
+            <img src="images/category-background-1.jpg" alt="Products" id="menu-image" />
           </div>
         </ul>
       </li>
@@ -861,6 +895,15 @@
   // Mega Menu Panel Switching
   const sidebarItems = document.querySelectorAll('.sub-menu-sidebar-item');
   const panels = document.querySelectorAll('.sub-menu-panel');
+  const menuImage = document.getElementById('menu-image');
+
+  // 图片映射
+  const imageMap = {
+    'devices': 'images/category-background-1.jpg',
+    'drugs': 'images/category-background-3.jpg',
+    'ivd': 'images/category-background-2.jpg',
+    'solutions': 'images/mechanical-perfusion.jpg'
+  };
 
   sidebarItems.forEach(item => {
     item.addEventListener('mouseenter', function() {
@@ -870,6 +913,11 @@
       const panelId = this.getAttribute('data-panel');
       const targetPanel = document.getElementById('panel-' + panelId);
       if (targetPanel) targetPanel.classList.add('active');
+
+      // 切换图片
+      if (imageMap[panelId] && menuImage) {
+        menuImage.src = imageMap[panelId];
+      }
     });
   });
 </script>
