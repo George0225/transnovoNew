@@ -605,7 +605,6 @@
     grid.innerHTML = videos.map((video, index) => `
       <div class="video-card" onclick="playVideo('${video.file}', '${video.title}')">
         <div class="video-thumbnail">
-          <video src="${video.file}#t=0.5" muted onloadeddata="extractCover(this)"></video>
           <div class="play-button">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
@@ -618,12 +617,6 @@
         </div>
       </div>
     `).join('');
-  }
-
-  // 提取视频封面（第一帧）
-  function extractCover(videoEl) {
-    videoEl.currentTime = 0.5; // 跳转到 0.5 秒处
-    videoEl.style.display = 'none'; // 隐藏 video 元素
   }
 
   // 播放视频

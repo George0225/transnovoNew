@@ -1,0 +1,5 @@
+# Video files - too large for GitHub
+videos/*.mp4
+
+# macOS
+.DS_Store
