@@ -690,16 +690,21 @@
     modal.style.display = 'flex';
     modalTitle.textContent = title;
     videoPlayer.src = file;
+    videoPlayer.load(); // 重新加载视频
 
     // 添加错误处理
     videoPlayer.onerror = function() {
-      console.error('视频播放错误');
-      alert('视频加载失败，请检查网络连接或联系管理员');
+      const error = videoPlayer.error;
+      console.error('视频播放错误:', error);
+      console.error('视频 URL:', file);
+    };
+
+    videoPlayer.onloadeddata = function() {
+      console.log('视频加载成功:', file);
     };
 
     videoPlayer.play().catch(function(error) {
       console.error('视频播放失败:', error);
-      alert('视频播放失败，请检查网络连接');
     });
 
     document.body.style.overflow = 'hidden';
