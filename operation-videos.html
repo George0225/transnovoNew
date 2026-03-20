@@ -640,9 +640,9 @@
   // 加载视频封面（提取第一帧）
   function loadVideoCover(videoUrl, index) {
     const video = document.createElement('video');
-    video.crossOrigin = 'anonymous';
     video.muted = true;
     video.preload = 'metadata';
+    video.crossOrigin = 'use-credentials'; // 允许跨域
 
     video.onloadeddata = function() {
       video.currentTime = 0.5; // 跳转到 0.5 秒处
@@ -654,8 +654,12 @@
         const ctx = canvas.getContext('2d');
         canvas.width = video.videoWidth || 640;
         canvas.height = video.videoHeight || 360;
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        canvas.style.display = 'block';
+        try {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          canvas.style.display = 'block';
+        } catch (e) {
+          console.log('Canvas 受跨域限制，使用默认封面');
+        }
       }
       video.remove();
     };
