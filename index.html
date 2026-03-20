@@ -228,7 +228,7 @@
     .nav-toggle { display: none; }
 
     /* =============================================
-       HERO SECTION - 初始锁定屏幕 (医疗科技背景)
+       HERO SECTION - 初始锁定屏幕 (AI 背景图)
        ============================================= */
     #hero {
       position: fixed;
@@ -241,7 +241,7 @@
       align-items: center;
       justify-content: center;
       z-index: 100;
-      background: linear-gradient(135deg, #f0f2f5 0%, #e8ecf1 50%, #f5f7fa 100%);
+      background: #0d1033;
       transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -258,69 +258,7 @@
       height: 100%;
       z-index: 0;
       overflow: hidden;
-    }
-
-    /* 器官轮廓剪影层 */
-    .organ-silhouette {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 30% 40% at 20% 50%, rgba(91, 143, 249, 0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 25% 35% at 80% 50%, rgba(230, 30, 108, 0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 20% 30% at 50% 30%, rgba(91, 143, 249, 0.05) 0%, transparent 70%);
-      filter: blur(40px);
-      opacity: 0.6;
-    }
-
-    /* 流动网络线层 */
-    .network-layer {
-      position: absolute;
-      inset: 0;
-      opacity: 0.4;
-    }
-
-    /* 粒子效果层 */
-    .particle-layer {
-      position: absolute;
-      inset: 0;
-    }
-
-    /* 细胞再生光晕 */
-    .cell-glow {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(91, 143, 249, 0.3) 0%, transparent 70%);
-      animation: cellPulse 4s ease-in-out infinite;
-      filter: blur(20px);
-    }
-
-    .cell-glow:nth-child(1) {
-      width: 200px;
-      height: 200px;
-      top: 10%;
-      left: 15%;
-      animation-delay: 0s;
-    }
-
-    .cell-glow:nth-child(2) {
-      width: 150px;
-      height: 150px;
-      top: 60%;
-      right: 20%;
-      animation-delay: 1.5s;
-    }
-
-    .cell-glow:nth-child(3) {
-      width: 120px;
-      height: 120px;
-      bottom: 15%;
-      left: 30%;
-      animation-delay: 3s;
-    }
-
-    @keyframes cellPulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.2); opacity: 0.5; }
+      background: url('images/hero-bg.png') center/cover no-repeat;
     }
 
     /* 标题容器 */
@@ -335,12 +273,12 @@
     .slogan-logo {
       height: clamp(60px, 12vw, 150px);
       width: auto;
-      filter: drop-shadow(0 4px 20px rgba(91, 143, 249, 0.4));
+      filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.3));
       transition: filter 0.3s;
     }
 
     .slogan-logo:hover {
-      filter: drop-shadow(0 8px 30px rgba(91, 143, 249, 0.6));
+      filter: drop-shadow(0 8px 30px rgba(255, 255, 255, 0.5));
     }
 
     /* 渐变文字效果 - 医疗科技风格 */
@@ -751,78 +689,10 @@
   </div>
 </nav>
 
-<!-- HERO: 初始锁定屏幕 - 医疗科技背景 -->
+<!-- HERO: 初始锁定屏幕 - AI 背景图 -->
 <section id="hero">
   <!-- 多层背景 -->
   <div class="hero-background">
-    <!-- 器官轮廓剪影 -->
-    <div class="organ-silhouette"></div>
-
-    <!-- 细胞再生光晕 -->
-    <div class="cell-glow"></div>
-    <div class="cell-glow"></div>
-    <div class="cell-glow"></div>
-
-    <!-- 流动网络线 -->
-    <svg class="network-layer" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="lineGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:rgba(91,143,249,0)"/>
-          <stop offset="50%" style="stop-color:rgba(91,143,249,0.3)"/>
-          <stop offset="100%" style="stop-color:rgba(230,30,108,0)"/>
-        </linearGradient>
-        <linearGradient id="lineGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:rgba(230,30,108,0)"/>
-          <stop offset="50%" style="stop-color:rgba(91,143,249,0.3)"/>
-          <stop offset="100%" style="stop-color:rgba(91,143,249,0)"/>
-        </linearGradient>
-      </defs>
-      <!-- 流动曲线 -->
-      <path class="flow-line" d="M0,300 Q360,200 720,300 T1440,300" fill="none" stroke="url(#lineGrad1)" stroke-width="1" opacity="0.4">
-        <animate attributeName="d" dur="20s" repeatCount="indefinite"
-          values="M0,300 Q360,200 720,300 T1440,300;
-                  M0,320 Q360,220 720,320 T1440,320;
-                  M0,300 Q360,200 720,300 T1440,300"/>
-      </path>
-      <path class="flow-line" d="M0,400 Q360,300 720,400 T1440,400" fill="none" stroke="url(#lineGrad2)" stroke-width="1" opacity="0.3">
-        <animate attributeName="d" dur="25s" repeatCount="indefinite"
-          values="M0,400 Q360,300 720,400 T1440,400;
-                  M0,380 Q360,280 720,380 T1440,380;
-                  M0,400 Q360,300 720,400 T1440,400"/>
-      </path>
-      <path class="flow-line" d="M0,500 Q360,400 720,500 T1440,500" fill="none" stroke="url(#lineGrad1)" stroke-width="1" opacity="0.25">
-        <animate attributeName="d" dur="22s" repeatCount="indefinite"
-          values="M0,500 Q360,400 720,500 T1440,500;
-                  M0,520 Q360,420 720,520 T1440,520;
-                  M0,500 Q360,400 720,500 T1440,500"/>
-      </path>
-      <!-- 连接点 -->
-      <circle cx="200" cy="300" r="3" fill="rgba(91,143,249,0.6)">
-        <animate attributeName="opacity" dur="3s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="500" cy="350" r="2" fill="rgba(230,30,108,0.5)">
-        <animate attributeName="opacity" dur="4s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="800" cy="400" r="3" fill="rgba(91,143,249,0.6)">
-        <animate attributeName="opacity" dur="3.5s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="1100" cy="350" r="2" fill="rgba(230,30,108,0.5)">
-        <animate attributeName="opacity" dur="4.5s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="300" cy="450" r="2" fill="rgba(91,143,249,0.5)">
-        <animate attributeName="opacity" dur="3.8s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="600" cy="500" r="3" fill="rgba(230,30,108,0.4)">
-        <animate attributeName="opacity" dur="4.2s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="900" cy="450" r="2" fill="rgba(91,143,249,0.5)">
-        <animate attributeName="opacity" dur="3.6s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-      <circle cx="1200" cy="500" r="3" fill="rgba(230,30,108,0.4)">
-        <animate attributeName="opacity" dur="4.4s" repeatCount="indefinite" values="0.3;1;0.3"/>
-      </circle>
-    </svg>
-
     <!-- Canvas 粒子层 -->
     <canvas class="particle-layer" id="techCanvas"></canvas>
   </div>
@@ -1013,157 +883,65 @@
 
 <script>
   // =============================================
-  // Canvas 医疗科技背景动画
-  // 器官移植科技背景，抽象细胞再生效果
+  // Canvas 背景动画 - 低调粒子效果
+  // 配合背景图，只做轻微点缀
   // =============================================
   const canvas = document.getElementById('techCanvas');
   const ctx = canvas.getContext('2d');
 
   let width, height;
   let particles = [];
-  let organParticles = []; // 器官相关粒子
 
   function resize() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
 
-  // 基础粒子（希望与生命的点缀）
+  // 简单粒子（微弱光点）
   class Particle {
     constructor() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = (Math.random() - 0.5) * 0.3;
-      this.radius = Math.random() * 2 + 1;
-      // 蓝色和粉色点缀，代表希望与生命
-      this.color = Math.random() > 0.5
-        ? `rgba(91, 143, 249, ${Math.random() * 0.4 + 0.1})`
-        : `rgba(230, 30, 108, ${Math.random() * 0.4 + 0.1})`;
+      this.vx = (Math.random() - 0.5) * 0.2;
+      this.vy = (Math.random() - 0.5) * 0.2;
+      this.radius = Math.random() * 1.5 + 0.5;
+      this.baseAlpha = Math.random() * 0.3 + 0.1;
+      this.phase = Math.random() * Math.PI * 2;
+      this.speed = Math.random() * 0.02 + 0.01;
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
+      this.phase += this.speed;
 
       if (this.x < 0 || this.x > width) this.vx *= -1;
       if (this.y < 0 || this.y > height) this.vy *= -1;
     }
 
     draw() {
+      const alpha = this.baseAlpha * (0.5 + 0.5 * Math.sin(this.phase));
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-    }
-  }
-
-  // 细胞再生粒子（柔和光晕效果）
-  class OrganParticle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.baseRadius = Math.random() * 3 + 2;
-      this.radius = this.baseRadius;
-      this.phase = Math.random() * Math.PI * 2;
-      this.speed = Math.random() * 0.02 + 0.01;
-      // 柔和的蓝粉渐变
-      this.hue = Math.random() > 0.6 ? 220 : 340;
-      this.saturation = 70;
-      this.lightness = 60 + Math.random() * 20;
-    }
-
-    update() {
-      this.phase += this.speed;
-      // 脉动效果（细胞再生可视化）
-      this.radius = this.baseRadius + Math.sin(this.phase) * 1.5;
-
-      // 缓慢漂移
-      this.x += (Math.random() - 0.5) * 0.5;
-      this.y += (Math.random() - 0.5) * 0.5;
-
-      // 边界检查
-      if (this.x < -50) this.x = width + 50;
-      if (this.x > width + 50) this.x = -50;
-      if (this.y < -50) this.y = height + 50;
-      if (this.y > height + 50) this.y = -50;
-    }
-
-    draw() {
-      // 发光效果
-      const gradient = ctx.createRadialGradient(
-        this.x, this.y, 0,
-        this.x, this.y, this.radius * 3
-      );
-      gradient.addColorStop(0, `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 0.6)`);
-      gradient.addColorStop(0.5, `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 0.2)`);
-      gradient.addColorStop(1, `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 0)`);
-
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
-      ctx.fill();
-
-      // 核心
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 0.8)`;
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
       ctx.fill();
     }
   }
 
   function initParticles() {
     particles = [];
-    organParticles = [];
-
-    const particleCount = Math.min(80, Math.floor((width * height) / 20000));
-    const organParticleCount = Math.min(30, Math.floor((width * height) / 30000));
-
+    const particleCount = Math.min(40, Math.floor((width * height) / 40000));
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
-    }
-
-    for (let i = 0; i < organParticleCount; i++) {
-      organParticles.push(new OrganParticle());
-    }
-  }
-
-  function drawConnections() {
-    // 绘制粒子间连接线（网络线）
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(91, 143, 249, ${0.1 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
     }
   }
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-
-    // 更新和绘制基础粒子
     particles.forEach(p => {
       p.update();
       p.draw();
     });
-
-    // 更新和绘制器官粒子
-    organParticles.forEach(p => {
-      p.update();
-      p.draw();
-    });
-
-    drawConnections();
     requestAnimationFrame(animate);
   }
 
