@@ -214,6 +214,7 @@
     /* 二级下拉菜单 */
     .nav-links .sub-menu li {
       position: relative;
+      list-style: none;
     }
 
     .nav-links .sub-menu li .sub-menu-2 {
@@ -240,11 +241,10 @@
 
     .nav-links .sub-menu li > a.has-submenu::after {
       content: '›';
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1;
       margin-left: 8px;
       color: currentColor;
-      transform: rotate(-90deg);
     }
 
     /* 三级下拉菜单 */
@@ -254,6 +254,10 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .nav-links .sub-menu-2 li {
+      list-style: none;
     }
 
     .nav-links .sub-menu-2 li .sub-menu-3 {
@@ -280,11 +284,10 @@
 
     .nav-links .sub-menu-2 li > a.has-submenu::after {
       content: '›';
-      font-size: 18px;
+      font-size: 20px;
       line-height: 1;
       margin-left: 8px;
       color: currentColor;
-      transform: rotate(-90deg);
     }
 
     .sub-menu-3 {
@@ -306,6 +309,7 @@
 
     .sub-menu-3 .product-group {
       margin-bottom: 8px;
+      list-style: none;
     }
 
     .sub-menu-3 .product-item {
@@ -314,6 +318,7 @@
       color: var(--text-secondary);
       transition: all 0.2s;
       display: block;
+      list-style: none;
     }
 
     .sub-menu-3 .product-item:hover {
