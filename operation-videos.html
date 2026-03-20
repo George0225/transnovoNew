@@ -264,9 +264,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .video-thumbnail img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-thumbnail canvas {
       position: absolute;
       top: 0;
       left: 0;
@@ -603,8 +613,9 @@
       return;
     }
     grid.innerHTML = videos.map((video, index) => `
-      <div class="video-card" onclick="playVideo('${video.file}', '${video.title}')">
+      <div class="video-card" onclick="playVideo('${escapeHtml(video.file)}', '${escapeHtml(video.title)}')">
         <div class="video-thumbnail">
+          <canvas id="thumb-${index}" style="display:none;"></canvas>
           <div class="play-button">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
@@ -612,11 +623,56 @@
           </div>
         </div>
         <div class="video-info">
-          <div class="video-category">${video.category}</div>
-          <div class="video-title">${video.title}</div>
+          <div class="video-category">${escapeHtml(video.category)}</div>
+          <div class="video-title">${escapeHtml(video.title)}</div>
         </div>
       </div>
     `).join('');
+
+    // 加载视频封面
+    setTimeout(() => {
+      videos.forEach((video, index) => {
+        loadVideoCover(video.file, index);
+      });
+    }, 100);
+  }
+
+  // 加载视频封面（提取第一帧）
+  function loadVideoCover(videoUrl, index) {
+    const video = document.createElement('video');
+    video.crossOrigin = 'anonymous';
+    video.muted = true;
+    video.preload = 'metadata';
+
+    video.onloadeddata = function() {
+      video.currentTime = 0.5; // 跳转到 0.5 秒处
+    };
+
+    video.onseeked = function() {
+      const canvas = document.getElementById(`thumb-${index}`);
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        canvas.width = video.videoWidth || 640;
+        canvas.height = video.videoHeight || 360;
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.style.display = 'block';
+      }
+      video.remove();
+    };
+
+    video.onerror = function() {
+      console.log('无法加载视频封面:', videoUrl);
+      video.remove();
+    };
+
+    video.src = videoUrl;
+  }
+
+  // HTML 转义防止 XSS
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 
   // 播放视频
@@ -625,10 +681,23 @@
     const videoPlayer = document.getElementById('videoPlayer');
     const modalTitle = document.getElementById('modalTitle');
 
+    console.log('播放视频:', file);
+
     modal.style.display = 'flex';
     modalTitle.textContent = title;
     videoPlayer.src = file;
-    videoPlayer.play();
+
+    // 添加错误处理
+    videoPlayer.onerror = function() {
+      console.error('视频播放错误');
+      alert('视频加载失败，请检查网络连接或联系管理员');
+    };
+
+    videoPlayer.play().catch(function(error) {
+      console.error('视频播放失败:', error);
+      alert('视频播放失败，请检查网络连接');
+    });
+
     document.body.style.overflow = 'hidden';
   }
 
