@@ -328,6 +328,76 @@
       overflow: hidden;
     }
 
+    /* 视频弹窗 */
+    .video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeIn 0.3s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .video-modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 1200px;
+      background: var(--bg-navy);
+      border-radius: 12px;
+      padding: 24px;
+      max-height: 90vh;
+      overflow: hidden;
+    }
+
+    .video-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .video-modal-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    .video-modal-title {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      padding-right: 40px;
+    }
+
+    .video-modal video {
+      width: 100%;
+      max-height: calc(90vh - 80px);
+      border-radius: 8px;
+      outline: none;
+    }
+
     /* 响应式 */
     @media (max-width: 1200px) {
       .video-container { grid-template-columns: 240px 1fr; }
@@ -341,6 +411,8 @@
       .category-tab { padding: 10px 20px; }
       .search-box input { width: 200px; }
       .content-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .video-modal-content { width: 95%; padding: 16px; }
+      .video-modal-title { font-size: 16px; }
     }
   </style>
 </head>
@@ -483,51 +555,41 @@
   </main>
 </div>
 
+<!-- 视频弹窗 -->
+<div class="video-modal" id="videoModal" onclick="closeVideo()">
+  <div class="video-modal-content" onclick="event.stopPropagation()">
+    <button class="video-modal-close" onclick="closeVideo()">×</button>
+    <h3 class="video-modal-title" id="modalTitle"></h3>
+    <video id="videoPlayer" controls></video>
+  </div>
+</div>
+
 <script>
-  // 视频数据
+  // 视频数据 - 使用真实视频文件
   const videoData = {
     'kidney-perfusion': [
-      { category: '机械灌注', title: 'LifePort®肾脏灌注转运箱 - 开机操作视频' },
-      { category: '机械灌注', title: 'LifePort®肾脏灌注转运箱 - 灌注操作视频' },
-      { category: '机械灌注', title: 'LifePort®肾脏灌注转运箱 - 转运包视频' },
-      { category: '机械灌注', title: '肾脏灌注转运箱 - LK1 推车使用操作视频' },
+      { category: '机械灌注', title: '莱保 - 操作视频', file: 'videos/莱保 - 操作视频.mp4' },
+      { category: '机械灌注', title: '莱保 - 转运包视频', file: 'videos/莱保 - 转运包视频.mp4' },
+      { category: '机械灌注', title: '莱保-LKT 推车使用操作', file: 'videos/莱保-LKT 推车使用操作.mp4' },
+      { category: '机械灌注', title: '莱保-LKT 日常检查保养', file: 'videos/莱保-LKT 日常检查保养.mp4' },
     ],
     'liver-perfusion': [
-      { category: '机械灌注', title: 'LifePort®肝脏灌注转运箱 - 开机操作视频' },
-      { category: '机械灌注', title: 'LifePort®肝脏灌注转运箱 - 灌注操作视频' },
+      { category: '机械灌注', title: '莱保-LKT 推车使用操作（美国）', file: 'videos/莱保-LKT 推车使用操作（美国）.mp4' },
     ],
     'lite-cold': [
-      { category: '静态冷藏', title: '莱拓®医用冷藏箱 - 产品介绍视频' },
-      { category: '静态冷藏', title: '莱拓®医用冷藏箱 - 新品上市' },
+      { category: '静态冷藏', title: '莱拓 - 宣传视频', file: 'videos/莱拓 - 宣传视频.mp4' },
     ],
-    'kps1': [
-      { category: '静态冷藏', title: 'KPS-1®器官保存液 - 产品介绍' },
-    ],
-    'sps1': [
-      { category: '静态冷藏', title: 'SPS-1®器官保存液 - 产品介绍' },
-    ],
-    'tacrolimus': [
-      { category: '免疫抑制剂', title: '他克莫司胶囊 - 产品介绍' },
-      { category: '免疫抑制剂', title: '他克莫司产品介绍 - 移植领域相关疾病' },
-    ],
-    'mycophenolate': [
-      { category: '免疫抑制剂', title: '麦考酚钠肠溶片 - 产品介绍' },
-    ],
-    'smx': [
-      { category: '抗感染药', title: '复方磺胺甲噁唑片 - 产品介绍' },
-    ],
-    'tdm-tac': [
-      { category: 'TDM', title: '他克莫司测定试剂盒 - 产品介绍' },
-    ],
-    'tdm-cyc': [
-      { category: 'TDM', title: '环孢霉素测定试剂盒 - 产品介绍' },
-    ],
+    'kps1': [],
+    'sps1': [],
+    'tacrolimus': [],
+    'mycophenolate': [],
+    'smx': [],
+    'tdm-tac': [],
+    'tdm-cyc': [],
     'tdm-3110': [
-      { category: 'TDM', title: 'TDM-3110 保养视频' },
+      { category: 'TDM', title: 'TDM-3110 保养', file: 'videos/TDM-3110 保养.mp4' },
     ],
-    'hla-labscan': [
-      { category: 'HLA 检测', title: 'HLA-LABScan3D - 操作视频' },
-    ],
+    'hla-labscan': [],
   };
 
   // 默认视频
@@ -540,9 +602,10 @@
       grid.innerHTML = '<p style="color:var(--text-secondary);grid-column:1/-1;text-align:center;padding:60px 0;">暂无相关视频</p>';
       return;
     }
-    grid.innerHTML = videos.map(video => `
-      <div class="video-card">
+    grid.innerHTML = videos.map((video, index) => `
+      <div class="video-card" onclick="playVideo('${video.file}', '${video.title}')">
         <div class="video-thumbnail">
+          <video src="${video.file}#t=0.5" muted onloadeddata="extractCover(this)"></video>
           <div class="play-button">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z"/>
@@ -555,6 +618,36 @@
         </div>
       </div>
     `).join('');
+  }
+
+  // 提取视频封面（第一帧）
+  function extractCover(videoEl) {
+    videoEl.currentTime = 0.5; // 跳转到 0.5 秒处
+    videoEl.style.display = 'none'; // 隐藏 video 元素
+  }
+
+  // 播放视频
+  function playVideo(file, title) {
+    const modal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    const modalTitle = document.getElementById('modalTitle');
+
+    modal.style.display = 'flex';
+    modalTitle.textContent = title;
+    videoPlayer.src = file;
+    videoPlayer.play();
+    document.body.style.overflow = 'hidden';
+  }
+
+  // 关闭视频
+  function closeVideo() {
+    const modal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    videoPlayer.pause();
+    videoPlayer.src = '';
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
   }
 
   // 切换子菜单
