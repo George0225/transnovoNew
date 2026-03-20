@@ -176,28 +176,110 @@
     .nav-links .sub-menu {
       position: absolute;
       top: 100%;
-      left: 0;
-      min-width: 200px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      width: 900px;
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 8px;
+      border-radius: 16px;
+      padding: 0;
       list-style: none;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(10px);
-      transition: all 0.3s;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      overflow: hidden;
     }
 
     .nav-links > li:hover > .sub-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
 
-    .nav-links .sub-menu li a {
-      color: var(--text-secondary);
+    /* 左侧菜单 */
+    .sub-menu-sidebar {
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, #fff 100%);
+      padding: 24px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .sub-menu-sidebar-item {
+      display: block;
+      padding: 16px 24px;
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+
+    .sub-menu-sidebar-item:hover,
+    .sub-menu-sidebar-item.active {
+      background: var(--accent-soft);
+      color: var(--tech-blue);
+      border-left-color: var(--tech-blue);
+    }
+
+    /* 右侧内容区 */
+    .sub-menu-content {
+      padding: 32px;
+      background: #fff;
+    }
+
+    .sub-menu-panel {
+      display: none;
+    }
+
+    .sub-menu-panel.active {
+      display: block;
+    }
+
+    .sub-menu-panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .sub-menu-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sub-menu-panel-item {
+      display: block;
+      padding: 16px 20px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+
+    .sub-menu-panel-item:hover {
+      background: var(--accent-soft);
+      border-color: var(--tech-blue);
+      transform: translateX(8px);
+    }
+
+    .sub-menu-panel-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .sub-menu-panel-item p {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
       padding: 12px 16px;
       display: block;
       border-radius: 8px;
@@ -679,11 +761,66 @@
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
-          <li><a href="machine-perfusion.html">机械灌注</a></li>
-          <li><a href="organ-preservation.html">器官保存</a></li>
-          <li><a href="tdm.html">药物浓度检测</a></li>
-          <li><a href="immunosuppressant.html">免疫抑制剂</a></li>
-          <li><a href="hla-antibody.html">配型与抗体</a></li>
+          <!-- 左侧侧边栏 -->
+          <div class="sub-menu-sidebar">
+            <a href="products.html" class="sub-menu-sidebar-item active" data-panel="products">产品</a>
+            <a href="solutions.html" class="sub-menu-sidebar-item" data-panel="solutions">解决方案</a>
+          </div>
+          <!-- 右侧内容区 -->
+          <div class="sub-menu-content">
+            <!-- 产品面板 -->
+            <div class="sub-menu-panel active" id="panel-products">
+              <h4 class="sub-menu-panel-title">产品中心</h4>
+              <div class="sub-menu-panel-grid">
+                <a href="products.html#category-devices" class="sub-menu-panel-item">
+                  <h4>器械</h4>
+                  <p>机械灌注、静态冷藏设备与耗材</p>
+                </a>
+                <a href="products.html#category-drugs" class="sub-menu-panel-item">
+                  <h4>药品</h4>
+                  <p>免疫抑制剂、抗感染药</p>
+                </a>
+                <a href="products.html#category-ivd" class="sub-menu-panel-item">
+                  <h4>体外诊断</h4>
+                  <p>TDM 药物监测、HLA 检测试剂</p>
+                </a>
+                <a href="products.html" class="sub-menu-panel-item">
+                  <h4>查看全部产品</h4>
+                  <p>完整产品列表与应用方案</p>
+                </a>
+              </div>
+            </div>
+            <!-- 解决方案面板 -->
+            <div class="sub-menu-panel" id="panel-solutions">
+              <h4 class="sub-menu-panel-title">解决方案</h4>
+              <div class="sub-menu-panel-grid">
+                <a href="solutions.html#step1" class="sub-menu-panel-item">
+                  <h4>器官获取与评估</h4>
+                  <p>供体评估与获取器械套装</p>
+                </a>
+                <a href="solutions.html#step2" class="sub-menu-panel-item">
+                  <h4>器官保存与灌注</h4>
+                  <p>机械灌注与静态冷保存方案</p>
+                </a>
+                <a href="solutions.html#step3" class="sub-menu-panel-item">
+                  <h4>器官运输</h4>
+                  <p>便携灌注系统与运输容器</p>
+                </a>
+                <a href="solutions.html#step4" class="sub-menu-panel-item">
+                  <h4>植入手术支持</h4>
+                  <p>手术器械与术中监测设备</p>
+                </a>
+                <a href="solutions.html#step5" class="sub-menu-panel-item">
+                  <h4>术后管理与随访</h4>
+                  <p>药物浓度监测与排斥反应检测</p>
+                </a>
+                <a href="solutions.html#services" class="sub-menu-panel-item">
+                  <h4>专业服务与支持</h4>
+                  <p>技术培训、设备维护与学术合作</p>
+                </a>
+              </div>
+            </div>
+          </div>
         </ul>
       </li>
       <li><a href="research.html">研发生产中心</a></li>
@@ -1261,6 +1398,32 @@
     } else {
       window.isNearTop = false;
     }
+  });
+
+  // =============================================
+  // Mega Menu Panel Switching
+  // =============================================
+  const sidebarItems = document.querySelectorAll('.sub-menu-sidebar-item');
+  const panels = document.querySelectorAll('.sub-menu-panel');
+
+  sidebarItems.forEach(item => {
+    item.addEventListener('mouseenter', function() {
+      // 移除所有激活状态
+      sidebarItems.forEach(i => {
+        i.classList.remove('active');
+      });
+      panels.forEach(p => {
+        p.classList.remove('active');
+      });
+
+      // 激活当前项
+      this.classList.add('active');
+      const panelId = this.getAttribute('data-panel');
+      const targetPanel = document.getElementById('panel-' + panelId);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
   });
 </script>
 
