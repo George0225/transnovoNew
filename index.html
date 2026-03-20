@@ -178,19 +178,16 @@
       top: 100%;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
-      width: 1000px;
+      min-width: 220px;
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 0;
+      border-radius: 12px;
+      padding: 12px 0;
       list-style: none;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-      display: grid;
-      grid-template-columns: 240px 1fr 280px;
-      overflow: hidden;
     }
 
     .nav-links > li:hover > .sub-menu {
@@ -199,111 +196,19 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* 左侧菜单 - 主分类 */
-    .sub-menu-sidebar {
-      background: var(--bg-secondary);
-      padding: 0;
-      border-right: 1px solid var(--border);
-    }
-
-    .sub-menu-sidebar-item {
+    .nav-links .sub-menu li a {
+      padding: 12px 20px;
       display: block;
-      padding: 18px 24px;
       color: var(--text-primary);
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s;
-      border-left: 3px solid transparent;
-      border-bottom: 1px solid rgba(224, 228, 237, 0.3);
-    }
-
-    .sub-menu-sidebar-item:hover,
-    .sub-menu-sidebar-item.active {
-      background: #fff;
-      color: var(--tech-blue);
-      border-left-color: var(--tech-blue);
-    }
-
-    /* 中间内容区 */
-    .sub-menu-content {
-      padding: 32px;
-      background: #fff;
-    }
-
-    .sub-menu-panel {
-      display: none;
-    }
-
-    .sub-menu-panel.active {
-      display: block;
-    }
-
-    .sub-menu-panel-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .sub-menu-panel-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      background: var(--bg-secondary);
-      border-radius: 10px;
-      text-decoration: none;
-      transition: all 0.3s;
-      border: 1px solid transparent;
-    }
-
-    .sub-menu-panel-item:hover {
-      background: var(--accent-soft);
-      border-color: var(--tech-blue);
-      padding-left: 22px;
-    }
-
-    .sub-menu-panel-item span {
       font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .sub-menu-panel-item svg {
-      width: 16px;
-      height: 16px;
-      color: var(--text-tertiary);
-      transition: transform 0.3s;
-    }
-
-    .sub-menu-panel-item:hover svg {
-      transform: translateX(4px);
-      color: var(--tech-blue);
-    }
-
-    /* 右侧图片区 */
-    .sub-menu-image {
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .sub-menu-image img {
-      max-width: 100%;
-      max-height: 280px;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-      padding: 12px 16px;
-      display: block;
+      text-decoration: none;
       border-radius: 8px;
+      transition: all 0.2s;
     }
 
     .nav-links .sub-menu li a:hover {
       color: var(--tech-blue);
-      background: var(--accent);
+      background: rgba(91, 143, 249, 0.08);
     }
 
     .nav-btn {
@@ -777,166 +682,8 @@
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
-          <!-- 左侧主分类 -->
-          <div class="sub-menu-sidebar">
-            <a href="#panel-devices" class="sub-menu-sidebar-item active" data-panel="devices">器械</a>
-            <a href="#panel-drugs" class="sub-menu-sidebar-item" data-panel="drugs">药品</a>
-            <a href="#panel-ivd" class="sub-menu-sidebar-item" data-panel="ivd">体外诊断</a>
-            <a href="solutions.html" class="sub-menu-sidebar-item">解决方案</a>
-          </div>
-          <!-- 中间内容区 -->
-          <div class="sub-menu-content">
-            <!-- 器械面板 -->
-            <div class="sub-menu-panel active" id="panel-devices">
-              <div class="sub-menu-panel-grid" style="grid-template-columns: 1fr;">
-                <div style="margin-bottom: 16px;">
-                  <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-left: 10px;">机械灌注</div>
-                  <div class="sub-menu-panel-grid" style="gap: 10px;">
-                    <a href="machine-perfusion.html" class="sub-menu-panel-item">
-                      <span>LifePort®肾脏灌注转运箱</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="machine-perfusion.html" class="sub-menu-panel-item">
-                      <span>LifePort®肝脏灌注转运箱</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="machine-perfusion.html" class="sub-menu-panel-item">
-                      <span>莱拓®医用冷藏转运箱</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                  </div>
-                </div>
-                <div style="margin-bottom: 16px;">
-                  <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-left: 10px;">静态冷藏</div>
-                  <div class="sub-menu-panel-grid" style="gap: 10px;">
-                    <a href="organ-preservation.html" class="sub-menu-panel-item">
-                      <span>KPS-1®器官保存液</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="organ-preservation.html" class="sub-menu-panel-item">
-                      <span>SPS-1®器官保存液</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 药品面板 -->
-            <div class="sub-menu-panel" id="panel-drugs">
-              <div class="sub-menu-panel-grid" style="grid-template-columns: 1fr;">
-                <div style="margin-bottom: 16px;">
-                  <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-left: 10px;">免疫抑制剂</div>
-                  <div class="sub-menu-panel-grid" style="gap: 10px;">
-                    <a href="immunosuppressant.html" class="sub-menu-panel-item">
-                      <span>他克莫司胶囊</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="immunosuppressant.html" class="sub-menu-panel-item">
-                      <span>麦考酚钠肠溶片</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="immunosuppressant.html" class="sub-menu-panel-item">
-                      <span>盐酸缓更昔洛韦片</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                  </div>
-                </div>
-                <div style="margin-bottom: 16px;">
-                  <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-left: 10px;">抗感染药</div>
-                  <div class="sub-menu-panel-grid" style="gap: 10px;">
-                    <a href="immunosuppressant.html" class="sub-menu-panel-item">
-                      <span>复方磺胺甲噁唑片</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="immunosuppressant.html" class="sub-menu-panel-item">
-                      <span>缬更昔洛韦片</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 体外诊断面板 -->
-            <div class="sub-menu-panel" id="panel-ivd">
-              <div class="sub-menu-panel-grid" style="grid-template-columns: 1fr;">
-                <div style="margin-bottom: 16px;">
-                  <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-left: 10px;">治疗药物监测（TDM）</div>
-                  <div class="sub-menu-panel-grid" style="gap: 10px;">
-                    <a href="tdm.html" class="sub-menu-panel-item">
-                      <span>他克莫司测定试剂盒</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="tdm.html" class="sub-menu-panel-item">
-                      <span>环孢霉素测定试剂盒</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="tdm.html" class="sub-menu-panel-item">
-                      <span>雷帕霉素测定试剂盒</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="tdm.html" class="sub-menu-panel-item">
-                      <span>霉酚酸测定试剂盒</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="tdm.html" class="sub-menu-panel-item">
-                      <span>全自动生化分析仪</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                  </div>
-                </div>
-                <div style="margin-bottom: 16px;">
-                  <div style="font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-left: 10px;">人类白细胞抗原和抗体检测</div>
-                  <div class="sub-menu-panel-grid" style="gap: 10px;">
-                    <a href="hla-antibody.html" class="sub-menu-panel-item">
-                      <span>人类白细胞抗原-DNA 分型试剂盒</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="hla-antibody.html" class="sub-menu-panel-item">
-                      <span>HLA 特异性抗体检测试剂盒</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="hla-antibody.html" class="sub-menu-panel-item">
-                      <span>HLA I 类单抗原特异性抗体检测试剂</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                    <a href="hla-antibody.html" class="sub-menu-panel-item">
-                      <span>HLA II 类单抗原特异性抗体检测试剂</span>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 解决方案面板 -->
-            <div class="sub-menu-panel" id="panel-solutions">
-              <div class="sub-menu-panel-grid">
-                <a href="solutions.html#step1" class="sub-menu-panel-item">
-                  <span>器官获取与评估</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="solutions.html#step2" class="sub-menu-panel-item">
-                  <span>器官保存与灌注</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="solutions.html#step3" class="sub-menu-panel-item">
-                  <span>器官运输</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="solutions.html#step4" class="sub-menu-panel-item">
-                  <span>植入手术支持</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-                <a href="solutions.html#step5" class="sub-menu-panel-item">
-                  <span>术后管理与随访</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- 右侧图片区 -->
-          <div class="sub-menu-image">
-            <img src="images/category-background-1.jpg" alt="Products" id="menu-image" />
-          </div>
+          <li><a href="products.html">产品</a></li>
+          <li><a href="solutions.html">解决方案</a></li>
         </ul>
       </li>
       <li><a href="research.html">研发生产中心</a></li>
@@ -1514,42 +1261,6 @@
     } else {
       window.isNearTop = false;
     }
-  });
-
-  // =============================================
-  // Mega Menu Panel Switching
-  // =============================================
-  const sidebarItems = document.querySelectorAll('.sub-menu-sidebar-item');
-  const panels = document.querySelectorAll('.sub-menu-panel');
-  const menuImage = document.getElementById('menu-image');
-
-  // 图片映射
-  const imageMap = {
-    'devices': 'images/category-background-1.jpg',
-    'drugs': 'images/category-background-3.jpg',
-    'ivd': 'images/category-background-2.jpg',
-    'solutions': 'images/mechanical-perfusion.jpg'
-  };
-
-  sidebarItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
-      // 移除所有激活状态
-      sidebarItems.forEach(i => i.classList.remove('active'));
-      panels.forEach(p => p.classList.remove('active'));
-
-      // 激活当前项
-      this.classList.add('active');
-      const panelId = this.getAttribute('data-panel');
-      const targetPanel = document.getElementById('panel-' + panelId);
-      if (targetPanel) {
-        targetPanel.classList.add('active');
-      }
-
-      // 切换图片
-      if (imageMap[panelId] && menuImage) {
-        menuImage.src = imageMap[panelId];
-      }
-    });
   });
 </script>
 
