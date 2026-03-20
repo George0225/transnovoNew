@@ -58,6 +58,7 @@
 
     .delay-1 { animation-delay: 0.15s; }
     .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
 
     #nav {
       position: fixed;
@@ -245,7 +246,7 @@
 
     /* Products Section */
     #products {
-      padding: 120px 24px;
+      padding: 80px 24px;
       background: var(--bg-primary);
     }
 
@@ -254,126 +255,111 @@
       margin: 0 auto;
     }
 
-    .products-header {
-      text-align: center;
-      margin-bottom: 64px;
+    /* Category Sections */
+    .category-section {
+      margin-bottom: 100px;
     }
 
-    .section-label {
-      display: inline-block;
-      padding: 8px 20px;
-      background: var(--accent-soft);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 20px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.2;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-    }
-
-    .product-card {
+    .category-title {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      margin-bottom: 40px;
+      padding-left: 20px;
+      border-left: 4px solid var(--tech-blue);
       position: relative;
+      color: var(--text-primary);
+    }
+
+    .category-title::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--tech-blue), var(--pink));
+    }
+
+    /* Sub Category Grid */
+    .sub-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .sub-category-card {
       background: #fff;
       border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border);
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--border);
     }
 
-    .product-card:hover {
+    .sub-category-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 50px rgba(91, 143, 249, 0.2);
       border-color: var(--tech-blue);
     }
 
-    .product-image {
-      height: 180px;
-      overflow: hidden;
-      background: var(--bg-secondary);
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.1);
-    }
-
-    .product-info {
-      padding: 24px;
-    }
-
-    .product-title {
-      font-size: 16px;
+    .sub-category-name {
+      font-size: 20px;
       font-weight: 700;
+      margin-bottom: 20px;
       color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .product-desc {
-      font-size: 14px;
-      color: var(--text-tertiary);
-      line-height: 1.6;
-    }
-
-    /* Partners Section */
-    #partners {
-      padding: 80px 24px;
-      background: var(--bg-secondary);
-    }
-
-    .partners-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .partners-title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-    }
-
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 32px;
+      display: flex;
       align-items: center;
+      gap: 12px;
     }
 
-    .partner-logo {
-      opacity: 0.6;
-      transition: opacity 0.3s, transform 0.3s;
+    .sub-category-name::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, var(--tech-blue), var(--pink));
+      border-radius: 50%;
     }
 
-    .partner-logo:hover {
+    .product-list {
+      list-style: none;
+    }
+
+    .product-list li {
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s;
+    }
+
+    .product-list li:hover {
+      background: linear-gradient(135deg, rgba(91,143,249,0.08), rgba(230,30,108,0.05));
+      transform: translateX(8px);
+    }
+
+    .product-list li a {
+      color: var(--tech-blue);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s;
+    }
+
+    .product-list li:hover a {
       opacity: 1;
-      transform: scale(1.05);
+      transform: translateX(0);
     }
 
-    .partner-logo img {
-      width: 100%;
-      height: auto;
+    .product-list li a::after {
+      content: '→';
+      margin-left: 4px;
     }
 
     /* Footer */
@@ -484,8 +470,7 @@
     /* Responsive */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+      .sub-category-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
       .footer-qrcodes { justify-content: center; }
     }
@@ -497,8 +482,7 @@
       .page-header { padding: 60px 20px; }
       .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
       #products { padding: 80px 20px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .sub-category-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .footer-qrcodes { display: none; }
     }
@@ -521,11 +505,8 @@
           <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
         </a>
         <ul class="sub-menu">
-          <li><a href="machine-perfusion.html">机械灌注</a></li>
-          <li><a href="organ-preservation.html">器官保存</a></li>
-          <li><a href="tdm.html">药物浓度检测</a></li>
-          <li><a href="immunosuppressant.html">免疫抑制剂</a></li>
-          <li><a href="hla-antibody.html">配型与抗体</a></li>
+          <li><a href="products.html">产品</a></li>
+          <li><a href="solutions.html">解决方案</a></li>
         </ul>
       </li>
       <li><a href="research.html">研发生产中心</a></li>
@@ -569,72 +550,93 @@
 <!-- PRODUCTS SECTION -->
 <section id="products">
   <div class="products-inner">
-    <div class="products-grid">
-      <div class="product-card animate-on-scroll">
-        <div class="product-image">
-          <img src="images/mechanical-perfusion.jpg" alt="机械灌注" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">机械灌注</h3>
-          <p class="product-desc">器官保存与运输设备</p>
-        </div>
-      </div>
 
-      <div class="product-card animate-on-scroll delay-1">
-        <div class="product-image">
-          <img src="images/category-background-1.jpg" alt="器官保存" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">器官保存</h3>
-          <p class="product-desc">保存液与相关试剂</p>
-        </div>
-      </div>
+    <!-- 器械 -->
+    <div class="category-section animate-on-scroll">
+      <h2 class="category-title">器械</h2>
+      <div class="sub-category-grid">
 
-      <div class="product-card animate-on-scroll delay-2">
-        <div class="product-image">
-          <img src="images/category-background-2.jpg" alt="药物浓度检测" />
+        <!-- 机械灌注 -->
+        <div class="sub-category-card">
+          <h3 class="sub-category-name">机械灌注</h3>
+          <ul class="product-list">
+            <li>LifePort®肾脏灌注转运箱 <a href="machine-perfusion.html">进入彩页</a></li>
+            <li>LifePort®肝脏灌注转运箱 <a href="machine-perfusion.html">进入彩页</a></li>
+            <li>莱拓®医用冷藏转运箱 <a href="machine-perfusion.html">进入彩页</a></li>
+          </ul>
         </div>
-        <div class="product-info">
-          <h3 class="product-title">药物浓度检测</h3>
-          <p class="product-desc">TDM 检测系统</p>
-        </div>
-      </div>
 
-      <div class="product-card animate-on-scroll delay-3">
-        <div class="product-image">
-          <img src="images/category-background-3.jpg" alt="免疫抑制剂" />
+        <!-- 静态冷藏 -->
+        <div class="sub-category-card">
+          <h3 class="sub-category-name">静态冷藏</h3>
+          <ul class="product-list">
+            <li>KPS-1®器官保存液 <a href="organ-preservation.html">进入彩页</a></li>
+            <li>SPS-1®器官保存液 <a href="organ-preservation.html">进入彩页</a></li>
+          </ul>
         </div>
-        <div class="product-info">
-          <h3 class="product-title">免疫抑制剂</h3>
-          <p class="product-desc">抗排斥药物</p>
-        </div>
-      </div>
 
-      <div class="product-card animate-on-scroll delay-2">
-        <div class="product-image">
-          <img src="images/category-background-4.jpg" alt="配型与抗体" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">配型与抗体</h3>
-          <p class="product-desc">HLA 分型检测与抗体筛查</p>
-        </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- PARTNERS SECTION -->
-<section id="partners">
-  <div class="partners-inner">
-    <h3 class="partners-title">合作伙伴</h3>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
-      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
-      <div class="partner-logo"><img src="images/part3.png" alt="合作伙伴 3" /></div>
-      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
-      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
-      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
+    <!-- 药品 -->
+    <div class="category-section animate-on-scroll">
+      <h2 class="category-title">药品</h2>
+      <div class="sub-category-grid">
+
+        <!-- 免疫抑制剂 -->
+        <div class="sub-category-card">
+          <h3 class="sub-category-name">免疫抑制剂</h3>
+          <ul class="product-list">
+            <li>他克莫司胶囊 <a href="immunosuppressant.html">进入彩页</a></li>
+            <li>麦考酚钠肠溶片 <a href="immunosuppressant.html">进入彩页</a></li>
+            <li>盐酸缓更昔洛韦片 <a href="immunosuppressant.html">进入彩页</a></li>
+          </ul>
+        </div>
+
+        <!-- 抗感染药 -->
+        <div class="sub-category-card">
+          <h3 class="sub-category-name">抗感染药</h3>
+          <ul class="product-list">
+            <li>他克莫司胶囊 <a href="immunosuppressant.html">进入彩页</a></li>
+            <li>麦考酚钠肠溶片 <a href="immunosuppressant.html">进入彩页</a></li>
+            <li>盐酸缓更昔洛韦片 <a href="immunosuppressant.html">进入彩页</a></li>
+          </ul>
+        </div>
+
+      </div>
     </div>
+
+    <!-- 体外诊断 -->
+    <div class="category-section animate-on-scroll">
+      <h2 class="category-title">体外诊断</h2>
+      <div class="sub-category-grid">
+
+        <!-- 治疗药物监测 (TDM) -->
+        <div class="sub-category-card">
+          <h3 class="sub-category-name">治疗药物监测（TDM）</h3>
+          <ul class="product-list">
+            <li>他克莫司测定试剂盒 <a href="tdm.html">进入彩页</a></li>
+            <li>环孢霉素测定试剂盒 <a href="tdm.html">进入彩页</a></li>
+            <li>雷帕霉素测定试剂盒 <a href="tdm.html">进入彩页</a></li>
+            <li>霉酚酸测定试剂盒 <a href="tdm.html">进入彩页</a></li>
+            <li>全自动生化分析仪 <a href="tdm.html">进入彩页</a></li>
+          </ul>
+        </div>
+
+        <!-- 人类白细胞抗原和抗体检测 -->
+        <div class="sub-category-card">
+          <h3 class="sub-category-name">人类白细胞抗原和抗体检测</h3>
+          <ul class="product-list">
+            <li>人类白细胞抗原-DNA 分型试剂盒 <a href="hla-antibody.html">进入彩页</a></li>
+            <li>HLA 特异性抗体检测试剂盒 <a href="hla-antibody.html">进入彩页</a></li>
+            <li>HLA I 类单抗原特异性抗体检测试剂 <a href="hla-antibody.html">进入彩页</a></li>
+            <li>HLA II 类单抗原特异性抗体检测试剂 <a href="hla-antibody.html">进入彩页</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
