@@ -38,9 +38,16 @@
 
     /* 页面头部 */
     .page-header {
-      background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent) 100%);
+      position: relative;
+      height: 300px;
+      background: linear-gradient(135deg, rgba(91, 143, 249, 0.9) 0%, rgba(43, 58, 109, 0.9) 100%),
+        url('images/production-center-4.jpg') center/cover no-repeat;
       padding: 80px 24px 60px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .page-header h1 {
