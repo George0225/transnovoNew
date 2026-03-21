@@ -1253,9 +1253,32 @@
           unlockPage();
         }
       }
-      // 向上滚动：忽略（保持在 Hero）
+      // 向上滚动：减少累积值，实现回滚
       else {
         e.preventDefault();
+        scrollAccumulator -= scrollAmount;
+
+        // 确保不小于 0
+        if (scrollAccumulator < 0) {
+          scrollAccumulator = 0;
+        }
+
+        // 计算滚动进度 (0 到 1)
+        const scrollProgress = Math.min(scrollAccumulator / UNLOCK_THRESHOLD, 1);
+
+        // 标题恢复效果
+        heroScale = 1 + scrollProgress * 3;
+        heroOpacity = Math.max(0, 1 - scrollProgress * 0.8);
+        canvasOpacity = 0.8 * (1 - scrollProgress);
+
+        if (heroContent) {
+          heroContent.style.transform = `scale(${heroScale})`;
+          heroContent.style.opacity = heroOpacity;
+        }
+
+        if (canvas) {
+          canvas.style.opacity = canvasOpacity;
+        }
       }
     } else {
       // 已解锁状态：检查是否需要重新锁定
