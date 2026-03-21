@@ -343,7 +343,134 @@
       box-shadow: 0 6px 20px rgba(91,143,249,0.45);
     }
 
-    .nav-toggle { display: none; }
+    /* 移动端汉堡菜单按钮 */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* 移动端导航面板 */
+    .mobile-nav-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      padding-top: 80px;
+    }
+
+    .mobile-nav-panel.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mobile-nav-links > li {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav-links > li > a {
+      display: block;
+      padding: 18px 24px;
+      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .mobile-nav-links > li > a:hover {
+      background: rgba(91, 143, 249, 0.05);
+      color: var(--tech-blue);
+    }
+
+    /* 移动端子菜单 */
+    .mobile-sub-menu {
+      list-style: none;
+      padding: 0;
+      display: none;
+      background: rgba(91, 143, 249, 0.03);
+    }
+
+    .mobile-sub-menu.open {
+      display: block;
+    }
+
+    .mobile-sub-menu li a {
+      display: block;
+      padding: 14px 24px 14px 36px;
+      color: var(--text-secondary);
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .mobile-sub-menu li a:hover {
+      color: var(--tech-blue);
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .mobile-menu-toggle::after {
+      content: '›';
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    .mobile-menu-toggle.open::after {
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-btn {
+      display: block;
+      margin: 24px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--tech-blue), #3A7BD5);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(91, 143, 249, 0.35);
+    }
 
     /* =============================================
        HERO SECTION - 初始锁定屏幕 (AI 背景图)
@@ -773,14 +900,31 @@
 
     @media (max-width: 768px) {
       .nav-links, .nav-btn { display: none; }
-      .nav-toggle { display: block; }
+      .nav-toggle { display: flex; }
+      .nav-inner { padding: 0 20px; }
       .cutout-title { font-size: 42px; }
       .hero-subtitle { font-size: 16px; }
-      .content-section { padding: 80px 24px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .content-section { padding: 80px 20px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .video-content h2 { font-size: 32px; }
       .video-content p { font-size: 16px; }
+      .section-inner { grid-template-columns: 1fr; gap: 32px; }
+      .section-image { order: -1; }
+
+      /* 移动端 hero 调整 */
+      .slogan-logo { height: clamp(50px, 15vw, 100px); }
+      .scroll-hint { bottom: 30px; }
+      .scroll-hint span { font-size: 11px; }
+      .scroll-hint svg { width: 18px; height: 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .cutout-title { font-size: 36px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-number { font-size: 32px; }
+      .stat-label { font-size: 11px; }
+      .content-section { padding: 60px 16px; }
     }
   </style>
 </head>
@@ -869,8 +1013,82 @@
       <li><a href="talent.html">人才中心</a></li>
     </ul>
     <a href="contact.html" class="nav-btn">联系我们</a>
+    <!-- 移动端汉堡菜单按钮 -->
+    <div class="nav-toggle" id="navToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </nav>
+
+<!-- 移动端导航面板 -->
+<div class="mobile-nav-panel" id="mobileNavPanel">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html">首页</a></li>
+    <li>
+      <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-products')">
+        <a href="products.html">产品中心</a>
+      </div>
+      <ul class="mobile-sub-menu" id="mobile-products">
+        <li><a href="solutions.html">解决方案</a></li>
+        <li>
+          <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-devices')">
+            <a href="products.html#devices">产品</a>
+          </div>
+          <ul class="mobile-sub-menu" id="mobile-devices">
+            <li>
+              <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-equipment')">
+                <a href="products.html#devices">器械</a>
+              </div>
+              <ul class="mobile-sub-menu" id="mobile-equipment">
+                <li><a href="machine-perfusion.html">LifePort®肾脏灌注转运箱</a></li>
+                <li><a href="machine-perfusion.html">LifePort®肝脏灌注转运箱</a></li>
+                <li><a href="machine-perfusion.html">莱拓®医用冷藏转运箱</a></li>
+                <li><a href="organ-preservation.html">KPS-1®器官保存液</a></li>
+                <li><a href="organ-preservation.html">SPS-1®器官保存液</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-drugs')">
+                <a href="products.html#drugs">药品</a>
+              </div>
+              <ul class="mobile-sub-menu" id="mobile-drugs">
+                <li><a href="immunosuppressant.html">他克莫司胶囊</a></li>
+                <li><a href="immunosuppressant.html">麦考酚钠肠溶片</a></li>
+                <li><a href="immunosuppressant.html">盐酸缓更昔洛韦片</a></li>
+                <li><a href="immunosuppressant.html">复方磺胺甲噁唑片</a></li>
+                <li><a href="immunosuppressant.html">缬更昔洛韦片</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-ivd')">
+                <a href="products.html#ivd">体外诊断</a>
+              </div>
+              <ul class="mobile-sub-menu" id="mobile-ivd">
+                <li><a href="tdm.html">治疗药物监测（TDM）</a></li>
+                <li><a href="hla-antibody.html">人类白细胞抗原和抗体检测</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-service')">
+        <a href="research.html">用户服务</a>
+      </div>
+      <ul class="mobile-sub-menu" id="mobile-service">
+        <li><a href="operation-videos.html">操作视频</a></li>
+        <li><a href="research.html#training">培训视频</a></li>
+        <li><a href="research.html#investment">招商服务</a></li>
+      </ul>
+    </li>
+    <li><a href="patients.html">关爱患者</a></li>
+    <li><a href="talent.html">人才中心</a></li>
+  </ul>
+  <a href="contact.html" class="mobile-nav-btn">联系我们</a>
+</div>
 
 <!-- HERO: 初始锁定屏幕 - AI 背景图 -->
 <section id="hero">
@@ -1375,6 +1593,104 @@
     // 滚动到顶部
     window.scrollTo(0, 0);
   }
+
+  // =============================================
+  // 移动端触摸滚动支持
+  // =============================================
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isUnlocked) {
+      const touchY = e.touches[0].clientY;
+      const touchX = e.touches[0].clientX;
+      const deltaY = touchStartY - touchY;
+      const deltaX = touchX - touchStartX;
+
+      // 只处理垂直滑动，忽略水平滑动
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        e.preventDefault();
+
+        const isScrollingDown = deltaY < 0;
+        const scrollAmount = Math.abs(deltaY) * 1.5; // 增加灵敏度
+
+        if (isScrollingDown) {
+          scrollAccumulator += scrollAmount;
+        } else {
+          scrollAccumulator -= scrollAmount;
+          if (scrollAccumulator < 0) scrollAccumulator = 0;
+        }
+
+        // 计算滚动进度 (0 到 1)
+        const scrollProgress = Math.min(scrollAccumulator / UNLOCK_THRESHOLD, 1);
+
+        // 标题放大效果
+        heroScale = 1 + scrollProgress * 3;
+        heroOpacity = Math.max(0, 1 - scrollProgress * 0.8);
+        canvasOpacity = 0.8 * (1 - scrollProgress);
+
+        if (heroContent) {
+          heroContent.style.transform = `scale(${heroScale})`;
+          heroContent.style.opacity = heroOpacity;
+        }
+
+        if (canvas) {
+          canvas.style.opacity = canvasOpacity;
+        }
+
+        // 达到阈值，解锁页面
+        if (scrollProgress >= 0.95) {
+          unlockPage();
+        }
+      }
+
+      // 更新起始位置用于下次计算
+      touchStartY = touchY;
+      touchStartX = touchX;
+    }
+  }, { passive: false });
+
+  // =============================================
+  // 移动端导航菜单切换
+  // =============================================
+  const navToggle = document.getElementById('navToggle');
+  const mobileNavPanel = document.getElementById('mobileNavPanel');
+
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      mobileNavPanel.classList.toggle('active');
+      document.body.style.overflow = mobileNavPanel.classList.contains('active') ? 'hidden' : '';
+    });
+  }
+
+  // 点击菜单项后关闭菜单
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navToggle) navToggle.classList.remove('active');
+      if (mobileNavPanel) mobileNavPanel.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // 移动端子菜单切换函数
+  function toggleMobileSubmenu(id) {
+    const submenu = document.getElementById(id);
+    const toggle = submenu?.previousElementSibling || submenu?.parentElement;
+    if (submenu) {
+      submenu.classList.toggle('open');
+      if (toggle && toggle.classList.contains('mobile-menu-toggle')) {
+        toggle.classList.toggle('open');
+      }
+    }
+    return false; // 阻止默认行为
+  }
+  window.toggleMobileSubmenu = toggleMobileSubmenu;
 
   // =============================================
   // Nav background on scroll
