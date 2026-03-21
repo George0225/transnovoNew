@@ -493,6 +493,16 @@
     #hero.hidden {
       opacity: 0;
       pointer-events: none;
+      visibility: hidden;
+    }
+
+    /* 视频 section 在 hero 解锁前隐藏 */
+    body.locked .video-section {
+      visibility: hidden;
+    }
+
+    body:not(.locked) .video-section {
+      visibility: visible;
     }
 
     /* 多层背景容器 */
@@ -949,10 +959,16 @@
 
       /* 移动端 hero 调整 */
       .slogan-logo { height: clamp(50px, 15vw, 100px); }
+      #hero { height: 100dvh; min-height: -webkit-fill-available; }
       .scroll-hint { bottom: 30px; }
       .scroll-hint-text .cn { font-size: 11px; }
       .scroll-hint-text .en { font-size: 10px; }
       .scroll-hint svg { width: 18px; height: 18px; }
+
+      /* 修复移动端视频 section 露出问题 */
+      body.locked .video-section {
+        visibility: hidden;
+      }
     }
 
     @media (max-width: 480px) {
