@@ -500,144 +500,6 @@
     }
 
     /* =============================================
-       器官灌注旅程动画 (新)
-       ============================================= */
-    .organ-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px;
-      height: 400px;
-      z-index: 5;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .organ-container.visible {
-      opacity: 1;
-    }
-
-    .organ-svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .organ-path {
-      fill: rgba(139, 0, 0, 0.3);
-      stroke: rgba(230, 30, 108, 0.6);
-      stroke-width: 2;
-      transition: all 1s ease;
-    }
-
-    .organ-path.perfusing {
-      fill: rgba(230, 30, 108, 0.5);
-      filter: drop-shadow(0 0 20px rgba(230, 30, 108, 0.8));
-    }
-
-    .lifeport-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 500px;
-      height: 500px;
-      z-index: 4;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .lifeport-container.visible {
-      opacity: 1;
-    }
-
-    .lifeport-svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .lifeport-body {
-      fill: none;
-      stroke: rgba(91, 143, 249, 0.3);
-      stroke-width: 2;
-      stroke-dasharray: 10 5;
-    }
-
-    .perfusion-fluid {
-      fill: none;
-      stroke: url(#fluidGradient);
-      stroke-width: 3;
-      stroke-dasharray: 20 40;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .perfusion-fluid.flowing {
-      opacity: 1;
-      animation: flowAnimation 2s linear infinite;
-    }
-
-    @keyframes flowAnimation {
-      to { stroke-dashoffset: -60; }
-    }
-
-    .organ-label {
-      font-size: 14px;
-      fill: var(--text-primary);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .organ-label.visible {
-      opacity: 1;
-    }
-
-    .stats-overlay {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-      opacity: 0;
-      transform: translateX(50px);
-      transition: all 0.5s ease;
-    }
-
-    .stats-overlay.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-
-    .stat-label {
-      color: var(--text-secondary);
-      margin-right: 16px;
-    }
-
-    .stat-value {
-      font-weight: 700;
-      color: var(--tech-blue);
-    }
-
-    .temperature-value {
-      font-size: 24px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--tech-blue), var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* =============================================
        内容 Sections
        ============================================= */
     .content-section {
@@ -1023,74 +885,6 @@
     <img src="images/logo-final.png" alt="tranSnovo" class="slogan-logo" />
   </div>
 
-  <!-- 器官灌注旅程动画容器 -->
-  <div class="organ-container" id="organContainer">
-    <svg class="organ-svg" viewBox="0 0 400 400">
-      <defs>
-        <linearGradient id="organGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#8B0000;stop-opacity:0.4" />
-          <stop offset="100%" style="stop-color:#E61E6C;stop-opacity:0.6" />
-        </linearGradient>
-      </defs>
-      <!-- 肾脏轮廓 (简化版) -->
-      <path class="organ-path" id="organPath" d="M200 80
-        C280 80 340 140 340 220
-        C340 300 280 340 200 340
-        C120 340 60 300 60 220
-        C60 140 120 80 200 80 Z"
-        fill="url(#organGradient)" />
-      <!-- 肾门结构 -->
-      <path class="organ-path" id="hilumPath" d="M180 280
-        Q200 300 220 280
-        L220 260
-        Q200 280 180 260 Z"
-        fill="rgba(139, 0, 0, 0.5)" />
-    </svg>
-  </div>
-
-  <!-- LifePort 设备容器 -->
-  <div class="lifeport-container" id="lifeportContainer">
-    <svg class="lifeport-svg" viewBox="0 0 500 500">
-      <defs>
-        <linearGradient id="fluidGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#E61E6C;stop-opacity:0.9" />
-          <stop offset="100%" style="stop-color:#5B8FF9;stop-opacity:0.9" />
-        </linearGradient>
-      </defs>
-      <!-- LifePort 设备轮廓 (简化版) -->
-      <rect class="lifeport-body" x="150" y="100" width="200" height="300" rx="20" />
-      <!-- 灌注管路 -->
-      <path class="perfusion-fluid" id="perfusionFluid1" d="M250 150
-        Q250 100 200 100
-        Q150 100 150 150
-        Q150 200 180 220" />
-      <path class="perfusion-fluid" id="perfusionFluid2" d="M270 150
-        Q270 100 320 100
-        Q370 100 370 150
-        Q370 200 340 220" />
-      <!-- 显示屏轮廓 -->
-      <rect class="lifeport-body" x="180" y="180" width="140" height="80" rx="8" fill="none" />
-      <!-- 温度指示器 -->
-      <circle class="lifeport-body" cx="250" cy="220" r="15" fill="none" />
-    </svg>
-  </div>
-
-  <!-- 统计信息叠加层 -->
-  <div class="stats-overlay" id="statsOverlay">
-    <div class="stat-row">
-      <span class="stat-label">器官温度</span>
-      <span class="temperature-value" id="tempValue">4°C</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">灌注压力</span>
-      <span class="stat-value" id="pressureValue">25 mmHg</span>
-    </div>
-    <div class="stat-row">
-      <span class="stat-label">流量</span>
-      <span class="stat-value" id="flowValue">180 mL/min</span>
-    </div>
-  </div>
-
   <!-- 滚动提示 -->
   <div class="scroll-hint">
     <span>滚动探索</span>
@@ -1418,17 +1212,6 @@
   const progressBar = document.querySelector('.scroll-progress');
   const firstSection = document.getElementById('section-about');
 
-  // 器官灌注动画元素
-  const organContainer = document.getElementById('organContainer');
-  const lifeportContainer = document.getElementById('lifeportContainer');
-  const statsOverlay = document.getElementById('statsOverlay');
-  const organPath = document.getElementById('organPath');
-  const perfusionFluid1 = document.getElementById('perfusionFluid1');
-  const perfusionFluid2 = document.getElementById('perfusionFluid2');
-  const tempValue = document.getElementById('tempValue');
-  const pressureValue = document.getElementById('pressureValue');
-  const flowValue = document.getElementById('flowValue');
-
   let isUnlocked = false;
   let scrollAccumulator = 0;
   const UNLOCK_THRESHOLD = 500; // 需要累积滚动多少像素才解锁
@@ -1436,7 +1219,7 @@
   let heroOpacity = 1;
   let canvasOpacity = 0.8;
 
-  // 监听鼠标滚轮 - 双向滚动 + 器官灌注动画
+  // 监听鼠标滚轮 - 双向滚动
   window.addEventListener('wheel', (e) => {
     const isScrollingDown = e.deltaY > 0;
     const scrollAmount = Math.abs(e.deltaY);
@@ -1464,33 +1247,6 @@
         if (canvas) {
           canvas.style.opacity = canvasOpacity;
         }
-
-        // ============= 器官灌注旅程动画 =============
-        // 阶段 1 (0-0.3): 器官显现
-        if (scrollProgress > 0.1 && scrollProgress <= 0.3) {
-          organContainer.classList.add('visible');
-        }
-        // 阶段 2 (0.3-0.5): LifePort 设备出现
-        if (scrollProgress > 0.3 && scrollProgress <= 0.5) {
-          lifeportContainer.classList.add('visible');
-        }
-        // 阶段 3 (0.5-0.7): 灌注开始，液体流动
-        if (scrollProgress > 0.5 && scrollProgress <= 0.7) {
-          organPath.classList.add('perfusing');
-          perfusionFluid1.classList.add('flowing');
-          perfusionFluid2.classList.add('flowing');
-        }
-        // 阶段 4 (0.7-1.0): 统计数据显示
-        if (scrollProgress > 0.7) {
-          statsOverlay.classList.add('visible');
-          // 模拟温度变化动画
-          if (scrollProgress > 0.75) {
-            tempValue.textContent = '4°C';
-            pressureValue.textContent = '25 mmHg';
-            flowValue.textContent = '180 mL/min';
-          }
-        }
-        // ===========================================
 
         // 达到阈值，解锁页面
         if (scrollProgress >= 0.95) {
@@ -1523,24 +1279,6 @@
         if (canvas) {
           canvas.style.opacity = canvasOpacity;
         }
-
-        // ============= 器官灌注回滚动画 =============
-        // 反向隐藏元素
-        if (scrollProgress <= 0.7) {
-          statsOverlay.classList.remove('visible');
-        }
-        if (scrollProgress <= 0.5) {
-          organPath.classList.remove('perfusing');
-          perfusionFluid1.classList.remove('flowing');
-          perfusionFluid2.classList.remove('flowing');
-        }
-        if (scrollProgress <= 0.3) {
-          lifeportContainer.classList.remove('visible');
-        }
-        if (scrollProgress <= 0.1) {
-          organContainer.classList.remove('visible');
-        }
-        // ===========================================
       }
     } else {
       // 已解锁状态：检查是否需要重新锁定
@@ -1600,14 +1338,6 @@
   function relockPage() {
     isUnlocked = false;
     scrollAccumulator = 0;
-
-    // 重置器官灌注动画状态
-    organContainer.classList.remove('visible');
-    lifeportContainer.classList.remove('visible');
-    statsOverlay.classList.remove('visible');
-    organPath.classList.remove('perfusing');
-    perfusionFluid1.classList.remove('flowing');
-    perfusionFluid2.classList.remove('flowing');
 
     // 重新显示 Hero 层
     if (hero) {
