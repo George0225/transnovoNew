@@ -1223,6 +1223,7 @@
   window.addEventListener('wheel', (e) => {
     const isScrollingDown = e.deltaY > 0;
     const scrollAmount = Math.abs(e.deltaY);
+    const scrollTop = window.scrollY;
 
     if (!isUnlocked) {
       // 向下滚动：累积解锁
@@ -1258,12 +1259,13 @@
       }
     } else {
       // 已解锁状态：检查是否需要重新锁定
-      const scrollTop = window.scrollY;
-
       // 如果滚动到 video section 顶部附近且继续向上滚动，重新锁定
-      if (scrollTop < window.innerHeight * 0.3 && !isScrollingDown) {
-        e.preventDefault();
-        relockPage();
+      if (scrollTop < window.innerHeight * 0.3) {
+        if (!isScrollingDown) {
+          // 向上滚动，重新锁定
+          e.preventDefault();
+          relockPage();
+        }
       }
     }
   }, { passive: false });
