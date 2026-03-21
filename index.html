@@ -609,11 +609,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       color: rgba(10, 22, 40, 0.5);
       font-size: 12px;
       letter-spacing: 0.2em;
       animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    .scroll-hint-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .scroll-hint-text .cn {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+    }
+
+    .scroll-hint-text .en {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      opacity: 0.7;
     }
 
     @keyframes hintPulse {
@@ -915,7 +933,8 @@
       /* 移动端 hero 调整 */
       .slogan-logo { height: clamp(50px, 15vw, 100px); }
       .scroll-hint { bottom: 30px; }
-      .scroll-hint span { font-size: 11px; }
+      .scroll-hint-text .cn { font-size: 11px; }
+      .scroll-hint-text .en { font-size: 10px; }
       .scroll-hint svg { width: 18px; height: 18px; }
     }
 
@@ -1105,7 +1124,10 @@
 
   <!-- 滚动提示 -->
   <div class="scroll-hint">
-    <span>滚动探索</span>
+    <div class="scroll-hint-text">
+      <span class="cn">滚动探索</span>
+      <span class="en">Scroll Down</span>
+    </div>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M12 5v14M5 12l7 7 7-7"/>
     </svg>
