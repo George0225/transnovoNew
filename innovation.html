@@ -136,7 +136,7 @@
       transform: rotate(180deg);
     }
 
-    .nav-links > li > ul.sub-menu {
+    .nav-links .sub-menu {
       position: absolute;
       top: 100%;
       left: 50%;
@@ -146,12 +146,12 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px 0;
-      list-style: none !important;
+      list-style: none;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-      z-index: 99999;
+      z-index: 1001;
     }
 
     .nav-links .sub-menu > li {
@@ -159,7 +159,7 @@
       position: relative;
     }
 
-    .nav-links > li:hover > ul.sub-menu {
+    .nav-links > li:hover > .sub-menu {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
