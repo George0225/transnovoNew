@@ -985,11 +985,11 @@
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="home.html" class="nav-logo" id="logoLink">
+    <a href="#" class="nav-logo" id="logoLink">
       <img src="images/logo.png" alt="tranSnovo" />
     </a>
     <ul class="nav-links">
-      <li><a href="home.html" id="homeLink">首页</a></li>
+      <li><a href="#" id="homeLink">首页</a></li>
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
@@ -1848,6 +1848,19 @@
   // 页面加载时强制初始化状态
   // =============================================
   relockPage();
+
+  // =============================================
+  // Logo 和首页链接点击强制刷新页面（带时间戳防止缓存）
+  // =============================================
+  document.getElementById('logoLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'index.html?t=' + Date.now();
+  });
+
+  document.getElementById('homeLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'index.html?t=' + Date.now();
+  });
 </script>
 
 </body>
