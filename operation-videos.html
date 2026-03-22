@@ -21,6 +21,7 @@
       --text-tertiary: #86868b;
       --text-light: #f5f5f7;
       --accent: #2B3A6D;
+      --accent-light: #3d508a;
       --accent-soft: rgba(43, 58, 109, 0.08);
       --pink: #E61E6C;
       --tech-blue: #5B8FF9;
@@ -36,8 +37,115 @@
       line-height: 1.6;
     }
 
+    /* 导航栏 */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links > li > a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .nav-links > li > a:hover,
+    .nav-links > li > a.active {
+      color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.08);
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(91, 143, 249, 0.2);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
     /* 页面头部 */
     .page-header {
+      margin-top: 80px;
       height: 200px;
       background: url('images/production-center-4.jpg') center/cover no-repeat;
     }
@@ -415,11 +523,15 @@
 
     /* 响应式 */
     @media (max-width: 1200px) {
+      .nav-inner { padding: 0 32px; }
       .video-container { grid-template-columns: 240px 1fr; }
       .video-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
+      .nav-links, .nav-btn { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-inner { height: 72px; padding: 0 20px; }
       .video-container { grid-template-columns: 1fr; }
       .sidebar { position: relative; top: 0; max-height: none; }
       .category-tabs { flex-wrap: wrap; }
@@ -432,6 +544,38 @@
   </style>
 </head>
 <body>
+
+<!-- 导航栏 -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="tranSnovo 健耕医药" />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li><a href="products.html">产品中心</a></li>
+      <li><a href="research.html" class="active">用户服务</a></li>
+      <li><a href="patients.html">关爱患者</a></li>
+      <li><a href="talent.html">人才中心</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-btn">联系我们</a>
+
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" onclick="closeMenu()">首页</a>
+    <a href="products.html" onclick="closeMenu()">产品中心</a>
+    <a href="research.html" onclick="closeMenu()">用户服务</a>
+    <a href="patients.html" onclick="closeMenu()">关爱患者</a>
+    <a href="talent.html" onclick="closeMenu()">人才中心</a>
+    <a href="contact.html" onclick="closeMenu()">联系我们</a>
+  </div>
+</nav>
 
 <!-- 页面头部背景图 -->
 <section class="page-header"></section>
@@ -580,6 +724,14 @@
 </div>
 
 <script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
   // 视频数据 - 使用阿里云 OSS 链接（URL 编码版本）
   const videoData = {
     'kidney-perfusion': [
