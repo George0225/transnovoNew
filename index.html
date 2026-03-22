@@ -985,11 +985,11 @@
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
+    <a href="#" class="nav-logo" onclick="window.location.href='index.html'; return false;">
       <img src="images/logo.png" alt="tranSnovo" />
     </a>
     <ul class="nav-links">
-      <li><a href="index.html">首页</a></li>
+      <li><a href="index.html" onclick="window.location.reload(); return false;">首页</a></li>
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
@@ -1077,7 +1077,7 @@
 <!-- 移动端导航面板 -->
 <div class="mobile-nav-panel" id="mobileNavPanel">
   <ul class="mobile-nav-links">
-    <li><a href="index.html">首页</a></li>
+    <li><a href="index.html" onclick="window.location.reload(); return false;">首页</a></li>
     <li>
       <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-products')">
         <a href="products.html">产品中心</a>
