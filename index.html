@@ -734,15 +734,21 @@
       box-shadow: 0 40px 100px rgba(0,0,0,0.2);
     }
 
-    .section-image img {
+    .section-image img,
+    .section-image video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.8s;
     }
 
-    .section-image:hover img {
+    .section-image:hover img,
+    .section-image:hover video {
       transform: scale(1.05);
+    }
+
+    .global-network-video {
+      display: block;
     }
 
     /* 数据统计网格 */
@@ -1297,7 +1303,9 @@
       </div>
     </div>
     <div class="section-image">
-      <img src="images/hero-banner-1.png" alt="全球网络" />
+      <video autoplay muted loop playsinline class="global-network-video">
+        <source src="images/global-network.mp4" type="video/mp4" />
+      </video>
     </div>
   </div>
 </section>
