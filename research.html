@@ -326,14 +326,21 @@
       background: rgba(91, 143, 249, 0.05);
     }
 
-    .dropdown-arrow {
-      width: 12px;
-      height: 12px;
-      margin-left: 4px;
+    /* Dropdown arrow using CSS */
+    .nav-links > li > a.has-submenu::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 6px;
+      vertical-align: middle;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
       transition: transform 0.3s;
     }
 
-    .nav-links > li:hover .dropdown-arrow {
+    .nav-links > li > a.has-submenu:hover::after {
       transform: rotate(180deg);
     }
 
@@ -741,10 +748,7 @@
     <ul class="nav-links">
       <li><a href="index.html">首页</a></li>
       <li>
-        <a href="products.html">产品中心</a>
-      <li>
-        <a href="innovation.html">研发创新</a>
-      </li>
+        <a href="products.html" class="has-submenu">产品中心</a>
         <ul class="sub-menu">
           <li><a href="solutions.html">解决方案</a></li>
           <li>
@@ -757,7 +761,7 @@
                     <div class="product-group-title">机械灌注</div>
                     <a href="machine-perfusion.html" class="product-item">LifePort®肾脏灌注转运箱</a>
                     <a href="liver-perfusion.html" class="product-item">LifePort®肝脏灌注转运箱</a>
-                    <a href="liver-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title">静态冷藏</div>
@@ -806,8 +810,9 @@
           </li>
         </ul>
       </li>
+      <li><a href="innovation.html">研发创新</a></li>
       <li>
-        <a href="research.html" class="active">用户服务</a>
+        <a href="research.html" class="active has-submenu">用户服务</a>
         <ul class="sub-menu">
           <li><a href="operation-videos.html">操作视频</a></li>
           <li><a href="research.html#training">培训视频</a></li>
@@ -829,9 +834,6 @@
     <a href="index.html" onclick="closeMenu()">首页</a>
     <a href="products.html" onclick="closeMenu()">产品中心</a>
     <a href="innovation.html" onclick="closeMenu()">研发创新</a>
-      <li>
-        <a href="innovation.html">研发创新</a>
-      </li>
     <a href="research.html" onclick="closeMenu()">用户服务</a>
     <a href="patients.html" onclick="closeMenu()">关爱患者</a>
     <a href="talent.html" onclick="closeMenu()">人才中心</a>

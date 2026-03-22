@@ -310,14 +310,21 @@
       background: rgba(91, 143, 249, 0.05);
     }
 
-    .dropdown-arrow {
-      width: 12px;
-      height: 12px;
-      margin-left: 4px;
+    /* Dropdown arrow using CSS */
+    .nav-links > li > a.has-submenu::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 6px;
+      vertical-align: middle;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
       transition: transform 0.3s;
     }
 
-    .nav-links > li:hover .dropdown-arrow {
+    .nav-links > li > a.has-submenu:hover::after {
       transform: rotate(180deg);
     }
 
@@ -599,10 +606,7 @@
     <ul class="nav-links">
       <li><a href="index.html">首页</a></li>
       <li>
-        <a href="products.html" class="active">
-          产品中心
-          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
-        </a>
+        <a href="products.html" class="active has-submenu">产品中心</a>
         <ul class="sub-menu">
           <li><a href="solutions.html">解决方案</a></li>
           <li>
@@ -665,7 +669,7 @@
         </ul>
       </li>
       <li>
-        <a href="research.html">用户服务</a>
+        <a href="research.html" class="has-submenu">用户服务</a>
         <ul class="sub-menu">
           <li><a href="operation-videos.html">操作视频</a></li>
           <li><a href="research.html#training">培训视频</a></li>
@@ -674,10 +678,7 @@
       </li>
       <li><a href="patients.html">关爱患者</a></li>
       <li>
-        <a href="talent.html">
-          人才中心
-          <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M2.5 4.5L6 8l3.5-3.5"/></svg>
-        </a>
+        <a href="talent.html" class="has-submenu">人才中心</a>
         <ul class="sub-menu">
           <li><a href="#">社会招聘</a></li>
           <li><a href="#">校园招聘</a></li>
