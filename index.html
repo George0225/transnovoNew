@@ -444,6 +444,49 @@
       margin-bottom: 24px;
     }
 
+    /* 全球覆盖网络 */
+    .global-coverage {
+      margin-bottom: 32px;
+      padding: 24px;
+      background: rgba(91, 143, 249, 0.1);
+      border-radius: 16px;
+      border: 1px solid rgba(91, 143, 249, 0.2);
+    }
+
+    .coverage-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .coverage-region {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .region-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tech-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .region-list {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
     /* 移动端汉堡菜单按钮 */
     .nav-toggle {
       display: none;
@@ -1065,6 +1108,7 @@
       .video-content p { font-size: 16px; }
       .section-inner { grid-template-columns: 1fr; gap: 32px; }
       .section-image { order: -1; }
+      .coverage-grid { grid-template-columns: 1fr; }
 
       /* 移动端 hero 调整 */
       .slogan-logo { height: clamp(50px, 15vw, 100px); }
@@ -1401,9 +1445,39 @@
         </div>
       </div>
 
+      <div class="global-coverage">
+        <div class="coverage-title">全球销售网络 — 覆盖 49+ 国家</div>
+        <div class="coverage-grid">
+          <div class="coverage-region">
+            <span class="region-name">亚洲</span>
+            <span class="region-list">中国、菲律宾、泰国、新加坡、印度、韩国</span>
+          </div>
+          <div class="coverage-region">
+            <span class="region-name">欧洲</span>
+            <span class="region-list">奥地利、比利时、丹麦、法国、德国、爱尔兰、意大利、荷兰、挪威、波兰、葡萄牙、西班牙、瑞典、瑞士、土耳其等</span>
+          </div>
+          <div class="coverage-region">
+            <span class="region-name">北美洲</span>
+            <span class="region-list">美国、加拿大、巴拿马</span>
+          </div>
+          <div class="coverage-region">
+            <span class="region-name">南美洲</span>
+            <span class="region-list">巴西、阿根廷、智利、墨西哥、秘鲁、哥伦比亚</span>
+          </div>
+          <div class="coverage-region">
+            <span class="region-name">中东</span>
+            <span class="region-list">以色列、沙特阿拉伯、阿联酋</span>
+          </div>
+          <div class="coverage-region">
+            <span class="region-name">大洋洲</span>
+            <span class="region-list">澳大利亚</span>
+          </div>
+        </div>
+      </div>
+
       <p class="global-desc">
         健耕医药已建立覆盖全球的销售和服务网络，
-        产品远销全球多个国家和地区，服务超过数百家移植中心。
+        产品远销全球 49 个国家和地区，服务超过数百家移植中心。
       </p>
       <p class="global-desc">
         公司与全球领先的器官移植中心、医疗机构和研究实验室建立了长期合作关系，
