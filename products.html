@@ -238,12 +238,28 @@
       visibility: hidden;
       transform: translateX(10px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      white-space: nowrap;
     }
 
     .nav-links .sub-menu li:hover > .sub-menu-2 {
       opacity: 1;
       visibility: visible;
       transform: translateX(0);
+    }
+
+    .nav-links .sub-menu-2 li > a {
+      padding: 12px 20px;
+      display: block;
+      color: var(--text-primary);
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links .sub-menu-2 li > a:hover {
+      color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.08);
     }
 
     .nav-links .sub-menu li > a.has-submenu::after {
@@ -263,7 +279,8 @@
       position: absolute;
       left: 100%;
       top: 0;
-      min-width: 260px;
+      min-width: 280px;
+      max-width: 320px;
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -273,6 +290,7 @@
       visibility: hidden;
       transform: translateX(10px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      white-space: nowrap;
     }
 
     .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
@@ -287,6 +305,14 @@
       line-height: 1;
       margin-left: 8px;
       color: currentColor;
+    }
+
+    .sub-menu-3 {
+      padding: 12px 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
 
     .sub-menu-3 .product-group-title {
@@ -308,7 +334,9 @@
       font-size: 13px;
       color: var(--text-secondary);
       transition: all 0.2s;
+      display: block;
       list-style: none;
+      white-space: nowrap;
     }
 
     .sub-menu-3 .product-item:hover {
