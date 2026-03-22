@@ -985,11 +985,11 @@
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo" onclick="window.location.href='index.html'; return false;">
+    <a href="index.html" class="nav-logo" onclick="window.location.replace('index.html'); return false;">
       <img src="images/logo.png" alt="tranSnovo" />
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" onclick="window.location.reload(); return false;">首页</a></li>
+      <li><a href="index.html" onclick="window.location.replace('index.html'); return false;">首页</a></li>
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
@@ -1077,7 +1077,7 @@
 <!-- 移动端导航面板 -->
 <div class="mobile-nav-panel" id="mobileNavPanel">
   <ul class="mobile-nav-links">
-    <li><a href="index.html" onclick="window.location.reload(); return false;">首页</a></li>
+    <li><a href="index.html" onclick="window.location.replace('index.html'); return false;">首页</a></li>
     <li>
       <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-products')">
         <a href="products.html">产品中心</a>
@@ -1478,31 +1478,6 @@
   });
 
   // =============================================
-  // 页面从缓存恢复时重置状态（修复点击 logo/首页后仍保持解锁状态）
-  // =============================================
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) {
-      // 页面从 bfcache 恢复，强制重置所有状态
-      isUnlocked = false;
-      scrollAccumulator = 0;
-      heroScale = 1;
-      heroOpacity = 1;
-      canvasOpacity = 0.8;
-
-      document.body.classList.add('locked');
-      if (hero) hero.classList.remove('hidden');
-      if (heroContent) {
-        heroContent.style.transition = 'none';
-        heroContent.style.transform = 'scale(1)';
-        heroContent.style.opacity = '1';
-      }
-      const nav = document.getElementById('nav');
-      if (nav) nav.classList.remove('visible');
-      window.scrollTo(0, 0);
-    }
-  });
-
-  // =============================================
   // 滚动解锁逻辑 (Genentech 风格 - 双向滚动)
   // =============================================
   const hero = document.getElementById('hero');
@@ -1859,6 +1834,16 @@
       window.isNearTop = true;
     } else {
       window.isNearTop = false;
+    }
+  });
+
+  // =============================================
+  // 页面从缓存恢复时重置状态（修复点击 logo/首页后仍保持解锁状态）
+  // =============================================
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      // 页面从 bfcache 恢复，强制重新加载
+      window.location.reload();
     }
   });
 
