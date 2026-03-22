@@ -136,7 +136,7 @@
       transform: rotate(180deg);
     }
 
-    .nav-links .sub-menu {
+    .nav-links > li > ul.sub-menu {
       position: absolute;
       top: 100%;
       left: 50%;
@@ -146,7 +146,7 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px 0;
-      list-style: none;
+      list-style: none !important;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -159,7 +159,7 @@
       position: relative;
     }
 
-    .nav-links > li:hover > .sub-menu {
+    .nav-links > li:hover > ul.sub-menu {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
