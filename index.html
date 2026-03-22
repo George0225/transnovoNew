@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>tranSnovo 健耕医药 — 为生命重塑未来</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -985,11 +988,11 @@
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo" onclick="window.location.replace('index.html'); return false;">
+    <a href="#" class="nav-logo" id="logoLink">
       <img src="images/logo.png" alt="tranSnovo" />
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" onclick="window.location.replace('index.html'); return false;">首页</a></li>
+      <li><a href="#" id="homeLink">首页</a></li>
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
@@ -1487,10 +1490,11 @@
 
   let isUnlocked = false;
   let scrollAccumulator = 0;
-  const UNLOCK_THRESHOLD = 500; // 需要累积滚动多少像素才解锁
+  const UNLOCK_THRESHOLD = 500;
   let heroScale = 1;
   let heroOpacity = 1;
   let canvasOpacity = 0.8;
+  let unlockTimeoutId = null;
 
   // 监听鼠标滚轮 - 双向滚动
   window.addEventListener('wheel', (e) => {
@@ -1599,7 +1603,7 @@
     }
 
     // 稍后移除锁定类，让过渡完成
-    setTimeout(() => {
+    unlockTimeoutId = setTimeout(() => {
       document.body.classList.remove('locked');
       if (hero) {
         hero.classList.add('hidden');
@@ -1609,6 +1613,12 @@
   }
 
   function relockPage() {
+    // 清除解锁定时器，防止竞争条件
+    if (unlockTimeoutId) {
+      clearTimeout(unlockTimeoutId);
+      unlockTimeoutId = null;
+    }
+
     isUnlocked = false;
     scrollAccumulator = 0;
 
@@ -1838,19 +1848,22 @@
   });
 
   // =============================================
-  // 页面从缓存恢复时重置状态（修复点击 logo/首页后仍保持解锁状态）
-  // =============================================
-  window.addEventListener('pageshow', (e) => {
-    if (e.persisted) {
-      // 页面从 bfcache 恢复，强制重新加载
-      window.location.reload();
-    }
-  });
-
-  // =============================================
-  // 页面加载时初始化状态
+  // 页面加载时强制初始化状态
   // =============================================
   relockPage();
+
+  // =============================================
+  // Logo 和首页链接点击强制刷新页面
+  // =============================================
+  document.getElementById('logoLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'index.html';
+  });
+
+  document.getElementById('homeLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = 'index.html';
+  });
 </script>
 
 </body>
