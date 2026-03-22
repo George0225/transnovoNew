@@ -3,9 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <title>tranSnovo 健耕医药 — 为生命重塑未来</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -988,11 +985,11 @@
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo" id="logoLink">
+    <a href="home.html" class="nav-logo" id="logoLink">
       <img src="images/logo.png" alt="tranSnovo" />
     </a>
     <ul class="nav-links">
-      <li><a href="#" id="homeLink">首页</a></li>
+      <li><a href="home.html" id="homeLink">首页</a></li>
       <li>
         <a href="products.html">产品中心</a>
         <ul class="sub-menu">
@@ -1080,7 +1077,7 @@
 <!-- 移动端导航面板 -->
 <div class="mobile-nav-panel" id="mobileNavPanel">
   <ul class="mobile-nav-links">
-    <li><a href="index.html" onclick="window.location.replace('index.html'); return false;">首页</a></li>
+    <li><a href="home.html">首页</a></li>
     <li>
       <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-products')">
         <a href="products.html">产品中心</a>
@@ -1851,19 +1848,6 @@
   // 页面加载时强制初始化状态
   // =============================================
   relockPage();
-
-  // =============================================
-  // Logo 和首页链接点击强制刷新页面
-  // =============================================
-  document.getElementById('logoLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.location.href = 'index.html';
-  });
-
-  document.getElementById('homeLink').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.location.href = 'index.html';
-  });
 </script>
 
 </body>
