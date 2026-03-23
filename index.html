@@ -1224,27 +1224,27 @@
       font-weight: 600;
     }
 
-    /* 核心价值 - 现代卡片设计 */
+    /* 核心价值 - 环形布局设计 */
     .core-values {
-      max-width: 1400px;
-      margin: 60px auto 0;
+      max-width: 1200px;
+      margin: 40px auto 0;
       padding: 0 24px;
     }
 
     .core-values-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
       position: relative;
     }
 
     .core-values-title {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.02em;
       display: inline-block;
       position: relative;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
     }
 
     .core-values-title::after {
@@ -1253,120 +1253,207 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 60px;
       height: 3px;
       background: linear-gradient(90deg, var(--primary-500), var(--primary-400));
       border-radius: 2px;
     }
 
     .core-values-subtitle {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-secondary);
       letter-spacing: 0.25em;
-      margin-top: 12px;
+      margin-top: 10px;
       text-transform: uppercase;
     }
 
-    .core-values-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
+    /* 环形容器 */
+    .core-values-ring {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16/10;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    /* 中心圆 - 品牌核心 */
+    .core-center-circle {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 8px 40px rgba(26, 89, 224, 0.35), inset 0 2px 10px rgba(255,255,255,0.2);
+      z-index: 10;
+      animation: centerPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes centerPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 8px 40px rgba(26, 89, 224, 0.35), inset 0 2px 10px rgba(255,255,255,0.2); }
+      50% { transform: scale(1.02); box-shadow: 0 12px 50px rgba(26, 89, 224, 0.45), inset 0 2px 10px rgba(255,255,255,0.2); }
+    }
+
+    .core-center-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .core-center-icon {
+      font-size: 28px;
+      margin-bottom: 4px;
+      opacity: 0.9;
+    }
+
+    /* 外环 - 装饰性圆环 */
+    .core-outer-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--primary-100);
+      border-radius: 50%;
+      animation: ringRotate 30s linear infinite;
+    }
+
+    .core-outer-ring::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border: 1px dashed var(--primary-200);
+      border-radius: 50%;
+      animation: ringRotate 25s linear infinite reverse;
+    }
+
+    @keyframes ringRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* 核心价值项 - 环绕分布 */
     .core-value-item {
-      position: relative;
-      padding: 40px 24px 28px;
+      position: absolute;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
       background: #fff;
-      border-radius: 16px;
-      border: 1px solid var(--slate-100);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 14px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 2px solid var(--slate-100);
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      overflow: hidden;
+      cursor: pointer;
     }
 
     .core-value-item::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-500), var(--primary-400), var(--primary-500));
-      transform: scaleX(0);
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .core-value-item:hover::before {
-      transform: scaleX(1);
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--primary-500), var(--accent-500), var(--primary-500));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
     }
 
     .core-value-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 40px rgba(26, 89, 224, 0.15), 0 4px 12px rgba(0, 0, 0, 0.06);
-      border-color: var(--primary-200);
+      transform: scale(1.08);
+      box-shadow: 0 12px 40px rgba(26, 89, 224, 0.25);
+      border-color: transparent;
+      z-index: 5;
     }
 
-    .core-value-bg-icon {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      font-size: 64px;
-      font-weight: 300;
-      color: var(--slate-50);
-      transition: all 0.4s ease;
-      line-height: 1;
-      opacity: 0.5;
-    }
-
-    .core-value-item:hover .core-value-bg-icon {
-      color: var(--primary-100);
-      transform: scale(1.1) rotate(15deg);
+    .core-value-item:hover::before {
       opacity: 1;
     }
 
-    .core-value-content {
-      position: relative;
-      z-index: 1;
+    .core-value-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: var(--primary-500);
+      transition: transform 0.3s ease;
+    }
+
+    .core-value-item:hover .core-value-icon {
+      transform: scale(1.2) rotate(10deg);
     }
 
     .core-value-name {
-      font-size: 19px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 2px;
     }
 
     .core-value-desc {
-      font-size: 10px;
+      font-size: 8px;
       color: var(--text-secondary);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       font-weight: 600;
-      line-height: 1.6;
     }
 
-    /* 发展历程 - 纵向线性时间线设计 */
+    /* 连接线 - 从中心辐射到各个价值点 */
+    .core-connector {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-200), transparent);
+      transform-origin: center;
+      pointer-events: none;
+    }
+
+    /* 装饰性光晕 */
+    .core-glow {
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(ellipse at center, rgba(26, 89, 224, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.5; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    /* 发展历程 - 紧凑横向时间线设计 */
     .development-history {
-      margin-top: 80px;
+      margin-top: 60px;
       padding: 0 24px;
     }
 
     .history-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 50px;
       position: relative;
     }
 
     .history-title {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.02em;
       display: inline-block;
       position: relative;
-      padding-bottom: 12px;
+      padding-bottom: 10px;
     }
 
     .history-title::after {
@@ -1375,235 +1462,275 @@
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 80px;
+      width: 60px;
       height: 3px;
       background: linear-gradient(90deg, var(--primary-500), var(--primary-400));
       border-radius: 2px;
     }
 
     .history-subtitle {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--text-secondary);
       letter-spacing: 0.25em;
-      margin-top: 12px;
+      margin-top: 10px;
       text-transform: uppercase;
     }
 
-    /* 纵向时间线容器 */
-    .timeline-container {
+    /* 横向时间线容器 */
+    .timeline-horizontal {
       position: relative;
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 0;
-    }
-
-    /* 中央垂直线 */
-    .timeline-line {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(180deg, var(--primary-500) 0%, var(--primary-300) 100%);
-      transform: translateX(-50%);
-    }
-
-    /* 时间线节点项 */
-    .timeline-item {
-      position: relative;
+      padding: 30px 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 60px;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: timeline-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      align-items: flex-start;
+      justify-content: space-between;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-300) var(--slate-100);
     }
 
-    @keyframes timeline-reveal {
+    .timeline-horizontal::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .timeline-horizontal::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .timeline-horizontal::-webkit-scrollbar-thumb {
+      background: var(--primary-300);
+      border-radius: 3px;
+    }
+
+    /* 顶部时间轴线 */
+    .timeline-axis {
+      position: absolute;
+      top: 20px;
+      left: 50px;
+      right: 50px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-200) 0%, var(--primary-500) 50%, var(--primary-200) 100%);
+      border-radius: 2px;
+    }
+
+    /* 时间线节点 */
+    .timeline-h-item {
+      position: relative;
+      flex: 0 0 auto;
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: timelineH-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      cursor: pointer;
+    }
+
+    @keyframes timelineH-reveal {
       to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
-    /* 奇数项在左，偶数项在右 */
-    .timeline-item:nth-child(odd) {
-      justify-content: flex-start;
-      padding-right: 55%;
-    }
-
-    .timeline-item:nth-child(even) {
-      justify-content: flex-end;
-      padding-left: 55%;
-    }
-
-    /* 最后一个元素去掉 margin */
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
     /* 节点圆点 */
-    .timeline-dot {
+    .timeline-h-dot {
       position: absolute;
-      left: 50%;
-      width: 16px;
-      height: 16px;
+      top: 14px;
+      width: 14px;
+      height: 14px;
       background: #fff;
       border: 3px solid var(--primary-500);
       border-radius: 50%;
-      transform: translateX(-50%) scale(1);
       transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 2;
       box-shadow: 0 0 0 4px rgba(26, 89, 224, 0.1);
     }
 
-    .timeline-item:hover .timeline-dot {
-      transform: translateX(-50%) scale(1.3);
+    .timeline-h-item:hover .timeline-h-dot {
+      transform: scale(1.25);
       box-shadow: 0 0 0 8px rgba(26, 89, 224, 0.15);
+      background: var(--primary-500);
     }
 
-    /* 时间线内容卡片 */
-    .timeline-content-wrapper {
-      position: relative;
+    /* 年份 */
+    .timeline-h-year {
+      margin-top: 35px;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary-600);
       background: #fff;
-      padding: 24px 28px;
-      border-radius: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       border: 1px solid var(--slate-100);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      max-width: 420px;
-      width: 100%;
+      transition: all 0.3s ease;
+      z-index: 3;
     }
 
-    .timeline-item:hover .timeline-content-wrapper {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(26, 89, 224, 0.15);
+    .timeline-h-item:hover .timeline-h-year {
+      background: var(--primary-500);
+      color: #fff;
+      border-color: var(--primary-500);
+      transform: scale(1.05);
+    }
+
+    /* 内容卡片 */
+    .timeline-h-content {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--slate-100);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0;
+      transform: scale(0.9);
+      animation: timelineH-content 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    }
+
+    @keyframes timelineH-content {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .timeline-h-item:hover .timeline-h-content {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 24px rgba(26, 89, 224, 0.15);
       border-color: var(--primary-200);
     }
 
-    /* 奇数项内容在右 */
-    .timeline-item:nth-child(odd) .timeline-content-wrapper {
-      margin-left: auto;
-    }
-
-    /* 奇数项内容在左 */
-    .timeline-item:nth-child(even) .timeline-content-wrapper {
-      margin-right: auto;
-    }
-
-    /* 连接线 */
-    .timeline-connector {
-      position: absolute;
-      top: 50%;
-      width: 40px;
-      height: 1px;
-      background: var(--primary-300);
-      transform: translateY(-50%);
-    }
-
-    .timeline-item:nth-child(odd) .timeline-connector {
-      right: 50%;
-      margin-right: 8px;
-    }
-
-    .timeline-item:nth-child(even) .timeline-connector {
-      left: 50%;
-      margin-left: 8px;
-    }
-
-    .timeline-year {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--primary-500);
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-
-    .timeline-content {
-      font-size: 14px;
+    .timeline-h-text {
+      font-size: 11px;
       color: var(--text-secondary);
-      line-height: 1.8;
+      line-height: 1.6;
     }
 
-    /* 产品中心网格 - 精致医疗器材展示 */
+    /* 高亮年份（重要里程碑） */
+    .timeline-h-item.highlight .timeline-h-year {
+      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+      color: #fff;
+      border-color: transparent;
+      font-size: 18px;
+    }
+
+    /* 产品中心网格 - 创意医疗器材展示 */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 16px;
       margin-top: 40px;
     }
 
     .product-card {
       position: relative;
-      border-radius: 8px;
+      border-radius: 16px;
       overflow: hidden;
       aspect-ratio: 3/4;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
       background: #fff;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
-      border: 1px solid var(--slate-150, #e5e7eb);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--slate-100);
+      cursor: pointer;
     }
 
-    /* 精致双色边框 */
+    /* 渐变边框效果 */
     .product-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 8px;
-      padding: 1px;
-      background: linear-gradient(180deg, var(--slate-200) 0%, var(--slate-100) 100%);
+      border-radius: 16px;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--primary-200), var(--slate-200), var(--primary-200));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
+      opacity: 0.5;
+      transition: opacity 0.4s ease;
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    /* 顶部装饰条 */
+    .product-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-500), var(--accent-500), var(--primary-500));
+      transform: scaleX(0);
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .product-card:hover::after {
+      transform: scaleX(1);
     }
 
     .product-card:hover {
-      box-shadow: 0 12px 35px rgba(26, 89, 224, 0.15), 0 4px 15px rgba(0, 0, 0, 0.05);
-      transform: translateY(-6px);
-      border-color: var(--primary-400);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(26, 89, 224, 0.2), 0 8px 24px rgba(0, 0, 0, 0.08);
+      border-color: var(--primary-300);
     }
 
     .product-card-image-wrapper {
       position: relative;
       width: 100%;
-      height: 72%;
+      height: 70%;
       overflow: hidden;
-      background: #fff;
+      background: linear-gradient(180deg, var(--slate-50) 0%, #fff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .product-card-image-wrapper:empty {
-      background: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-100) 100%);
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--slate-100) 100%);
     }
 
     .product-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 85%;
+      height: 85%;
+      object-fit: contain;
       object-position: center;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
     }
 
     .product-card:hover img {
-      transform: scale(1.06);
+      transform: scale(1.08) translateY(-5px);
+      filter: drop-shadow(0 12px 24px rgba(26, 89, 224, 0.2));
     }
 
-    /* 进入产品中心链接 */
-    .section-more-link {
-      display: inline-block;
-      font-size: 14px;
-      color: var(--primary-600);
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
+    /* 装饰性背景元素 */
+    .product-bg-circle {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle at center, rgba(26, 89, 224, 0.06) 0%, transparent 60%);
+      border-radius: 50%;
+      animation: productBgPulse 4s ease-in-out infinite;
+      pointer-events: none;
     }
 
-    .section-more-link:hover {
-      color: var(--primary-700);
-      text-decoration: underline;
+    @keyframes productBgPulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
     }
 
     .product-card-overlay {
@@ -1611,11 +1738,9 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 16px 18px 14px;
-      background: linear-gradient(transparent, rgba(255, 255, 255, 0.95));
-      color: var(--text-primary);
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      border-top: 1px solid var(--slate-50);
+      padding: 18px 20px;
+      background: linear-gradient(transparent, rgba(255, 255, 255, 0.98));
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .product-card-name {
@@ -1624,31 +1749,53 @@
       color: var(--text-primary);
       margin-bottom: 4px;
       letter-spacing: -0.01em;
+      transition: color 0.3s ease;
+    }
+
+    .product-card:hover .product-card-name {
+      color: var(--primary-600);
     }
 
     .product-card-desc {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-secondary);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       font-weight: 600;
     }
 
-    /* 顶部蓝色强调条 */
-    .product-card::after {
-      content: '';
+    /* 悬停时的箭头指示器 */
+    .product-arrow {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-500), var(--primary-400), var(--primary-500));
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 50px;
+      height: 50px;
+      background: rgba(26, 89, 224, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
     }
 
-    .product-card:hover::after {
-      transform: scaleX(1);
+    .product-arrow::before {
+      content: '→';
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .product-card:hover .product-arrow {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .product-card-image-wrapper:hover .product-arrow {
+      opacity: 0;
     }
 
     /* 视频章节 - 这是唯一的 Hero 视频 */
@@ -1804,7 +1951,16 @@
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
       .coverage-grid { grid-template-columns: repeat(2, 1fr); }
-      .core-values-grid { grid-template-columns: repeat(3, 1fr); }
+      .core-values-ring { max-width: 700px; }
+      .core-value-item { width: 110px; height: 110px; }
+      .core-center-circle { width: 110px; height: 110px; }
+      .core-center-text { font-size: 10px; }
+      .core-center-icon { font-size: 24px; }
+      .core-value-name { font-size: 12px; }
+      .core-value-desc { font-size: 8px; }
+      .timeline-h-item { width: 90px; }
+      .timeline-h-content { min-height: 60px; padding: 10px; }
+      .timeline-h-text { font-size: 10px; }
     }
 
     @media (max-width: 992px) {
@@ -1812,6 +1968,9 @@
       .nav-toggle { display: flex; }
       .nav-inner { padding: 0 20px; }
       .coverage-grid { grid-template-columns: 1fr; }
+      .core-values-ring { max-width: 600px; }
+      .core-value-item { width: 100px; height: 100px; }
+      .core-center-circle { width: 100px; height: 100px; }
     }
 
     @media (max-width: 768px) {
@@ -1841,47 +2000,61 @@
       .office-item { flex-direction: column; align-items: flex-start; gap: 8px; }
       .office-list { gap: 8px; }
 
-      /* 核心价值移动端适配 */
+      /* 核心价值移动端适配 - 环形变通垂直布局 */
       .core-values { margin-top: 40px; }
       .core-values-header { margin-bottom: 32px; }
       .core-values-title { font-size: 24px; }
       .core-values-subtitle { font-size: 11px; }
-      .core-values-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .core-value-item { padding: 28px 16px 20px; }
-      .core-value-name { font-size: 15px; }
+      .core-values-ring {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+        max-width: 100%;
+        aspect-ratio: auto;
+        padding: 20px 0;
+      }
+      .core-outer-ring { display: none; }
+      .core-glow { display: none; }
+      .core-center-circle {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        order: -1;
+      }
+      .core-center-text { font-size: 9px; }
+      .core-center-icon { font-size: 20px; }
+      .core-value-item {
+        position: relative;
+        width: 90%;
+        max-width: 320px;
+        height: auto;
+        min-height: 70px;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 16px;
+        padding: 16px 20px;
+        left: auto !important;
+        top: auto !important;
+        text-align: left;
+      }
+      .core-value-icon { font-size: 20px; margin-bottom: 0; }
+      .core-value-name { font-size: 14px; }
       .core-value-desc { font-size: 9px; }
-      .core-value-bg-icon { font-size: 42px; top: 12px; right: 12px; }
 
-      /* 发展历程移动端适配 - 纵向时间线 */
-      .development-history { margin-top: 60px; }
-      .history-header { margin-bottom: 40px; }
-      .history-title { font-size: 24px; }
-      .history-subtitle { font-size: 11px; }
-      .timeline-container { padding: 20px 0; }
-      .timeline-line { left: 20px; }
-      .timeline-item:nth-child(odd),
-      .timeline-item:nth-child(even) {
-        justify-content: flex-end;
-        padding-left: 60px;
-        padding-right: 0;
-      }
-      .timeline-dot { left: 20px; }
-      .timeline-connector {
-        width: 20px;
-        left: 36px !important;
-        right: auto !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-      }
-      .timeline-item:nth-child(odd) .timeline-content-wrapper {
-        margin-left: 0;
-      }
-      .timeline-item:nth-child(even) .timeline-content-wrapper {
-        margin-right: 0;
-      }
-      .timeline-year { font-size: 22px; }
-      .timeline-content { font-size: 12px; }
-      .timeline-content-wrapper { padding: 18px 20px; }
+      /* 发展历程移动端适配 - 横向时间线 */
+      .development-history { margin-top: 50px; }
+      .history-header { margin-bottom: 36px; }
+      .history-title { font-size: 22px; }
+      .history-subtitle { font-size: 10px; }
+      .timeline-horizontal { padding: 40px 20px 20px; }
+      .timeline-axis { top: 15px; left: 70px; right: 20px; }
+      .timeline-h-item { width: 85px; }
+      .timeline-h-year { font-size: 14px; margin-top: 30px; }
+      .timeline-h-content { min-height: 55px; padding: 10px 12px; }
+      .timeline-h-text { font-size: 10px; }
+      .timeline-h-dot { top: 9px; width: 12px; height: 12px; }
 
       /* 修复移动端视频 section 露出问题 */
       body.locked .video-section {
@@ -1895,19 +2068,22 @@
       .stat-number { font-size: 32px; }
       .stat-label { font-size: 11px; }
       .content-section { padding: 60px 16px; }
-      .core-values-grid { grid-template-columns: 1fr; }
-      .core-value-item { padding: 24px 18px 18px; }
-      .core-value-bg-icon { font-size: 36px; }
-      /* 纵向时间线超移动端适配 */
-      .timeline-line { left: 14px; }
-      .timeline-item:nth-child(odd),
-      .timeline-item:nth-child(even) {
-        padding-left: 44px;
-      }
-      .timeline-dot { left: 14px; width: 12px; height: 12px; }
-      .timeline-connector { width: 14px; left: 26px !important; }
-      .timeline-year { font-size: 20px; }
-      .timeline-content-wrapper { padding: 14px 16px; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+
+      /* 核心价值超移动端 */
+      .core-value-item { padding: 14px 16px; }
+      .core-value-icon { font-size: 18px; }
+      .core-value-name { font-size: 13px; }
+      .core-center-circle { width: 70px; height: 70px; }
+
+      /* 横向时间线超移动端适配 */
+      .timeline-horizontal { padding: 35px 15px 15px; }
+      .timeline-axis { top: 12px; left: 60px; }
+      .timeline-h-item { width: 75px; }
+      .timeline-h-year { font-size: 13px; padding: 3px 8px; }
+      .timeline-h-content { min-height: 50px; padding: 8px 10px; }
+      .timeline-h-text { font-size: 9px; }
+      .timeline-h-dot { width: 10px; height: 10px; }
     }
   </style>
 </head>
@@ -2157,137 +2333,127 @@
 
 <!-- CORE VALUES SECTION -->
 <section class="content-section section-white" id="section-core-values">
-  <!-- 核心价值 -->
+  <!-- 核心价值 - 环形布局 -->
   <div class="core-values">
     <div class="core-values-header">
       <h3 class="core-values-title">核心价值</h3>
       <p class="core-values-subtitle">CORE VALUES</p>
     </div>
-    <div class="core-values-grid">
-      <div class="core-value-item">
-        <div class="core-value-bg-icon">❖</div>
-        <div class="core-value-content">
-          <h4 class="core-value-name">专注移植</h4>
-          <p class="core-value-desc">COMMITMENT TO TX</p>
-        </div>
+    <div class="core-values-ring">
+      <!-- 装饰性外环 -->
+      <div class="core-outer-ring"></div>
+      <!-- 中心光晕 -->
+      <div class="core-glow"></div>
+      <!-- 中心圆 -->
+      <div class="core-center-circle">
+        <div class="core-center-icon">✦</div>
+        <div class="core-center-text">Core<br/>Values</div>
       </div>
-      <div class="core-value-item">
-        <div class="core-value-bg-icon">❖</div>
-        <div class="core-value-content">
-          <h4 class="core-value-name">精益求精</h4>
-          <p class="core-value-desc">PURSUIT FOR EXCELLENCE</p>
-        </div>
+      <!-- 核心价值项 - 使用 CSS 变量定位 -->
+      <div class="core-value-item" style="--angle: 0deg;">
+        <div class="core-value-icon">◈</div>
+        <div class="core-value-name">专注移植</div>
+        <div class="core-value-desc">COMMITMENT TO TX</div>
       </div>
-      <div class="core-value-item">
-        <div class="core-value-bg-icon">❖</div>
-        <div class="core-value-content">
-          <h4 class="core-value-name">以人为本</h4>
-          <p class="core-value-desc">CARE FOR PEOPLE</p>
-        </div>
+      <div class="core-value-item" style="--angle: 72deg;">
+        <div class="core-value-icon">◆</div>
+        <div class="core-value-name">精益求精</div>
+        <div class="core-value-desc">PURSUIT FOR EXCELLENCE</div>
       </div>
-      <div class="core-value-item">
-        <div class="core-value-bg-icon">❖</div>
-        <div class="core-value-content">
-          <h4 class="core-value-name">持续创新</h4>
-          <p class="core-value-desc">NEVER STOP INNOVATION</p>
-        </div>
+      <div class="core-value-item" style="--angle: 144deg;">
+        <div class="core-value-icon">❖</div>
+        <div class="core-value-name">以人为本</div>
+        <div class="core-value-desc">CARE FOR PEOPLE</div>
       </div>
-      <div class="core-value-item">
-        <div class="core-value-bg-icon">❖</div>
-        <div class="core-value-content">
-          <h4 class="core-value-name">敬畏生命</h4>
-          <p class="core-value-desc">REVERENCE FOR LIFE</p>
-        </div>
+      <div class="core-value-item" style="--angle: 216deg;">
+        <div class="core-value-icon">◇</div>
+        <div class="core-value-name">持续创新</div>
+        <div class="core-value-desc">NEVER STOP INNOVATION</div>
+      </div>
+      <div class="core-value-item" style="--angle: 288deg;">
+        <div class="core-value-icon">☆</div>
+        <div class="core-value-name">敬畏生命</div>
+        <div class="core-value-desc">REVERENCE FOR LIFE</div>
       </div>
     </div>
   </div>
 
-  <!-- 发展历程 -->
+  <!-- 发展历程 - 横向时间线 -->
   <div class="development-history">
     <div class="history-header">
       <h3 class="history-title">发展历程</h3>
       <p class="history-subtitle">HISTORY</p>
     </div>
-    <div class="timeline-container">
-      <div class="timeline-line"></div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2004</div>
-          <div class="timeline-content">· 公司成立</div>
+    <div class="timeline-horizontal">
+      <div class="timeline-axis"></div>
+      <div class="timeline-h-item" style="animation-delay: 0ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2004</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">公司成立</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2005</div>
-          <div class="timeline-content">· 开展海外移植产品代理<br>· 国内移植覆盖华东市场</div>
+      <div class="timeline-h-item" style="animation-delay: 80ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2005</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">开展海外代理<br/>覆盖华东市场</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2008</div>
-          <div class="timeline-content">· 代理海正业务，扩展全国销售</div>
+      <div class="timeline-h-item" style="animation-delay: 160ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2008</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">代理海正业务<br/>扩展全国销售</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2013</div>
-          <div class="timeline-content">· 云泽移植 IVD 生产建立</div>
+      <div class="timeline-h-item" style="animation-delay: 240ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2013</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">云泽移植 IVD<br/>生产建立</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2015</div>
-          <div class="timeline-content">· 新三板上市</div>
+      <div class="timeline-h-item" style="animation-delay: 320ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2015</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">新三板上市</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2016</div>
-          <div class="timeline-content">· 完成收购 LSI<br>· 布局全球市场</div>
+      <div class="timeline-h-item highlight" style="animation-delay: 400ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2016</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">完成收购 LSI<br/>布局全球市场</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2018</div>
-          <div class="timeline-content">· 研发生产中心落地</div>
+      <div class="timeline-h-item" style="animation-delay: 480ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2018</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">研发生产中心<br/>落地</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2019</div>
-          <div class="timeline-content">· 第一个自主研发产品他克莫司测定试剂盒获得中国注册证</div>
+      <div class="timeline-h-item" style="animation-delay: 560ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2019</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">首个自研产品<br/>获中国注册证</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2021</div>
-          <div class="timeline-content">· TDM 全产品获 CE 证</div>
+      <div class="timeline-h-item" style="animation-delay: 640ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2021</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">TDM 全产品<br/>获 CE 证</div>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-connector"></div>
-        <div class="timeline-content-wrapper">
-          <div class="timeline-year">2023</div>
-          <div class="timeline-content">· 他克莫司测定试剂盒完成 FDA 注册</div>
+      <div class="timeline-h-item highlight" style="animation-delay: 720ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2023</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
         </div>
       </div>
     </div>
@@ -2307,7 +2473,9 @@
     <div class="products-grid">
       <div class="product-card">
         <div class="product-card-image-wrapper">
+          <div class="product-bg-circle"></div>
           <img src="images/product-merged.png" alt="机械灌注" />
+          <div class="product-arrow"></div>
         </div>
         <div class="product-card-overlay">
           <div class="product-card-name">机械灌注</div>
@@ -2316,7 +2484,9 @@
       </div>
       <div class="product-card">
         <div class="product-card-image-wrapper">
+          <div class="product-bg-circle"></div>
           <img src="images/product-organ.png" alt="器官保存" />
+          <div class="product-arrow"></div>
         </div>
         <div class="product-card-overlay">
           <div class="product-card-name">器官保存</div>
@@ -2325,7 +2495,9 @@
       </div>
       <div class="product-card">
         <div class="product-card-image-wrapper">
+          <div class="product-bg-circle"></div>
           <img src="images/product-tdm.png" alt="药物检测" />
+          <div class="product-arrow"></div>
         </div>
         <div class="product-card-overlay">
           <div class="product-card-name">药物检测</div>
@@ -2334,6 +2506,8 @@
       </div>
       <div class="product-card">
         <div class="product-card-image-wrapper">
+          <div class="product-bg-circle"></div>
+          <div class="product-arrow"></div>
         </div>
         <div class="product-card-overlay">
           <div class="product-card-name">免疫抑制剂</div>
@@ -2954,32 +3128,59 @@
   relockPage();
 
   // =============================================
-  // 发展历程时间线滚动动画
+  // 核心价值 - 环形布局定位
+  // =============================================
+  function positionCoreValues() {
+    const ringContainer = document.querySelector('.core-values-ring');
+    if (!ringContainer) return;
+
+    const coreValueItems = ringContainer.querySelectorAll('.core-value-item');
+    const containerWidth = ringContainer.offsetWidth;
+    const containerHeight = ringContainer.offsetHeight;
+    const containerRadius = Math.min(containerWidth, containerHeight) / 2 - 75;
+
+    coreValueItems.forEach((item) => {
+      const angle = parseFloat(item.style.getPropertyValue('--angle'));
+      // -90 度起始，让第一个点在正上方
+      const radians = (angle - 90) * (Math.PI / 180);
+      const x = Math.cos(radians) * containerRadius;
+      const y = Math.sin(radians) * containerRadius;
+
+      // 使用 transform 来定位，保持响应式
+      item.style.left = '50%';
+      item.style.top = '50%';
+      item.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    positionCoreValues();
+    // 窗口大小改变时重新定位
+    window.addEventListener('resize', positionCoreValues);
+  });
+
+  // =============================================
+  // 发展历程 - 横向时间线滚动动画
   // =============================================
   document.addEventListener('DOMContentLoaded', () => {
-    const timelineItems = document.querySelectorAll('.timeline-item');
+    const timelineItems = document.querySelectorAll('.timeline-h-item');
 
     const observerOptions = {
       root: null,
-      rootMargin: '0px 0px -100px 0px',
+      rootMargin: '0px 0px -50px 0px',
       threshold: 0.1
     };
 
     const timelineObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
+      entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // 添加延迟让动画有交错效果
-          setTimeout(() => {
-            entry.target.style.animationPlayState = 'running';
-          }, index * 50);
+          entry.target.style.animationPlayState = 'running';
           timelineObserver.unobserve(entry.target);
         }
       });
     }, observerOptions);
 
-    timelineItems.forEach((item, index) => {
-      // 初始状态：动画暂停，每一项有不同的延迟
-      item.style.animationDelay = `${index * 80}ms`;
+    timelineItems.forEach((item) => {
       timelineObserver.observe(item);
     });
   });
