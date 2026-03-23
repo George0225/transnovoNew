@@ -563,10 +563,9 @@
     .global-offices {
       margin-bottom: 32px;
       padding: 24px;
-      background: rgba(255, 255, 255, 0.08);
+      background: linear-gradient(135deg, var(--primary-50) 0%, rgba(255, 255, 255, 0.5) 100%);
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
     }
 
     .office-item {
@@ -583,14 +582,14 @@
 
     .office-label {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--text-secondary);
       font-weight: 500;
       white-space: nowrap;
     }
 
     .office-value {
       font-size: 15px;
-      color: #fff;
+      color: var(--text-primary);
       font-weight: 600;
     }
 
@@ -608,12 +607,12 @@
       content: '·';
       position: absolute;
       right: -10px;
-      color: rgba(255, 255, 255, 0.5);
+      color: var(--slate-400);
     }
 
     .global-desc {
       font-size: 15px;
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--text-secondary);
       line-height: 1.8;
       margin-bottom: 16px;
     }
@@ -626,19 +625,17 @@
     .global-coverage {
       margin-bottom: 32px;
       padding: 28px 32px;
-      background: rgba(91, 143, 249, 0.15);
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--primary-100) 100%);
       border-radius: 16px;
-      border: 1px solid rgba(91, 143, 249, 0.3);
-      backdrop-filter: blur(10px);
+      border: 1px solid var(--primary-200);
     }
 
     .coverage-title {
       font-size: 18px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text-primary);
       margin-bottom: 24px;
       text-align: center;
-      text-shadow: 0 2px 10px rgba(91, 143, 249, 0.3);
     }
 
     .coverage-grid {
@@ -656,15 +653,14 @@
     .region-name {
       font-size: 15px;
       font-weight: 700;
-      color: var(--tech-blue);
+      color: var(--primary-600);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      text-shadow: 0 2px 8px rgba(91, 143, 249, 0.4);
     }
 
     .region-list {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--text-secondary);
       line-height: 1.7;
     }
 
@@ -813,7 +809,7 @@
       align-items: center;
       justify-content: center;
       z-index: 100;
-      background: linear-gradient(135deg, #0d1033 0%, #1a1f3a 50%, #0d1033 100%);
+      background: linear-gradient(135deg, #f8f9fb 0%, #f0f2f5 50%, #e8ebf0 100%);
       transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -841,7 +837,7 @@
       z-index: 0;
       overflow: hidden;
       background:
-        linear-gradient(135deg, rgba(13, 16, 51, 0.7) 0%, rgba(26, 31, 58, 0.5) 50%, rgba(13, 16, 51, 0.7) 100%),
+        linear-gradient(135deg, rgba(248, 249, 251, 0.85) 0%, rgba(240, 242, 245, 0.7) 50%, rgba(232, 235, 240, 0.85) 100%),
         url('images/hero-bg.png') center/cover no-repeat;
     }
 
@@ -856,21 +852,22 @@
       z-index: 10;
       text-align: center;
       will-change: transform, opacity;
+      margin-top: -20vh;
     }
 
     /* Logo 样式 */
     .slogan-logo {
-      height: clamp(60px, 12vw, 150px);
+      height: clamp(120px, 22vw, 350px);
       width: auto;
-      filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.4)) brightness(1.1);
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.1));
       transition: filter 0.3s;
     }
 
     .slogan-logo:hover {
-      filter: drop-shadow(0 8px 30px rgba(255, 255, 255, 0.6)) brightness(1.15);
+      filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.15));
     }
 
-    /* 渐变文字效果 - 医疗科技风格 */
+    /* 渐变文字效果 - 医疗科技蓝 */
     .cutout-title {
       font-size: clamp(64px, 12vw, 160px);
       font-weight: 900;
@@ -879,11 +876,11 @@
       /* 渐变填充：从左到右，蓝色 → 粉色 → 深色 */
       background: linear-gradient(
         135deg,
-        #5B8FF9 0%,
-        #7B68EE 25%,
-        #E61E6C 50%,
-        #1d1d1f 75%,
-        #1d1d1f 100%
+        #1a59e0 0%,
+        #0f3fb5 25%,
+        #0a2c85 50%,
+        #0d1033 75%,
+        #0d1033 100%
       );
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -892,7 +889,7 @@
       position: relative;
       display: inline-block;
       /* 光晕效果 */
-      filter: drop-shadow(0 0 30px rgba(91, 143, 249, 0.4));
+      filter: drop-shadow(0 4px 12px rgba(26, 89, 224, 0.3));
       animation: gradientShift 8s ease infinite;
     }
 
@@ -911,11 +908,11 @@
       height: 100%;
       background: linear-gradient(
         135deg,
-        rgba(91, 143, 249, 0.5) 0%,
-        rgba(123, 104, 238, 0.4) 25%,
-        rgba(230, 30, 108, 0.5) 50%,
-        rgba(29, 29, 31, 0.6) 75%,
-        rgba(29, 29, 31, 0.6) 100%
+        rgba(26, 89, 224, 0.4) 0%,
+        rgba(15, 63, 181, 0.3) 25%,
+        rgba(10, 44, 133, 0.4) 50%,
+        rgba(13, 16, 51, 0.5) 75%,
+        rgba(13, 16, 51, 0.5) 100%
       );
       background-size: 200% auto;
       -webkit-background-clip: text;
@@ -949,12 +946,11 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      color: rgba(255, 255, 255, 0.95);
+      color: var(--text-primary);
       z-index: 20;
       font-size: 14px;
       letter-spacing: 0.25em;
       animation: hintPulse 2s ease-in-out infinite;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
     }
 
     .scroll-hint-text {
@@ -968,16 +964,14 @@
       font-size: 16px;
       font-weight: 600;
       letter-spacing: 0.3em;
-      color: rgba(255, 255, 255, 1);
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.5);
+      color: var(--text-primary);
     }
 
     .scroll-hint-text .en {
       font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.2em;
-      color: rgba(255, 255, 255, 0.85);
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.4);
+      color: var(--text-secondary);
       text-transform: uppercase;
     }
 
@@ -989,9 +983,8 @@
     .scroll-hint svg {
       width: 28px;
       height: 28px;
-      stroke: rgba(255, 255, 255, 0.95);
+      stroke: var(--text-primary);
       stroke-width: 2.5;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
       animation: arrowBounce 1.5s ease-in-out infinite;
     }
 
@@ -1096,6 +1089,7 @@
       overflow: hidden;
       box-shadow: 0 40px 100px rgba(0,0,0,0.3);
       min-height: 500px;
+      background: #999;
     }
 
     .section-image img,
@@ -1115,6 +1109,8 @@
       display: block;
       width: 100%;
       height: 100%;
+      object-fit: cover;
+      object-position: center 5%;
     }
 
     /* 数据统计网格 */
@@ -1282,8 +1278,8 @@
 
     /* Footer */
     #footer {
-      background: var(--bg-dark);
-      color: #fff;
+      background: #ffffff;
+      color: var(--text-primary);
       padding: 80px 24px 40px;
       position: relative;
     }
@@ -1295,7 +1291,7 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--tech-blue), transparent);
+      background: linear-gradient(90deg, transparent, var(--primary-300), transparent);
     }
 
     .footer-grid {
@@ -1317,7 +1313,7 @@
 
     .footer-text {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--text-secondary);
       line-height: 1.8;
     }
 
@@ -1325,15 +1321,15 @@
       font-size: 16px;
       font-weight: 700;
       margin-bottom: 24px;
-      color: #fff;
+      color: var(--text-primary);
     }
 
     .footer-qr {
       width: 120px;
       height: 120px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
     .footer-contact li {
@@ -1341,28 +1337,28 @@
       align-items: flex-start;
       gap: 12px;
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.85);
+      color: var(--text-secondary);
       margin-bottom: 16px;
       list-style: none;
       transition: color 0.3s ease;
     }
 
     .footer-contact li:hover {
-      color: var(--tech-blue);
+      color: var(--primary-600);
     }
 
     .footer-contact li svg {
       flex-shrink: 0;
-      stroke: var(--tech-blue);
+      stroke: var(--primary-500);
     }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       padding-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid var(--border);
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.5);
+      color: var(--text-tertiary);
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -1374,7 +1370,7 @@
     }
 
     .footer-bottom a:hover {
-      color: var(--tech-blue);
+      color: var(--primary-600);
     }
 
     /* ===== RESPONSIVE ===== */
@@ -1602,7 +1598,7 @@
 
   <!-- 标题内容 -->
   <div class="hero-content" id="heroContent">
-    <img src="images/logo-final.png" alt="tranSnovo" class="slogan-logo" />
+    <img src="images/logo-en-small-text.png" alt="tranSnovo" class="slogan-logo" />
   </div>
 
   <!-- 滚动提示 -->
