@@ -1185,7 +1185,7 @@
     /* 数据统计网格 - 报刊风格 */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 32px;
       margin-top: 56px;
     }
@@ -1230,6 +1230,7 @@
       color: var(--primary-600);
       margin-bottom: 10px;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .stat-item.dark .stat-number {
@@ -1271,8 +1272,8 @@
     /* 中心圆 - 品牌核心 */
     .core-center-circle {
       position: absolute;
-      width: 120px;
-      height: 120px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
       display: flex;
@@ -1283,6 +1284,7 @@
       box-shadow: 0 8px 40px rgba(26, 89, 224, 0.35), inset 0 2px 10px rgba(255,255,255,0.2);
       z-index: 10;
       animation: centerPulse 4s ease-in-out infinite;
+      padding: 12px;
     }
 
     @keyframes centerPulse {
@@ -1291,8 +1293,27 @@
     }
 
     .core-center-icon {
-      font-size: 32px;
+      font-size: 42px;
       opacity: 0.95;
+      margin-bottom: 6px;
+    }
+
+    .core-center-text {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-align: center;
+      line-height: 1.4;
+      opacity: 0.95;
+    }
+
+    .core-center-text-en {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-top: 3px;
     }
 
     /* 外环 - 装饰性圆环 */
@@ -1324,8 +1345,8 @@
     /* 核心价值项 - 环绕分布 */
     .core-value-item {
       position: absolute;
-      width: 135px;
-      height: 135px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       background: #fff;
       display: flex;
@@ -1333,7 +1354,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 12px;
+      padding: 14px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       border: 2px solid var(--slate-100);
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1375,8 +1396,8 @@
     }
 
     .core-value-icon {
-      font-size: 22px;
-      margin-bottom: 6px;
+      font-size: 28px;
+      margin-bottom: 8px;
       color: var(--primary-500);
       transition: transform 0.3s ease;
     }
@@ -1386,15 +1407,15 @@
     }
 
     .core-value-name {
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.3;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     .core-value-desc {
-      font-size: 7px;
+      font-size: 9px;
       color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -1457,13 +1478,13 @@
     }
 
     .history-title {
-      font-size: 32px;
+      font-size: 42px;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.02em;
       display: inline-block;
       position: relative;
-      padding-bottom: 10px;
+      padding-bottom: 12px;
     }
 
     .history-title::after {
@@ -1479,11 +1500,11 @@
     }
 
     .history-subtitle {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--text-secondary);
       letter-spacing: 0.25em;
-      margin-top: 10px;
+      margin-top: 12px;
       text-transform: uppercase;
     }
 
@@ -1582,11 +1603,11 @@
     /* 年份 */
     .timeline-h-year {
       margin-top: 35px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--primary-600);
       background: #fff;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       border: 1px solid var(--slate-100);
@@ -1649,7 +1670,7 @@
     }
 
     .timeline-h-text {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-secondary);
       line-height: 1.6;
     }
@@ -1659,7 +1680,7 @@
       background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
       color: #fff;
       border-color: transparent;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     /* 产品中心网格 - 创意医疗器材展示 */
@@ -1992,15 +2013,15 @@
       .nav-inner { padding: 0 32px; }
       .section-inner { grid-template-columns: 1fr; gap: 48px; }
       .section-image { order: -1; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
       .coverage-grid { grid-template-columns: repeat(2, 1fr); }
       .core-values-ring { max-width: 700px; }
-      .core-value-item { width: 110px; height: 110px; }
-      .core-center-circle { width: 110px; height: 110px; }
-      .core-center-text { font-size: 10px; }
-      .core-center-icon { font-size: 24px; }
+      .core-value-item { width: 130px; height: 130px; }
+      .core-center-circle { width: 130px; height: 130px; }
+      .core-center-text { font-size: 12px; }
+      .core-center-icon { font-size: 28px; }
       .core-value-name { font-size: 12px; }
       .core-value-desc { font-size: 8px; }
       .timeline-h-item { width: 90px; }
@@ -2014,8 +2035,8 @@
       .nav-inner { padding: 0 20px; }
       .coverage-grid { grid-template-columns: 1fr; }
       .core-values-ring { max-width: 600px; }
-      .core-value-item { width: 100px; height: 100px; }
-      .core-center-circle { width: 100px; height: 100px; }
+      .core-value-item { width: 120px; height: 120px; }
+      .core-center-circle { width: 120px; height: 120px; }
     }
 
     @media (max-width: 768px) {
@@ -2153,12 +2174,12 @@
                     <div class="product-group-title">机械灌注</div>
                     <a href="machine-perfusion.html" class="product-item">LifePort®肾脏灌注转运箱</a>
                     <a href="liver-perfusion.html" class="product-item">LifePort®肝脏灌注转运箱</a>
-                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                    <a href="organ-preservation.html" class="product-item">KPS-1®器官保存液</a>
+                    <a href="organ-preservation.html" class="product-item">SPS-1®器官保存液</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title">静态冷藏</div>
-                    <a href="organ-preservation.html" class="product-item">KPS-1®器官保存液</a>
-                    <a href="organ-preservation.html" class="product-item">SPS-1®器官保存液</a>
+                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
                   </li>
                 </ul>
               </li>
@@ -2339,7 +2360,7 @@
       <h2>关于健耕</h2>
       <p class="subtitle">二十年深耕，专注器官移植领域</p>
       <p>
-        成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。
+        成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人。
       </p>
       <p>
         公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。
@@ -2350,20 +2371,16 @@
       </p>
       <div class="stats-grid">
         <div class="stat-item">
-          <span class="stat-number" data-count="20">0</span>
+          <span class="stat-number" data-count="20">+</span>
           <span class="stat-label">年深耕</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-count="185">0</span>
+          <span class="stat-number" data-count="185">+</span>
           <span class="stat-label">全球员工</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-count="49">0</span>
-          <span class="stat-label">国家</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number" data-count="26">0</span>
-          <span class="stat-label">研发人员</span>
+          <span class="stat-number" data-count="500">+</span>
+          <span class="stat-label">IP</span>
         </div>
       </div>
     </div>
@@ -2387,6 +2404,8 @@
       <!-- 中心圆 -->
       <div class="core-center-circle">
         <div class="core-center-icon">✦</div>
+        <div class="core-center-text">核心价值</div>
+        <div class="core-center-text-en">CORE VALUES</div>
       </div>
       <!-- 核心价值项 - 使用 CSS 变量定位 -->
       <div class="core-value-item" style="--angle: 0deg;">
@@ -3177,7 +3196,7 @@
     const containerWidth = ringContainer.offsetWidth;
     const containerHeight = ringContainer.offsetHeight;
     // 计算半径：更聚拢的布局
-    const containerRadius = 155;
+    const containerRadius = 165;
 
     // 整体旋转角度：往右上方偏移（顺时针旋转约 25 度）
     const rotationOffset = 25;
