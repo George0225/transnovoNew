@@ -1057,17 +1057,24 @@
     }
 
     /* =============================================
-       内容 Sections
+       内容 Sections - 报刊风格排版
        ============================================= */
     .content-section {
       min-height: 100vh;
-      padding: 120px 24px;
+      padding: 140px 40px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       opacity: 0;
       transform: translateY(80px);
       transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 核心价值 section 使用特殊的垂直居中 */
+    #section-core-values {
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 100px;
     }
 
     .content-section.visible {
@@ -1104,24 +1111,21 @@
     }
 
     .section-inner {
-      max-width: 1400px;
+      max-width: 1200px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 60px;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
       align-items: center;
     }
 
     .section-content h2 {
-      font-size: clamp(40px, 5vw, 64px);
+      font-size: clamp(36px, 4.5vw, 52px);
       font-weight: 800;
-      margin-bottom: 32px;
-      line-height: 1.1;
+      margin-bottom: 28px;
+      line-height: 1.2;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--slate-800), var(--slate-700));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text-primary);
     }
 
     .section-dark .section-content h2 {
@@ -1133,17 +1137,19 @@
     }
 
     .section-content .subtitle {
-      font-size: clamp(18px, 2vw, 22px);
-      line-height: 1.8;
-      opacity: 0.8;
-      margin-bottom: 24px;
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.9;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      color: var(--text-secondary);
     }
 
     .section-content p {
-      font-size: clamp(16px, 1.5vw, 18px);
+      font-size: clamp(15px, 1.5vw, 17px);
       line-height: 1.9;
-      opacity: 0.75;
-      margin-bottom: 20px;
+      opacity: 0.85;
+      margin-bottom: 18px;
+      color: var(--text-secondary);
     }
 
     .section-image {
@@ -1176,115 +1182,97 @@
       object-position: center 5%;
     }
 
-    /* 数据统计网格 */
+    /* 数据统计网格 - 报刊风格 */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 48px;
+      gap: 32px;
+      margin-top: 56px;
     }
 
     .stat-item {
       text-align: center;
-      padding: 32px 24px;
-      background: linear-gradient(135deg, rgba(91,143,249,0.12) 0%, rgba(230,30,108,0.08) 100%);
-      border-radius: 20px;
-      transition: all 0.4s;
-      border: 1px solid rgba(91, 143, 249, 0.15);
+      padding: 36px 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(249,250,252,0.6) 100%);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      border: 1px solid rgba(26, 89, 224, 0.08);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    /* 光晕背景 */
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(91,143,249,0.08) 0%, rgba(230,30,108,0.06) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .stat-item:hover::before {
+      opacity: 1;
     }
 
     .stat-item:hover {
-      transform: translateY(-8px);
-      background: linear-gradient(135deg, rgba(91,143,249,0.2) 0%, rgba(230,30,108,0.12) 100%);
-      box-shadow: 0 20px 40px rgba(91,143,249,0.25);
-      border-color: rgba(91, 143, 249, 0.3);
+      transform: translateY(-4px);
+      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(245,248,255,0.9) 100%);
+      box-shadow: 0 12px 40px rgba(26, 89, 224, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+      border-color: rgba(26, 89, 224, 0.15);
     }
 
     .stat-number {
       display: block;
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--tech-blue), var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 2px 8px rgba(91, 143, 249, 0.3));
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--primary-600);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
     }
 
     .stat-item.dark .stat-number {
-      filter: drop-shadow(0 2px 10px rgba(255,255,255,0.2));
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.2);
     }
 
     .stat-label {
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--slate-600);
-      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--slate-500);
+      font-weight: 500;
     }
 
     /* 核心价值 - 环形布局设计 */
     .core-values {
       max-width: 1200px;
-      margin: 40px auto 0;
-      padding: 0 24px;
-    }
-
-    .core-values-header {
-      text-align: center;
-      margin-bottom: 40px;
-      position: relative;
-    }
-
-    .core-values-title {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-      display: inline-block;
-      position: relative;
-      padding-bottom: 10px;
-    }
-
-    .core-values-title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-500), var(--primary-400));
-      border-radius: 2px;
-    }
-
-    .core-values-subtitle {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      letter-spacing: 0.25em;
-      margin-top: 10px;
-      text-transform: uppercase;
+      margin: 0 auto;
+      padding: 20px 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     /* 环形容器 */
     .core-values-ring {
       position: relative;
       width: 100%;
-      max-width: 900px;
-      aspect-ratio: 16/10;
-      margin: 0 auto;
+      max-width: 700px;
+      height: 420px;
+      margin: 0 auto 0 80px;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: visible;
     }
 
     /* 中心圆 - 品牌核心 */
     .core-center-circle {
       position: absolute;
-      width: 140px;
-      height: 140px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
       display: flex;
@@ -1302,19 +1290,9 @@
       50% { transform: scale(1.02); box-shadow: 0 12px 50px rgba(26, 89, 224, 0.45), inset 0 2px 10px rgba(255,255,255,0.2); }
     }
 
-    .core-center-text {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-      line-height: 1.4;
-    }
-
     .core-center-icon {
-      font-size: 28px;
-      margin-bottom: 4px;
-      opacity: 0.9;
+      font-size: 32px;
+      opacity: 0.95;
     }
 
     /* 外环 - 装饰性圆环 */
@@ -1325,6 +1303,8 @@
       border: 2px solid var(--primary-100);
       border-radius: 50%;
       animation: ringRotate 30s linear infinite;
+      z-index: 1;
+      pointer-events: none;
     }
 
     .core-outer-ring::before {
@@ -1344,8 +1324,8 @@
     /* 核心价值项 - 环绕分布 */
     .core-value-item {
       position: absolute;
-      width: 130px;
-      height: 130px;
+      width: 135px;
+      height: 135px;
       border-radius: 50%;
       background: #fff;
       display: flex;
@@ -1353,11 +1333,23 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 14px;
+      padding: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       border: 2px solid var(--slate-100);
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       cursor: pointer;
+      z-index: 5;
+      opacity: 0;
+    }
+
+    .core-value-item.animated {
+      opacity: 1;
+      animation: coreValuePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes coreValuePulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+      50% { box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12); }
     }
 
     .core-value-item::before {
@@ -1383,8 +1375,8 @@
     }
 
     .core-value-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
+      font-size: 22px;
+      margin-bottom: 6px;
       color: var(--primary-500);
       transition: transform 0.3s ease;
     }
@@ -1394,15 +1386,15 @@
     }
 
     .core-value-name {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--text-primary);
       line-height: 1.3;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .core-value-desc {
-      font-size: 8px;
+      font-size: 7px;
       color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -1427,11 +1419,29 @@
       border-radius: 50%;
       pointer-events: none;
       animation: glowPulse 3s ease-in-out infinite;
+      z-index: 2;
     }
 
     @keyframes glowPulse {
       0%, 100% { opacity: 0.5; transform: scale(1); }
       50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    /* 第二层光晕 - 粉色 */
+    .core-glow-pink {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(ellipse at center, rgba(230, 30, 108, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: glowPulsePink 4s ease-in-out infinite reverse;
+      z-index: 1;
+    }
+
+    @keyframes glowPulsePink {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.15); }
     }
 
     /* 发展历程 - 紧凑横向时间线设计 */
@@ -1511,9 +1521,20 @@
       top: 20px;
       left: 50px;
       right: 50px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-200) 0%, var(--primary-500) 50%, var(--primary-200) 100%);
+      height: 4px;
+      background: linear-gradient(90deg, transparent 0%, var(--primary-200) 10%, var(--primary-500) 50%, var(--primary-200) 90%, transparent 100%);
       border-radius: 2px;
+      box-shadow: 0 0 20px rgba(26, 89, 224, 0.3);
+    }
+
+    /* 时间线轴线光晕 */
+    .timeline-axis::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      background: radial-gradient(ellipse at center, rgba(26, 89, 224, 0.1) 0%, transparent 70%);
+      border-radius: 10px;
+      pointer-events: none;
     }
 
     /* 时间线节点 */
@@ -1543,18 +1564,19 @@
       top: 14px;
       width: 14px;
       height: 14px;
-      background: #fff;
+      background: linear-gradient(135deg, #fff, var(--primary-50));
       border: 3px solid var(--primary-500);
       border-radius: 50%;
       transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 2;
-      box-shadow: 0 0 0 4px rgba(26, 89, 224, 0.1);
+      box-shadow: 0 0 0 4px rgba(26, 89, 224, 0.1), 0 4px 12px rgba(26, 89, 224, 0.2);
     }
 
     .timeline-h-item:hover .timeline-h-dot {
       transform: scale(1.25);
-      box-shadow: 0 0 0 8px rgba(26, 89, 224, 0.15);
-      background: var(--primary-500);
+      box-shadow: 0 0 0 8px rgba(26, 89, 224, 0.15), 0 6px 20px rgba(26, 89, 224, 0.3);
+      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+      border-color: transparent;
     }
 
     /* 年份 */
@@ -1582,20 +1604,36 @@
     /* 内容卡片 */
     .timeline-h-content {
       margin-top: 12px;
-      padding: 12px 14px;
-      background: #fff;
-      border-radius: 10px;
-      border: 1px solid var(--slate-100);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(249,250,252,0.9) 100%);
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 16px rgba(26, 89, 224, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
       min-height: 70px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       opacity: 0;
       transform: scale(0.9);
       animation: timelineH-content 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 卡片光晕背景 */
+    .timeline-h-content::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26, 89, 224, 0.06) 0%, rgba(230, 30, 108, 0.04) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .timeline-h-item:hover .timeline-h-content::before {
+      opacity: 1;
     }
 
     @keyframes timelineH-content {
@@ -1606,9 +1644,8 @@
     }
 
     .timeline-h-item:hover .timeline-h-content {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 8px 24px rgba(26, 89, 224, 0.15);
-      border-color: var(--primary-200);
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 12px 32px rgba(26, 89, 224, 0.18), 0 6px 16px rgba(0, 0, 0, 0.04);
     }
 
     .timeline-h-text {
@@ -1635,37 +1672,37 @@
 
     .product-card {
       position: relative;
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
       aspect-ratio: 3/4;
       transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      border: 1px solid var(--slate-100);
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(249,250,252,0.9) 100%);
+      box-shadow: 0 4px 20px rgba(26, 89, 224, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
+      border: none;
       cursor: pointer;
     }
 
-    /* 渐变边框效果 */
+    /* 光晕背景 - 蓝粉双色 */
     .product-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 2px;
-      background: linear-gradient(135deg, var(--primary-200), var(--slate-200), var(--primary-200));
+      background: linear-gradient(135deg, rgba(26, 89, 224, 0.3), rgba(230, 30, 108, 0.3));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
-      opacity: 0.5;
-      transition: opacity 0.4s ease;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
     .product-card:hover::before {
       opacity: 1;
     }
 
-    /* 顶部装饰条 */
+    /* 顶部装饰线 */
     .product-card::after {
       content: '';
       position: absolute;
@@ -1674,18 +1711,26 @@
       right: 0;
       height: 4px;
       background: linear-gradient(90deg, var(--primary-500), var(--accent-500), var(--primary-500));
+      background-size: 200% 100%;
       transform: scaleX(0);
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .product-card:hover::after {
       transform: scaleX(1);
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
 
     .product-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(26, 89, 224, 0.2), 0 8px 24px rgba(0, 0, 0, 0.08);
-      border-color: var(--primary-300);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(26, 89, 224, 0.18), 0 8px 24px rgba(0, 0, 0, 0.06);
+      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(245,248,255,0.95) 100%);
     }
 
     .product-card-image-wrapper {
@@ -2002,9 +2047,6 @@
 
       /* 核心价值移动端适配 - 环形变通垂直布局 */
       .core-values { margin-top: 40px; }
-      .core-values-header { margin-bottom: 32px; }
-      .core-values-title { font-size: 24px; }
-      .core-values-subtitle { font-size: 11px; }
       .core-values-ring {
         display: flex;
         flex-direction: column;
@@ -2335,19 +2377,16 @@
 <section class="content-section section-white" id="section-core-values">
   <!-- 核心价值 - 环形布局 -->
   <div class="core-values">
-    <div class="core-values-header">
-      <h3 class="core-values-title">核心价值</h3>
-      <p class="core-values-subtitle">CORE VALUES</p>
-    </div>
     <div class="core-values-ring">
       <!-- 装饰性外环 -->
       <div class="core-outer-ring"></div>
-      <!-- 中心光晕 -->
+      <!-- 中心光晕 - 蓝色 -->
       <div class="core-glow"></div>
+      <!-- 中心光晕 - 粉色 -->
+      <div class="core-glow-pink"></div>
       <!-- 中心圆 -->
       <div class="core-center-circle">
         <div class="core-center-icon">✦</div>
-        <div class="core-center-text">Core<br/>Values</div>
       </div>
       <!-- 核心价值项 - 使用 CSS 变量定位 -->
       <div class="core-value-item" style="--angle: 0deg;">
@@ -3137,12 +3176,16 @@
     const coreValueItems = ringContainer.querySelectorAll('.core-value-item');
     const containerWidth = ringContainer.offsetWidth;
     const containerHeight = ringContainer.offsetHeight;
-    const containerRadius = Math.min(containerWidth, containerHeight) / 2 - 75;
+    // 计算半径：更聚拢的布局
+    const containerRadius = 155;
 
-    coreValueItems.forEach((item) => {
+    // 整体旋转角度：往右上方偏移（顺时针旋转约 25 度）
+    const rotationOffset = 25;
+
+    coreValueItems.forEach((item, index) => {
       const angle = parseFloat(item.style.getPropertyValue('--angle'));
-      // -90 度起始，让第一个点在正上方
-      const radians = (angle - 90) * (Math.PI / 180);
+      // -90 度起始 + 旋转偏移，让整体往右上方
+      const radians = (angle - 90 + rotationOffset) * (Math.PI / 180);
       const x = Math.cos(radians) * containerRadius;
       const y = Math.sin(radians) * containerRadius;
 
@@ -3150,6 +3193,11 @@
       item.style.left = '50%';
       item.style.top = '50%';
       item.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+
+      // 设置 staggered 动画延迟
+      setTimeout(() => {
+        item.classList.add('animated');
+      }, 100 + index * 100);
     });
   }
 

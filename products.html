@@ -657,14 +657,32 @@
     }
 
     .sub-category-card {
-      background: #fff;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(249,250,252,0.8) 100%);
       border-radius: 24px;
       padding: 36px;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 4px 24px rgba(26, 89, 224, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
       transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-      border: 1px solid var(--border);
+      border: none;
       position: relative;
       overflow: hidden;
+    }
+
+    /* 光晕背景效果 */
+    .sub-category-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(26, 89, 224, 0.04) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .sub-category-card:hover::before {
+      opacity: 1;
     }
 
     /* 卡片顶部装饰线 */
@@ -684,8 +702,8 @@
 
     .sub-category-card:hover {
       transform: translateY(-12px);
-      box-shadow: var(--shadow-xl), 0 0 0 1px rgba(26, 89, 224, 0.1);
-      border-color: var(--primary-200);
+      box-shadow: 0 20px 60px rgba(26, 89, 224, 0.15), 0 8px 24px rgba(0, 0, 0, 0.04);
+      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(240,244,255,0.9) 100%);
     }
 
     .sub-category-card:hover::before {
@@ -721,22 +739,40 @@
     .product-list li {
       padding: 18px 20px;
       margin-bottom: 12px;
-      background: var(--bg-secondary);
+      background: transparent;
       border-radius: 16px;
       font-size: 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      border: 1px solid transparent;
+      border: none;
       cursor: pointer;
+      position: relative;
+    }
+
+    /* 左侧装饰条 */
+    .product-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0%;
+      background: linear-gradient(180deg, var(--primary-500), var(--accent-500));
+      border-radius: 0 4px 4px 0;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .product-list li:hover {
-      background: linear-gradient(135deg, var(--primary-50) 0%, var(--accent-50) 100%);
+      background: linear-gradient(135deg, rgba(26, 89, 224, 0.04) 0%, rgba(230, 30, 108, 0.03) 100%);
       transform: translateX(12px);
-      border-color: rgba(26, 89, 224, 0.2);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 4px 16px rgba(26, 89, 224, 0.08);
+    }
+
+    .product-list li:hover::before {
+      height: 60%;
     }
 
     .product-list li a {
@@ -750,9 +786,20 @@
       display: flex;
       align-items: center;
       gap: 4px;
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: var(--primary-100);
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--primary-100), var(--primary-50));
+      box-shadow: 0 2px 8px rgba(26, 89, 224, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 箭头 */
+    .product-list li a::after {
+      content: '→';
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .product-list li:hover a {
@@ -761,7 +808,12 @@
     }
 
     .product-list li:hover a:hover {
-      background: var(--primary-200);
+      background: linear-gradient(135deg, var(--primary-200), var(--primary-100));
+      box-shadow: 0 4px 12px rgba(26, 89, 224, 0.2);
+    }
+
+    .product-list li a:hover::after {
+      transform: translateX(4px);
     }
 
     /* ===== FOOTER ===== */
