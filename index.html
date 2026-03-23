@@ -1237,7 +1237,6 @@
       border-radius: 8px;
       overflow: hidden;
       aspect-ratio: 3/4;
-      cursor: pointer;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       background: #fff;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
@@ -1272,17 +1271,35 @@
       background: #fff;
     }
 
+    .product-card-image-wrapper:empty {
+      background: linear-gradient(135deg, var(--slate-50) 0%, var(--slate-100) 100%);
+    }
+
     .product-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
       transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-      /* 无 padding，让图片填满 */
     }
 
     .product-card:hover img {
       transform: scale(1.06);
+    }
+
+    /* 进入产品中心链接 */
+    .section-more-link {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--primary-600);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .section-more-link:hover {
+      color: var(--primary-700);
+      text-decoration: underline;
     }
 
     .product-card-overlay {
@@ -1782,9 +1799,12 @@
 <!-- PRODUCTS SECTION -->
 <section class="content-section section-light" id="section-products">
   <div class="section-inner" style="display: block;">
-    <div class="section-content" style="margin-bottom: 48px;">
-      <h2>产品中心</h2>
-      <p class="subtitle">创新产品矩阵，覆盖移植全流程</p>
+    <div class="section-content" style="margin-bottom: 48px; display: flex; align-items: baseline; justify-content: space-between;">
+      <div>
+        <h2 style="display: inline; margin-right: 12px;">产品中心</h2>
+        <a href="products.html" class="section-more-link">进入产品中心 →</a>
+      </div>
+      <p class="subtitle" style="margin-bottom: 0;">创新产品矩阵，覆盖移植全流程</p>
     </div>
     <div class="products-grid">
       <div class="product-card">
@@ -1816,7 +1836,6 @@
       </div>
       <div class="product-card">
         <div class="product-card-image-wrapper">
-          <img src="images/product-immuno.png" alt="免疫抑制剂" />
         </div>
         <div class="product-card-overlay">
           <div class="product-card-name">免疫抑制剂</div>
