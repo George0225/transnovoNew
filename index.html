@@ -1224,39 +1224,51 @@
       font-weight: 600;
     }
 
-    /* 产品中心网格 */
+    /* 产品中心网格 - Siemens 拼接风格 */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 16px;
       margin-top: 40px;
     }
 
     .product-card {
       position: relative;
-      border-radius: 20px;
+      border-radius: 12px;
       overflow: hidden;
-      aspect-ratio: 3/4;
+      aspect-ratio: 4/5;
       cursor: pointer;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      border: 1px solid rgba(91, 143, 249, 0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      border: 1px solid var(--slate-200);
+      background: #fff;
     }
 
     .product-card:hover {
-      box-shadow: 0 16px 50px rgba(91, 143, 249, 0.25);
-      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(26, 89, 224, 0.15);
+      transform: translateY(-2px);
+      border-color: var(--primary-300);
+    }
+
+    .product-card-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 65%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f8f9fb 0%, #fff 100%);
     }
 
     .product-card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 16px;
     }
 
     .product-card:hover img {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .product-card-overlay {
@@ -1264,32 +1276,43 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 28px 24px;
-      background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-      color: #fff;
-      transform: translateY(20px);
-      opacity: 0.95;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .product-card:hover .product-card-overlay {
-      transform: translateY(0);
-      opacity: 1;
+      padding: 16px 18px;
+      background: transparent;
+      color: var(--text-primary);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .product-card-name {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 700;
-      margin-bottom: 6px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
     }
 
     .product-card-desc {
-      font-size: 13px;
-      opacity: 0.85;
+      font-size: 11px;
+      color: var(--text-secondary);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      letter-spacing: 0.12em;
+      font-weight: 600;
+    }
+
+    /* 产品类别指示条 */
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-500), var(--primary-400));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
     }
 
     /* 视频章节 - 这是唯一的 Hero 视频 */
@@ -1750,28 +1773,36 @@
     </div>
     <div class="products-grid">
       <div class="product-card">
-        <img src="images/category-background-1.jpg" alt="机械灌注" />
+        <div class="product-card-image-wrapper">
+          <img src="images/product-1.png" alt="机械灌注" />
+        </div>
         <div class="product-card-overlay">
           <div class="product-card-name">机械灌注</div>
           <div class="product-card-desc">MACHINE PERFUSION</div>
         </div>
       </div>
       <div class="product-card">
-        <img src="images/category-background-2.jpg" alt="器官保存" />
+        <div class="product-card-image-wrapper">
+          <img src="images/product-2.png" alt="器官保存" />
+        </div>
         <div class="product-card-overlay">
           <div class="product-card-name">器官保存</div>
           <div class="product-card-desc">ORGAN PRESERVATION</div>
         </div>
       </div>
       <div class="product-card">
-        <img src="images/category-background-3.jpg" alt="药物检测" />
+        <div class="product-card-image-wrapper">
+          <img src="images/product-4.png" alt="药物检测" />
+        </div>
         <div class="product-card-overlay">
           <div class="product-card-name">药物检测</div>
           <div class="product-card-desc">TDM</div>
         </div>
       </div>
       <div class="product-card">
-        <img src="images/category-background-4.jpg" alt="免疫抑制剂" />
+        <div class="product-card-image-wrapper">
+          <img src="images/product-3.png" alt="免疫抑制剂" />
+        </div>
         <div class="product-card-overlay">
           <div class="product-card-name">免疫抑制剂</div>
           <div class="product-card-desc">IMMUNOSUPPRESSANT</div>
