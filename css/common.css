@@ -357,6 +357,9 @@ body {
   transform: translateX(8px);
   transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   white-space: nowrap;
+  max-height: min(500px, 85vh);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
@@ -371,6 +374,28 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px;
   box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
+  max-height: min(500px, 85vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 三级菜单滚动条样式 */
+.sub-menu-3::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sub-menu-3::-webkit-scrollbar-track {
+  background: var(--slate-100);
+  border-radius: 3px;
+}
+
+.sub-menu-3::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+  border-radius: 3px;
+}
+
+.sub-menu-3::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
 }
 
 .sub-menu-3 .product-group-title {
