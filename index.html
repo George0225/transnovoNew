@@ -382,6 +382,9 @@
       transform: translateX(8px);
       transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       white-space: nowrap;
+      max-height: min(500px, 85vh);
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
@@ -416,6 +419,43 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
+      max-height: min(500px, 85vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .sub-menu-3::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+    }
+
+    /* 所有 sub-menu-3 层级的滚动条样式 */
+    .nav-links .sub-menu-3::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .nav-links .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
     }
 
     .sub-menu-3 .product-group-title {
@@ -441,6 +481,15 @@
     .sub-menu-3 .product-group {
       margin-bottom: 4px;
       list-style: none;
+    }
+
+    /* 确保产品组在可滚动菜单中正常显示 */
+    .nav-links .sub-menu-3 .product-group {
+      margin-bottom: 8px;
+    }
+
+    .nav-links .sub-menu-3 .product-group:last-child {
+      margin-bottom: 0;
     }
 
     .sub-menu-3 .product-item {
@@ -479,6 +528,24 @@
       background: var(--primary-500);
       width: 6px;
       height: 6px;
+    }
+
+    /* 了解更多链接特殊样式 */
+    .sub-menu-3 .product-item.learn-more-item {
+      color: var(--primary-600);
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 4px;
+      padding-left: 14px;
+    }
+
+    .sub-menu-3 .product-item.learn-more-item::before {
+      display: none;
+    }
+
+    .sub-menu-3 .product-item.learn-more-item:hover {
+      color: var(--accent-500);
+      background: rgba(230, 30, 108, 0.05);
     }
 
     /* ===== BUTTONS ===== */
@@ -1311,6 +1378,17 @@
       height: 42px;
       fill: #fff;
       filter: drop-shadow(0 2px 8px rgba(255,255,255,0.4));
+    }
+
+    .core-value-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: var(--primary-500);
+      transition: transform 0.3s ease;
+    }
+
+    .core-value-item:hover .core-value-icon {
+      transform: scale(1.2) rotate(10deg);
     }
 
     .core-value-icon svg {
@@ -2278,12 +2356,10 @@
                     <div class="product-group-title">免疫抑制剂</div>
                     <a href="immunosuppressant.html" class="product-item">他克莫司胶囊</a>
                     <a href="immunosuppressant.html" class="product-item">麦考酚钠肠溶片</a>
-                    <a href="immunosuppressant.html" class="product-item">盐酸缓更昔洛韦片</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title">抗感染药</div>
-                    <a href="immunosuppressant.html" class="product-item">复方磺胺甲噁唑片</a>
-                    <a href="immunosuppressant.html" class="product-item">缬更昔洛韦片</a>
+                    <a href="immunosuppressant.html" class="product-item">盐酸缬更昔洛韦片</a>
                   </li>
                 </ul>
               </li>
@@ -2301,9 +2377,7 @@
                   <li class="product-group">
                     <div class="product-group-title">人类白细胞抗原和抗体检测</div>
                     <a href="hla-antibody.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
-                    <a href="hla-antibody.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
-                    <a href="hla-antibody.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
-                    <a href="hla-antibody.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
+                    <a href="products.html#ivd" class="product-item learn-more-item">了解更多 ›</a>
                   </li>
                 </ul>
               </li>
@@ -2367,9 +2441,7 @@
               <ul class="mobile-sub-menu" id="mobile-drugs">
                 <li><a href="immunosuppressant.html">他克莫司胶囊</a></li>
                 <li><a href="immunosuppressant.html">麦考酚钠肠溶片</a></li>
-                <li><a href="immunosuppressant.html">盐酸缓更昔洛韦片</a></li>
-                <li><a href="immunosuppressant.html">复方磺胺甲噁唑片</a></li>
-                <li><a href="immunosuppressant.html">缬更昔洛韦片</a></li>
+                <li><a href="immunosuppressant.html">盐酸缬更昔洛韦片</a></li>
               </ul>
             </li>
             <li>
@@ -2491,57 +2563,33 @@
       <div class="core-glow-pink"></div>
       <!-- 中心圆 -->
       <div class="core-center-circle">
-        <div class="core-center-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C9.5 2 7.5 4 7.5 6.5C7.5 7.5 7.8 8.4 8.3 9.2C5.5 10.1 3 13 3 16.5C3 20.1 6.9 22 12 22C17.1 22 21 20.1 21 16.5C21 13 18.5 10.1 15.7 9.2C16.2 8.4 16.5 7.5 16.5 6.5C16.5 4 14.5 2 12 2ZM12 20C8.1 20 5 18.5 5 16.5C5 14.5 7.1 12.8 10 12.8C10.3 12.8 10.5 12.8 10.8 12.8C11.1 13.9 12 14.8 13.2 14.8C14.4 14.8 15.3 13.9 15.6 12.8C15.9 12.8 16.1 12.8 16.4 12.8C19.3 12.8 21.4 14.5 21.4 16.5C21.4 18.5 18.3 20 14.4 20H12Z"/>
-          </svg>
-        </div>
+        <div class="core-center-icon">✦</div>
         <div class="core-center-text">核心价值</div>
         <div class="core-center-text-en">CORE VALUES</div>
       </div>
       <!-- 核心价值项 - 使用 CSS 变量定位 -->
       <div class="core-value-item" style="--angle: 0deg;">
-        <div class="core-value-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C13.5 2 14.8 3.3 14.8 4.8C14.8 5.4 14.6 5.9 14.3 6.3C16.5 7.1 18 9.3 18 11.9V12.6C18 15.6 15.6 18 12.6 18H11.4C8.4 18 6 15.6 6 12.6V11.9C6 9.3 7.5 7.1 9.7 6.3C9.4 5.9 9.2 5.4 9.2 4.8C9.2 3.3 10.5 2 12 2ZM12 4C11.6 4 11.2 4.4 11.2 4.8C11.2 5.2 11.6 5.6 12 5.6C12.4 5.6 12.8 5.2 12.8 4.8C12.8 4.4 12.4 4 12 4ZM12 16C14.5 16 16.5 14 16.5 11.5V10.8C16.5 8.8 15.2 7.1 13.4 6.5C13.1 7.3 12.3 7.9 11.4 7.9H12.6C11.7 7.9 10.9 7.3 10.6 6.5C8.8 7.1 7.5 8.8 7.5 10.8V11.5C7.5 14 9.5 16 12 16Z"/>
-          </svg>
-        </div>
+        <div class="core-value-icon">◈</div>
         <div class="core-value-name">专注移植</div>
         <div class="core-value-desc">COMMITMENT TO TX</div>
       </div>
       <div class="core-value-item" style="--angle: 72deg;">
-        <div class="core-value-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2L15.5 8.5L22 9.5L17.5 14.5L18.5 21L12 17.5L5.5 21L6.5 14.5L2 9.5L8.5 8.5L12 2Z"/>
-          </svg>
-        </div>
+        <div class="core-value-icon">◆</div>
         <div class="core-value-name">精益求精</div>
         <div class="core-value-desc">PURSUIT FOR EXCELLENCE</div>
       </div>
       <div class="core-value-item" style="--angle: 144deg;">
-        <div class="core-value-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C13.5 2 14.8 3.3 14.8 4.8C14.8 5.4 14.6 5.9 14.3 6.3C16.5 7.1 18 9.3 18 11.9V12.6C18 15.6 15.6 18 12.6 18H11.4C8.4 18 6 15.6 6 12.6V11.9C6 9.3 7.5 7.1 9.7 6.3C9.4 5.9 9.2 5.4 9.2 4.8C9.2 3.3 10.5 2 12 2ZM12 4C11.6 4 11.2 4.4 11.2 4.8C11.2 5.2 11.6 5.6 12 5.6C12.4 5.6 12.8 5.2 12.8 4.8C12.8 4.4 12.4 4 12 4ZM12 16C14.5 16 16.5 14 16.5 11.5V10.8C16.5 8.8 15.2 7.1 13.4 6.5C13.1 7.3 12.3 7.9 10.6 7.9C8.9 7.9 7.5 9.3 7.5 11V11.5C7.5 14 9.5 16 12 16Z"/>
-          </svg>
-        </div>
+        <div class="core-value-icon">❖</div>
         <div class="core-value-name">以人为本</div>
         <div class="core-value-desc">CARE FOR PEOPLE</div>
       </div>
       <div class="core-value-item" style="--angle: 216deg;">
-        <div class="core-value-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 21C9 20.4 8.8 19.8 8.4 19.4C8 18.9 7.8 18.3 7.8 17.6V16.6C7.8 16.3 7.9 16 8.1 15.8C8.3 15.5 8.6 15.4 8.9 15.4H10.9C11.2 15.4 11.5 15.5 11.7 15.8C11.9 16 12 16.3 12 16.6V17.6C12 18.3 11.8 18.9 11.4 19.4C11 19.8 10.8 20.4 10.8 21H9ZM13 21C13 20.4 12.8 19.8 12.4 19.4C12 18.9 11.8 18.3 11.8 17.6V16.6C11.8 16.3 11.9 16 12.1 15.8C12.3 15.5 12.6 15.4 12.9 15.4H14.9C15.2 15.4 15.5 15.5 15.7 15.8C15.9 16 16 16.3 16 16.6V17.6C16 18.3 15.8 18.9 15.4 19.4C15 19.8 14.8 20.4 14.8 21H13ZM17.3 14H19.3V13H17.3V14ZM6.7 14H4.7V13H6.7V14ZM12 3C11.7 3 11.5 3.1 11.3 3.3C11.1 3.5 11 3.7 11 4V10H13V4C13 3.7 12.9 3.5 12.7 3.3C12.5 3.1 12.3 3 12 3Z"/>
-          </svg>
-        </div>
+        <div class="core-value-icon">◇</div>
         <div class="core-value-name">持续创新</div>
         <div class="core-value-desc">NEVER STOP INNOVATION</div>
       </div>
       <div class="core-value-item" style="--angle: 288deg;">
-        <div class="core-value-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 21.3L9.9 19.3C6.1 15.8 3 13 3 8.5C3 5.4 5.4 3 8.5 3C9.9 3 11.2 3.5 12 4.4C12.8 3.5 14.1 3 15.5 3C18.6 3 21 5.4 21 8.5C21 13 17.9 15.8 14.1 19.3L12 21.3ZM8.5 5C6.6 5 5 6.6 5 8.5C5 12.1 7.7 14.6 11.3 17.9L12 18.6L12.7 17.9C16.3 14.6 19 12.1 19 8.5C19 6.6 17.4 5 15.5 5C14.3 5 13.2 5.6 12.6 6.6C12.4 6.9 12.2 7 12 7C11.8 7 11.6 6.9 11.4 6.6C10.8 5.6 9.7 5 8.5 5Z"/>
-          </svg>
-        </div>
+        <div class="core-value-icon">☆</div>
         <div class="core-value-name">敬畏生命</div>
         <div class="core-value-desc">REVERENCE FOR LIFE</div>
       </div>
