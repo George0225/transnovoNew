@@ -1364,22 +1364,6 @@
       50% { transform: scale(1.02); box-shadow: 0 12px 50px rgba(26, 89, 224, 0.45), inset 0 2px 10px rgba(255,255,255,0.2); }
     }
 
-    .core-center-icon {
-      font-size: 42px;
-      opacity: 0.95;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .core-center-icon svg {
-      width: 42px;
-      height: 42px;
-      fill: #fff;
-      filter: drop-shadow(0 2px 8px rgba(255,255,255,0.4));
-    }
-
     .core-value-icon {
       font-size: 28px;
       margin-bottom: 8px;
@@ -1396,6 +1380,27 @@
       height: 32px;
       fill: currentColor;
       display: block;
+    }
+
+    /* 核心价值图片样式 */
+    .core-value-img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      margin-bottom: 8px;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+    }
+
+    .core-value-item:hover .core-value-img {
+      transform: scale(1.15) rotate(8deg);
+      filter: drop-shadow(0 4px 12px rgba(26, 89, 224, 0.3));
+    }
+
+    /* 持续创新大图 */
+    .core-value-img-large {
+      width: 56px;
+      height: 56px;
     }
 
     .core-center-text {
@@ -2196,7 +2201,6 @@
       .core-value-item { width: 130px; height: 130px; }
       .core-center-circle { width: 130px; height: 130px; }
       .core-center-text { font-size: 12px; }
-      .core-center-icon { font-size: 28px; }
       .core-value-name { font-size: 12px; }
       .core-value-desc { font-size: 8px; }
       .timeline-h-item { width: 90px; }
@@ -2262,7 +2266,6 @@
         order: -1;
       }
       .core-center-text { font-size: 9px; }
-      .core-center-icon { font-size: 20px; }
       .core-value-item {
         position: relative;
         width: 90%;
@@ -2572,33 +2575,32 @@
       <div class="core-glow-pink"></div>
       <!-- 中心圆 -->
       <div class="core-center-circle">
-        <div class="core-center-icon">✦</div>
         <div class="core-center-text">核心价值</div>
         <div class="core-center-text-en">CORE VALUES</div>
       </div>
       <!-- 核心价值项 - 使用 CSS 变量定位 -->
       <div class="core-value-item" style="--angle: 0deg;">
-        <div class="core-value-icon">◈</div>
+        <img src="images/core-value-kidney.png" alt="专注移植" class="core-value-img" />
         <div class="core-value-name">专注移植</div>
         <div class="core-value-desc">COMMITMENT TO TX</div>
       </div>
       <div class="core-value-item" style="--angle: 72deg;">
-        <div class="core-value-icon">◆</div>
+        <img src="images/core-value-core.png" alt="精益求精" class="core-value-img" />
         <div class="core-value-name">精益求精</div>
         <div class="core-value-desc">PURSUIT FOR EXCELLENCE</div>
       </div>
       <div class="core-value-item" style="--angle: 144deg;">
-        <div class="core-value-icon">❖</div>
+        <img src="images/core-value-human.png" alt="以人为本" class="core-value-img" />
         <div class="core-value-name">以人为本</div>
         <div class="core-value-desc">CARE FOR PEOPLE</div>
       </div>
       <div class="core-value-item" style="--angle: 216deg;">
-        <div class="core-value-icon">◇</div>
+        <img src="images/core-value-innovation.png" alt="持续创新" class="core-value-img core-value-img-large" />
         <div class="core-value-name">持续创新</div>
         <div class="core-value-desc">NEVER STOP INNOVATION</div>
       </div>
       <div class="core-value-item" style="--angle: 288deg;">
-        <div class="core-value-icon">☆</div>
+        <img src="images/core-value-life.png" alt="敬畏生命" class="core-value-img" />
         <div class="core-value-name">敬畏生命</div>
         <div class="core-value-desc">REVERENCE FOR LIFE</div>
       </div>
