@@ -279,6 +279,29 @@
       .product-content { padding: 40px 20px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
+
+    /* 产品图片样式 */
+    .product-image-full {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+    }
+
+    .product-image-full img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .product-image-full {
+        max-width: 100%;
+        margin: 0 auto 40px;
+        padding: 0 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -396,8 +419,14 @@
 </section>
 
 <main class="product-content">
-  <div class="pending-notice">
-    待上传 DA
+  <!-- 图片 1：产品介绍 -->
+  <div class="product-image-full">
+    <img src="images/hla-dna-1.jpg" alt="LABType SSO 人类白细胞抗原-DNA 分型试剂盒产品介绍" />
+  </div>
+
+  <!-- 图片 2：工作原理和订购信息 -->
+  <div class="product-image-full">
+    <img src="images/hla-dna-2.jpg" alt="LABType SSO 工作原理和订购信息" />
   </div>
 </main>
 
