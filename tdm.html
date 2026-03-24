@@ -291,6 +291,24 @@
       visibility: hidden;
       transform: translateX(10px);
       white-space: nowrap;
+      max-height: min(400px, 70vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
     }
 
     .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
@@ -845,10 +863,10 @@
                   </li>
                   <li class="product-group">
                     <div class="product-group-title">人类白细胞抗原和抗体检测</div>
-                    <a href="hla-antibody.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
+                    <a href="hla-dna.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
                     <a href="hla-antibody.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
-                    <a href="hla-antibody.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
-                    <a href="hla-antibody.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-class1.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-class2.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
                   </li>
                 </ul>
               </li>
