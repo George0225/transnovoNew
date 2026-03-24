@@ -180,16 +180,25 @@
 
     /* 全宽产品图片样式 */
     .product-image-full {
-      max-width: 1200px;
-      margin: 0 auto 60px;
-      padding: 0 24px;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
     }
 
     .product-image-full img {
       width: 100%;
       height: auto;
-      border-radius: 16px;
+      border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .product-image-full {
+        max-width: 100%;
+        margin: 0 auto 40px;
+        padding: 0 16px;
+      }
     }
 
     .sub-menu {

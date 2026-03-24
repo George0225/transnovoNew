@@ -980,6 +980,29 @@
       .footer-qrcodes { justify-content: center; }
     }
 
+    /* 产品图片样式 - 适配屏幕 */
+    .product-image-full {
+      max-width: 900px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
+    }
+
+    .product-image-full img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .product-image-full {
+        max-width: 100%;
+        margin: 0 auto 40px;
+        padding: 0 16px;
+      }
+    }
+
     @media (max-width: 768px) {
       .nav-links, .nav-btn { display: none; }
       .nav-toggle { display: flex; }
