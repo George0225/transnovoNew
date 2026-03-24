@@ -178,6 +178,20 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* 全宽产品图片样式 */
+    .product-image-full {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 24px;
+    }
+
+    .product-image-full img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
     .sub-menu {
       position: absolute;
       top: 100%;
@@ -291,6 +305,24 @@
       visibility: hidden;
       transform: translateX(10px);
       white-space: nowrap;
+      max-height: min(400px, 70vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
     }
 
     .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
@@ -319,6 +351,24 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      max-height: min(400px, 70vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .sub-menu-3::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
     }
 
     .sub-menu-3 .product-group-title {
@@ -823,12 +873,10 @@
                     <div class="product-group-title">免疫抑制剂</div>
                     <a href="immunosuppressant.html" class="product-item">他克莫司胶囊</a>
                     <a href="immunosuppressant.html" class="product-item">麦考酚钠肠溶片</a>
-                    <a href="immunosuppressant.html" class="product-item">盐酸缓更昔洛韦片</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title">抗感染药</div>
-                    <a href="immunosuppressant.html" class="product-item">复方磺胺甲噁唑片</a>
-                    <a href="immunosuppressant.html" class="product-item">缬更昔洛韦片</a>
+                    <a href="immunosuppressant.html" class="product-item">盐酸缬更昔洛韦片</a>
                   </li>
                 </ul>
               </li>
@@ -897,91 +945,24 @@
 
 <!-- PAGE HEADER -->
 <section class="page-header">
-  <h1>配型与抗体</h1>
-  <p>精准 HLA 分型检测与抗体筛查，助力移植配型匹配</p>
+  <h1>LABType™ SSO 人类白细胞抗原-DNA 分型试剂盒</h1>
+  <p>序列特异性寡合苷酸探针法（rSSO）</p>
 </section>
 
 <!-- PRODUCT DETAIL SECTION -->
 <section class="product-detail-section">
   <div class="product-detail-inner">
-    <span class="section-label">HLA TYPING & ANTIBODY DETECTION</span>
-    <h2 class="section-title">HLA 分型检测与抗体筛查</h2>
-    <p class="section-description">
-      人类白细胞抗原（HLA）分型是器官移植供受者配型的核心环节。通过精准的 HLA 分型检测和群体反应性抗体（PRA）筛查，
-      可以有效评估移植排斥风险，提高配型成功率，为移植手术的成功提供重要保障。
-    </p>
 
-    <div class="product-showcase animate-on-scroll">
-      <div class="product-showcase-img">
-        <img src="images/category-background-4.jpg" alt="HLA 分型检测" />
-      </div>
-      <div class="product-showcase-content">
-        <h3>检测项目</h3>
-        <ul class="feature-list">
-          <li>HLA-A、HLA-B、HLA-DR 位点分型检测</li>
-          <li>HLA-Cw、HLA-DQ、HLA-DP 位点分型检测</li>
-          <li>群体反应性抗体（PRA）筛查</li>
-          <li>群体反应性抗体特异性鉴定</li>
-          <li>交叉配型试验（Crossmatch）</li>
-        </ul>
-        <a href="contact.html" class="showcase-btn">咨询检测服务</a>
-      </div>
+    <!-- 图片 1：产品介绍 -->
+    <div class="product-image-full animate-on-scroll">
+      <img src="images/hla-sso-1.jpg" alt="LABType SSO 产品介绍" />
     </div>
 
-    <div class="products-grid">
-      <div class="product-card animate-on-scroll">
-        <div class="product-image">
-          <img src="images/category-background-4.jpg" alt="HLA 分型试剂盒" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">HLA 分型试剂盒</h3>
-          <p class="product-desc">高精度 PCR-SSO/SSP 检测试剂</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-1">
-        <div class="product-image">
-          <img src="images/category-background-1.jpg" alt="抗体筛查试剂盒" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">抗体筛查试剂盒</h3>
-          <p class="product-desc">PRA 检测与特异性鉴定</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-2">
-        <div class="product-image">
-          <img src="images/category-background-2.jpg" alt="配型检测服务" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">配型检测服务</h3>
-          <p class="product-desc">专业实验室与技术支持</p>
-        </div>
-      </div>
+    <!-- 图片 2：工作原理和订购信息 -->
+    <div class="product-image-full animate-on-scroll">
+      <img src="images/hla-sso-2.jpg" alt="LABType SSO 工作原理和订购信息" />
     </div>
-  </div>
-</section>
 
-<!-- CTA SECTION -->
-<section class="cta-section">
-  <div class="cta-content">
-    <h2>需要配型检测服务？</h2>
-    <p>我们的专业实验室团队提供精准、高效的 HLA 分型与抗体检测服务</p>
-    <a href="contact.html" class="cta-btn">联系我们</a>
-  </div>
-</section>
-
-<!-- PARTNERS SECTION -->
-<section id="partners">
-  <div class="partners-inner">
-    <h3 class="partners-title">合作伙伴</h3>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
-      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
-      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
-      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
-      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
-    </div>
   </div>
 </section>
 
