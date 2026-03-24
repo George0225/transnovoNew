@@ -452,6 +452,24 @@
       transform: translateX(8px);
       transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
+      max-height: min(500px, 85vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
     }
 
     .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
@@ -1017,12 +1035,10 @@
                     <div class="product-group-title">免疫抑制剂</div>
                     <a href="immunosuppressant.html" class="product-item">他克莫司胶囊</a>
                     <a href="immunosuppressant.html" class="product-item">麦考酚钠肠溶片</a>
-                    <a href="immunosuppressant.html" class="product-item">盐酸缓更昔洛韦片</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title">抗感染药</div>
-                    <a href="immunosuppressant.html" class="product-item">复方磺胺甲噁唑片</a>
-                    <a href="immunosuppressant.html" class="product-item">缬更昔洛韦片</a>
+                    <a href="immunosuppressant.html" class="product-item">盐酸缬更昔洛韦片</a>
                   </li>
                 </ul>
               </li>
@@ -1091,92 +1107,24 @@
 
 <!-- PAGE HEADER -->
 <section class="page-header">
-  <h1>免疫抑制剂</h1>
-  <p>预防器官移植排斥反应，保障移植器官长期存活</p>
+  <h1>他克莫司胶囊（FK506）</h1>
+  <p>国内首个全规格基于一致性评价审批通过的他克莫司胶囊</p>
 </section>
 
 <!-- PRODUCT DETAIL SECTION -->
 <section class="product-detail-section">
   <div class="product-detail-inner">
-    <span class="section-label">IMMUNOSUPPRESSANT</span>
-    <h2 class="section-title">抗排斥药物方案</h2>
-    <p class="section-description">
-      器官移植术后，患者需要终身服用免疫抑制剂以预防排斥反应。
-      我们提供多种主流免疫抑制剂产品，包括钙调神经磷酸酶抑制剂、抗代谢类药物等，
-      配合血药浓度监测服务，为患者提供个体化的用药方案。
-    </p>
 
-    <div class="product-showcase animate-on-scroll">
-      <div class="product-showcase-img">
-        <img src="images/category-background-3.jpg" alt="免疫抑制剂" />
-      </div>
-      <div class="product-showcase-content">
-        <h3>主要产品</h3>
-        <ul class="feature-list">
-          <li>他克莫司（Tacrolimus）- 一线免疫抑制剂</li>
-          <li>环孢素 A（Cyclosporine A）- 经典免疫抑制剂</li>
-          <li>西罗莫司（Sirolimus）- mTOR 抑制剂</li>
-          <li>吗替麦考酚酯（MMF）- 抗代谢类免疫抑制剂</li>
-          <li>泼尼松（Prednisone）- 糖皮质激素</li>
-        </ul>
-        <a href="contact.html" class="showcase-btn">咨询产品</a>
-      </div>
+    <!-- 图片 1：产品介绍和处方信息 -->
+    <div class="product-image-full animate-on-scroll">
+      <img src="images/immunosuppressant-1.jpg" alt="他克莫司胶囊产品介绍" />
     </div>
 
-    <div class="products-grid">
-      <div class="product-card animate-on-scroll">
-        <div class="product-image">
-          <img src="images/category-background-3.jpg" alt="他克莫司" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">他克莫司胶囊</h3>
-          <p class="product-desc">强效免疫抑制剂，预防排斥反应</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-1">
-        <div class="product-image">
-          <img src="images/category-background-1.jpg" alt="环孢素" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">环孢素软胶囊</h3>
-          <p class="product-desc">经典免疫抑制方案</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-2">
-        <div class="product-image">
-          <img src="images/category-background-2.jpg" alt="用药指导" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">用药指导服务</h3>
-          <p class="product-desc">专业药师提供用药咨询</p>
-        </div>
-      </div>
+    <!-- 图片 2：质量体系和药代动力学数据 -->
+    <div class="product-image-full animate-on-scroll">
+      <img src="images/immunosuppressant-2.jpg" alt="他克莫司胶囊质量体系和药代动力学数据" />
     </div>
-  </div>
-</section>
 
-<!-- CTA SECTION -->
-<section class="cta-section">
-  <div class="cta-content">
-    <h2>需要药物咨询？</h2>
-    <p>我们的专业药师团队为您提供详细的用药指导与服务</p>
-    <a href="contact.html" class="cta-btn">联系我们</a>
-  </div>
-</section>
-
-<!-- PARTNERS SECTION -->
-<section id="partners">
-  <div class="partners-inner">
-    <h3 class="partners-title">合作伙伴</h3>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
-      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
-      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
-      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
-      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
-    </div>
   </div>
 </section>
 
