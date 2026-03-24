@@ -1882,6 +1882,15 @@
       filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
     }
 
+    /* 免疫抑制剂小图 - 保持原始比例 */
+    .product-card img.product-img-small {
+      width: auto;
+      height: auto;
+      max-width: 60%;
+      max-height: 60%;
+      object-fit: contain;
+    }
+
     .product-card:hover img {
       transform: scale(1.1);
       filter: drop-shadow(0 12px 24px rgba(26, 89, 224, 0.2));
@@ -2732,7 +2741,7 @@
         <div class="product-card">
           <div class="product-card-image-wrapper">
             <div class="product-bg-circle"></div>
-            <img src="images/immunosuppressant-pills.png" alt="免疫抑制剂" />
+            <img src="images/immunosuppressant-pills.png" alt="免疫抑制剂" class="product-img-small" />
             <div class="product-arrow"></div>
           </div>
           <div class="product-card-overlay">
