@@ -1606,7 +1606,7 @@
       margin-top: 40px;
     }
 
-    /* 发展历程 - 紧凑横向时间线设计 */
+    /* 发展历程 - 波浪形交错时间线 */
     .development-history {
       margin-top: 120px;
       padding: 0 24px;
@@ -1614,7 +1614,7 @@
 
     .history-header {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 60px;
       position: relative;
     }
 
@@ -1649,179 +1649,206 @@
       text-transform: uppercase;
     }
 
-    /* 横向时间线容器 */
-    .timeline-horizontal {
+    /* 波浪形时间线容器 */
+    .timeline-wave {
       position: relative;
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 30px 0;
+      padding: 80px 0 100px;
       display: flex;
-      align-items: flex-start;
       justify-content: space-between;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--primary-300) var(--slate-100);
+      align-items: center;
     }
 
-    .timeline-horizontal::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .timeline-horizontal::-webkit-scrollbar-track {
-      background: var(--slate-100);
-      border-radius: 3px;
-    }
-
-    .timeline-horizontal::-webkit-scrollbar-thumb {
-      background: var(--primary-300);
-      border-radius: 3px;
-    }
-
-    /* 顶部时间轴线 */
-    .timeline-axis {
+    /* 中央波浪形时间轴线 */
+    .timeline-wave-axis {
       position: absolute;
-      top: 20px;
-      left: 50px;
-      right: 50px;
+      top: 50%;
+      left: 60px;
+      right: 60px;
       height: 4px;
-      background: linear-gradient(90deg, transparent 0%, var(--primary-200) 10%, var(--primary-500) 50%, var(--primary-200) 90%, transparent 100%);
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--primary-200) 5%,
+        var(--primary-400) 30%,
+        var(--primary-500) 50%,
+        var(--primary-400) 70%,
+        var(--primary-200) 95%,
+        transparent 100%);
       border-radius: 2px;
-      box-shadow: 0 0 20px rgba(26, 89, 224, 0.3);
+      transform: translateY(-50%);
     }
 
-    /* 时间线轴线光晕 */
-    .timeline-axis::before {
+    .timeline-wave-axis::before {
       content: '';
       position: absolute;
-      inset: -8px;
-      background: radial-gradient(ellipse at center, rgba(26, 89, 224, 0.1) 0%, transparent 70%);
-      border-radius: 10px;
+      inset: -10px;
+      background: radial-gradient(ellipse at center, rgba(26, 89, 224, 0.08) 0%, transparent 70%);
+      border-radius: 14px;
       pointer-events: none;
     }
 
-    /* 时间线节点 */
-    .timeline-h-item {
+    /* 时间线节点 - 交错布局 */
+    .timeline-item {
       position: relative;
       flex: 0 0 auto;
-      width: 100px;
+      width: 110px;
       display: flex;
       flex-direction: column;
       align-items: center;
       opacity: 0;
-      transform: translateY(20px);
-      animation: timelineH-reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: timeline-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       cursor: pointer;
     }
 
-    @keyframes timelineH-reveal {
+    /* 偶数项在上方 */
+    .timeline-item:nth-child(even) {
+      align-items: flex-start;
+      padding-top: 0;
+      padding-bottom: 60px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      top: auto;
+      bottom: -8px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year {
+      margin-top: 8px;
+      margin-bottom: 0;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-top: 8px;
+      align-items: flex-start;
+    }
+
+    /* 奇数项在下方 */
+    .timeline-item:nth-child(odd) {
+      align-items: flex-start;
+      padding-top: 60px;
+      padding-bottom: 0;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      top: -8px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-year {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-top: 0;
+      align-items: flex-start;
+    }
+
+    @keyframes timeline-reveal {
       to {
         opacity: 1;
-        transform: translateY(0);
       }
     }
 
     /* 节点圆点 */
-    .timeline-h-dot {
+    .timeline-dot {
       position: absolute;
-      top: 14px;
-      width: 14px;
-      height: 14px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
       background: linear-gradient(135deg, #fff, var(--primary-50));
       border: 3px solid var(--primary-500);
       border-radius: 50%;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 2;
       box-shadow: 0 0 0 4px rgba(26, 89, 224, 0.1), 0 4px 12px rgba(26, 89, 224, 0.2);
     }
 
-    .timeline-h-item:hover .timeline-h-dot {
-      transform: scale(1.25);
-      box-shadow: 0 0 0 8px rgba(26, 89, 224, 0.15), 0 6px 20px rgba(26, 89, 224, 0.3);
+    .timeline-item:hover .timeline-dot {
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow: 0 0 0 8px rgba(26, 89, 224, 0.15), 0 6px 20px rgba(26, 89, 224, 0.35);
       background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
       border-color: transparent;
     }
 
-    /* 年份 */
-    .timeline-h-year {
-      margin-top: 35px;
+    /* 高亮节点的圆点 */
+    .timeline-item.highlight .timeline-dot {
+      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+      border-color: transparent;
+      box-shadow: 0 0 0 6px rgba(26, 89, 224, 0.2), 0 6px 20px rgba(230, 30, 108, 0.3);
+    }
+
+    /* 年份标签 */
+    .timeline-year {
       font-size: 18px;
       font-weight: 800;
       color: var(--primary-600);
       background: #fff;
-      padding: 5px 12px;
-      border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 6px 14px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(26, 89, 224, 0.08);
       border: 1px solid var(--slate-100);
       transition: all 0.3s ease;
-      z-index: 3;
+      white-space: nowrap;
     }
 
-    .timeline-h-item:hover .timeline-h-year {
-      background: var(--primary-500);
+    .timeline-item:hover .timeline-year {
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
       color: #fff;
-      border-color: var(--primary-500);
+      border-color: transparent;
       transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(26, 89, 224, 0.25);
+    }
+
+    /* 高亮年份 */
+    .timeline-item.highlight .timeline-year {
+      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
+      color: #fff;
+      border-color: transparent;
+      font-size: 19px;
+      box-shadow: 0 4px 16px rgba(26, 89, 224, 0.2);
     }
 
     /* 内容卡片 */
-    .timeline-h-content {
-      margin-top: 12px;
-      padding: 14px 16px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(249,250,252,0.9) 100%);
-      border-radius: 12px;
-      border: none;
-      box-shadow: 0 4px 16px rgba(26, 89, 224, 0.08), 0 2px 6px rgba(0, 0, 0, 0.02);
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+    .timeline-content {
+      padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(249,250,252,0.95) 100%);
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(26, 89, 224, 0.1), 0 2px 8px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(26, 89, 224, 0.08);
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      opacity: 0;
-      transform: scale(0.9);
-      animation: timelineH-content 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
       position: relative;
       overflow: hidden;
+      min-width: 140px;
+      text-align: center;
     }
 
-    /* 卡片光晕背景 */
-    .timeline-h-content::before {
+    .timeline-content::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(26, 89, 224, 0.06) 0%, rgba(230, 30, 108, 0.04) 100%);
+      background: linear-gradient(135deg, rgba(26, 89, 224, 0.05) 0%, rgba(230, 30, 108, 0.03) 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
 
-    .timeline-h-item:hover .timeline-h-content::before {
+    .timeline-item:hover .timeline-content::before {
       opacity: 1;
     }
 
-    @keyframes timelineH-content {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .timeline-item:hover .timeline-content {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(26, 89, 224, 0.18), 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    .timeline-h-item:hover .timeline-h-content {
-      transform: translateY(-6px) scale(1.03);
-      box-shadow: 0 12px 32px rgba(26, 89, 224, 0.18), 0 6px 16px rgba(0, 0, 0, 0.04);
-    }
-
-    .timeline-h-text {
+    .timeline-text {
       font-size: 12px;
       color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* 高亮年份（重要里程碑） */
-    .timeline-h-item.highlight .timeline-h-year {
-      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-      color: #fff;
-      border-color: transparent;
-      font-size: 20px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
     }
 
     /* 产品中心网格 - 创意医疗器材展示 */
@@ -2298,18 +2325,20 @@
       .core-value-en { font-size: 9px; }
       .core-value-number { width: 24px; height: 24px; font-size: 11px; }
 
-      /* 发展历程移动端适配 - 横向时间线 */
+      /* 发展历程移动端适配 - 波浪形时间线 */
       .development-history { margin-top: 50px; }
       .history-header { margin-bottom: 36px; }
       .history-title { font-size: 22px; }
       .history-subtitle { font-size: 10px; }
-      .timeline-horizontal { padding: 40px 20px 20px; }
-      .timeline-axis { top: 15px; left: 70px; right: 20px; }
-      .timeline-h-item { width: 85px; }
-      .timeline-h-year { font-size: 14px; margin-top: 30px; }
-      .timeline-h-content { min-height: 55px; padding: 10px 12px; }
-      .timeline-h-text { font-size: 10px; }
-      .timeline-h-dot { top: 9px; width: 12px; height: 12px; }
+      .timeline-wave { padding: 60px 0 80px; }
+      .timeline-wave-axis { left: 40px; right: 40px; }
+      .timeline-item { width: 90px; }
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) { padding-top: 40px; padding-bottom: 40px; }
+      .timeline-year { font-size: 14px; padding: 4px 10px; }
+      .timeline-content { min-width: 110px; padding: 12px; }
+      .timeline-text { font-size: 10px; }
+      .timeline-dot { width: 12px; height: 12px; }
 
       /* 修复移动端视频 section 露出问题 */
       body.locked .video-section {
@@ -2577,83 +2606,103 @@
   </div>
 </section>
 
-<!-- 发展历程 - 横向时间线 -->
+<!-- 发展历程 - 波浪形交错时间线 -->
 <section class="content-section section-white">
   <div class="development-history">
     <div class="history-header">
       <h3 class="history-title">发展历程</h3>
       <p class="history-subtitle">HISTORY</p>
     </div>
-    <div class="timeline-horizontal">
-      <div class="timeline-axis"></div>
-      <div class="timeline-h-item" style="animation-delay: 0ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2004</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">公司成立</div>
+    <div class="timeline-wave">
+      <div class="timeline-wave-axis"></div>
+
+      <!-- 2004 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 0ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2004</div>
+        <div class="timeline-content">
+          <div class="timeline-text">公司成立</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 80ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2005</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">开展海外代理<br/>覆盖华东市场</div>
+
+      <!-- 2005 - 偶数项，在上方 -->
+      <div class="timeline-item" style="animation-delay: 100ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2005</div>
+        <div class="timeline-content">
+          <div class="timeline-text">开展海外代理<br/>覆盖华东市场</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 160ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2008</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">代理海正业务<br/>扩展全国销售</div>
+
+      <!-- 2008 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 200ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2008</div>
+        <div class="timeline-content">
+          <div class="timeline-text">代理海正业务<br/>扩展全国销售</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 240ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2013</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">云泽移植 IVD<br/>生产建立</div>
+
+      <!-- 2013 - 偶数项，在上方 -->
+      <div class="timeline-item" style="animation-delay: 300ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2013</div>
+        <div class="timeline-content">
+          <div class="timeline-text">云泽移植 IVD<br/>生产建立</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 320ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2015</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">新三板上市</div>
+
+      <!-- 2015 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 400ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2015</div>
+        <div class="timeline-content">
+          <div class="timeline-text">新三板上市</div>
         </div>
       </div>
-      <div class="timeline-h-item highlight" style="animation-delay: 400ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2016</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">完成收购 LSI<br/>布局全球市场</div>
+
+      <!-- 2016 - 偶数项，在上方（高亮） -->
+      <div class="timeline-item highlight" style="animation-delay: 500ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2016</div>
+        <div class="timeline-content">
+          <div class="timeline-text">完成收购 LSI<br/>布局全球市场</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 480ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2018</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">研发生产中心<br/>落地</div>
+
+      <!-- 2018 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 600ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2018</div>
+        <div class="timeline-content">
+          <div class="timeline-text">研发生产中心<br/>落地</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 560ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2019</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">首个自研产品<br/>获中国注册证</div>
+
+      <!-- 2019 - 偶数项，在上方 -->
+      <div class="timeline-item" style="animation-delay: 700ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2019</div>
+        <div class="timeline-content">
+          <div class="timeline-text">首个自研产品<br/>获中国注册证</div>
         </div>
       </div>
-      <div class="timeline-h-item" style="animation-delay: 640ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2021</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">TDM 全产品<br/>获 CE 证</div>
+
+      <!-- 2021 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 800ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2021</div>
+        <div class="timeline-content">
+          <div class="timeline-text">TDM 全产品<br/>获 CE 证</div>
         </div>
       </div>
-      <div class="timeline-h-item highlight" style="animation-delay: 720ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2023</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
+
+      <!-- 2023 - 偶数项，在上方（高亮） -->
+      <div class="timeline-item highlight" style="animation-delay: 900ms;">
+        <div class="timeline-dot"></div>
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <div class="timeline-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
         </div>
       </div>
     </div>
@@ -3505,10 +3554,10 @@
   relockPage();
 
   // =============================================
-  // 发展历程 - 横向时间线滚动动画
+  // 发展历程 - 波浪形时间线滚动动画
   // =============================================
   document.addEventListener('DOMContentLoaded', () => {
-    const timelineItems = document.querySelectorAll('.timeline-h-item');
+    const timelineItems = document.querySelectorAll('.timeline-item');
 
     const observerOptions = {
       root: null,
