@@ -1571,6 +1571,23 @@
       line-height: 1.4;
     }
 
+    /* 蜂窝状交错布局 - 偶数项向下偏移形成蜂窝效果 */
+    .core-hex-cell:nth-child(even) {
+      transform: translateY(28px);
+    }
+
+    .core-hex-cell:nth-child(even).animated {
+      transform: translateY(28px);
+    }
+
+    /* 六边形之间紧密排列 */
+    .core-hex-cell:nth-child(1) { margin-right: -10px; }
+    .core-hex-cell:nth-child(2) { margin-left: -10px; margin-right: -10px; }
+    .core-hex-cell:nth-child(3) { margin-left: -10px; margin-right: -10px; }
+    .core-hex-cell:nth-child(4) { margin-left: -10px; margin-right: -10px; }
+    .core-hex-cell:nth-child(5) { margin-left: -10px; margin-right: -10px; }
+    .core-hex-cell:nth-child(6) { margin-left: -10px; }
+
     /* 发展历程 - 紧凑横向时间线设计 */
     .development-history {
       margin-top: 120px;
@@ -2255,13 +2272,16 @@
 
       /* 核心价值移动端适配 - 蜂窝状布局 */
       .core-values-honeycomb { padding: 30px 12px; }
-      .core-honeycomb-grid { flex-wrap: wrap; gap: 4px; }
-      .core-hexagon { width: 100px; height: 116px; padding: 18px 10px; }
-      .core-hex-icon { width: 32px; height: 32px; }
-      .core-hex-icon svg { width: 28px; height: 28px; }
-      .core-hex-name { font-size: 12px; }
-      .core-hex-desc { font-size: 8px; }
-      .core-hex-number { width: 22px; height: 22px; font-size: 10px; }
+      .core-honeycomb-grid { flex-wrap: wrap; gap: 0; }
+      .core-hex-cell:nth-child(even) { transform: none !important; }
+      .core-hex-cell:nth-child(even).animated { transform: none !important; }
+      .core-hex-cell { margin: 0 !important; }
+      .core-hexagon { width: 90px; height: 104px; padding: 16px 8px; }
+      .core-hex-icon { width: 28px; height: 28px; }
+      .core-hex-icon svg { width: 24px; height: 24px; }
+      .core-hex-name { font-size: 11px; }
+      .core-hex-desc { font-size: 7px; }
+      .core-hex-number { width: 20px; height: 20px; font-size: 9px; }
 
       /* 发展历程移动端适配 - 横向时间线 */
       .development-history { margin-top: 50px; }
