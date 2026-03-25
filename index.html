@@ -1438,136 +1438,68 @@
        ============================================= */
     .core-values-honeycomb {
       position: relative;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
-      padding: 60px 24px;
-      background: linear-gradient(180deg, #1a59e0 0%, #0d47a1 50%, #08306b 100%);
-      border-radius: 24px;
-      overflow: hidden;
+      padding: 40px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* 背景装饰 - 蜂窝网格图案 */
-    .core-honeycomb-bg {
-      position: absolute;
-      inset: 0;
-      opacity: 0.06;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 17L28 1L56 17L56 50L28 66L28 66L28 99L0 83L0 50' fill='none' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E");
-      background-size: 60px 104px;
-      pointer-events: none;
-    }
-
-    /* 核心价值观标题 */
-    .core-honeycomb-header {
-      text-align: center;
-      margin-bottom: 50px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .core-honeycomb-title {
-      font-size: 36px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.15em;
-      margin-bottom: 8px;
-    }
-
-    .core-honeycomb-subtitle {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.7);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 500;
-    }
-
-    /* 蜂窝容器 */
+    /* 蜂窝容器 - 横向聚拢布局 */
     .core-honeycomb-grid {
       position: relative;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 20px;
-      z-index: 2;
+      justify-content: center;
+      gap: 8px;
     }
 
     /* 六边形单元格 */
     .core-hex-cell {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       position: relative;
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.8) translateY(20px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .core-hex-cell.animated {
       opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* 奇数项偏右 */
-    .core-hex-cell:nth-child(odd) {
-      transform: translateX(80px) translateY(30px);
-    }
-
-    .core-hex-cell:nth-child(odd).animated {
-      transform: translateX(80px);
-    }
-
-    /* 偶数项偏左 */
-    .core-hex-cell:nth-child(even) {
-      transform: translateX(-80px) translateY(30px);
-    }
-
-    .core-hex-cell:nth-child(even).animated {
-      transform: translateX(-80px);
+      transform: scale(1) translateY(0);
     }
 
     /* 六边形容器 */
     .core-hexagon {
       position: relative;
-      width: 200px;
-      height: 220px;
+      width: 160px;
+      height: 185px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 24px;
+      padding: 28px 20px;
       text-align: center;
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .core-hex-cell:hover .core-hexagon {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
     /* 六边形背景 - 使用 clip-path */
     .core-hex-bg {
       position: absolute;
       inset: 0;
-      background: rgba(255, 255, 255, 0.95);
+      background: #ffffff;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      transition: all 0.4s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--slate-200);
+      transition: all 0.3s ease;
     }
 
     .core-hex-cell:hover .core-hex-bg {
-      background: #ffffff;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    /* 六边形边框效果 */
-    .core-hex-bg::before {
-      content: '';
-      position: absolute;
-      inset: 2px;
-      background: linear-gradient(135deg, rgba(26, 89, 224, 0.1), rgba(230, 30, 108, 0.1));
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      transition: all 0.4s ease;
-    }
-
-    .core-hex-cell:hover .core-hex-bg::before {
-      background: linear-gradient(135deg, rgba(26, 89, 224, 0.2), rgba(230, 30, 108, 0.2));
+      box-shadow: 0 12px 40px rgba(26, 89, 224, 0.2);
+      border-color: var(--primary-300);
     }
 
     /* 六边形内容 */
@@ -1582,98 +1514,61 @@
     /* 序号 */
     .core-hex-number {
       position: absolute;
-      top: -10px;
+      top: -8px;
       left: 50%;
       transform: translateX(-50%);
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(26, 89, 224, 0.4);
+      box-shadow: 0 2px 8px rgba(26, 89, 224, 0.3);
       z-index: 3;
     }
 
     /* 图标容器 */
     .core-hex-icon {
-      width: 56px;
-      height: 56px;
-      margin-bottom: 12px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .core-hex-cell:hover .core-hex-icon {
-      transform: scale(1.15) rotate(5deg);
+      transform: scale(1.12) rotate(5deg);
     }
 
     .core-hex-icon svg {
-      width: 48px;
-      height: 48px;
+      width: 40px;
+      height: 40px;
       fill: url(#hexIconGradient);
     }
 
     /* 价值观名称 */
     .core-hex-name {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 700;
-      color: var(--slate-800);
-      margin-bottom: 6px;
-      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: 0.08em;
     }
 
     /* 价值观描述 */
     .core-hex-desc {
-      font-size: 11px;
-      color: var(--slate-500);
+      font-size: 9px;
+      color: var(--text-secondary);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       font-weight: 600;
-      line-height: 1.5;
-      max-width: 160px;
-    }
-
-    /* 连接线 */
-    .core-hex-connector {
-      position: absolute;
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      top: 50%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .core-hex-connector.left {
-      left: -50px;
-    }
-
-    .core-hex-connector.right {
-      right: -50px;
-    }
-
-    /* 响应式调整 */
-    @media (max-width: 992px) {
-      .core-hex-cell:nth-child(odd),
-      .core-hex-cell:nth-child(even) {
-        transform: translateX(0) translateY(30px);
-      }
-
-      .core-hex-cell:nth-child(odd).animated,
-      .core-hex-cell:nth-child(even).animated {
-        transform: translateX(0);
-      }
-
-      .core-hex-connector {
-        display: none;
-      }
+      line-height: 1.4;
     }
 
     /* 发展历程 - 紧凑横向时间线设计 */
@@ -2359,15 +2254,14 @@
       .marker-pulse { width: 14px; height: 14px; }
 
       /* 核心价值移动端适配 - 蜂窝状布局 */
-      .core-values-honeycomb { padding: 40px 16px; }
-      .core-honeycomb-title { font-size: 28px; }
-      .core-honeycomb-subtitle { font-size: 12px; }
-      .core-hexagon { width: 160px; height: 180px; padding: 24px 18px; }
-      .core-hex-icon { width: 44px; height: 44px; }
-      .core-hex-icon svg { width: 36px; height: 36px; }
-      .core-hex-name { font-size: 16px; }
-      .core-hex-desc { font-size: 10px; }
-      .core-hex-number { width: 28px; height: 28px; font-size: 12px; }
+      .core-values-honeycomb { padding: 30px 12px; }
+      .core-honeycomb-grid { flex-wrap: wrap; gap: 4px; }
+      .core-hexagon { width: 100px; height: 116px; padding: 18px 10px; }
+      .core-hex-icon { width: 32px; height: 32px; }
+      .core-hex-icon svg { width: 28px; height: 28px; }
+      .core-hex-name { font-size: 12px; }
+      .core-hex-desc { font-size: 8px; }
+      .core-hex-number { width: 22px; height: 22px; font-size: 10px; }
 
       /* 发展历程移动端适配 - 横向时间线 */
       .development-history { margin-top: 50px; }
@@ -2648,237 +2542,6 @@
   </div>
 </section>
 
-<!-- CORE VALUES SECTION - 蜂窝状布局 -->
-<section class="content-section section-white" id="section-core-values">
-  <div class="core-values-honeycomb">
-    <!-- 背景蜂窝图案 -->
-    <div class="core-honeycomb-bg"></div>
-
-    <!-- 标题 -->
-    <div class="core-honeycomb-header">
-      <h2 class="core-honeycomb-title">核心价值</h2>
-      <p class="core-honeycomb-subtitle">CORE VALUES</p>
-    </div>
-
-    <!-- 蜂窝网格 -->
-    <div class="core-honeycomb-grid">
-      <!-- 价值观 1: 专注移植 -->
-      <div class="core-hex-cell">
-        <div class="core-hex-connector right"></div>
-        <div class="core-hexagon">
-          <div class="core-hex-bg"></div>
-          <div class="core-hex-content">
-            <span class="core-hex-number">01</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="hexIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#1a59e0"/>
-                    <stop offset="100%" style="stop-color:#0f3fb5"/>
-                  </linearGradient>
-                </defs>
-                <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"/>
-                <path d="M24 14c-5.52 0-10 4.48-10 10v4h4v-4c0-3.31 2.69-6 6-6s6 2.69 6 6v4h4v-4c0-5.52-4.48-10-10-10z"/>
-                <rect x="20" y="26" width="8" height="8" rx="2"/>
-                <path d="M22 36h4v4h-4z"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">专注移植</h3>
-            <p class="core-hex-desc">Commitment To Transplantation</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 价值观 2: 精益求精 -->
-      <div class="core-hex-cell">
-        <div class="core-hex-connector left"></div>
-        <div class="core-hexagon">
-          <div class="core-hex-bg"></div>
-          <div class="core-hex-content">
-            <span class="core-hex-number">02</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 2L4 12l4 18 16 10 16-10 4-18L24 2z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M24 10l-8 4 2 10 6 4 6-4 2-10-8-4z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="24" cy="22" r="4" fill="url(#hexIconGradient)"/>
-                <path d="M24 28v8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M20 40h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">精益求精</h3>
-            <p class="core-hex-desc">Pursuit For Excellence</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 价值观 3: 以人为本 -->
-      <div class="core-hex-cell">
-        <div class="core-hex-connector right"></div>
-        <div class="core-hexagon">
-          <div class="core-hex-bg"></div>
-          <div class="core-hex-content">
-            <span class="core-hex-number">03</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="14" r="5" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="32" cy="14" r="5" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M8 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M24 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M16 20c-4.42 0-8 3.58-8 8v4h4v-4c0-2.21 1.79-4 4-4" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">以人为本</h3>
-            <p class="core-hex-desc">Care For People</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 价值观 4: 持续创新 -->
-      <div class="core-hex-cell">
-        <div class="core-hex-connector left"></div>
-        <div class="core-hexagon">
-          <div class="core-hex-bg"></div>
-          <div class="core-hex-content">
-            <span class="core-hex-number">04</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 4v6M24 38v6M8 24h6M34 24h6" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="24" cy="24" r="10" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M24 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="url(#hexIconGradient)"/>
-                <path d="M12 12l4 4M32 32l4 4M12 36l4-4M32 16l4-4" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">持续创新</h3>
-            <p class="core-hex-desc">Never Stop Innovation</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 价值观 5: 敬畏生命 -->
-      <div class="core-hex-cell">
-        <div class="core-hex-connector right"></div>
-        <div class="core-hexagon">
-          <div class="core-hex-bg"></div>
-          <div class="core-hex-content">
-            <span class="core-hex-number">05</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 44s-16-10.67-16-24c0-6.63 5.37-12 12-12 4.42 0 8 2.69 10 6 2-3.31 5.58-6 10-6 6.63 0 12 5.37 12 12 0 13.33-16 24-16 24z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2.5"/>
-                <path d="M24 34v6M20 36h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">敬畏生命</h3>
-            <p class="core-hex-desc">Reverence For Life</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 价值观 6: 诚信责任 -->
-      <div class="core-hex-cell">
-        <div class="core-hex-connector left"></div>
-        <div class="core-hexagon">
-          <div class="core-hex-bg"></div>
-          <div class="core-hex-content">
-            <span class="core-hex-number">06</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="12" width="32" height="24" rx="3" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M16 22h16M16 28h10" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="34" cy="34" r="6" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M32 34l1.5 1.5L37 32" stroke="url(#hexIconGradient)" stroke-width="2" fill="none"/>
-                <path d="M24 6v6M20 8h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">诚信责任</h3>
-            <p class="core-hex-desc">Integrity & Responsibility</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 发展历程 - 横向时间线 -->
-  <div class="development-history">
-    <div class="history-header">
-      <h3 class="history-title">发展历程</h3>
-      <p class="history-subtitle">HISTORY</p>
-    </div>
-    <div class="timeline-horizontal">
-      <div class="timeline-axis"></div>
-      <div class="timeline-h-item" style="animation-delay: 0ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2004</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">公司成立</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 80ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2005</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">开展海外代理<br/>覆盖华东市场</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 160ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2008</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">代理海正业务<br/>扩展全国销售</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 240ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2013</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">云泽移植 IVD<br/>生产建立</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 320ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2015</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">新三板上市</div>
-        </div>
-      </div>
-      <div class="timeline-h-item highlight" style="animation-delay: 400ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2016</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">完成收购 LSI<br/>布局全球市场</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 480ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2018</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">研发生产中心<br/>落地</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 560ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2019</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">首个自研产品<br/>获中国注册证</div>
-        </div>
-      </div>
-      <div class="timeline-h-item" style="animation-delay: 640ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2021</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">TDM 全产品<br/>获 CE 证</div>
-        </div>
-      </div>
-      <div class="timeline-h-item highlight" style="animation-delay: 720ms;">
-        <div class="timeline-h-dot"></div>
-        <div class="timeline-h-year">2023</div>
-        <div class="timeline-h-content">
-          <div class="timeline-h-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRODUCTS SECTION -->
 <section class="content-section section-light" id="section-products">
   <div class="section-inner" style="display: block;">
@@ -3021,6 +2684,222 @@
               <line x1="10" y1="14" x2="21" y2="3"/>
             </svg>
           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES SECTION - 蜂窝状布局 -->
+<section class="content-section section-white" id="section-core-values">
+  <div class="core-values-honeycomb">
+    <!-- 蜂窝网格 - 横向聚拢排列 -->
+    <div class="core-honeycomb-grid">
+      <!-- 价值观 1: 专注移植 -->
+      <div class="core-hex-cell">
+        <div class="core-hexagon">
+          <div class="core-hex-bg"></div>
+          <div class="core-hex-content">
+            <span class="core-hex-number">01</span>
+            <div class="core-hex-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="hexIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#1a59e0"/>
+                    <stop offset="100%" style="stop-color:#0f3fb5"/>
+                  </linearGradient>
+                </defs>
+                <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"/>
+                <path d="M24 14c-5.52 0-10 4.48-10 10v4h4v-4c0-3.31 2.69-6 6-6s6 2.69 6 6v4h4v-4c0-5.52-4.48-10-10-10z"/>
+                <rect x="20" y="26" width="8" height="8" rx="2"/>
+                <path d="M22 36h4v4h-4z"/>
+              </svg>
+            </div>
+            <h3 class="core-hex-name">专注移植</h3>
+            <p class="core-hex-desc">Commitment To Transplantation</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 价值观 2: 精益求精 -->
+      <div class="core-hex-cell">
+        <div class="core-hexagon">
+          <div class="core-hex-bg"></div>
+          <div class="core-hex-content">
+            <span class="core-hex-number">02</span>
+            <div class="core-hex-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 2L4 12l4 18 16 10 16-10 4-18L24 2z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M24 10l-8 4 2 10 6 4 6-4 2-10-8-4z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <circle cx="24" cy="22" r="4" fill="url(#hexIconGradient)"/>
+                <path d="M24 28v8" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M20 40h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="core-hex-name">精益求精</h3>
+            <p class="core-hex-desc">Pursuit For Excellence</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 价值观 3: 以人为本 -->
+      <div class="core-hex-cell">
+        <div class="core-hexagon">
+          <div class="core-hex-bg"></div>
+          <div class="core-hex-content">
+            <span class="core-hex-number">03</span>
+            <div class="core-hex-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="14" r="5" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <circle cx="32" cy="14" r="5" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M8 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M24 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M16 20c-4.42 0-8 3.58-8 8v4h4v-4c0-2.21 1.79-4 4-4" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="core-hex-name">以人为本</h3>
+            <p class="core-hex-desc">Care For People</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 价值观 4: 持续创新 -->
+      <div class="core-hex-cell">
+        <div class="core-hexagon">
+          <div class="core-hex-bg"></div>
+          <div class="core-hex-content">
+            <span class="core-hex-number">04</span>
+            <div class="core-hex-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 4v6M24 38v6M8 24h6M34 24h6" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <circle cx="24" cy="24" r="10" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M24 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="url(#hexIconGradient)"/>
+                <path d="M12 12l4 4M32 32l4 4M12 36l4-4M32 16l4-4" stroke="url(#hexIconGradient)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="core-hex-name">持续创新</h3>
+            <p class="core-hex-desc">Never Stop Innovation</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 价值观 5: 敬畏生命 -->
+      <div class="core-hex-cell">
+        <div class="core-hexagon">
+          <div class="core-hex-bg"></div>
+          <div class="core-hex-content">
+            <span class="core-hex-number">05</span>
+            <div class="core-hex-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 44s-16-10.67-16-24c0-6.63 5.37-12 12-12 4.42 0 8 2.69 10 6 2-3.31 5.58-6 10-6 6.63 0 12 5.37 12 12 0 13.33-16 24-16 24z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2.5"/>
+                <path d="M24 34v6M20 36h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="core-hex-name">敬畏生命</h3>
+            <p class="core-hex-desc">Reverence For Life</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 价值观 6: 诚信责任 -->
+      <div class="core-hex-cell">
+        <div class="core-hexagon">
+          <div class="core-hex-bg"></div>
+          <div class="core-hex-content">
+            <span class="core-hex-number">06</span>
+            <div class="core-hex-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="12" width="32" height="24" rx="3" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M16 22h16M16 28h10" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <circle cx="34" cy="34" r="6" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
+                <path d="M32 34l1.5 1.5L37 32" stroke="url(#hexIconGradient)" stroke-width="2" fill="none"/>
+                <path d="M24 6v6M20 8h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="core-hex-name">诚信责任</h3>
+            <p class="core-hex-desc">Integrity & Responsibility</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 发展历程 - 横向时间线 -->
+  <div class="development-history">
+    <div class="history-header">
+      <h3 class="history-title">发展历程</h3>
+      <p class="history-subtitle">HISTORY</p>
+    </div>
+    <div class="timeline-horizontal">
+      <div class="timeline-axis"></div>
+      <div class="timeline-h-item" style="animation-delay: 0ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2004</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">公司成立</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 80ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2005</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">开展海外代理<br/>覆盖华东市场</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 160ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2008</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">代理海正业务<br/>扩展全国销售</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 240ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2013</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">云泽移植 IVD<br/>生产建立</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 320ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2015</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">新三板上市</div>
+        </div>
+      </div>
+      <div class="timeline-h-item highlight" style="animation-delay: 400ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2016</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">完成收购 LSI<br/>布局全球市场</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 480ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2018</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">研发生产中心<br/>落地</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 560ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2019</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">首个自研产品<br/>获中国注册证</div>
+        </div>
+      </div>
+      <div class="timeline-h-item" style="animation-delay: 640ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2021</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">TDM 全产品<br/>获 CE 证</div>
+        </div>
+      </div>
+      <div class="timeline-h-item highlight" style="animation-delay: 720ms;">
+        <div class="timeline-h-dot"></div>
+        <div class="timeline-h-year">2023</div>
+        <div class="timeline-h-content">
+          <div class="timeline-h-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
         </div>
       </div>
     </div>
