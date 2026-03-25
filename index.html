@@ -1455,17 +1455,31 @@
       gap: 8px;
     }
 
-    /* 六边形单元格 */
+    /* 六边形单元格 - 初始状态 */
     .core-hex-cell {
       position: relative;
       opacity: 0;
-      transform: scale(0.8) translateY(20px);
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 奇数项 - 从上方滑入 */
+    .core-hex-cell:nth-child(odd) {
+      transform: scale(0.8) translateY(-30px);
+    }
+
+    /* 偶数项 - 从下方滑入，并保持 28px 向下偏移形成蜂窝 */
+    .core-hex-cell:nth-child(even) {
+      transform: scale(0.8) translateY(58px);
     }
 
     .core-hex-cell.animated {
       opacity: 1;
       transform: scale(1) translateY(0);
+    }
+
+    /* 动画后保持蜂窝交错效果 */
+    .core-hex-cell:nth-child(even).animated {
+      transform: translateY(28px) scale(1);
     }
 
     /* 六边形容器 */
@@ -1569,15 +1583,6 @@
       letter-spacing: 0.12em;
       font-weight: 600;
       line-height: 1.4;
-    }
-
-    /* 蜂窝状交错布局 - 偶数项向下偏移形成蜂窝效果 */
-    .core-hex-cell:nth-child(even) {
-      transform: translateY(28px);
-    }
-
-    .core-hex-cell:nth-child(even).animated {
-      transform: translateY(28px);
     }
 
     /* 六边形之间紧密排列 */
