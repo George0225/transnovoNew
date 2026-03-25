@@ -2160,6 +2160,107 @@
       font-weight: 600;
     }
 
+    /* 弹出式文字介绍 - 柔和有机质感 */
+    .product-card-popout {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 248, 246, 0.96) 100%);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 36px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(10px) scale(0.98);
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .product-card:hover .product-card-popout {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .product-card-popout::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-400), var(--accent-500), var(--primary-500));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .product-popout-content {
+      position: relative;
+      z-index: 1;
+      max-height: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-400) transparent;
+    }
+
+    .product-popout-content::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .product-popout-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .product-popout-content::-webkit-scrollbar-thumb {
+      background: var(--primary-400);
+      border-radius: 2px;
+    }
+
+    .product-popout-text {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-primary);
+      text-align: justify;
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 400;
+    }
+
+    .product-popout-text p {
+      margin-bottom: 16px;
+    }
+
+    .product-popout-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .product-popout-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-600);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-right: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* 隐藏原有 overlay 当 popout 存在时 */
+    .product-card:hover .product-card-overlay {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* 隐藏 imageWrapper 当 popout 显示时 - 只针对有 popout 的卡片 */
+    .product-card:has(.product-card-popout):hover .product-card-image-wrapper {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+
     /* 进入产品中心链接美化 - 柔和质感 */
     .section-more-link {
       display: inline-flex;
@@ -2885,6 +2986,14 @@
             <div class="product-card-name">机械灌注</div>
             <div class="product-card-desc">MACHINE PERFUSION</div>
           </div>
+          <div class="product-card-popout">
+            <div class="product-popout-content">
+              <div class="product-popout-text">
+                <p><span class="product-popout-label">产品用途</span>LifePort®肾脏灌注转运箱主要用于肾移植前对供肾的低温保存、灌注和运输。它可以保持肾脏在一个低温和无菌的环境中，进行持续的机械灌注。</p>
+                <p>LifePort®提供了一个标准的可视化的保存与运输环境，提供客观供肾评估参数，是除了肾脏活检之外的又一里程碑式的供肾评估方法，有效的提高了供肾的质量，减少移植失败风险，对提高患者长期生存率具有积极意义，是肾脏机械灌注的金标准。</p>
+              </div>
+            </div>
+          </div>
         </div>
       </a>
       <a href="organ-preservation.html" class="product-card-link">
@@ -2923,6 +3032,14 @@
           <div class="product-card-overlay">
             <div class="product-card-name">免疫抑制剂</div>
             <div class="product-card-desc">IMMUNOSUPPRESSANT</div>
+          </div>
+          <div class="product-card-popout">
+            <div class="product-popout-content">
+              <div class="product-popout-text">
+                <p><span class="product-popout-label">通用名称</span>他克莫司胶囊</p>
+                <p><span class="product-popout-label">适应症</span>预防肝脏或肾脏移植术后的移植物排斥反应。治疗肝脏或肾脏移植术后应用其他免疫抑制药物无法控制的移植物排斥反应。</p>
+              </div>
+            </div>
           </div>
         </div>
       </a>
