@@ -1705,16 +1705,11 @@
     .timeline-item:nth-child(even) {
       align-items: flex-start;
       padding-top: 0;
-      padding-bottom: 60px;
-    }
-
-    .timeline-item:nth-child(even) .timeline-dot {
-      top: auto;
-      bottom: -8px;
+      padding-bottom: 40px;
     }
 
     .timeline-item:nth-child(even) .timeline-year {
-      margin-top: 8px;
+      margin-top: 0;
       margin-bottom: 0;
     }
 
@@ -1726,21 +1721,17 @@
     /* 奇数项在下方 */
     .timeline-item:nth-child(odd) {
       align-items: flex-start;
-      padding-top: 60px;
+      padding-top: 40px;
       padding-bottom: 0;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-dot {
-      top: -8px;
     }
 
     .timeline-item:nth-child(odd) .timeline-year {
       margin-top: 0;
-      margin-bottom: 8px;
+      margin-bottom: 0;
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
-      margin-top: 0;
+      margin-top: 8px;
       align-items: flex-start;
     }
 
@@ -1750,33 +1741,10 @@
       }
     }
 
-    /* 节点圆点 */
+    /* 节点圆点 - 隐藏 */
     .timeline-dot {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 16px;
-      height: 16px;
-      background: linear-gradient(135deg, #fff, var(--primary-50));
-      border: 3px solid var(--primary-500);
-      border-radius: 50%;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      z-index: 2;
-      box-shadow: 0 0 0 4px rgba(26, 89, 224, 0.1), 0 4px 12px rgba(26, 89, 224, 0.2);
+      display: none;
     }
-
-    .timeline-item:hover .timeline-dot {
-      transform: translate(-50%, -50%) scale(1.3);
-      box-shadow: 0 0 0 8px rgba(26, 89, 224, 0.15), 0 6px 20px rgba(26, 89, 224, 0.35);
-      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-      border-color: transparent;
-    }
-
-    /* 高亮节点的圆点 */
-    .timeline-item.highlight .timeline-dot {
-      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-      border-color: transparent;
       box-shadow: 0 0 0 6px rgba(26, 89, 224, 0.2), 0 6px 20px rgba(230, 30, 108, 0.3);
     }
 
@@ -2627,7 +2595,7 @@
 
       <!-- 2004 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 0ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2004</div>
         <div class="timeline-content">
           <div class="timeline-text">公司成立</div>
@@ -2636,7 +2604,7 @@
 
       <!-- 2005 - 偶数项，在上方 -->
       <div class="timeline-item" style="animation-delay: 100ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2005</div>
         <div class="timeline-content">
           <div class="timeline-text">开展海外代理<br/>覆盖华东市场</div>
@@ -2645,7 +2613,7 @@
 
       <!-- 2008 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 200ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2008</div>
         <div class="timeline-content">
           <div class="timeline-text">代理海正业务<br/>扩展全国销售</div>
@@ -2654,7 +2622,7 @@
 
       <!-- 2013 - 偶数项，在上方 -->
       <div class="timeline-item" style="animation-delay: 300ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2013</div>
         <div class="timeline-content">
           <div class="timeline-text">云泽移植 IVD<br/>生产建立</div>
@@ -2663,7 +2631,7 @@
 
       <!-- 2015 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 400ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2015</div>
         <div class="timeline-content">
           <div class="timeline-text">新三板上市</div>
@@ -2672,7 +2640,7 @@
 
       <!-- 2016 - 偶数项，在上方（高亮） -->
       <div class="timeline-item highlight" style="animation-delay: 500ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2016</div>
         <div class="timeline-content">
           <div class="timeline-text">完成收购 LSI<br/>布局全球市场</div>
@@ -2681,7 +2649,7 @@
 
       <!-- 2018 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 600ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2018</div>
         <div class="timeline-content">
           <div class="timeline-text">研发生产中心<br/>落地</div>
@@ -2690,7 +2658,7 @@
 
       <!-- 2019 - 偶数项，在上方 -->
       <div class="timeline-item" style="animation-delay: 700ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2019</div>
         <div class="timeline-content">
           <div class="timeline-text">首个自研产品<br/>获中国注册证</div>
@@ -2699,7 +2667,7 @@
 
       <!-- 2021 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 800ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2021</div>
         <div class="timeline-content">
           <div class="timeline-text">TDM 全产品<br/>获 CE 证</div>
@@ -2708,7 +2676,7 @@
 
       <!-- 2023 - 偶数项，在上方（高亮） -->
       <div class="timeline-item highlight" style="animation-delay: 900ms;">
-        <div class="timeline-dot"></div>
+        
         <div class="timeline-year">2023</div>
         <div class="timeline-content">
           <div class="timeline-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
