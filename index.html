@@ -1134,21 +1134,23 @@
       letter-spacing: 0.1em;
     }
 
-    /* 地图容器 - 增大尺寸 */
+    /* 地图容器 - 最大化尺寸 */
     .world-map-container {
       width: 100%;
-      max-width: 2000px;
-      margin: 0 auto 50px;
+      max-width: 100%;
+      margin: 0 auto 60px;
+      padding: 0 24px;
     }
 
     .world-map-viz {
       position: relative;
       width: 100%;
-      aspect-ratio: 16/9;
+      aspect-ratio: 21/9;
+      max-height: 80vh;
       background: #fafbfc;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
       border: 1px solid rgba(15, 63, 181, 0.08);
     }
 
@@ -1157,11 +1159,11 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 98%;
-      height: 95%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       object-position: center;
-      opacity: 0.9;
+      opacity: 0.95;
       image-rendering: high-quality;
     }
 
@@ -1185,61 +1187,62 @@
 
     /* 标记点位置 - 基于实际地图图片精确分析 */
     /* 上海：中国东部沿海，长江入海口附近 */
-    .marker-shanghai { left: 82%; top: 39%; }
-    /* 广州：中国南部，广东省，沿海内陆一点 */
-    .marker-guangzhou { left: 81%; top: 43%; }
+    .marker-shanghai { left: 86%; top: 40%; }
+    /* 广州：中国南部，广东省，珠江三角洲 */
+    .marker-guangzhou { left: 84%; top: 47%; }
     /* 芝加哥：美国中东部，五大湖密歇根湖西南 */
-    .marker-chicago { left: 21%; top: 31%; }
+    .marker-chicago { left: 24%; top: 35%; }
     /* 布鲁塞尔：西欧，英国东南方向欧洲大陆 */
-    .marker-brussels { left: 48.5%; top: 30%; }
+    .marker-brussels { left: 51%; top: 29%; }
 
     .marker-pulse {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 16px;
-      height: 16px;
-      background: radial-gradient(circle, rgba(230, 30, 108, 0.4) 0%, transparent 70%);
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, rgba(230, 30, 108, 0.5) 0%, transparent 70%);
       border-radius: 50%;
       animation: markerPulseRing 2.5s ease-out infinite;
     }
 
     @keyframes markerPulseRing {
       0% { width: 0; height: 0; opacity: 0.8; }
-      100% { width: 32px; height: 32px; opacity: 0; }
+      100% { width: 48px; height: 48px; opacity: 0; }
     }
 
     .marker-dot {
       position: relative;
-      width: 8px;
-      height: 8px;
+      width: 12px;
+      height: 12px;
       background: var(--primary-600);
       border-radius: 50%;
-      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95);
       transition: all 0.3s ease;
     }
 
     .office-marker:hover .marker-dot {
-      transform: scale(1.3);
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 1), 0 2px 8px rgba(230, 30, 108, 0.4);
+      transform: scale(1.4);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 1), 0 2px 12px rgba(230, 30, 108, 0.5);
     }
 
     /* 标记点标签 */
     .office-marker::after {
       content: attr(data-city);
       position: absolute;
-      top: calc(100% + 6px);
+      top: calc(100% + 8px);
       left: 50%;
       transform: translateX(-50%);
       background: #fff;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
       color: var(--text-primary);
       white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--border);
       opacity: 0;
       visibility: hidden;
       transition: all 0.25s ease;
@@ -1248,7 +1251,7 @@
     .office-marker:hover::after {
       opacity: 1;
       visibility: visible;
-      top: calc(100% + 8px);
+      top: calc(100% + 10px);
     }
 
     /* 办公地点列表 - 无卡片简洁风格 */
@@ -1434,11 +1437,11 @@
     }
 
     /* =============================================
-       核心价值 - 蜂窝状纵向布局 (参考图片风格)
+       核心价值 - 蜂窝状聚拢布局 (参考图片风格)
        ============================================= */
     .core-values-honeycomb {
       position: relative;
-      max-width: 500px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 60px 24px;
       display: flex;
@@ -1446,47 +1449,46 @@
       align-items: center;
     }
 
-    /* 蜂窝容器 - 纵向 Z 字形排列 */
+    /* 蜂窝容器 - 6 个六边形聚拢排列 */
     .core-honeycomb-grid {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+      width: 520px;
+      height: 420px;
     }
 
-    /* 六边形单元格 */
+    /* 六边形单元格 - 绝对定位形成蜂窝 */
     .core-hex-cell {
-      position: relative;
+      position: absolute;
       opacity: 0;
       transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* 奇数项 - 从左侧滑入 */
-    .core-hex-cell:nth-child(odd) {
-      transform: translateX(-40px) scale(0.8);
-    }
+    /* 六边形位置 - 蜂窝状排列 (2 列 3 行，交错) */
+    /* 第一列：1, 3, 5 */
+    .core-hex-cell:nth-child(1) { left: 0; top: 0; transform: scale(0.8) translateY(-30px); }
+    .core-hex-cell:nth-child(3) { left: 0; top: 190px; transform: scale(0.8) translateY(-30px); }
+    .core-hex-cell:nth-child(5) { left: 0; top: 380px; transform: scale(0.8) translateY(-30px); }
 
-    /* 偶数项 - 从右侧滑入 */
-    .core-hex-cell:nth-child(even) {
-      transform: translateX(40px) scale(0.8);
-    }
+    /* 第二列：2, 4, 6 - 向下偏移 95px 形成蜂窝 */
+    .core-hex-cell:nth-child(2) { left: 165px; top: 95px; transform: scale(0.8) translateY(30px); }
+    .core-hex-cell:nth-child(4) { left: 165px; top: 285px; transform: scale(0.8) translateY(30px); }
+    .core-hex-cell:nth-child(6) { left: 330px; top: 190px; transform: scale(0.8) translateY(-30px); }
 
     .core-hex-cell.animated {
       opacity: 1;
-      transform: scale(1) translateX(0);
+      transform: scale(1) translateY(0);
     }
 
     /* 六边形容器 */
     .core-hexagon {
       position: relative;
-      width: 180px;
-      height: 208px;
+      width: 160px;
+      height: 185px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 20px;
+      padding: 28px 20px;
       text-align: center;
       transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
