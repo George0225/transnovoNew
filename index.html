@@ -1437,90 +1437,111 @@
     }
 
     /* =============================================
-       核心价值 - 蜂窝状聚拢布局 (参考图片风格)
+       核心价值 - 蜂窝状六边形布局
        ============================================= */
-    .core-values-honeycomb {
+    .core-values-section {
       position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 60px 24px;
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #f9fafc 0%, #ffffff 100%);
+    }
+
+    .core-values-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .core-values-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .core-values-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-500), var(--primary-400));
+      border-radius: 2px;
+    }
+
+    .core-values-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 20px;
+    }
+
+    /* 蜂窝网格容器 */
+    .core-values-grid {
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    /* 蜂窝容器 - 6 个六边形聚拢排列 */
-    .core-honeycomb-grid {
+    /* 六边形卡片 */
+    .core-value-item {
       position: relative;
-      width: 520px;
-      height: 420px;
-    }
-
-    /* 六边形单元格 - 绝对定位形成蜂窝 */
-    .core-hex-cell {
-      position: absolute;
-      opacity: 0;
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* 六边形位置 - 蜂窝状排列 (2 列 3 行，交错) */
-    /* 第一列：1, 3, 5 */
-    .core-hex-cell:nth-child(1) { left: 0; top: 0; transform: scale(0.8) translateY(-30px); }
-    .core-hex-cell:nth-child(3) { left: 0; top: 190px; transform: scale(0.8) translateY(-30px); }
-    .core-hex-cell:nth-child(5) { left: 0; top: 380px; transform: scale(0.8) translateY(-30px); }
-
-    /* 第二列：2, 4, 6 - 向下偏移 95px 形成蜂窝 */
-    .core-hex-cell:nth-child(2) { left: 165px; top: 95px; transform: scale(0.8) translateY(30px); }
-    .core-hex-cell:nth-child(4) { left: 165px; top: 285px; transform: scale(0.8) translateY(30px); }
-    .core-hex-cell:nth-child(6) { left: 330px; top: 190px; transform: scale(0.8) translateY(-30px); }
-
-    .core-hex-cell.animated {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-
-    /* 六边形容器 - 直接使用背景色和边框 */
-    .core-hexagon {
-      position: relative;
-      width: 160px;
-      height: 185px;
+      width: 180px;
+      height: 200px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 28px 20px;
       text-align: center;
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      background: #ffffff;
-      border: 2px solid var(--slate-200);
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .core-hex-cell:hover .core-hexagon {
-      transform: scale(1.08);
-      z-index: 10;
-      box-shadow: 0 12px 40px rgba(26, 89, 224, 0.25);
-      border-color: var(--primary-400);
+    /* SVG 六边形背景 */
+    .core-value-hex-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .core-value-hex-bg polygon {
+      fill: #ffffff;
+      stroke: var(--slate-200);
+      stroke-width: 2;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.08));
+    }
+
+    .core-value-item:hover .core-value-hex-bg polygon {
+      stroke: var(--primary-400);
+      stroke-width: 2.5;
+      filter: drop-shadow(0 12px 40px rgba(26, 89, 224, 0.25));
     }
 
     /* 六边形内容 */
-    .core-hex-content {
+    .core-value-content {
       position: relative;
-      z-index: 2;
+      z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      pointer-events: none;
+      gap: 8px;
     }
 
-    /* 序号 */
-    .core-hex-number {
-      position: absolute;
-      top: -8px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* 序号徽章 */
+    .core-value-number {
       width: 28px;
       height: 28px;
       background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
@@ -1532,56 +1553,58 @@
       font-size: 12px;
       font-weight: 700;
       box-shadow: 0 3px 10px rgba(26, 89, 224, 0.35);
-      z-index: 3;
+      margin-bottom: 4px;
     }
 
-    /* 图标容器 */
-    .core-hex-icon {
-      width: 50px;
-      height: 50px;
-      margin-bottom: 10px;
+    /* 图标 */
+    .core-value-icon {
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .core-hex-cell:hover .core-hex-icon {
-      transform: scale(1.12) rotate(5deg);
+    .core-value-item:hover .core-value-icon {
+      transform: scale(1.15) rotate(5deg);
     }
 
-    .core-hex-icon svg {
-      width: 42px;
-      height: 42px;
-      fill: url(#hexIconGradient);
+    .core-value-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: url(#coreValueGradient);
     }
 
-    /* 价值观名称 */
-    .core-hex-name {
+    /* 标题 */
+    .core-value-text {
       font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 4px;
       letter-spacing: 0.08em;
     }
 
-    /* 价值观描述 */
-    .core-hex-desc {
+    /* 英文描述 */
+    .core-value-en {
       font-size: 10px;
       color: var(--text-secondary);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.15em;
       font-weight: 600;
-      line-height: 1.4;
     }
 
-    /* 六边形之间紧密排列 */
-    .core-hex-cell:nth-child(1) { margin-right: -10px; }
-    .core-hex-cell:nth-child(2) { margin-left: -10px; margin-right: -10px; }
-    .core-hex-cell:nth-child(3) { margin-left: -10px; margin-right: -10px; }
-    .core-hex-cell:nth-child(4) { margin-left: -10px; margin-right: -10px; }
-    .core-hex-cell:nth-child(5) { margin-left: -10px; margin-right: -10px; }
-    .core-hex-cell:nth-child(6) { margin-left: -10px; }
+    /* 六边形排列 - 两行交错 */
+    .core-values-grid .core-value-item:nth-child(1),
+    .core-values-grid .core-value-item:nth-child(2),
+    .core-values-grid .core-value-item:nth-child(3) {
+      margin-top: 0;
+    }
+
+    .core-values-grid .core-value-item:nth-child(4),
+    .core-values-grid .core-value-item:nth-child(5),
+    .core-values-grid .core-value-item:nth-child(6) {
+      margin-top: 40px;
+    }
 
     /* 发展历程 - 紧凑横向时间线设计 */
     .development-history {
@@ -2265,14 +2288,15 @@
       .marker-dot { width: 7px; height: 7px; }
       .marker-pulse { width: 14px; height: 14px; }
 
-      /* 核心价值移动端适配 - 蜂窝状布局 */
-      .core-values-honeycomb { padding: 40px 16px; }
-      .core-hexagon { width: 140px; height: 162px; padding: 24px 16px; }
-      .core-hex-icon { width: 40px; height: 40px; }
-      .core-hex-icon svg { width: 34px; height: 34px; }
-      .core-hex-name { font-size: 14px; }
-      .core-hex-desc { font-size: 9px; }
-      .core-hex-number { width: 24px; height: 24px; font-size: 11px; }
+      /* 核心价值移动端适配 */
+      .core-values-grid { gap: 12px; }
+      .core-value-item { width: 150px; height: 170px; }
+      .core-value-hex-bg { transform: scale(0.85); }
+      .core-value-icon { width: 40px; height: 40px; }
+      .core-value-icon svg { width: 32px; height: 32px; }
+      .core-value-text { font-size: 14px; }
+      .core-value-en { font-size: 9px; }
+      .core-value-number { width: 24px; height: 24px; font-size: 11px; }
 
       /* 发展历程移动端适配 - 横向时间线 */
       .development-history { margin-top: 50px; }
@@ -2302,11 +2326,11 @@
       .products-grid { grid-template-columns: 1fr 1fr; }
 
       /* 核心价值超移动端适配 */
-      .core-values-honeycomb { padding: 30px 12px; }
-      .core-honeycomb-title { font-size: 24px; }
-      .core-hexagon { width: 140px; height: 160px; padding: 20px 14px; }
-      .core-hex-name { font-size: 14px; }
-      .core-hex-desc { font-size: 9px; }
+      .core-values-grid { gap: 8px; }
+      .core-value-item { width: 130px; height: 150px; }
+      .core-value-hex-bg { transform: scale(0.75); }
+      .core-value-text { font-size: 13px; }
+      .core-value-en { font-size: 8px; }
 
       /* 横向时间线超移动端适配 */
       .timeline-horizontal { padding: 35px 15px 15px; }
@@ -2784,130 +2808,144 @@
   </div>
 </section>
 
-<!-- CORE VALUES SECTION - 蜂窝状布局 -->
-<section class="content-section section-white" id="section-core-values">
-  <div class="core-values-honeycomb">
-    <!-- 蜂窝网格 - 横向聚拢排列 -->
-    <div class="core-honeycomb-grid">
-      <!-- 价值观 1: 专注移植 -->
-      <div class="core-hex-cell">
-        <div class="core-hexagon">
-          <div class="core-hex-content">
-            <span class="core-hex-number">01</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="hexIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#1a59e0"/>
-                    <stop offset="100%" style="stop-color:#0f3fb5"/>
-                  </linearGradient>
-                </defs>
-                <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"/>
-                <path d="M24 14c-5.52 0-10 4.48-10 10v4h4v-4c0-3.31 2.69-6 6-6s6 2.69 6 6v4h4v-4c0-5.52-4.48-10-10-10z"/>
-                <rect x="20" y="26" width="8" height="8" rx="2"/>
-                <path d="M22 36h4v4h-4z"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">专注移植</h3>
-            <p class="core-hex-desc">Commitment To Transplantation</p>
-          </div>
-        </div>
-      </div>
+<!-- CORE VALUES SECTION - 核心价值 -->
+<section class="core-values-section" id="section-core-values">
+  <!-- 标题 -->
+  <div class="core-values-header">
+    <h2 class="core-values-title">核心价值观</h2>
+    <p class="core-values-subtitle">CORE VALUES</p>
+  </div>
 
-      <!-- 价值观 2: 精益求精 -->
-      <div class="core-hex-cell">
-        <div class="core-hexagon">
-          <div class="core-hex-content">
-            <span class="core-hex-number">02</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 2L4 12l4 18 16 10 16-10 4-18L24 2z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M24 10l-8 4 2 10 6 4 6-4 2-10-8-4z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="24" cy="22" r="4" fill="url(#hexIconGradient)"/>
-                <path d="M24 28v8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M20 40h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">精益求精</h3>
-            <p class="core-hex-desc">Pursuit For Excellence</p>
-          </div>
-        </div>
-      </div>
+  <!-- 六边形网格 -->
+  <div class="core-values-grid">
+    <!-- SVG 渐变定义 -->
+    <svg width="0" height="0" style="position: absolute;">
+      <defs>
+        <linearGradient id="coreValueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a59e0"/>
+          <stop offset="100%" style="stop-color:#0f3fb5"/>
+        </linearGradient>
+      </defs>
+    </svg>
 
-      <!-- 价值观 3: 以人为本 -->
-      <div class="core-hex-cell">
-        <div class="core-hexagon">
-          <div class="core-hex-content">
-            <span class="core-hex-number">03</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="14" r="5" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="32" cy="14" r="5" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M8 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M24 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M16 20c-4.42 0-8 3.58-8 8v4h4v-4c0-2.21 1.79-4 4-4" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">以人为本</h3>
-            <p class="core-hex-desc">Care For People</p>
-          </div>
+    <!-- 价值观 1: 专注移植 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">01</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z"/>
+            <path d="M24 14c-5.52 0-10 4.48-10 10v4h4v-4c0-3.31 2.69-6 6-6s6 2.69 6 6v4h4v-4c0-5.52-4.48-10-10-10z"/>
+            <rect x="20" y="26" width="8" height="8" rx="2"/>
+            <path d="M22 36h4v4h-4z"/>
+          </svg>
         </div>
+        <h3 class="core-value-text">专注移植</h3>
+        <p class="core-value-en">Commitment To Transplantation</p>
       </div>
+    </div>
 
-      <!-- 价值观 4: 持续创新 -->
-      <div class="core-hex-cell">
-        <div class="core-hexagon">
-          <div class="core-hex-content">
-            <span class="core-hex-number">04</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 4v6M24 38v6M8 24h6M34 24h6" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="24" cy="24" r="10" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M24 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="url(#hexIconGradient)"/>
-                <path d="M12 12l4 4M32 32l4 4M12 36l4-4M32 16l4-4" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">持续创新</h3>
-            <p class="core-hex-desc">Never Stop Innovation</p>
-          </div>
+    <!-- 价值观 2: 精益求精 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">02</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 2L4 12l4 18 16 10 16-10 4-18L24 2z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M24 10l-8 4 2 10 6 4 6-4 2-10-8-4z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="24" cy="22" r="4" fill="url(#coreValueGradient)"/>
+            <path d="M24 28v8" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M20 40h8" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
         </div>
+        <h3 class="core-value-text">精益求精</h3>
+        <p class="core-value-en">Pursuit For Excellence</p>
       </div>
+    </div>
 
-      <!-- 价值观 5: 敬畏生命 -->
-      <div class="core-hex-cell">
-        <div class="core-hexagon">
-          <div class="core-hex-content">
-            <span class="core-hex-number">05</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 44s-16-10.67-16-24c0-6.63 5.37-12 12-12 4.42 0 8 2.69 10 6 2-3.31 5.58-6 10-6 6.63 0 12 5.37 12 12 0 13.33-16 24-16 24z" fill="none" stroke="url(#hexIconGradient)" stroke-width="2.5"/>
-                <path d="M24 34v6M20 36h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">敬畏生命</h3>
-            <p class="core-hex-desc">Reverence For Life</p>
-          </div>
+    <!-- 价值观 3: 以人为本 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">03</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="14" r="5" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="32" cy="14" r="5" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M8 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M24 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M16 20c-4.42 0-8 3.58-8 8v4h4v-4c0-2.21 1.79-4 4-4" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
         </div>
+        <h3 class="core-value-text">以人为本</h3>
+        <p class="core-value-en">Care For People</p>
       </div>
+    </div>
 
-      <!-- 价值观 6: 诚信责任 -->
-      <div class="core-hex-cell">
-        <div class="core-hexagon">
-          <div class="core-hex-content">
-            <span class="core-hex-number">06</span>
-            <div class="core-hex-icon">
-              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="12" width="32" height="24" rx="3" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M16 22h16M16 28h10" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <circle cx="34" cy="34" r="6" fill="none" stroke="url(#hexIconGradient)" stroke-width="2"/>
-                <path d="M32 34l1.5 1.5L37 32" stroke="url(#hexIconGradient)" stroke-width="2" fill="none"/>
-                <path d="M24 6v6M20 8h8" stroke="url(#hexIconGradient)" stroke-width="2"/>
-              </svg>
-            </div>
-            <h3 class="core-hex-name">诚信责任</h3>
-            <p class="core-hex-desc">Integrity & Responsibility</p>
-          </div>
+    <!-- 价值观 4: 持续创新 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">04</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4v6M24 38v6M8 24h6M34 24h6" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="24" cy="24" r="10" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M24 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="url(#coreValueGradient)"/>
+            <path d="M12 12l4 4M32 32l4 4M12 36l4-4M32 16l4-4" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
         </div>
+        <h3 class="core-value-text">持续创新</h3>
+        <p class="core-value-en">Never Stop Innovation</p>
+      </div>
+    </div>
+
+    <!-- 价值观 5: 敬畏生命 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">05</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 44s-16-10.67-16-24c0-6.63 5.37-12 12-12 4.42 0 8 2.69 10 6 2-3.31 5.58-6 10-6 6.63 0 12 5.37 12 12 0 13.33-16 24-16 24z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2.5"/>
+            <path d="M24 34v6M20 36h8" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text">敬畏生命</h3>
+        <p class="core-value-en">Reverence For Life</p>
+      </div>
+    </div>
+
+    <!-- 价值观 6: 诚信责任 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">06</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="12" width="32" height="24" rx="3" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M16 22h16M16 28h10" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="34" cy="34" r="6" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M32 34l1.5 1.5L37 32" stroke="url(#coreValueGradient)" stroke-width="2" fill="none"/>
+            <path d="M24 6v6M20 8h8" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text">诚信责任</h3>
+        <p class="core-value-en">Integrity & Responsibility</p>
       </div>
     </div>
   </div>
@@ -3456,35 +3494,6 @@
   // 页面加载时初始化状态
   // =============================================
   relockPage();
-
-  // =============================================
-  // 核心价值 - 蜂窝状布局滚动动画
-  // =============================================
-  document.addEventListener('DOMContentLoaded', () => {
-    const hexCells = document.querySelectorAll('.core-hex-cell');
-
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px 0px -100px 0px',
-      threshold: 0.2
-    };
-
-    const hexObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-          // 添加 staggered 延迟
-          setTimeout(() => {
-            entry.target.classList.add('animated');
-          }, index * 100);
-          hexObserver.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    hexCells.forEach((cell) => {
-      hexObserver.observe(cell);
-    });
-  });
 
   // =============================================
   // 发展历程 - 横向时间线滚动动画
