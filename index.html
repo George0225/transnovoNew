@@ -1326,6 +1326,22 @@
       font-size: 15px;
       font-weight: 600;
       color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .subsidiary-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-600);
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.15), rgba(201, 169, 98, 0.08));
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(201, 169, 98, 0.2);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.05em;
     }
 
     .subsidiary-location {
@@ -1347,26 +1363,30 @@
     .subsidiary-link-simple {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 12px;
-      color: var(--primary-600);
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-600);
       text-decoration: none;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      padding: 4px 8px;
+      margin: 0 -4px;
+      border-radius: 6px;
     }
 
     .subsidiary-link-simple:hover {
       color: var(--accent-500);
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.12), rgba(201, 169, 98, 0.06));
+      text-decoration: none;
     }
 
     .subsidiary-link-simple svg {
-      transition: transform 0.2s ease;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      stroke-width: 2.5;
     }
 
     .subsidiary-link-simple:hover svg {
-      transform: translateX(3px);
+      transform: translateX(4px);
     }
 
     .global-network-video {
@@ -3130,7 +3150,7 @@
       <div class="subsidiary-location-group">
         <div class="location-group-title">Subsidiary</div>
         <div class="subsidiary-item">
-          <span class="subsidiary-name-text">Lifeline Scientific, Inc.</span>
+          <span class="subsidiary-name-text">Lifeline Scientific, Inc.<span class="subsidiary-badge">子公司</span></span>
           <span class="subsidiary-location">美国</span>
           <a href="https://www.organ-recovery.com/" target="_blank" class="subsidiary-link-simple">
             访问官网
