@@ -425,6 +425,27 @@
       margin: 0 auto;
     }
 
+    /* Product Content */
+    .product-content {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .product-image-full {
+      width: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      box-shadow: none;
+    }
+
+    .product-image-full img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* Product Detail Section */
     .product-detail-section {
       padding: 120px 24px;
@@ -928,90 +949,12 @@
   <p>精准血药浓度监测，实现个体化用药指导</p>
 </section>
 
-<!-- PRODUCT DETAIL SECTION -->
-<section class="product-detail-section">
-  <div class="product-detail-inner">
-    <span class="section-label">TDM - THERAPEUTIC DRUG MONITORING</span>
-    <h2 class="section-title">免疫抑制剂血药浓度检测</h2>
-    <p class="section-description">
-      治疗药物监测（TDM）是器官移植术后管理的重要环节。通过定期检测免疫抑制剂的血药浓度，
-      医生可以根据个体差异调整用药剂量，避免药物浓度过高导致毒性反应，或浓度过低引发排斥反应，
-      确保移植器官长期存活。
-    </p>
-
-    <div class="product-showcase animate-on-scroll">
-      <div class="product-showcase-img">
-        <img src="images/category-background-2.jpg" alt="药物浓度检测" />
-      </div>
-      <div class="product-showcase-content">
-        <h3>检测项目</h3>
-        <ul class="feature-list">
-          <li>他克莫司（Tacrolimus, FK506）血药浓度检测</li>
-          <li>环孢素 A（Cyclosporine A, CsA）血药浓度检测</li>
-          <li>西罗莫司（Sirolimus, SRL）血药浓度检测</li>
-          <li>吗替麦考酚酯（Mycophenolate Mofetil, MMF）血药浓度检测</li>
-          <li>泼尼松（Prednisone）血药浓度检测</li>
-        </ul>
-        <a href="contact.html" class="showcase-btn">咨询检测服务</a>
-      </div>
-    </div>
-
-    <div class="products-grid">
-      <div class="product-card animate-on-scroll">
-        <div class="product-image">
-          <img src="images/category-background-2.jpg" alt="TDM 检测试剂盒" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">TDM 检测试剂盒</h3>
-          <p class="product-desc">高灵敏度免疫检测试剂</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-1">
-        <div class="product-image">
-          <img src="images/category-background-3.jpg" alt="采血管" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">专用采血管</h3>
-          <p class="product-desc">标准化样本采集</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-2">
-        <div class="product-image">
-          <img src="images/category-background-1.jpg" alt="检测服务" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">检测服务</h3>
-          <p class="product-desc">专业实验室技术支持</p>
-        </div>
-      </div>
-    </div>
+<!-- PRODUCT IMAGE SECTION -->
+<main class="product-content">
+  <div class="product-image-full">
+    <img src="images/tdm.png" alt="TDM 药物浓度检测产品介绍" />
   </div>
-</section>
-
-<!-- CTA SECTION -->
-<section class="cta-section">
-  <div class="cta-content">
-    <h2>需要检测服务？</h2>
-    <p>我们的专业实验室团队提供快速、准确的血药浓度检测服务</p>
-    <a href="contact.html" class="cta-btn">联系我们</a>
-  </div>
-</section>
-
-<!-- PARTNERS SECTION -->
-<section id="partners">
-  <div class="partners-inner">
-    <h3 class="partners-title">合作伙伴</h3>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
-      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
-      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
-      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
-      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
-    </div>
-  </div>
-</section>
+</main>
 
 <!-- FOOTER -->
 <footer id="footer">
@@ -1083,24 +1026,6 @@
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
   }
-
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    el.style.animationPlayState = 'paused';
-    observer.observe(el);
-  });
 </script>
 
 </body>
