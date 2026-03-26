@@ -1738,7 +1738,7 @@
 
     /* 六边形排列 - 单行对齐 */
 
-    /* 发展历程 - 有机柔性质感 */
+    /* 发展历程 - 极简编辑出版风格 */
     .development-history {
       margin-top: 120px;
       padding: 0 24px;
@@ -1746,184 +1746,107 @@
 
     .history-header {
       text-align: center;
-      margin-bottom: 80px;
+      margin-bottom: 100px;
       position: relative;
     }
 
     .history-title {
       font-size: 56px;
       font-weight: 500;
-      color: #4a4a4a;
+      color: #2a2a2a;
       letter-spacing: 0.02em;
       display: inline-block;
       position: relative;
-      padding: 24px 60px;
-      background: linear-gradient(180deg,
-        #fefefe 0%,
-        #f9f8f6 30%,
-        #f3f1ed 50%,
-        #ede9e4 70%,
-        #e8e4df 100%);
-      border-radius: 100px;
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.05),
-        0 10px 25px rgba(0, 0, 0, 0.04),
-        0 4px 12px rgba(0, 0, 0, 0.03),
-        inset 0 2px 0 rgba(255, 255, 255, 0.9),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.03);
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .history-title::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg,
-        rgba(255, 255, 255, 0.6) 0%,
-        transparent 50%,
-        rgba(0, 0, 0, 0.02) 100%);
-      border-radius: 100px;
-      pointer-events: none;
+      padding: 0 0 20px 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      text-shadow: none;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .history-title::after {
       content: '';
       position: absolute;
-      bottom: -12px;
+      bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 50px;
-      height: 3px;
+      width: 60px;
+      height: 1px;
       background: linear-gradient(90deg,
         transparent 0%,
-        #d8d3cc 20%,
-        #c9c4bc 50%,
-        #d8d3cc 80%,
+        #1a1a1a 30%,
+        #1a1a1a 70%,
         transparent 100%);
-      border-radius: 2px;
+      border-radius: 0;
     }
 
     .history-title:hover {
-      transform: translateY(-3px);
-      box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.06),
-        0 15px 35px rgba(0, 0, 0, 0.05),
-        0 6px 18px rgba(0, 0, 0, 0.04),
-        inset 0 2px 0 rgba(255, 255, 255, 1),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.03);
+      opacity: 0.9;
     }
 
     .history-subtitle {
-      font-size: 12px;
-      font-weight: 500;
-      color: #a8a49e;
-      letter-spacing: 0.35em;
-      margin-top: 18px;
+      font-size: 11px;
+      font-weight: 400;
+      color: #888888;
+      letter-spacing: 0.4em;
+      margin-top: 14px;
       text-transform: uppercase;
     }
 
-    /* 波浪形时间线容器 - 有机柔性质感 */
+    /* 波浪形时间线容器 - 极简挂线风格 */
     .timeline-wave {
       position: relative;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 80px 0 100px;
+      padding: 60px 0 80px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    /* 背景装饰 - 柔和光晕 */
-    .timeline-wave::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 280px;
-      background: radial-gradient(ellipse at center,
-        rgba(245, 243, 240, 0.8) 0%,
-        rgba(250, 249, 247, 0.4) 40%,
-        transparent 70%);
-      border-radius: 140px;
-      pointer-events: none;
-      z-index: 0;
-      filter: blur(40px);
-    }
-
-    /* 中央时间轴线 - 柔和曲线 */
+    /* 中央时间轴线 - 纤细精致 */
     .timeline-wave-axis {
       position: absolute;
       top: 50%;
-      left: 300px;
-      right: 300px;
-      height: 4px;
+      left: 280px;
+      right: 280px;
+      height: 1px;
       background: linear-gradient(90deg,
         transparent 0%,
-        rgba(220, 216, 210, 0.3) 10%,
-        rgba(210, 205, 198, 0.5) 30%,
-        rgba(200, 195, 188, 0.6) 50%,
-        rgba(210, 205, 198, 0.5) 70%,
-        rgba(220, 216, 210, 0.3) 90%,
+        rgba(26, 26, 26, 0.15) 10%,
+        rgba(26, 26, 26, 0.3) 30%,
+        rgba(26, 26, 26, 0.4) 50%,
+        rgba(26, 26, 26, 0.3) 70%,
+        rgba(26, 26, 26, 0.15) 90%,
         transparent 100%);
-      border-radius: 2px;
+      border-radius: 0;
       transform: translateY(-50%);
-      box-shadow: 0 0 30px rgba(200, 195, 188, 0.2);
     }
 
     /* 时间线节点 - 交错布局 */
     .timeline-item {
       position: relative;
       flex: 0 0 auto;
-      width: 140px;
+      width: 150px;
       display: flex;
       flex-direction: column;
       align-items: center;
       opacity: 0;
-      animation: timeline-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation: timeline-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       cursor: pointer;
       z-index: 2;
     }
 
-    /* 时间线节点连接效果 - 柔和圆环 */
-    .timeline-item::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      z-index: 1;
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      background: radial-gradient(circle,
-        rgba(230, 226, 220, 0.4) 0%,
-        rgba(220, 216, 210, 0.2) 70%,
-        transparent 100%);
-      box-shadow:
-        0 0 20px rgba(210, 205, 198, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    }
-
-    .timeline-item:hover::after {
-      background: radial-gradient(circle,
-        rgba(220, 216, 210, 0.6) 0%,
-        rgba(210, 205, 198, 0.3) 70%,
-        transparent 100%);
-      box-shadow:
-        0 0 30px rgba(200, 195, 188, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-      transform: translate(-50%, -50%) scale(1.3);
-    }
-
     /* 偶数项在上方 */
     .timeline-item:nth-child(even) {
-      align-items: flex-start;
+      align-items: flex-end;
       padding-top: 0;
-      padding-bottom: 50px;
+      padding-bottom: 70px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year-wrapper {
+      justify-content: flex-end;
     }
 
     .timeline-item:nth-child(even) .timeline-year {
@@ -1932,15 +1855,20 @@
     }
 
     .timeline-item:nth-child(even) .timeline-content {
-      margin-top: 10px;
-      align-items: flex-start;
+      margin-top: 16px;
+      align-items: flex-end;
+      text-align: right;
     }
 
     /* 奇数项在下方 */
     .timeline-item:nth-child(odd) {
       align-items: flex-start;
-      padding-top: 50px;
+      padding-top: 70px;
       padding-bottom: 0;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-year-wrapper {
+      justify-content: flex-start;
     }
 
     .timeline-item:nth-child(odd) .timeline-year {
@@ -1949,8 +1877,9 @@
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
-      margin-top: 10px;
+      margin-top: 16px;
       align-items: flex-start;
+      text-align: left;
     }
 
     @keyframes timeline-reveal {
@@ -1964,96 +1893,96 @@
       display: none;
     }
 
-    /* 年份标签 - 柔性质感 */
+    /* 年份挂线容器 */
+    .timeline-year-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* 偶数项挂线向上 */
+    .timeline-item:nth-child(even) .timeline-year-wrapper::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 24px;
+      background: linear-gradient(to bottom,
+        rgba(26, 26, 26, 0) 0%,
+        rgba(26, 26, 26, 0.3) 20%,
+        rgba(26, 26, 26, 0.4) 100%);
+    }
+
+    /* 奇数项挂线向下 */
+    .timeline-item:nth-child(odd) .timeline-year-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 24px;
+      background: linear-gradient(to bottom,
+        rgba(26, 26, 26, 0.4) 0%,
+        rgba(26, 26, 26, 0.3) 80%,
+        rgba(26, 26, 26, 0) 100%);
+    }
+
+    /* 年份标签 - 专业衬线字体，无背景框 */
     .timeline-year {
-      font-size: 20px;
-      font-weight: 500;
-      color: #6d6962;
-      background: linear-gradient(180deg,
-        #fefefe 0%,
-        #f9f8f6 30%,
-        #f3f1ed 50%,
-        #ede9e4 70%,
-        #e8e4df 100%);
-      padding: 14px 28px;
-      border-radius: 50px;
-      box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.04),
-        0 4px 12px rgba(0, 0, 0, 0.03),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.02);
-      border: 1px solid rgba(220, 216, 210, 0.25);
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       white-space: nowrap;
       position: relative;
       z-index: 2;
-      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-      letter-spacing: 0.02em;
-    }
-
-    .timeline-year::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg,
-        rgba(255, 255, 255, 0.6) 0%,
-        transparent 50%,
-        rgba(0, 0, 0, 0.02) 100%);
-      border-radius: 50px;
-      pointer-events: none;
+      letter-spacing: 0.04em;
+      font-variant-numeric: lining-nums;
     }
 
     .timeline-item:hover .timeline-year {
-      transform: translateY(-4px);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.06),
-        0 6px 16px rgba(0, 0, 0, 0.04),
-        inset 0 1px 0 rgba(255, 255, 255, 1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+      color: #4a4a4a;
+      transform: scale(1.02);
     }
 
-    /* 内容卡片 - 柔和有机质感 */
+    /* 内容卡片 - 极简风格 */
     .timeline-content {
-      padding: 22px 26px;
-      background: linear-gradient(135deg,
-        rgba(255, 255, 255, 0.95) 0%,
-        rgba(252, 251, 249, 0.92) 50%,
-        rgba(255, 255, 255, 0.95) 100%);
-      border-radius: 24px;
-      box-shadow:
-        0 8px 28px rgba(0, 0, 0, 0.04),
-        0 4px 14px rgba(0, 0, 0, 0.03),
-        0 1px 4px rgba(0, 0, 0, 0.02);
-      border: 1px solid rgba(220, 216, 210, 0.15);
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      padding: 18px 22px;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      border-left: 1px solid rgba(26, 26, 26, 0.15);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
-      overflow: hidden;
-      min-width: 170px;
-      text-align: center;
+      min-width: 160px;
+      text-align: left;
     }
 
-    .timeline-content::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg,
-        rgba(245, 243, 240, 0.05) 0%,
-        rgba(235, 232, 225, 0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .timeline-item:hover .timeline-content::before {
-      opacity: 1;
+    .timeline-item:nth-child(even) .timeline-content {
+      border-left: none;
+      border-right: 1px solid rgba(26, 26, 26, 0.15);
     }
 
     .timeline-item:hover .timeline-content {
-      transform: translateY(-5px);
-      box-shadow:
-        0 14px 40px rgba(0, 0, 0, 0.06),
-        0 8px 20px rgba(0, 0, 0, 0.04),
-        0 2px 8px rgba(0, 0, 0, 0.03);
-      border-color: rgba(210, 205, 198, 0.25);
+      border-color: rgba(26, 26, 26, 0.3);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content:hover {
+      border-right-color: rgba(26, 26, 26, 0.3);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content:hover {
+      border-left-color: rgba(26, 26, 26, 0.3);
     }
 
     .timeline-text {
@@ -2673,18 +2602,18 @@
       .core-value-en { font-size: 9px; }
       .core-value-number { width: 24px; height: 24px; font-size: 11px; }
 
-      /* 发展历程移动端适配 - 波浪形时间线 */
+      /* 发展历程移动端适配 - 极简挂线风格 */
       .development-history { margin-top: 50px; }
-      .history-header { margin-bottom: 40px; }
-      .history-title { font-size: 32px; padding: 10px 20px; }
-      .history-subtitle { font-size: 12px; }
-      .timeline-wave { padding: 60px 0 80px; }
-      .timeline-wave-axis { left: 50px; right: 50px; height: 6px; }
-      .timeline-item { width: 110px; }
+      .history-header { margin-bottom: 60px; }
+      .history-title { font-size: 32px; padding: 0 0 16px 0; }
+      .history-subtitle { font-size: 10px; }
+      .timeline-wave { padding: 40px 0 60px; }
+      .timeline-wave-axis { left: 40px; right: 40px; height: 1px; }
+      .timeline-item { width: 100px; }
       .timeline-item:nth-child(odd),
-      .timeline-item:nth-child(even) { padding-top: 40px; padding-bottom: 40px; }
-      .timeline-year { font-size: 18px; padding: 8px 16px; }
-      .timeline-content { min-width: 140px; padding: 16px 18px; }
+      .timeline-item:nth-child(even) { padding-top: 50px; padding-bottom: 50px; }
+      .timeline-year { font-size: 16px; }
+      .timeline-content { min-width: 120px; padding: 14px 16px; }
       .timeline-text { font-size: 12px; }
 
       /* 修复移动端视频 section 露出问题 */
@@ -2793,8 +2722,8 @@
         <a href="research.html" class="has-submenu">用户服务</a>
         <ul class="sub-menu">
           <li><a href="operation-videos.html">操作视频</a></li>
-          <li><a href="research.html#training">培训视频</a></li>
-          <li><a href="research.html#investment">招商服务</a></li>
+          <li><a href="training-videos.html">培训视频</a></li>
+          <li><a href="investment.html">招商服务</a></li>
         </ul>
       </li>
       <li><a href="patients.html">关爱患者</a></li>
@@ -2867,8 +2796,8 @@
       </div>
       <ul class="mobile-sub-menu" id="mobile-service">
         <li><a href="operation-videos.html">操作视频</a></li>
-        <li><a href="research.html#training">培训视频</a></li>
-        <li><a href="research.html#investment">招商服务</a></li>
+        <li><a href="training-videos.html">培训视频</a></li>
+        <li><a href="investment.html">招商服务</a></li>
       </ul>
     </li>
     <li><a href="patients.html">关爱患者</a></li>
@@ -2938,7 +2867,7 @@
           <span class="stat-label">年深耕</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-count="185">+</span>
+          <span class="stat-number" data-count="200">+</span>
           <span class="stat-label">全球员工</span>
         </div>
         <div class="stat-item">
@@ -2965,8 +2894,9 @@
 
       <!-- 2004 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 0ms;">
-        
-        <div class="timeline-year">2004</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2004</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">公司成立</div>
         </div>
@@ -2974,8 +2904,9 @@
 
       <!-- 2005 - 偶数项，在上方 -->
       <div class="timeline-item" style="animation-delay: 100ms;">
-        
-        <div class="timeline-year">2005</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2005</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">开展海外代理<br/>覆盖华东市场</div>
         </div>
@@ -2983,8 +2914,9 @@
 
       <!-- 2008 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 200ms;">
-        
-        <div class="timeline-year">2008</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2008</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">代理海正业务<br/>扩展全国销售</div>
         </div>
@@ -2992,8 +2924,9 @@
 
       <!-- 2013 - 偶数项，在上方 -->
       <div class="timeline-item" style="animation-delay: 300ms;">
-        
-        <div class="timeline-year">2013</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2013</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">云泽移植 IVD<br/>生产建立</div>
         </div>
@@ -3001,8 +2934,9 @@
 
       <!-- 2015 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 400ms;">
-        
-        <div class="timeline-year">2015</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2015</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">新三板上市</div>
         </div>
@@ -3010,8 +2944,9 @@
 
       <!-- 2016 - 偶数项，在上方（高亮） -->
       <div class="timeline-item" style="animation-delay: 500ms;">
-        
-        <div class="timeline-year">2016</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2016</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">完成收购 LSI<br/>布局全球市场</div>
         </div>
@@ -3019,8 +2954,9 @@
 
       <!-- 2018 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 600ms;">
-        
-        <div class="timeline-year">2018</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2018</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">研发生产中心<br/>落地</div>
         </div>
@@ -3028,8 +2964,9 @@
 
       <!-- 2019 - 偶数项，在上方 -->
       <div class="timeline-item" style="animation-delay: 700ms;">
-        
-        <div class="timeline-year">2019</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2019</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">首个自研产品<br/>获中国注册证</div>
         </div>
@@ -3037,8 +2974,9 @@
 
       <!-- 2021 - 奇数项，在下方 -->
       <div class="timeline-item" style="animation-delay: 800ms;">
-        
-        <div class="timeline-year">2021</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2021</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">TDM 全产品<br/>获 CE 证</div>
         </div>
@@ -3046,8 +2984,9 @@
 
       <!-- 2023 - 偶数项，在上方（高亮） -->
       <div class="timeline-item" style="animation-delay: 900ms;">
-        
-        <div class="timeline-year">2023</div>
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2023</div>
+        </div>
         <div class="timeline-content">
           <div class="timeline-text">他克莫司试剂盒<br/>完成 FDA 注册</div>
         </div>
