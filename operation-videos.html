@@ -1297,13 +1297,57 @@
       document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
       this.classList.add('active');
 
+      // 切换侧边栏显示
       document.querySelectorAll('.sidebar-item').forEach(item => {
         const isActive = item.dataset.category === category;
         item.classList.toggle('expanded', isActive);
         item.style.display = isActive ? 'block' : 'none';
       });
+
+      // 自动滚动到该分类的第一个视频
+      scrollToFirstVideoOfCategory(category);
     });
   });
+
+  // 滚动到指定分类的第一个视频
+  function scrollToFirstVideoOfCategory(category) {
+    // 找到该分类侧边栏中第一个有视频的子项
+    const sidebarItem = document.querySelector(`.sidebar-item[data-category="${category}"]`);
+    if (!sidebarItem) return;
+
+    // 获取该分类下第一个视频链接
+    let firstVideoLink = null;
+
+    if (category === 'devices') {
+      // 器械：机械灌注 -> LifePort®肾脏灌注转运箱
+      firstVideoLink = sidebarItem.querySelector('.sidebar-sub-sub-item[data-video="kidney-perfusion"]');
+    } else if (category === 'drugs') {
+      // 药品：免疫抑制剂 -> 他克莫司胶囊
+      firstVideoLink = sidebarItem.querySelector('.sidebar-sub-sub-item[data-video="tacrolimus"]');
+    } else if (category === 'ivd') {
+      // 体外诊断：没有视频，显示"暂无视频"
+      document.getElementById('contentTitle').textContent = '体外诊断';
+      renderVideos([]);
+
+      // 清除所有侧边栏激活状态
+      document.querySelectorAll('.sidebar-sub-sub-item').forEach(i => i.classList.remove('active'));
+      return;
+    }
+
+    if (firstVideoLink) {
+      // 模拟点击第一个视频链接
+      firstVideoLink.click();
+
+      // 添加平滑滚动高亮效果
+      const contentArea = document.querySelector('.content-area');
+      contentArea.style.transition = 'box-shadow 0.6s ease';
+      contentArea.style.boxShadow = '0 0 0 3px rgba(184, 150, 84, 0.2), 0 4px 24px rgba(0, 0, 0, 0.06)';
+
+      setTimeout(() => {
+        contentArea.style.boxShadow = '0 4px 24px rgba(0, 0, 0, 0.06)';
+      }, 600);
+    }
+  }
 
   // 搜索功能
   document.getElementById('searchInput').addEventListener('input', function() {
