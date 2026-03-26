@@ -1139,6 +1139,108 @@
       letter-spacing: 0.1em;
     }
 
+    /* =============================================
+       全球销售网络 - 覆盖 49 个国家
+       ============================================= */
+    .sales-network-section {
+      padding: 80px 24px 60px;
+      background: linear-gradient(180deg, var(--bg-light) 0%, var(--primary-100) 100%);
+      border-top: 1px solid var(--border);
+    }
+
+    .sales-network-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .sales-network-title {
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+
+    .sales-network-cover {
+      display: inline-block;
+      font-size: clamp(18px, 2.5vw, 22px);
+      font-weight: 600;
+      color: var(--accent-600);
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.12), rgba(201, 169, 98, 0.06));
+      padding: 10px 28px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(201, 169, 98, 0.25);
+      letter-spacing: 0.05em;
+    }
+
+    .sales-network-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .region-group {
+      margin-bottom: 36px;
+    }
+
+    .region-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .region-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .region-title::before {
+      content: '';
+      width: 4px;
+      height: 20px;
+      background: linear-gradient(180deg, var(--accent-500), var(--accent-600));
+      border-radius: 2px;
+    }
+
+    .country-list {
+      font-size: 15px;
+      line-height: 2;
+      color: var(--text-secondary);
+      padding-left: 14px;
+    }
+
+    .country-list span {
+      display: inline;
+      transition: color 0.3s;
+    }
+
+    .country-list span:hover {
+      color: var(--accent-600);
+    }
+
+    /* 移动端适配 */
+    @media (max-width: 768px) {
+      .sales-network-section {
+        padding: 50px 16px 40px;
+      }
+
+      .sales-network-title {
+        font-size: 26px;
+      }
+
+      .sales-network-cover {
+        font-size: 16px;
+        padding: 8px 20px;
+      }
+
+      .country-list {
+        font-size: 14px;
+        line-height: 1.8;
+      }
+    }
+
     /* 地图容器 - 最大化尺寸 */
     .world-map-container {
       width: 100%;
@@ -2559,6 +2661,13 @@
       .global-header h2 { font-size: 22px; }
       .global-header .subtitle { font-size: 11px; }
 
+      /* 全球销售网络移动端适配 */
+      .sales-network-section { padding: 50px 16px 40px; }
+      .sales-network-title { font-size: 24px; }
+      .sales-network-cover { font-size: 14px; padding: 8px 16px; }
+      .region-title { font-size: 14px; }
+      .country-list { font-size: 13px; line-height: 1.8; }
+
       .world-map-container { max-width: 100%; margin-bottom: 30px; }
       .world-map-viz { aspect-ratio: 4/3; border-radius: 8px; }
 
@@ -3150,6 +3259,65 @@
             </svg>
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL SALES NETWORK SECTION -->
+<section class="sales-network-section" id="section-sales-network">
+  <div class="sales-network-content">
+    <!-- 标题 -->
+    <div class="sales-network-header">
+      <h2 class="sales-network-title">全球销售网络 - 覆盖 49 个国家</h2>
+      <div class="sales-network-cover">GLOBAL COVERAGE: 49 COUNTRIES</div>
+    </div>
+
+    <!-- 亚洲 -->
+    <div class="region-group">
+      <h3 class="region-title">亚洲 Asia</h3>
+      <div class="country-list">
+        <span>中国</span>、<span>菲律宾</span>、<span>泰国</span>、<span>新加坡</span>、<span>印度</span>、<span>韩国</span>
+      </div>
+    </div>
+
+    <!-- 欧洲 -->
+    <div class="region-group">
+      <h3 class="region-title">欧洲 Europe</h3>
+      <div class="country-list">
+        <span>奥地利</span>、<span>比利时</span>、<span>克罗地亚</span>、<span>捷克</span>、<span>丹麦</span>、<span>爱沙尼亚</span>、<span>法国</span>、<span>德国</span>、<span>爱尔兰</span>、<span>意大利</span>、<span>拉脱维亚</span>、<span>立陶宛</span>、<span>挪威</span>、<span>波兰</span>、<span>葡萄牙</span>、<span>罗马尼亚</span>、<span>斯洛文尼亚</span>、<span>西班牙</span>、<span>瑞典</span>、<span>瑞士</span>、<span>荷兰</span>、<span>土耳其</span>、<span>匈牙利</span>、<span>芬兰</span>、<span>英国</span>
+      </div>
+    </div>
+
+    <!-- 北美洲 -->
+    <div class="region-group">
+      <h3 class="region-title">北美洲 North America</h3>
+      <div class="country-list">
+        <span>美国</span>、<span>加拿大</span>、<span>巴拿马</span>
+      </div>
+    </div>
+
+    <!-- 南美洲 -->
+    <div class="region-group">
+      <h3 class="region-title">南美洲 South America</h3>
+      <div class="country-list">
+        <span>巴西</span>、<span>哥伦比亚</span>、<span>秘鲁</span>、<span>阿根廷</span>、<span>墨西哥</span>、<span>智利</span>、<span>乌拉圭</span>
+      </div>
+    </div>
+
+    <!-- 中东地区 -->
+    <div class="region-group">
+      <h3 class="region-title">中东地区 Middle East</h3>
+      <div class="country-list">
+        <span>以色列</span>、<span>沙特阿拉伯</span>、<span>阿拉伯联合酋长国</span>
+      </div>
+    </div>
+
+    <!-- 大洋洲 -->
+    <div class="region-group">
+      <h3 class="region-title">大洋洲 Oceania</h3>
+      <div class="country-list">
+        <span>澳大利亚</span>
       </div>
     </div>
   </div>
