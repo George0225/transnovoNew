@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>器官保存 - tranSnovo 健耕医药</title>
-  <meta name="description" content="提供 KPS-1、SPS-1 等器官保存液产品，为移植器官提供专业保存解决方案。" />
+  <title>SPS-1® 器官保存液（腹部器官） - tranSnovo 健耕医药</title>
+  <meta name="description" content="SPS-1® 器官保存液，腹部器官保存的金标准，适用于肾脏、肝脏和胰腺的低温保存和运输。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,7 +58,6 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Cormorant Garamond', 'Noto Serif SC', 'Plus Jakarta Sans', serif;
       color: var(--text-primary);
@@ -79,205 +78,269 @@
       background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
     }
 
-      /* 效果色 */
-      --shadow-sm: 0 1px 3px rgba(15, 63, 181, 0.06);
-      --shadow-md: 0 4px 12px rgba(15, 63, 181, 0.08);
-      --shadow-lg: 0 8px 30px rgba(15, 63, 181, 0.12);
-      --shadow-xl: 0 20px 60px rgba(15, 63, 181, 0.16);
-      --glow-primary: 0 0 40px rgba(26, 89, 224, 0.25);
-      --glow-accent: 0 0 40px rgba(230, 30, 108, 0.3);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      color: var(--text-primary);
-      background: var(--bg-primary);
-      line-height: 1.65;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-40px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.35s; }
-
+    /* 导航栏 */
     #nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 99999;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(24px) saturate(180%);
-      border-bottom: 1px solid rgba(15, 63, 181, 0.04);
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    #nav.scrolled {
       background: rgba(255, 255, 255, 0.98);
-      border-bottom-color: rgba(15, 63, 181, 0.08);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 30px rgba(15, 63, 181, 0.06);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
     }
 
     .nav-inner {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 56px;
-      height: 84px;
+      padding: 0 48px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
-
-    .nav-logo img {
-      height: 44px;
-      width: auto;
-      transition: filter 0.3s ease, transform 0.3s ease;
-    }
-
-    .nav-logo:hover img {
-      transform: scale(1.02);
-      filter: drop-shadow(0 4px 12px rgba(26, 89, 224, 0.2));
-    }
+    .nav-logo img { height: 42px; width: auto; }
 
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 6px;
+      gap: 8px;
       align-items: center;
-    }
-
-    .nav-links > li {
-      position: relative;
     }
 
     .nav-links > li > a {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 18px;
-      color: var(--text-secondary);
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
       font-size: 15px;
       font-weight: 500;
       text-decoration: none;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-      border-radius: 10px;
-      position: relative;
-    }
-
-    /* 下划线指示器 */
-    .nav-links > li > a::after {
-      content: '';
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--primary-500), var(--accent-500));
-      transform: translateX(-50%);
-      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      border-radius: 2px;
+      transition: all 0.2s;
+      border-radius: 8px;
     }
 
     .nav-links > li > a:hover,
     .nav-links > li > a.active {
-      color: var(--primary-600);
-      background: var(--primary-50);
+      color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.08);
     }
 
-    .nav-links > li > a:hover::after,
-    .nav-links > li > a.active::after {
-      width: 20px;
-    }
 
-    /* Active state - 高亮背景 + 光晕 */
-    .nav-links > li > a.active {
-      background: linear-gradient(135deg, var(--primary-100), var(--primary-50));
-      box-shadow: inset 0 0 0 1px rgba(26, 89, 224, 0.1), 0 2px 8px rgba(26, 89, 224, 0.08);
-    }
 
-    .nav-links > li > a.active::after {
-      width: 24px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent-500), var(--primary-500));
-    }
+    /* 下拉菜单样式 */
+    .nav-links > li { position: relative; }
 
-    .nav-btn {
-      padding: 12px 26px;
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-      color: #fff;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 4px 15px rgba(26, 89, 224, 0.3), 0 1px 3px rgba(26, 89, 224, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nav-btn::before {
+    .nav-links > li > a.has-submenu::after {
       content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 6px;
+      vertical-align: middle;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
+      transition: transform 0.3s;
+    }
+
+    .nav-links > li > a.has-submenu:hover::after {
+      transform: rotate(180deg);
+    }
+
+    .nav-links .sub-menu {
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 220px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 0;
+      list-style: none;
       opacity: 0;
-      transition: opacity 0.35s ease;
-      border-radius: 100px;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      z-index: 1001;
     }
 
-    .nav-btn span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .nav-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(26, 89, 224, 0.4), 0 2px 6px rgba(26, 89, 224, 0.25);
-    }
-
-    .nav-btn:hover::before {
+    .nav-links > li:hover > .sub-menu {
       opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-links .sub-menu > li {
+      list-style: none;
+    }
+
+    .nav-links .sub-menu > li > a {
+      padding: 12px 20px;
+      display: block;
+      color: var(--text-primary);
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links .sub-menu > li > a:hover {
+      color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.08);
+    }
+
+    /* 二级下拉菜单 */
+    .nav-links .sub-menu > li {
+      position: relative;
+      list-style: none;
+    }
+
+    .nav-links .sub-menu li .sub-menu-2 {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(10px);
+    }
+
+    .nav-links .sub-menu li:hover > .sub-menu-2 {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .nav-links .sub-menu li > a.has-submenu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links .sub-menu li > a.has-submenu::after {
+      content: '›';
+      font-size: 20px;
+      line-height: 1;
+      margin-left: 8px;
+      color: currentColor;
+    }
+
+    /* 三级下拉菜单 */
+    .nav-links .sub-menu-2 {
+      padding: 12px 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      white-space: nowrap;
+    }
+
+    .nav-links .sub-menu-2 li {
+      list-style: none;
+    }
+
+    .nav-links .sub-menu-2 li > a {
+      padding: 12px 20px;
+      display: block;
+      color: var(--text-primary);
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .nav-links .sub-menu-2 li > a:hover {
+      color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.08);
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3 {
+      position: absolute;
+      left: 100%;
+      top: 0;
+      min-width: 280px;
+      max-width: 320px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(10px);
+      white-space: nowrap;
+      max-height: min(400px, 70vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .nav-links .sub-menu-2 li > a.has-submenu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links .sub-menu-2 li > a.has-submenu::after {
+      content: '›';
+      font-size: 20px;
+      line-height: 1;
+      margin-left: 8px;
+      color: currentColor;
+    }
+
+    .sub-menu-3 {
+      padding: 12px 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .sub-menu-3 .product-group-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      padding: 8px 20px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sub-menu-3 .product-group {
+      margin-bottom: 8px;
+      list-style: none;
+    }
+
+    .sub-menu-3 .product-item {
+      padding: 10px 20px 10px 28px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      display: block;
+      list-style: none;
+    }
+
+    .sub-menu-3 .product-item:hover {
+      color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.05);
     }
 
     .nav-toggle {
@@ -300,19 +363,16 @@
     .nav-mobile {
       display: none;
       position: fixed;
-      top: 84px;
+      top: 80px;
       left: 0;
       right: 0;
       background: #fff;
       padding: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       z-index: 999;
-      border-top: 1px solid var(--border);
     }
 
-    .nav-mobile.open {
-      display: block;
-    }
+    .nav-mobile.open { display: block; }
 
     .nav-mobile a {
       display: block;
@@ -321,576 +381,111 @@
       text-decoration: none;
       font-size: 16px;
       border-bottom: 1px solid var(--border);
-      transition: all 0.25s ease;
     }
 
-    .nav-mobile a:hover {
-      color: var(--primary-600);
-      background: var(--primary-50);
-      padding-left: 24px;
-    }
-
-    /* ===== DROPDOWN MENUS ===== */
-    /* 一级下拉菜单 */
-    .nav-links .sub-menu {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%) translateY(8px);
-      min-width: 240px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 10px;
-      list-style: none;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
-      z-index: 1001;
-    }
-
-    .nav-links > li:hover > .sub-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* 下拉菜单箭头 */
-    .nav-links > li > a.has-submenu::after {
-      content: '';
-      display: inline-block;
-      width: 0;
-      height: 0;
-      margin-left: 4px;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 4px solid currentColor;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .nav-links > li > a.has-submenu:hover::after {
-      transform: rotate(180deg);
-    }
-
-    .nav-links .sub-menu > li {
-      list-style: none;
-      position: relative;
-    }
-
-    .nav-links .sub-menu > li > a {
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .nav-links .sub-menu > li > a:hover {
-      color: var(--primary-600);
-      background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
-      transform: translateX(4px);
-    }
-
-    /* 二级下拉菜单 */
-    .nav-links .sub-menu li .sub-menu-2 {
-      position: absolute;
-      left: 100%;
-      top: -10px;
-      margin-left: 8px;
-      min-width: 220px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 10px;
-      list-style: none;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(8px);
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
-      white-space: nowrap;
-    }
-
-    .nav-links .sub-menu li:hover > .sub-menu-2 {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(0);
-    }
-
-    .nav-links .sub-menu li > a.has-submenu::after {
-      content: '›';
-      font-size: 18px;
-      line-height: 1;
-      color: var(--slate-400);
-      transition: transform 0.25s ease;
-    }
-
-    .nav-links .sub-menu li > a.has-submenu:hover::after {
-      transform: translateX(4px);
-      color: var(--primary-500);
-    }
-
-    .nav-links .sub-menu-2 li > a {
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .nav-links .sub-menu-2 li > a:hover {
-      color: var(--primary-600);
-      background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
-      transform: translateX(4px);
-    }
-
-    /* 三级下拉菜单 */
-    .nav-links .sub-menu-2 li .sub-menu-3 {
-      position: absolute;
-      left: 100%;
-      top: -10px;
-      margin-left: 8px;
-      min-width: 300px;
-      max-width: 360px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 10px;
-      list-style: none;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateX(8px);
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
-      max-height: min(500px, 85vh);
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    /* 三级菜单滚动条样式 */
-    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track {
-      background: var(--slate-100);
-      border-radius: 3px;
-    }
-
-    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
-      border-radius: 3px;
-    }
-
-    .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(0);
-    }
-
-    .nav-links .sub-menu-2 li > a.has-submenu::after {
-      content: '›';
-      font-size: 18px;
-      line-height: 1;
-      color: var(--slate-400);
-      transition: transform 0.25s ease;
-    }
-
-    .nav-links .sub-menu-2 li > a.has-submenu:hover::after {
-      transform: translateX(4px);
-      color: var(--primary-500);
-    }
-
-    .nav-links .sub-menu-3 li > a {
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-secondary);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .nav-links .sub-menu-3 li > a:hover {
-      color: var(--primary-600);
-      background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
-      transform: translateX(4px);
-    }
-
-    /* 产品分组样式 */
-    .sub-menu-3 .product-group-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-tertiary);
-      padding: 8px 16px 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .sub-menu-3 .product-item {
-      padding: 10px 16px 10px 20px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      transition: all 0.2s;
-      display: block;
-      list-style: none;
-    }
-
-    .sub-menu-3 .product-item:hover {
-      color: var(--primary-600);
-      background: var(--primary-50);
-    }
-
-    /* Page Header */
+    /* 页面标题 */
     .page-header {
-      margin-top: 84px;
-      padding: 100px 24px;
-      background: linear-gradient(135deg, var(--primary-50) 0%, var(--slate-100) 100%);
+      margin-top: 80px;
+      padding: 60px 24px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
       text-align: center;
     }
 
     .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(40px, 5vw, 64px);
+      font-size: clamp(32px, 5vw, 48px);
       font-weight: 700;
-      color: var(--slate-800);
-      margin-bottom: 16px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      font-family: 'Plus Jakarta Sans', 'Noto Serif SC', sans-serif;
+      font-variant-numeric: lining-nums proportional;
     }
 
     .page-header p {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Product Detail Section */
-    .product-detail-section {
-      padding: 120px 24px;
-      background: var(--bg-primary);
-    }
-
-    .product-detail-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      display: inline-block;
-      padding: 8px 20px;
-      background: var(--primary-50);
-      border: 1px solid var(--primary-500);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary-600);
-      margin-bottom: 20px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .section-description {
       font-size: 16px;
       color: var(--text-secondary);
-      line-height: 1.9;
-      margin-bottom: 48px;
-      max-width: 800px;
     }
 
-    .product-showcase {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      margin-bottom: 80px;
+    /* 产品内容区 */
+    .product-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 24px;
     }
 
-    .product-showcase-img {
-      background: var(--bg-secondary);
-      border-radius: 24px;
+    .product-image-full {
+      width: 100%;
+      margin-bottom: 40px;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .product-showcase-img img {
+    .product-image-full img {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    .product-showcase-content h3 {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 20px;
+    /* 产品详情 */
+    .product-detail-section {
+      padding: 60px 0;
     }
 
-    .product-showcase-content p {
+    .detail-card {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .detail-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .detail-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 24px;
+      background: var(--tech-blue);
+      border-radius: 2px;
+    }
+
+    .detail-list {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .detail-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
       font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.8;
-      margin-bottom: 24px;
     }
 
-    .feature-list {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .feature-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 15px;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-    }
-
-    .feature-list li::before {
-      content: "✓";
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
-      color: #fff;
-      border-radius: 50%;
+    .detail-list li::before {
+      content: '△';
+      position: absolute;
+      left: 0;
+      color: var(--tech-blue);
       font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
     }
 
-    .showcase-btn {
-      display: inline-block;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-      color: #fff;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 4px 15px rgba(26, 89, 224, 0.3), 0 1px 3px rgba(26, 89, 224, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .showcase-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      border-radius: 100px;
-    }
-
-    .showcase-btn span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .showcase-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(26, 89, 224, 0.4), 0 2px 6px rgba(26, 89, 224, 0.25);
-    }
-
-    .showcase-btn:hover::before {
-      opacity: 1;
-    }
-
-    /* Products Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 60px;
-    }
-
-    .product-card {
-      position: relative;
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-xl);
-      border-color: var(--primary-400);
-    }
-
-    .product-card .product-image {
-      height: 180px;
-      overflow: hidden;
-      background: var(--bg-secondary);
-    }
-
-    .product-card .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.08);
-    }
-
-    .product-card .product-info {
-      padding: 24px;
-    }
-
-    .product-card .product-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-    }
-
-    .product-card .product-desc {
-      font-size: 14px;
-      color: var(--text-tertiary);
-      line-height: 1.6;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 100px 24px;
-      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
-      text-align: center;
-    }
-
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cta-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .cta-section p {
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 32px;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 16px 40px;
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-      color: #fff;
-      border-radius: 100px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      box-shadow: 0 4px 15px rgba(26, 89, 224, 0.3), 0 1px 3px rgba(26, 89, 224, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      border-radius: 100px;
-    }
-
-    .cta-btn span {
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(26, 89, 224, 0.4), 0 2px 6px rgba(26, 89, 224, 0.25);
-    }
-
-    .cta-btn:hover::before {
-      opacity: 1;
-    }
-
-    /* Partners */
-    #partners {
-      padding: 80px 24px;
-      background: var(--bg-secondary);
-    }
-
-    .partners-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .partners-title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-    }
-
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    .partner-logo {
-      opacity: 0.6;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    .partner-logo:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .partner-logo img {
-      width: 100%;
-      height: auto;
-    }
-
-    /* Footer */
+    /* 页脚 */
     #footer {
       background: var(--bg-primary);
       border-top: 1px solid var(--border);
-      padding: 80px 24px 40px;
+      padding: 60px 24px 40px;
+      margin-top: 80px;
     }
 
     .footer-inner {
@@ -902,41 +497,31 @@
       display: grid;
       grid-template-columns: 1.5fr 1fr 1.5fr;
       gap: 60px;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
-    .footer-brand .logo {
-      height: 48px;
-      margin-bottom: 24px;
+    .footer-brand img {
+      height: 42px;
+      margin-bottom: 20px;
     }
 
     .footer-brand p {
       font-size: 14px;
       color: var(--text-tertiary);
       line-height: 1.8;
-      margin-bottom: 20px;
     }
 
     .footer-section h4 {
       font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 24px;
-    }
-
-    .footer-qrcodes {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-qr {
-      text-align: center;
+      margin-bottom: 20px;
     }
 
     .footer-qr img {
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
       border: 1px solid var(--border);
     }
 
@@ -945,6 +530,11 @@
       font-size: 12px;
       color: var(--text-tertiary);
       margin-top: 8px;
+      text-align: center;
+    }
+
+    .footer-contact {
+      list-style: none;
     }
 
     .footer-contact li {
@@ -954,13 +544,12 @@
       font-size: 14px;
       color: var(--text-secondary);
       margin-bottom: 16px;
-      list-style: none;
     }
 
     .footer-contact svg {
       width: 20px;
       height: 20px;
-      color: var(--primary-500);
+      color: var(--tech-blue);
       flex-shrink: 0;
     }
 
@@ -968,71 +557,40 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 40px;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .footer-copyright {
+      padding-top: 30px;
+      border-top: 1px solid rgba(91, 143, 249, 0.1);
       font-size: 13px;
       color: var(--text-tertiary);
     }
 
-    .footer-icp {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    .footer-icp a {
+    .footer-bottom a {
       color: var(--text-secondary);
       text-decoration: none;
     }
 
-    .footer-icp a:hover {
-      color: var(--primary-500);
+    .footer-bottom a:hover {
+      color: var(--tech-blue);
     }
 
-    /* Responsive */
+    /* 响应式 */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .product-showcase { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .partners-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-      .footer-qrcodes { justify-content: center; }
-    }
-
-    @media (max-width: 992px) {
-      .nav-inner { padding: 0 24px; }
-      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .detail-card { padding: 30px 24px; }
     }
 
     @media (max-width: 768px) {
-      .nav-links, .nav-btn { display: none; }
-      .nav-toggle { display: flex; }
       .nav-inner { height: 72px; padding: 0 20px; }
-      .page-header { padding: 60px 20px; margin-top: 72px; }
-      .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
-      .product-detail-section { padding: 80px 20px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .page-header { padding: 40px 20px; }
+      .page-header h1 { font-size: 28px; }
+      .product-content { padding: 40px 20px; }
+      .detail-card { padding: 24px 20px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .footer-qrcodes { display: none; }
-    }
-
-    @media (max-width: 480px) {
-      .nav-inner { padding: 0 16px; }
-      .page-header { padding: 40px 16px; }
-      .product-detail-section { padding: 60px 16px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .partners-grid { grid-template-columns: 1fr; }
-      .stat-box { padding: 16px; }
-      .stat-box .num { font-size: 32px; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
@@ -1113,7 +671,7 @@
       </li>
       <li><a href="patients.html">关爱患者</a></li>
       <li><a href="talent.html">人才中心</a></li>
-    </ul><a href="contact.html" class="nav-btn"><span>联系我们</span></a>
+    </ul><a href="contact.html" class="nav-btn">联系我们</a>
 
     <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1134,115 +692,36 @@
   </div>
 </nav>
 
-<!-- PAGE HEADER -->
 <section class="page-header">
-  <h1>器官保存</h1>
-  <p>专业器官保存液，为移植器官提供低温保存保护</p>
+  <h1>SPS-1&reg; 器官保存液（腹部器官）</h1>
+  <p>腹部器官保存的金标准</p>
 </section>
 
-<!-- PRODUCT DETAIL SECTION -->
-<section class="product-detail-section">
-  <div class="product-detail-inner">
-    <span class="section-label">ORGAN PRESERVATION</span>
-    <h2 class="section-title">KPS-1® 肾脏保存液</h2>
-    <p class="section-description">
-      KPS-1® 肾脏保存液采用 Intracellular 型配方，模拟细胞内液离子组成，低钠高钾，
-      有效维持细胞膜稳定性，防止细胞水肿，为肾脏提供优异的低温保存保护。
-    </p>
-
-    <div class="product-showcase animate-on-scroll">
-      <div class="product-showcase-img">
-        <img src="images/category-background-1.jpg" alt="KPS-1 肾脏保存液" />
-      </div>
-      <div class="product-showcase-content">
-        <h3>产品特点</h3>
-        <ul class="feature-list">
-          <li>Intracellular 型配方，低钠高钾，模拟细胞内液环境</li>
-          <li>含谷胱甘肽、甘露醇等成分，有效清除自由基</li>
-          <li>防止细胞水肿，维持细胞膜完整性</li>
-          <li>适用于肾脏低温静态保存</li>
-          <li>配合 LifePort® 机械灌注系统使用效果更佳</li>
-        </ul>
-        <a href="contact.html" class="showcase-btn"><span>咨询产品</span></a>
-      </div>
-    </div>
-
-    <div class="products-grid">
-      <div class="product-card animate-on-scroll">
-        <div class="product-image">
-          <img src="images/category-background-1.jpg" alt="SPS-1 器官保存液" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">SPS-1® 器官保存液</h3>
-          <p class="product-desc">适用于腹部多器官的低温保存</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-1">
-        <div class="product-image">
-          <img src="images/category-background-2.jpg" alt="KPS-1 肾脏保存液" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">KPS-1® 肾脏保存液</h3>
-          <p class="product-desc">专为肾脏移植设计的保存液</p>
-        </div>
-      </div>
-
-      <div class="product-card animate-on-scroll delay-2">
-        <div class="product-image">
-          <img src="images/category-background-3.jpg" alt="保存液配件" />
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">保存液配件</h3>
-          <p class="product-desc">配套管路与耗材</p>
-        </div>
-      </div>
-    </div>
+<main class="product-content">
+  <!-- 产品图片 - SPS-1 完整宣传页 -->
+  <div class="product-image-full">
+    <img src="images/SPS-1.png" alt="SPS-1® 器官保存液（腹部器官）产品介绍" />
   </div>
-</section>
+</main>
 
-<!-- CTA SECTION -->
-<section class="cta-section">
-  <div class="cta-content">
-    <h2>需要产品咨询？</h2>
-    <p>我们的专业团队随时为您服务，提供详细的产品信息与技术支援</p>
-    <a href="contact.html" class="cta-btn"><span>联系我们</span></a>
-  </div>
-</section>
-
-<!-- PARTNERS SECTION -->
-<section id="partners">
-  <div class="partners-inner">
-    <h3 class="partners-title">合作伙伴</h3>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
-      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
-      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
-      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
-      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="images/logo.png" alt="健耕医药" class="logo" />
-        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。</p>
+        <img src="images/logo.png" alt="健耕医药" />
+        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
       </div>
 
       <div class="footer-section">
         <h4>关注我们</h4>
-        <div class="footer-qrcodes">
+        <div style="display: flex; gap: 16px; justify-content: center;">
           <div class="footer-qr">
             <img src="images/qcode.png" alt="官网二维码" />
-            <span>官网二维码</span>
+            <span>官网</span>
           </div>
           <div class="footer-qr">
             <img src="images/wechat-2.png" alt="微信公众号" />
-            <span>微信公众号</span>
+            <span>微信</span>
           </div>
         </div>
       </div>
@@ -1267,26 +746,13 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copyright">
-        &copy; 2014 - 2026 上海健耕医药科技股份有限公司
-      </div>
-      <div class="footer-icp">
-        <a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 12033151 号</a>
-      </div>
+      <div>&copy; 2014 - 2026 上海健耕医药科技股份有限公司</div>
+      <div><a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 12033151 号</a></div>
     </div>
   </div>
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
-
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
@@ -1294,24 +760,6 @@
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
   }
-
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    el.style.animationPlayState = 'paused';
-    observer.observe(el);
-  });
 </script>
 
 </body>
