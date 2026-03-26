@@ -232,6 +232,13 @@
       color: var(--text-tertiary);
       line-height: 1.8;
     }
+    /* 正式数字样式 - 专业财务报表风格 */
+    .footer-brand p .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
+    }
 
     .footer-section h4 {
       font-size: 16px;
@@ -455,7 +462,7 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <img src="images/logo.png" alt="健耕医药" />
-        <p>成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。</p>
+        <p>成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人，其中研发人员 <span class="num">26</span> 名。</p>
       </div>
 
       <div class="footer-section">

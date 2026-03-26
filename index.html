@@ -2518,6 +2518,13 @@
       color: var(--text-secondary);
       line-height: 1.8;
     }
+    /* 正式数字样式 - 专业财务报表风格 */
+    .footer-text .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
+    }
 
     .footer-heading {
       font-size: 16px;
@@ -2916,7 +2923,7 @@
       <h2>关于健耕</h2>
       <p class="subtitle">二十年深耕，专注器官移植领域</p>
       <p>
-        成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人。
+        成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人。
       </p>
       <p>
         公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。
@@ -3400,7 +3407,7 @@
         <img src="images/logo.png" alt="健耕医药" />
       </div>
       <p class="footer-text">
-        成立于 2004 年，注册资本 7040 万元人民币，全球员工人数 185 人，其中研发人员 26 名。
+        成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人，其中研发人员 <span class="num">26</span> 名。
       </p>
     </div>
     <div class="footer-section">
