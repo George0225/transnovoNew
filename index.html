@@ -15,54 +15,54 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* 主色调 - 柔和奶油色」 */
-      --primary-50: #fefefe;
-      --primary-100: #f9f8f6;
-      --primary-200: #f3f1ed;
-      --primary-300: #ede9e4;
-      --primary-400: #e5e0d8;
-      --primary-500: #d8d3cc;
-      --primary-600: #c9c4bc;
-      --primary-700: #b8b4ae;
+      /* 主色调 - 深度奶油色（更浓郁护眼）」 */
+      --primary-50: #fdfdfc;
+      --primary-100: #f7f5f0;
+      --primary-200: #efede6;
+      --primary-300: #e6e2d9;
+      --primary-400: #d6d0c4;
+      --primary-500: #c4bdae;
+      --primary-600: #b5ac9d;
+      --primary-700: #a39a8b;
 
-      /* 强调色 - 温暖金棕」 */
-      --accent-400: #c9a962;
-      --accent-500: #b89849;
-      --accent-600: #a3863a;
+      /* 强调色 - 深度温暖金棕（更低饱和度）」 */
+      --accent-400: #b89654;
+      --accent-500: #a48546;
+      --accent-600: #92743a;
 
-      /* 中性色 - 温暖灰」 */
-      --slate-50: #fafaf9;
-      --slate-100: #f5f4f2;
-      --slate-200: #e8e6e1;
-      --slate-300: #d4d1ca;
-      --slate-400: #b0ada6;
-      --slate-500: #8a8882;
-      --slate-600: #6d6962;
-      --slate-700: #4a4844;
-      --slate-800: #2d2c2a;
-      --slate-900: #1a1918;
+      /* 中性色 - 深度温暖灰」 */
+      --slate-50: #f8f7f5;
+      --slate-100: #f0efeb;
+      --slate-200: #e0ded8;
+      --slate-300: #c8c5be;
+      --slate-400: #a5a29a;
+      --slate-500: #827f78;
+      --slate-600: #63605a;
+      --slate-700: #45433f;
+      --slate-800: #2a2926;
+      --slate-900: #161513;
 
-      /* 语义色 */
-      --bg-primary: #ffffff;
+      /* 语义色 - 更柔和护眼」 */
+      --bg-primary: #fdfdfc;
       --bg-secondary: var(--slate-50);
       --bg-tertiary: var(--slate-100);
-      --bg-light: #f9f8f6;
-      --bg-dark: #1a1918;
+      --bg-light: #f7f5f0;
+      --bg-dark: #2a2926;
       --border: var(--slate-200);
-      --text-primary: #4a4a4a;
-      --text-secondary: #6d6962;
-      --text-tertiary: #9a9690;
+      --text-primary: #1a1a1a;
+      --text-secondary: #3a3732;
+      --text-tertiary: #6a6660;
       --text-light: #ffffff;
 
-      /* 效果色 */
-      --warm-stone: #d8d3cc;
-      --warm-sand: #e5e0d8;
-      --shadow-sm: 0 1px 3px rgba(74, 74, 74, 0.04);
-      --shadow-md: 0 4px 12px rgba(74, 74, 74, 0.06);
-      --shadow-lg: 0 8px 30px rgba(74, 74, 74, 0.08);
-      --shadow-xl: 0 20px 60px rgba(74, 74, 74, 0.10);
-      --glow-soft: 0 0 40px rgba(216, 211, 204, 0.3);
-      --glow-warm: 0 0 40px rgba(201, 169, 98, 0.2);
+      /* 效果色 - 深度温暖质感」 */
+      --warm-stone: #c4bdae;
+      --warm-sand: #d6d0c4;
+      --shadow-sm: 0 1px 3px rgba(61, 61, 61, 0.05);
+      --shadow-md: 0 4px 12px rgba(61, 61, 61, 0.08);
+      --shadow-lg: 0 8px 30px rgba(61, 61, 61, 0.10);
+      --shadow-xl: 0 20px 60px rgba(61, 61, 61, 0.12);
+      --glow-soft: 0 0 40px rgba(196, 189, 174, 0.35);
+      --glow-warm: 0 0 40px rgba(184, 150, 84, 0.25);
     }
 
     html { scroll-behavior: smooth; }
@@ -1105,7 +1105,7 @@
     .global-header .subtitle {
       font-size: 14px;
       color: var(--text-secondary);
-      font-weight: 400;
+      font-weight: 500;
     }
 
     /* =============================================
@@ -1134,7 +1134,7 @@
     .global-header .subtitle {
       font-size: 13px;
       color: var(--text-tertiary);
-      font-weight: 400;
+      font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
@@ -1543,7 +1543,7 @@
 
     .core-values-subtitle {
       font-size: 12px;
-      font-weight: 400;
+      font-weight: 500;
       color: #a8a49e;
       letter-spacing: 0.35em;
       text-transform: uppercase;
@@ -1764,7 +1764,7 @@
 
     .history-subtitle {
       font-size: 12px;
-      font-weight: 400;
+      font-weight: 500;
       color: #a8a49e;
       letter-spacing: 0.35em;
       margin-top: 18px;
@@ -2010,7 +2010,7 @@
       line-height: 1.75;
       position: relative;
       z-index: 1;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     /* 产品中心网格 - 柔和有机质感 */
@@ -2247,7 +2247,7 @@
       color: var(--text-primary);
       text-align: justify;
       font-family: 'Noto Serif SC', serif;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     .product-popout-text p {
