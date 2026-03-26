@@ -7,56 +7,77 @@
   <meta name="description" content="提供他克莫司、环孢素等免疫抑制剂产品，预防器官移植排斥反应。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/common.css" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* 主色调 - 医疗科技蓝 */
-      --primary-50: #eef4ff;
-      --primary-100: #d9e6ff;
-      --primary-200: #b3ccff;
-      --primary-300: #80aaff;
-      --primary-400: #4d85ff;
-      --primary-500: #1a59e0;
-      --primary-600: #0f3fb5;
-      --primary-700: #0a2c85;
-
-      /* 强调色 - 生命粉 */
-      --accent-400: #ff4d8d;
-      --accent-500: #e61e6c;
-      --accent-600: #b81255;
-
-      /* 中性色 - 优雅灰 */
-      --slate-50: #f9fafc;
-      --slate-100: #f0f2f6;
-      --slate-200: #e2e6ed;
-      --slate-300: #c8ced9;
-      --slate-400: #9aa3b3;
-      --slate-500: #6b778c;
-      --slate-600: #4a5568;
-      --slate-700: #2d3748;
-      --slate-800: #1a2433;
-
-      /* 语义色 */
-      --bg-primary: #ffffff;
+      --primary-50: #fdfdfc;
+      --primary-100: #f7f5f0;
+      --primary-200: #efede6;
+      --primary-300: #e6e2d9;
+      --primary-400: #d6d0c4;
+      --primary-500: #c4bdae;
+      --primary-600: #b5ac9d;
+      --primary-700: #a39a8b;
+      --accent-400: #b89654;
+      --accent-500: #a48546;
+      --accent-600: #92743a;
+      --slate-50: #f8f7f5;
+      --slate-100: #f0efeb;
+      --slate-200: #e0ded8;
+      --slate-300: #c8c5be;
+      --slate-400: #a5a29a;
+      --slate-500: #827f78;
+      --slate-600: #63605a;
+      --slate-700: #45433f;
+      --slate-800: #2a2926;
+      --slate-900: #161513;
+      --bg-primary: #fdfdfc;
       --bg-secondary: var(--slate-50);
       --bg-tertiary: var(--slate-100);
-      --bg-light: #f5f7fa;
-      --bg-dark: #0d1033;
+      --bg-light: #f7f5f0;
+      --bg-dark: #2a2926;
       --border: var(--slate-200);
-      --border-light: rgba(15, 63, 181, 0.06);
-      --text-primary: var(--slate-800);
-      --text-secondary: var(--slate-600);
-      --text-tertiary: var(--slate-400);
+      --text-primary: #1a1a1a;
+      --text-secondary: #3a3732;
+      --text-tertiary: #6a6660;
       --text-light: #ffffff;
-      --slate-900: #0d1033;
+      --warm-stone: #c4bdae;
+      --warm-sand: #d6d0c4;
+      --shadow-sm: 0 1px 3px rgba(61, 61, 61, 0.05);
+      --shadow-md: 0 4px 12px rgba(61, 61, 61, 0.08);
+      --shadow-lg: 0 8px 30px rgba(61, 61, 61, 0.10);
+      --shadow-xl: 0 20px 60px rgba(61, 61, 61, 0.12);
+      --glow-soft: 0 0 40px rgba(196, 189, 174, 0.35);
+      --glow-warm: 0 0 40px rgba(184, 150, 84, 0.25);
+    }
 
-      /* 品牌色 */
-      --tech-blue: #5B8FF9;
-      --pink: #E61E6C;
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Cormorant Garamond', 'Noto Serif SC', 'Plus Jakarta Sans', serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.75;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--slate-100); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
+    }
 
       /* 效果色 */
       --shadow-sm: 0 1px 3px rgba(15, 63, 181, 0.06);
