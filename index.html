@@ -1113,132 +1113,48 @@
        ============================================= */
     .global-section-wrapper {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 40px 24px 60px;
+      padding: 60px 24px 80px;
     }
 
     .global-header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 48px;
     }
 
     .global-header h2 {
-      font-size: clamp(26px, 3vw, 32px);
-      font-weight: 600;
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       letter-spacing: 0.02em;
     }
 
     .global-header .subtitle {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    /* =============================================
-       全球销售网络 - 覆盖 49 个国家
-       ============================================= */
-    .global-sales-network {
-      margin-top: 48px;
-      padding: 40px 32px;
-      background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(201, 169, 98, 0.03) 100%);
-      border-radius: 16px;
-      border: 1px solid rgba(201, 169, 98, 0.15);
-    }
-
-    .sales-network-title {
-      font-size: clamp(22px, 3vw, 32px);
-      font-weight: 700;
-      color: var(--text-primary);
-      text-align: center;
-      margin-bottom: 32px;
-      letter-spacing: 0.02em;
-    }
-
-    .sales-regions-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .sales-region {
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 12px;
-      border: 1px solid rgba(201, 169, 98, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .sales-region:hover {
-      background: rgba(255, 255, 255, 0.8);
-      border-color: rgba(201, 169, 98, 0.25);
-      box-shadow: 0 4px 16px rgba(201, 169, 98, 0.1);
-    }
-
-    .region-name {
-      display: block;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--accent-600);
-      margin-bottom: 10px;
-      letter-spacing: 0.05em;
-    }
-
-    .region-countries {
-      display: block;
-      font-size: 13px;
-      line-height: 1.8;
+      font-size: 14px;
       color: var(--text-secondary);
+      font-weight: 500;
     }
 
-    /* 移动端适配 */
-    @media (max-width: 992px) {
-      .sales-regions-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    /* 全球内容网格布局 - 地图和销售网络并排 */
+    .global-content-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: start;
     }
 
-    @media (max-width: 576px) {
-      .global-sales-network {
-        padding: 24px 16px;
-      }
-
-      .sales-network-title {
-        font-size: 18px;
-      }
-
-      .sales-regions-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      .region-name {
-        font-size: 14px;
-      }
-
-      .region-countries {
-        font-size: 12px;
-        line-height: 1.6;
-      }
-    }
-
-    /* 地图容器 - 最大化尺寸 */
-    .world-map-container {
+    .world-map-wrapper {
       width: 100%;
-      max-width: 100%;
-      margin: 0 auto 60px;
-      padding: 0 24px;
     }
 
+    /* 地图容器 */
     .world-map-viz {
       position: relative;
       width: 100%;
       aspect-ratio: 21/9;
-      max-height: 80vh;
+      max-height: 70vh;
       background: #fafbfc;
       border-radius: 16px;
       overflow: hidden;
@@ -1353,7 +1269,67 @@
       gap: 32px 48px;
       width: 100%;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 24px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* 全球销售网络 - 右侧面板样式 */
+    .global-sales-network {
+      padding: 32px 28px;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(201, 169, 98, 0.03) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sales-network-title {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+
+    .sales-regions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      flex: 1;
+    }
+
+    .sales-region {
+      padding: 14px 12px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      border: 1px solid rgba(201, 169, 98, 0.12);
+      transition: all 0.3s ease;
+    }
+
+    .sales-region:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(201, 169, 98, 0.25);
+      box-shadow: 0 4px 12px rgba(201, 169, 98, 0.08);
+    }
+
+    .region-name {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-600);
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    .region-countries {
+      display: block;
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-secondary);
     }
 
     .office-location-group,
@@ -2646,8 +2622,21 @@
       .global-header h2 { font-size: 22px; }
       .global-header .subtitle { font-size: 11px; }
 
-      .world-map-container { max-width: 100%; margin-bottom: 30px; }
+      /* 全球内容网格移动端 - 上下堆叠 */
+      .global-content-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .world-map-wrapper { width: 100%; }
       .world-map-viz { aspect-ratio: 4/3; border-radius: 8px; }
+
+      /* 销售网络移动端适配 */
+      .global-sales-network { padding: 24px 16px; }
+      .sales-network-title { font-size: 18px; margin-bottom: 16px; }
+      .sales-regions-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .region-name { font-size: 13px; }
+      .region-countries { font-size: 11px; line-height: 1.5; }
 
       .global-info-content {
         grid-template-columns: 1fr;
@@ -3164,101 +3153,102 @@
 <!-- GLOBAL SECTION -->
 <section class="content-section section-white" id="section-global">
   <div class="global-section-wrapper">
-    <!-- 标题在地图上方 -->
+    <!-- 标题 -->
     <div class="global-header">
       <h2>全球网络</h2>
       <p class="subtitle">覆盖全球的销售和服务网络</p>
     </div>
 
-    <!-- 世界地图居中显示 -->
-    <div class="world-map-container">
-      <div class="world-map-viz">
-        <img src="images/world-map.jpg" alt="世界地图" class="world-map-bg" />
-        <canvas id="worldMapCanvas"></canvas>
-        <!-- 办公室标记点 - 精确定位 -->
-        <div class="office-marker marker-shanghai" data-city="上海" data-type="总部">
-          <div class="marker-pulse"></div>
-          <div class="marker-dot"></div>
+    <!-- 地图和销售网络并排布局 -->
+    <div class="global-content-grid">
+      <!-- 世界地图 -->
+      <div class="world-map-wrapper">
+        <div class="world-map-viz">
+          <img src="images/world-map.jpg" alt="世界地图" class="world-map-bg" />
+          <canvas id="worldMapCanvas"></canvas>
+          <!-- 办公室标记点 -->
+          <div class="office-marker marker-shanghai" data-city="上海" data-type="总部">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+          <div class="office-marker marker-guangzhou" data-city="广州" data-type="办事处">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+          <div class="office-marker marker-chicago" data-city="芝加哥" data-type="办事处">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+          <div class="office-marker marker-brussels" data-city="布鲁塞尔" data-type="办事处">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
         </div>
-        <div class="office-marker marker-guangzhou" data-city="广州" data-type="办事处">
-          <div class="marker-pulse"></div>
-          <div class="marker-dot"></div>
-        </div>
-        <div class="office-marker marker-chicago" data-city="芝加哥" data-type="办事处">
-          <div class="marker-pulse"></div>
-          <div class="marker-dot"></div>
-        </div>
-        <div class="office-marker marker-brussels" data-city="布鲁塞尔" data-type="办事处">
-          <div class="marker-pulse"></div>
-          <div class="marker-dot"></div>
+
+        <!-- 办公地点信息 -->
+        <div class="global-info-content">
+          <div class="office-location-group">
+            <div class="location-group-title">Global Offices</div>
+            <div class="location-item">
+              <span class="location-badge">HEADQ</span>
+              <span class="location-city">上海</span>
+              <span class="location-country">中国</span>
+            </div>
+            <div class="location-item">
+              <span class="location-badge">OFFICE</span>
+              <span class="location-city">广州</span>
+              <span class="location-country">中国</span>
+            </div>
+            <div class="location-item">
+              <span class="location-badge">OFFICE</span>
+              <span class="location-city">芝加哥</span>
+              <span class="location-country">美国</span>
+            </div>
+            <div class="location-item">
+              <span class="location-badge">OFFICE</span>
+              <span class="location-city">布鲁塞尔</span>
+              <span class="location-country">比利时</span>
+            </div>
+          </div>
+
+          <div class="subsidiary-location-group">
+            <div class="location-group-title">Subsidiary</div>
+            <div class="subsidiary-item">
+              <span class="subsidiary-name-text">Lifeline Scientific, Inc.<span class="subsidiary-badge">子公司</span></span>
+              <span class="subsidiary-location">美国</span>
+              <a href="https://www.organ-recovery.com/" target="_blank" class="subsidiary-link-simple">
+                访问官网
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 办公地点信息在地图下方 -->
-    <div class="global-info-content">
-      <!-- 办公地点 -->
-      <div class="office-location-group">
-        <div class="location-group-title">Global Offices</div>
-        <div class="location-item">
-          <span class="location-badge">HEADQ</span>
-          <span class="location-city">上海</span>
-          <span class="location-country">中国</span>
-        </div>
-        <div class="location-item">
-          <span class="location-badge">OFFICE</span>
-          <span class="location-city">广州</span>
-          <span class="location-country">中国</span>
-        </div>
-        <div class="location-item">
-          <span class="location-badge">OFFICE</span>
-          <span class="location-city">芝加哥</span>
-          <span class="location-country">美国</span>
-        </div>
-        <div class="location-item">
-          <span class="location-badge">OFFICE</span>
-          <span class="location-city">布鲁塞尔</span>
-          <span class="location-country">比利时</span>
-        </div>
-      </div>
-
-      <!-- 子公司 -->
-      <div class="subsidiary-location-group">
-        <div class="location-group-title">Subsidiary</div>
-        <div class="subsidiary-item">
-          <span class="subsidiary-name-text">Lifeline Scientific, Inc.<span class="subsidiary-badge">子公司</span></span>
-          <span class="subsidiary-location">美国</span>
-          <a href="https://www.organ-recovery.com/" target="_blank" class="subsidiary-link-simple">
-            访问官网
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 全球销售网络 -->
-    <div class="global-sales-network">
-      <div class="sales-network-title">全球销售网络 - 覆盖 49 个国家</div>
-      <div class="sales-regions-grid">
-        <div class="sales-region">
-          <span class="region-name">亚洲</span>
-          <span class="region-countries">中国、菲律宾、泰国、新加坡、印度、韩国</span>
-        </div>
-        <div class="sales-region">
-          <span class="region-name">欧洲</span>
-          <span class="region-countries">英国、德国、法国、荷兰、瑞士、西班牙、意大利、波兰、奥地利、比利时、丹麦、挪威、瑞典、芬兰、葡萄牙、捷克、匈牙利、罗马尼亚、克罗地亚、斯洛文尼亚、土耳其、爱沙尼亚、拉脱维亚、立陶宛</span>
-        </div>
-        <div class="sales-region">
-          <span class="region-name">美洲</span>
-          <span class="region-countries">美国、加拿大、巴西、墨西哥、阿根廷、智利、哥伦比亚、秘鲁、乌拉圭、巴拿马</span>
-        </div>
-        <div class="sales-region">
-          <span class="region-name">中东及大洋洲</span>
-          <span class="region-countries">澳大利亚、以色列、沙特阿拉伯、阿联酋</span>
+      <!-- 全球销售网络 -->
+      <div class="global-sales-network">
+        <div class="sales-network-title">全球销售网络 - 覆盖 49 个国家</div>
+        <div class="sales-regions-grid">
+          <div class="sales-region">
+            <span class="region-name">亚洲</span>
+            <span class="region-countries">中国、菲律宾、泰国、新加坡、印度、韩国</span>
+          </div>
+          <div class="sales-region">
+            <span class="region-name">欧洲</span>
+            <span class="region-countries">英国、德国、法国、荷兰、瑞士、西班牙、意大利、波兰、奥地利、比利时、丹麦、挪威、瑞典、芬兰、葡萄牙、捷克、匈牙利、罗马尼亚、克罗地亚、斯洛文尼亚、土耳其、爱沙尼亚、拉脱维亚、立陶宛</span>
+          </div>
+          <div class="sales-region">
+            <span class="region-name">美洲</span>
+            <span class="region-countries">美国、加拿大、巴西、墨西哥、阿根廷、智利、哥伦比亚、秘鲁、乌拉圭、巴拿马</span>
+          </div>
+          <div class="sales-region">
+            <span class="region-name">中东及大洋洲</span>
+            <span class="region-countries">澳大利亚、以色列、沙特阿拉伯、阿联酋</span>
+          </div>
         </div>
       </div>
     </div>
