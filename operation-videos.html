@@ -122,13 +122,13 @@
 
     .nav-links > li > a:hover,
     .nav-links > li > a.active {
-      color: var(--tech-blue);
-      background: rgba(91, 143, 249, 0.08);
+      color: var(--accent-500);
+      background: rgba(184, 150, 84, 0.08);
     }
 
     .nav-btn {
       padding: 12px 24px;
-      background: var(--accent);
+      background: var(--accent-500);
       color: #fff;
       border-radius: 8px;
       text-decoration: none;
@@ -138,9 +138,9 @@
     }
 
     .nav-btn:hover {
-      background: var(--accent-light);
+      background: var(--accent-600);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(91, 143, 249, 0.2);
+      box-shadow: 0 8px 20px rgba(184, 150, 84, 0.3);
     }
 
     /* 下拉菜单样式 */
@@ -202,8 +202,8 @@
     }
 
     .nav-links .sub-menu > li > a:hover {
-      color: var(--tech-blue);
-      background: rgba(91, 143, 249, 0.08);
+      color: var(--accent-500);
+      background: rgba(184, 150, 84, 0.08);
     }
 
     /* 二级下拉菜单 */
@@ -267,8 +267,8 @@
     }
 
     .nav-links .sub-menu-2 li > a:hover {
-      color: var(--tech-blue);
-      background: rgba(91, 143, 249, 0.08);
+      color: var(--accent-500);
+      background: rgba(184, 150, 84, 0.08);
     }
 
     .nav-links .sub-menu-2 li .sub-menu-3 {
@@ -353,8 +353,8 @@
     }
 
     .sub-menu-3 .product-item:hover {
-      color: var(--tech-blue);
-      background: rgba(91, 143, 249, 0.05);
+      color: var(--accent-500);
+      background: rgba(184, 150, 84, 0.05);
     }
 
     .nav-toggle {
@@ -397,80 +397,40 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* 页面头部 - 三图组合 Banner */
+    /* 页面头部 - 简洁文字标题 */
     .page-header {
       margin-top: 80px;
       display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      background: var(--bg-white);
-      overflow: hidden;
-      height: 180px;
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--primary-100) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 24px;
+      min-height: 200px;
     }
 
-    .page-header h1,
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin: 0;
+    }
+
     .page-header p {
       display: none;
     }
 
-    .banner-wrapper {
-      display: flex;
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 0;
-    }
-
-    .banner-item {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      transition: flex 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-    .banner-item:hover {
-      flex: 1.3;
-    }
-
-    .banner-item:hover::after {
-      opacity: 1;
-    }
-
-    .banner-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      transition: transform 0.6s ease;
-    }
-
-    .banner-item:hover img {
-      transform: scale(1.05);
-    }
-
-    .banner-item::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.3) 100%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-
     @media (max-width: 768px) {
       .page-header {
-        flex-direction: column;
-        height: auto;
+        padding: 40px 20px;
+        min-height: 140px;
       }
-      .banner-wrapper {
-        flex-direction: column;
-      }
-      .banner-item {
-        height: 140px;
-      }
-      .banner-item:hover {
-        flex: 1;
+      .page-header h1 {
+        font-size: 32px;
       }
     }
 
@@ -510,16 +470,16 @@
     }
 
     .category-tab:hover {
-      color: var(--tech-blue);
-      background: rgba(91, 143, 249, 0.08);
-      border-color: var(--tech-blue);
+      color: var(--accent-500);
+      background: rgba(184, 150, 84, 0.08);
+      border-color: var(--accent-500);
     }
 
     .category-tab.active {
-      background: var(--tech-blue);
+      background: var(--accent-500);
       color: #fff;
-      border-color: var(--tech-blue);
-      box-shadow: 0 2px 8px rgba(91, 143, 249, 0.3);
+      border-color: var(--accent-500);
+      box-shadow: 0 2px 8px rgba(184, 150, 84, 0.3);
     }
 
     /* 左侧边栏 */
@@ -546,7 +506,7 @@
     }
 
     .sidebar::-webkit-scrollbar-thumb {
-      background: var(--tech-blue);
+      background: var(--accent-500);
       border-radius: 3px;
     }
 
@@ -570,8 +530,8 @@
     }
 
     .sidebar-header:hover {
-      background: linear-gradient(135deg, rgba(91, 143, 249, 0.08) 0%, rgba(43, 58, 109, 0.08) 100%);
-      color: var(--tech-blue);
+      background: linear-gradient(135deg, rgba(184, 150, 84, 0.08) 0%, rgba(164, 133, 70, 0.08) 100%);
+      color: var(--accent-500);
     }
 
     .sidebar-header .arrow {
@@ -583,7 +543,7 @@
 
     .sidebar-item.expanded .sidebar-header .arrow {
       transform: rotate(90deg);
-      color: var(--tech-blue);
+      color: var(--accent-500);
     }
 
     .sidebar-sub {
@@ -612,9 +572,9 @@
 
     .sidebar-sub-item:hover,
     .sidebar-sub-item.active {
-      color: var(--tech-blue);
+      color: var(--accent-500);
       background: transparent;
-      border-left-color: var(--tech-blue);
+      border-left-color: var(--accent-500);
       font-weight: 600;
     }
 
@@ -641,7 +601,7 @@
 
     .sidebar-sub-sub-item:hover,
     .sidebar-sub-sub-item.active {
-      color: var(--tech-blue);
+      color: var(--accent-500);
       background: transparent;
       font-weight: 600;
     }
@@ -669,7 +629,7 @@
       font-size: 24px;
       font-weight: 700;
       color: var(--text-primary);
-      background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent) 100%);
+      background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-400) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -691,9 +651,9 @@
 
     .search-box input:focus {
       outline: none;
-      border-color: var(--tech-blue);
+      border-color: var(--accent-500);
       background: var(--bg-white);
-      box-shadow: 0 0 0 4px rgba(91, 143, 249, 0.1);
+      box-shadow: 0 0 0 4px rgba(184, 150, 84, 0.1);
     }
 
     .search-box svg {
@@ -709,7 +669,7 @@
 
     .search-box input:focus + svg,
     .search-box:hover svg {
-      color: var(--tech-blue);
+      color: var(--accent-500);
     }
 
     /* 视频网格 */
@@ -731,15 +691,15 @@
 
     .video-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(91, 143, 249, 0.15);
-      border-color: var(--tech-blue);
+      box-shadow: 0 20px 40px rgba(184, 150, 84, 0.15);
+      border-color: var(--accent-500);
     }
 
     .video-thumbnail {
       position: relative;
       width: 100%;
       padding-top: 56.25%;
-      background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent) 100%);
+      background: linear-gradient(135deg, var(--accent-400) 0%, var(--accent-500) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -762,7 +722,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent) 100%);
+      background: linear-gradient(135deg, var(--accent-400) 0%, var(--accent-500) 100%);
     }
 
     .play-button {
@@ -782,15 +742,15 @@
     }
 
     .video-card:hover .play-button {
-      background: var(--tech-blue);
+      background: var(--accent-500);
       transform: translate(-50%, -50%) scale(1.15);
-      box-shadow: 0 8px 24px rgba(91, 143, 249, 0.4);
+      box-shadow: 0 8px 24px rgba(184, 150, 84, 0.4);
     }
 
     .play-button svg {
       width: 22px;
       height: 22px;
-      color: var(--tech-blue);
+      color: var(--accent-500);
       margin-left: 2px;
       transition: color 0.3s;
     }
@@ -805,7 +765,7 @@
 
     .video-category {
       font-size: 12px;
-      color: var(--tech-blue);
+      color: var(--accent-500);
       font-weight: 600;
       margin-bottom: 8px;
       text-transform: uppercase;
@@ -825,7 +785,7 @@
     }
 
     .video-card:hover .video-title {
-      color: var(--tech-blue);
+      color: var(--accent-500);
     }
 
     /* 视频弹窗 */
@@ -856,7 +816,7 @@
       position: relative;
       width: 90%;
       max-width: 1200px;
-      background: var(--bg-navy);
+      background: var(--bg-dark);
       border-radius: 12px;
       padding: 24px;
       max-height: 90vh;
@@ -1035,19 +995,9 @@
   </div>
 </nav>
 
-<!-- 页面头部背景图 - 三图组合 -->
+<!-- 页面头部标题 -->
 <section class="page-header">
-  <div class="banner-wrapper">
-    <div class="banner-item">
-      <img src="images/operation-banner-1.png" alt="LifePort 肾脏灌注设备显示屏" />
-    </div>
-    <div class="banner-item">
-      <img src="images/operation-banner-2.png" alt="LifePort 肝脏灌注设备内部结构" />
-    </div>
-    <div class="banner-item">
-      <img src="images/operation-banner-3.png" alt="器官灌注转运盒操作" />
-    </div>
-  </div>
+  <h1>操作视频</h1>
 </section>
 
 <!-- 主容器 -->
