@@ -1556,8 +1556,8 @@
       justify-content: center;
       align-items: center;
       gap: 24px;
-      flex-wrap: wrap;
-      max-width: 1000px;
+      flex-wrap: nowrap;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
@@ -1673,18 +1673,7 @@
       font-weight: 600;
     }
 
-    /* 六边形排列 - 两行交错 */
-    .core-values-grid .core-value-item:nth-child(1),
-    .core-values-grid .core-value-item:nth-child(2),
-    .core-values-grid .core-value-item:nth-child(3) {
-      margin-top: 0;
-    }
-
-    .core-values-grid .core-value-item:nth-child(4),
-    .core-values-grid .core-value-item:nth-child(5),
-    .core-values-grid .core-value-item:nth-child(6) {
-      margin-top: 40px;
-    }
+    /* 六边形排列 - 单行对齐 */
 
     /* 发展历程 - 有机柔性质感 */
     .development-history {
