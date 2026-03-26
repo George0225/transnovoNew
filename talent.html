@@ -143,22 +143,7 @@
       background: var(--accent-soft);
     }
 
-    .nav-btn {
-      padding: 12px 24px;
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.3s;
-    }
 
-    .nav-btn:hover {
-      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px var(--tech-glow);
-    }
 
     .nav-toggle {
       display: none;
@@ -724,8 +709,6 @@
     }
 
     @media (max-width: 768px) {
-      .nav-links, .nav-btn { display: none; }
-      .nav-toggle { display: flex; }
       .nav-inner { height: 72px; padding: 0 20px; }
       .page-header { padding: 60px 20px; }
       .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
