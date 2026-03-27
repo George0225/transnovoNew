@@ -1,0 +1,4037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tranSnovo 健耕医药 — 为生命重塑未来</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* 主色调 - 深度奶油色（更浓郁护眼）」 */
+      --primary-50: #fdfdfc;
+      --primary-100: #f7f5f0;
+      --primary-200: #efede6;
+      --primary-300: #e6e2d9;
+      --primary-400: #d6d0c4;
+      --primary-500: #c4bdae;
+      --primary-600: #b5ac9d;
+      --primary-700: #a39a8b;
+
+      /* 强调色 - 深度温暖金棕（更低饱和度）」 */
+      --accent-400: #b89654;
+      --accent-500: #a48546;
+      --accent-600: #92743a;
+
+      /* 中性色 - 深度温暖灰」 */
+      --slate-50: #f8f7f5;
+      --slate-100: #f0efeb;
+      --slate-200: #e0ded8;
+      --slate-300: #c8c5be;
+      --slate-400: #a5a29a;
+      --slate-500: #827f78;
+      --slate-600: #63605a;
+      --slate-700: #45433f;
+      --slate-800: #2a2926;
+      --slate-900: #161513;
+
+      /* 语义色 - 更柔和护眼」 */
+      --bg-primary: #fdfdfc;
+      --bg-secondary: var(--slate-50);
+      --bg-tertiary: var(--slate-100);
+      --bg-light: #f7f5f0;
+      --bg-dark: #2a2926;
+      --border: var(--slate-200);
+      --text-primary: #1a1a1a;
+      --text-secondary: #3a3732;
+      --text-tertiary: #6a6660;
+      --text-light: #ffffff;
+
+      /* 效果色 - 深度温暖质感」 */
+      --warm-stone: #c4bdae;
+      --warm-sand: #d6d0c4;
+      --shadow-sm: 0 1px 3px rgba(61, 61, 61, 0.05);
+      --shadow-md: 0 4px 12px rgba(61, 61, 61, 0.08);
+      --shadow-lg: 0 8px 30px rgba(61, 61, 61, 0.10);
+      --shadow-xl: 0 20px 60px rgba(61, 61, 61, 0.12);
+      --glow-soft: 0 0 40px rgba(196, 189, 174, 0.35);
+      --glow-warm: 0 0 40px rgba(184, 150, 84, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cormorant Garamond', 'Noto Serif SC', 'Plus Jakarta Sans', serif;
+      color: var(--text-primary);
+      background: var(--bg-light);
+      line-height: 1.75;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* 精致滚动条 - 柔和质感 */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--slate-100); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+      border-radius: 5px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
+    }
+
+    /* 初始锁定滚动 */
+    body.locked {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* SCROLL PROGRESS BAR - 柔和质感 */
+    .scroll-progress {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--primary-500), var(--accent-500));
+      z-index: 9999;
+      transform-origin: top;
+      transition: transform 0.1s ease-out;
+      opacity: 0;
+      transition: opacity 0.5s, transform 0.1s ease-out;
+    }
+
+    .scroll-progress.visible {
+      opacity: 1;
+    }
+
+    /* ===== NAVIGATION ===== */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99999;
+      background: transparent;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #nav.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #nav::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(24px) saturate(180%);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: -1;
+    }
+
+    #nav.scrolled::before {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 30px rgba(74, 74, 74, 0.06);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 56px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      filter: drop-shadow(0 2px 8px rgba(216, 211, 204, 0.3));
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-logo:hover img {
+      filter: drop-shadow(0 4px 15px rgba(201, 169, 98, 0.25));
+      transform: scale(1.02);
+    }
+
+    #nav.scrolled .nav-logo img {
+      filter: drop-shadow(0 2px 8px rgba(109, 105, 98, 0.15));
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .nav-links > li { position: relative; }
+
+    .nav-links > li > a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 18px;
+      color: var(--text-secondary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+
+    /* 下划线指示器 */
+    .nav-links > li > a::after {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary-500), var(--accent-500));
+      transform: translateX(-50%);
+      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 2px;
+    }
+
+    .nav-links > li > a:hover {
+      color: var(--text-primary);
+      background: var(--primary-100);
+    }
+
+    .nav-links > li > a:hover::after,
+    .nav-links > li > a.active::after {
+      width: 20px;
+    }
+
+    .nav-links > li > a.has-submenu::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 4px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid currentColor;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-links > li > a.has-submenu:hover::after {
+      transform: rotate(180deg);
+    }
+
+    /* ===== DROPDOWN MENUS ===== */
+    .nav-links .sub-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      min-width: 240px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 10px;
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 20px 60px rgba(74, 74, 74, 0.08), 0 0 0 1px rgba(216, 211, 204, 0.08);
+      z-index: 1001;
+    }
+
+    .nav-links > li:hover > .sub-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-links .sub-menu > li {
+      list-style: none;
+      position: relative;
+    }
+
+    .nav-links .sub-menu > li > a {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-links .sub-menu > li > a:hover {
+      color: var(--text-primary);
+      background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
+      transform: translateX(4px);
+    }
+
+    /* 二级下拉菜单 */
+    .nav-links .sub-menu > li {
+      position: relative;
+      list-style: none;
+    }
+
+    .nav-links .sub-menu li .sub-menu-2 {
+      position: absolute;
+      left: 100%;
+      top: -10px;
+      margin-left: 8px;
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(8px);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-links .sub-menu li:hover > .sub-menu-2 {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .nav-links .sub-menu li > a.has-submenu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links .sub-menu li > a.has-submenu::after {
+      content: '›';
+      font-size: 18px;
+      line-height: 1;
+      margin-left: 8px;
+      color: var(--slate-400);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links .sub-menu li > a.has-submenu:hover::after {
+      color: var(--text-primary);
+      transform: translateX(4px);
+    }
+
+    /* 三级下拉菜单 */
+    .nav-links .sub-menu-2 {
+      padding: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(74, 74, 74, 0.08), 0 0 0 1px rgba(216, 211, 204, 0.08);
+      white-space: nowrap;
+    }
+
+    .nav-links .sub-menu-2 li {
+      list-style: none;
+      position: relative;
+    }
+
+    .nav-links .sub-menu-2 li > a {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-links .sub-menu-2 li > a:hover {
+      color: var(--text-primary);
+      background: linear-gradient(135deg, var(--primary-100), var(--primary-200));
+      transform: translateX(4px);
+    }
+
+    .nav-links .sub-menu-2 li .sub-menu-3 {
+      position: absolute;
+      left: 100%;
+      top: -10px;
+      margin-left: 8px;
+      min-width: 300px;
+      max-width: 360px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(8px);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+      max-height: min(500px, 85vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .nav-links .sub-menu-2 li > a.has-submenu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-links .sub-menu-2 li > a.has-submenu::after {
+      content: '›';
+      font-size: 18px;
+      line-height: 1;
+      margin-left: 8px;
+      color: var(--slate-400);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links .sub-menu-2 li > a.has-submenu:hover::after {
+      color: var(--text-primary);
+      transform: translateX(4px);
+    }
+
+    .sub-menu-3 {
+      padding: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(74, 74, 74, 0.08), 0 0 0 1px rgba(216, 211, 204, 0.08);
+      max-height: min(500px, 85vh);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* 三级菜单滚动条样式 */
+    .sub-menu-3::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+      border-radius: 3px;
+    }
+
+    .sub-menu-3::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
+    }
+
+    /* 所有 sub-menu-3 层级的滚动条样式 */
+    .nav-links .sub-menu-3::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .nav-links .sub-menu-3::-webkit-scrollbar-track {
+      background: var(--slate-100);
+      border-radius: 3px;
+    }
+
+    .nav-links .sub-menu-3::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+      border-radius: 3px;
+    }
+
+    .sub-menu-3 .product-group-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--slate-400);
+      padding: 10px 14px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      position: relative;
+    }
+
+    .sub-menu-3 .product-group-title::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      bottom: 0;
+      width: 12px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary-500), transparent);
+    }
+
+    .sub-menu-3 .product-group {
+      margin-bottom: 4px;
+      list-style: none;
+    }
+
+    /* 确保产品组在可滚动菜单中正常显示 */
+    .nav-links .sub-menu-3 .product-group {
+      margin-bottom: 8px;
+    }
+
+    .nav-links .sub-menu-3 .product-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .sub-menu-3 .product-item {
+      padding: 10px 14px 10px 26px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      display: block;
+      list-style: none;
+      white-space: nowrap;
+      border-radius: 8px;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .sub-menu-3 .product-item::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 4px;
+      background: var(--slate-300);
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .sub-menu-3 .product-item:hover {
+      color: var(--text-primary);
+      background: var(--primary-100);
+      transform: translateX(6px);
+    }
+
+    .sub-menu-3 .product-item:hover::before {
+      background: var(--primary-600);
+      width: 6px;
+      height: 6px;
+    }
+
+    /* 了解更多链接特殊样式 */
+    .sub-menu-3 .product-item.learn-more-item {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 4px;
+      padding-left: 14px;
+    }
+
+    .sub-menu-3 .product-item.learn-more-item::before {
+      display: none;
+    }
+
+    .sub-menu-3 .product-item.learn-more-item:hover {
+      color: var(--accent-500);
+      background: rgba(201, 169, 98, 0.08);
+    }
+
+    /* ===== BUTTONS - 柔和有机质感 ===== */
+    .nav-btn {
+      padding: 12px 26px;
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 15px rgba(216, 211, 204, 0.4), 0 1px 3px rgba(74, 74, 74, 0.1);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      border-radius: 100px;
+    }
+
+    .nav-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 169, 98, 0.35), 0 2px 6px rgba(74, 74, 74, 0.15);
+    }
+
+    .nav-btn:hover::before {
+      opacity: 1;
+    }
+
+    .learn-more-btn {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(216, 211, 204, 0.35);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .learn-more-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 169, 98, 0.3);
+    }
+
+    .learn-more-btn-small {
+      display: inline-block;
+      margin-left: 16px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(216, 211, 204, 0.3);
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .learn-more-btn-small:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(201, 169, 98, 0.25);
+    }
+
+
+    /* 移动端汉堡菜单按钮 */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* 移动端导航面板 */
+    .mobile-nav-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+      padding-top: 80px;
+      display: none;
+    }
+
+    .mobile-nav-panel.active {
+      display: block;
+      transform: translateX(0);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .mobile-nav-links > li {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav-links > li > a {
+      display: block;
+      padding: 18px 24px;
+      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    .mobile-nav-links > li > a:hover {
+      background: var(--primary-100);
+      color: var(--text-primary);
+    }
+
+    /* 移动端子菜单 - 柔和质感 */
+    .mobile-sub-menu {
+      list-style: none;
+      padding: 0;
+      display: none;
+      background: var(--primary-50);
+    }
+
+    .mobile-sub-menu.open {
+      display: block;
+    }
+
+    .mobile-sub-menu li a {
+      display: block;
+      padding: 14px 24px 14px 36px;
+      color: var(--text-secondary);
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .mobile-sub-menu li a:hover {
+      color: var(--text-primary);
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .mobile-menu-toggle::after {
+      content: '›';
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    .mobile-menu-toggle.open::after {
+      transform: rotate(90deg);
+    }
+
+    .mobile-nav-btn {
+      display: block;
+      margin: 24px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(91, 143, 249, 0.35);
+    }
+
+    /* =============================================
+       HERO SECTION - 柔和有机质感
+       ============================================= */
+    #hero {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      background: linear-gradient(135deg, #fefefe 0%, #f9f8f6 50%, #f3f1ed 100%);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #hero.hidden {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    /* 视频 section 在 hero 解锁前隐藏 */
+    body.locked .video-section {
+      visibility: hidden;
+    }
+
+    body:not(.locked) .video-section {
+      visibility: visible;
+    }
+
+    /* 多层背景容器 - 柔和质感 */
+    .hero-background {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(254, 254, 254, 0.85) 0%, rgba(249, 248, 246, 0.7) 50%, rgba(243, 241, 237, 0.85) 100%),
+        url('images/hero-bg.png') center/cover no-repeat;
+    }
+
+    /* 粒子 Canvas */
+    #techCanvas {
+      display: block;
+    }
+
+    /* 标题容器 */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      will-change: transform, opacity;
+      margin-top: -20vh;
+    }
+
+    /* Logo 样式 - 柔和质感 */
+    .slogan-logo {
+      height: clamp(120px, 22vw, 350px);
+      width: auto;
+      filter: drop-shadow(0 4px 20px rgba(216, 211, 204, 0.2));
+      transition: filter 0.3s;
+    }
+
+    .slogan-logo:hover {
+      filter: drop-shadow(0 8px 30px rgba(201, 169, 98, 0.25));
+    }
+
+    /* 渐变文字效果 - 柔和奶油色 */
+    .cutout-title {
+      font-size: clamp(64px, 12vw, 160px);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      /* 渐变填充：温暖的奶油色系 */
+      background: linear-gradient(
+        135deg,
+        #6d6962 0%,
+        #7a7670 25%,
+        #8a8680 50%,
+        #9a9690 75%,
+        #a8a49e 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+      /* 光晕效果 */
+      filter: drop-shadow(0 4px 12px rgba(216, 211, 204, 0.3));
+      animation: gradientShift 8s ease infinite;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    /* 发光外轮廓 - 柔和质感 */
+    .cutout-title::before {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(109, 105, 98, 0.3) 0%,
+        rgba(122, 118, 112, 0.25) 25%,
+        rgba(138, 134, 128, 0.3) 50%,
+        rgba(154, 150, 144, 0.35) 75%,
+        rgba(168, 164, 158, 0.4) 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: blur(20px);
+      z-index: -1;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    /* 细腻轮廓线 */
+    .cutout-title::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-text-stroke: 0.5px rgba(74, 74, 74, 0.08);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* 滚动提示 */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-primary);
+      z-index: 20;
+      font-size: 14px;
+      letter-spacing: 0.25em;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
+    .scroll-hint-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .scroll-hint-text .cn {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--text-primary);
+    }
+
+    .scroll-hint-text .en {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    @keyframes hintPulse {
+      0%, 100% { opacity: 0.6; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(12px); }
+    }
+
+    .scroll-hint svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--text-primary);
+      stroke-width: 2.5;
+      animation: arrowBounce 1.5s ease-in-out infinite;
+    }
+
+    @keyframes arrowBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.7; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+
+    /* =============================================
+       内容 Sections - 报刊风格排版
+       ============================================= */
+    .content-section {
+      min-height: 100vh;
+      padding: 140px 40px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* 核心价值 section 使用特殊的垂直居中 */
+    #section-core-values {
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 60px;
+    }
+
+    .content-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-white {
+      background: #fff;
+      color: var(--text-primary);
+    }
+    .section-light {
+      background: var(--bg-light);
+      color: var(--text-primary);
+    }
+    .section-dark {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+    .section-dark h2,
+    .section-dark h3,
+    .section-dark h4,
+    .section-dark h5,
+    .section-dark h6 {
+      color: #fff !important;
+    }
+    .section-dark p,
+    .section-dark span,
+    .section-dark div {
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .section-dark .subtitle {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .section-content h2 {
+      font-size: clamp(36px, 4.5vw, 52px);
+      font-weight: 700;
+      margin-bottom: 28px;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      color: var(--text-primary);
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    .section-dark .section-content h2 {
+      background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.85));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.2));
+    }
+
+    .section-content .subtitle {
+      font-size: clamp(16px, 1.8vw, 19px);
+      line-height: 1.9;
+      opacity: 0.9;
+      margin-bottom: 20px;
+      color: var(--text-secondary);
+    }
+
+    .section-content p {
+      font-size: clamp(15px, 1.5vw, 17px);
+      line-height: 1.9;
+      opacity: 0.85;
+      margin-bottom: 18px;
+      color: var(--text-secondary);
+    }
+
+    .section-image {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+      min-height: 500px;
+      background: #999;
+    }
+
+    .section-image img,
+    .section-image video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s;
+    }
+
+    .section-image:hover img,
+    .section-image:hover video {
+      transform: scale(1.05);
+    }
+
+    /* =============================================
+       全球网络 - 全新设计
+       ============================================= */
+    .global-section-wrapper {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 24px 40px;
+    }
+
+    .global-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .global-header h2 {
+      font-size: clamp(28px, 3.5vw, 36px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .global-header .subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* =============================================
+       全球网络 - 简洁优雅设计
+       ============================================= */
+    .global-section-wrapper {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .global-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .global-header h2 {
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .global-header .subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* 全球内容网格布局 - 地图和销售网络并排 */
+    .global-content-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .world-map-wrapper {
+      width: 100%;
+    }
+
+    /* 地图容器 */
+    .world-map-viz {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 21/9;
+      max-height: 70vh;
+      background: #fafbfc;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(15, 63, 181, 0.08);
+    }
+
+    .world-map-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.95;
+      image-rendering: high-quality;
+    }
+
+    #worldMapCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* 地图标记点 - 简洁风格 */
+    .office-marker {
+      position: absolute;
+      z-index: 10;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+
+    /* 标记点位置 - 基于实际地图图片精确分析 */
+    /* 上海：中国东部沿海，长江入海口附近 */
+    .marker-shanghai { left: 83%; top: 38%; }
+    /* 广州：中国南部，广东省，珠江三角洲 */
+    .marker-guangzhou { left: 81%; top: 43%; }
+    /* 芝加哥：美国中东部，五大湖密歇根湖西南 */
+    .marker-chicago { left: 20%; top: 22%; }
+    /* 布鲁塞尔：西欧，英国东南方向欧洲大陆 */
+    .marker-brussels { left: 48%; top: 16%; }
+
+    .marker-pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      background: radial-gradient(circle, rgba(201, 169, 98, 0.6) 0%, rgba(201, 169, 98, 0.3) 40%, transparent 70%);
+      border-radius: 50%;
+      animation: markerPulseRing 2.5s ease-out infinite;
+    }
+
+    @keyframes markerPulseRing {
+      0% { width: 0; height: 0; opacity: 0.9; }
+      100% { width: 48px; height: 48px; opacity: 0; }
+    }
+
+    .marker-dot {
+      position: relative;
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, #d4a857 0%, #b89849 50%, #a3863a 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.95), 0 2px 8px rgba(201, 169, 98, 0.5);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .office-marker:hover .marker-dot {
+      transform: scale(1.5);
+      box-shadow: 0 0 0 4px rgba(255, 255, 255, 1), 0 4px 16px rgba(201, 169, 98, 0.7), 0 0 24px rgba(201, 169, 98, 0.4);
+    }
+
+    /* 标记点标签 */
+    .office-marker::after {
+      content: attr(data-city);
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--border);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+    }
+
+    .office-marker:hover::after {
+      opacity: 1;
+      visibility: visible;
+      top: calc(100% + 10px);
+    }
+
+    /* 办公地点列表 - 无卡片简洁风格 */
+    .global-info-content {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 48px;
+      width: 100%;
+      max-width: 600px;
+      margin: 24px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* 全球销售网络 - 右侧面板样式 */
+    .global-sales-network {
+      padding: 32px 28px;
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.08) 0%, rgba(201, 169, 98, 0.03) 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(201, 169, 98, 0.15);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sales-network-title {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+    }
+
+    .sales-network-title .num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-variant-numeric: oldstyle-nums;
+      font-weight: 700;
+    }
+
+    .sales-regions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .sales-region {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(201, 169, 98, 0.1);
+    }
+
+    .sales-region:last-child {
+      border-bottom: none;
+    }
+
+    .region-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-600);
+      min-width: 100px;
+      flex-shrink: 0;
+    }
+
+    .region-countries {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .office-location-group,
+    .subsidiary-location-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .location-group-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+
+    .location-item {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 6px 0;
+    }
+
+    .location-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      min-width: 42px;
+    }
+
+    .location-city {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .location-country {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* 子公司特殊样式 */
+    .subsidiary-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 8px 0;
+    }
+
+    .subsidiary-name-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .subsidiary-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-600);
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.15), rgba(201, 169, 98, 0.08));
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(201, 169, 98, 0.2);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .subsidiary-location {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .subsidiary-location::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--primary-500);
+      border-radius: 50%;
+    }
+
+    .subsidiary-link-simple {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-600);
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      padding: 4px 8px;
+      margin: 0 -4px;
+      border-radius: 6px;
+    }
+
+    .subsidiary-link-simple:hover {
+      color: var(--accent-500);
+      background: linear-gradient(135deg, rgba(201, 169, 98, 0.12), rgba(201, 169, 98, 0.06));
+      text-decoration: none;
+    }
+
+    .subsidiary-link-simple svg {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      stroke-width: 2.5;
+    }
+
+    .subsidiary-link-simple:hover svg {
+      transform: translateX(4px);
+    }
+
+    .global-network-video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 5%;
+    }
+
+    /* 数据统计网格 - 柔和有机质感 */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 56px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 36px 28px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(249,248,246,0.8) 100%);
+      border-radius: 16px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 1px solid rgba(216, 211, 204, 0.15);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    /* 光晕背景 - 温暖色调 */
+    .stat-item::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(216, 211, 204, 0.08) 0%, rgba(201, 169, 98, 0.06) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .stat-item:hover::before {
+      opacity: 1;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(250,249,247,0.95) 100%);
+      box-shadow: 0 12px 40px rgba(74, 74, 74, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+      border-color: rgba(201, 169, 98, 0.2);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: 0.01em;
+      line-height: 1.2;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    .stat-item.dark .stat-number {
+      color: #fff;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.2);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    /* =============================================
+       核心价值 - 蜂窝状六边形布局
+       ============================================= */
+    .core-values-section {
+      position: relative;
+      padding: 80px 24px;
+      background: linear-gradient(180deg, #fefefe 0%, #f9f8f6 100%);
+    }
+
+    .core-values-header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .core-values-title {
+      font-size: 56px;
+      font-weight: 500;
+      color: #4a4a4a;
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      position: relative;
+      display: inline-block;
+      padding: 24px 60px;
+      background: linear-gradient(180deg,
+        #fefefe 0%,
+        #f9f8f6 30%,
+        #f3f1ed 50%,
+        #ede9e4 70%,
+        #e8e4df 100%);
+      border-radius: 100px;
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.05),
+        0 10px 25px rgba(0, 0, 0, 0.04),
+        0 4px 12px rgba(0, 0, 0, 0.03),
+        inset 0 2px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.03);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .core-values-title::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.6) 0%,
+        transparent 50%,
+        rgba(0, 0, 0, 0.02) 100%);
+      border-radius: 100px;
+      pointer-events: none;
+    }
+
+    .core-values-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        #d8d3cc 20%,
+        #c9c4bc 50%,
+        #d8d3cc 80%,
+        transparent 100%);
+      border-radius: 2px;
+    }
+
+    .core-values-title:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.06),
+        0 15px 35px rgba(0, 0, 0, 0.05),
+        0 6px 18px rgba(0, 0, 0, 0.04),
+        inset 0 2px 0 rgba(255, 255, 255, 1),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    .core-values-subtitle {
+      font-size: 12px;
+      font-weight: 500;
+      color: #a8a49e;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-top: 18px;
+    }
+
+    /* 蜂窝网格容器 */
+    .core-values-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: nowrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 六边形卡片 - 柔和有机质感 */
+    .core-value-item {
+      position: relative;
+      width: 180px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* SVG 六边形背景 - 柔和质感 */
+    .core-value-hex-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .core-value-hex-bg polygon {
+      fill: url(#hexBgGradient);
+      stroke: rgba(220, 216, 210, 0.4);
+      stroke-width: 1.5;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.04));
+    }
+
+    .core-value-item:hover .core-value-hex-bg polygon {
+      stroke: rgba(200, 195, 188, 0.6);
+      stroke-width: 2;
+      filter: drop-shadow(0 14px 40px rgba(200, 195, 188, 0.15));
+    }
+
+    /* 六边形内容 */
+    .core-value-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 序号徽章 - 柔性质感 */
+    .core-value-number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(180deg,
+        #fefefe 0%,
+        #f9f8f6 30%,
+        #f3f1ed 50%,
+        #ede9e4 70%,
+        #e8e4df 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6d6962;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.04),
+        0 3px 8px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(220, 216, 210, 0.25);
+      margin-bottom: 4px;
+    }
+
+    /* 图标 */
+    .core-value-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .core-value-item:hover .core-value-icon {
+      transform: scale(1.12);
+    }
+
+    .core-value-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: url(#coreValueGradient);
+    }
+
+    /* 标题 - 柔和质感 */
+    .core-value-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: #6d6962;
+      letter-spacing: 0.08em;
+    }
+
+    /* 英文描述 */
+    .core-value-en {
+      font-size: 9px;
+      color: #9a9690;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+    }
+
+    /* 六边形排列 - 单行对齐 */
+
+    /* 发展历程 - 极简编辑出版风格 */
+    .development-history {
+      margin-top: 120px;
+      padding: 0 24px;
+    }
+
+    .history-header {
+      text-align: center;
+      margin-bottom: 100px;
+      position: relative;
+    }
+
+    .history-title {
+      font-size: 56px;
+      font-weight: 500;
+      color: #2a2a2a;
+      letter-spacing: 0.02em;
+      display: inline-block;
+      position: relative;
+      padding: 0 0 20px 0;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      text-shadow: none;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .history-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        #1a1a1a 30%,
+        #1a1a1a 70%,
+        transparent 100%);
+      border-radius: 0;
+    }
+
+    .history-title:hover {
+      opacity: 0.9;
+    }
+
+    .history-subtitle {
+      font-size: 11px;
+      font-weight: 400;
+      color: #888888;
+      letter-spacing: 0.4em;
+      margin-top: 14px;
+      text-transform: uppercase;
+    }
+
+    /* 波浪形时间线容器 - 极简挂线风格 */
+    .timeline-wave {
+      position: relative;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 0 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 中央时间轴线 - 纤细精致 */
+    .timeline-wave-axis {
+      position: absolute;
+      top: 50%;
+      left: 280px;
+      right: 400px;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(26, 26, 26, 0.15) 10%,
+        rgba(26, 26, 26, 0.3) 30%,
+        rgba(26, 26, 26, 0.4) 50%,
+        rgba(26, 26, 26, 0.3) 70%,
+        rgba(26, 26, 26, 0.15) 90%,
+        transparent 100%);
+      border-radius: 0;
+      transform: translateY(-50%);
+    }
+
+    /* 时间线节点 - 交错布局 */
+    .timeline-item {
+      position: relative;
+      flex: 0 0 auto;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      animation: timeline-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    /* 偶数项在上方 */
+    .timeline-item:nth-child(even) {
+      align-items: flex-end;
+      padding-top: 0;
+      padding-bottom: 70px;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year-wrapper {
+      justify-content: flex-end;
+    }
+
+    .timeline-item:nth-child(even) .timeline-year {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      margin-top: 16px;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    /* 奇数项在下方 */
+    .timeline-item:nth-child(odd) {
+      align-items: flex-start;
+      padding-top: 70px;
+      padding-bottom: 0;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-year-wrapper {
+      justify-content: flex-start;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-year {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-top: 16px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    @keyframes timeline-reveal {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* 节点圆点 - 隐藏 */
+    .timeline-dot {
+      display: none;
+    }
+
+    /* 年份挂线容器 */
+    .timeline-year-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* 偶数项挂线向上 */
+    .timeline-item:nth-child(even) .timeline-year-wrapper::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 24px;
+      background: linear-gradient(to bottom,
+        rgba(26, 26, 26, 0) 0%,
+        rgba(26, 26, 26, 0.3) 20%,
+        rgba(26, 26, 26, 0.4) 100%);
+    }
+
+    /* 奇数项挂线向下 */
+    .timeline-item:nth-child(odd) .timeline-year-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 24px;
+      background: linear-gradient(to bottom,
+        rgba(26, 26, 26, 0.4) 0%,
+        rgba(26, 26, 26, 0.3) 80%,
+        rgba(26, 26, 26, 0) 100%);
+    }
+
+    /* 年份标签 - 专业衬线字体，无背景框 */
+    .timeline-year {
+      font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+      position: relative;
+      z-index: 2;
+      letter-spacing: 0.04em;
+      font-variant-numeric: lining-nums;
+    }
+
+    .timeline-item:hover .timeline-year {
+      color: #4a4a4a;
+      transform: scale(1.02);
+    }
+
+    /* 内容卡片 - 极简风格 */
+    .timeline-content {
+      padding: 18px 22px;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+      border-left: 1px solid rgba(26, 26, 26, 0.15);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      min-width: 160px;
+      text-align: left;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      border-left: none;
+      border-right: 1px solid rgba(26, 26, 26, 0.15);
+    }
+
+    .timeline-item:hover .timeline-content {
+      border-color: rgba(26, 26, 26, 0.3);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content:hover {
+      border-right-color: rgba(26, 26, 26, 0.3);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content:hover {
+      border-left-color: rgba(26, 26, 26, 0.3);
+    }
+
+    .timeline-text {
+      font-size: 14px;
+      color: #7a7670;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+      font-weight: 500;
+    }
+
+    /* 产品中心网格 - 柔和有机质感 */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(249,248,246,0.9) 100%);
+      box-shadow: 0 8px 32px rgba(74, 74, 74, 0.06), 0 4px 16px rgba(0, 0, 0, 0.03);
+      border: 1px solid rgba(216, 211, 204, 0.12);
+      cursor: pointer;
+    }
+
+    /* 光晕背景 - 温暖色调 */
+    .product-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(135deg, rgba(216, 211, 204, 0.2), rgba(201, 169, 98, 0.15));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    /* 顶部装饰线 - 温暖金色 */
+    .product-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-400), var(--accent-500), var(--primary-500));
+      background-size: 200% 100%;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .product-card:hover::after {
+      transform: scaleX(1);
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px) scale(1.03);
+      box-shadow: 0 20px 50px rgba(74, 74, 74, 0.1), 0 12px 32px rgba(0, 0, 0, 0.06);
+      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(250,249,247,0.95) 100%);
+      border-color: rgba(201, 169, 98, 0.25);
+    }
+
+    .product-card-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 75%;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--primary-50) 0%, #fff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-card-image-wrapper:empty {
+      background: linear-gradient(135deg, var(--primary-100) 0%, var(--primary-200) 100%);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+      filter: drop-shadow(0 4px 12px rgba(74, 74, 74, 0.08));
+    }
+
+    /* 免疫抑制剂小图 - 保持原始比例 */
+    .product-card img.product-img-small {
+      width: auto;
+      height: auto;
+      max-width: 60%;
+      max-height: 60%;
+      object-fit: contain;
+    }
+
+    /* 机械灌注中图 - 稍微缩小 */
+    .product-card img.product-img-medium {
+      width: auto;
+      height: auto;
+      max-width: 85%;
+      max-height: 85%;
+      object-fit: contain;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.1);
+      filter: drop-shadow(0 12px 24px rgba(74, 74, 74, 0.12));
+    }
+
+    /* 装饰性背景元素 - 柔和质感 */
+    .product-bg-circle {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle at center, rgba(216, 211, 204, 0.08) 0%, transparent 60%);
+      border-radius: 50%;
+      animation: productBgPulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes productBgPulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    .product-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 24px;
+      background: linear-gradient(transparent, rgba(255, 255, 255, 0.98));
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .product-card-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+      transition: color 0.3s ease;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    .product-card:hover .product-card-name {
+      color: var(--text-primary);
+    }
+
+    .product-card-desc {
+      font-size: 10px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+    }
+
+    /* 弹出式文字介绍 - 柔和有机质感 */
+    .product-card-popout {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(249, 248, 246, 0.96) 100%);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 36px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transform: translateY(10px) scale(0.98);
+      z-index: 20;
+      overflow: hidden;
+    }
+
+    .product-card:hover .product-card-popout {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .product-card-popout::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-400), var(--accent-500), var(--primary-500));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+    }
+
+    .product-popout-content {
+      position: relative;
+      z-index: 1;
+      max-height: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-400) transparent;
+    }
+
+    .product-popout-content::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .product-popout-content::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .product-popout-content::-webkit-scrollbar-thumb {
+      background: var(--primary-400);
+      border-radius: 2px;
+    }
+
+    .product-popout-text {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-primary);
+      text-align: justify;
+      font-family: 'Noto Serif SC', serif;
+      font-weight: 500;
+    }
+
+    .product-popout-text p {
+      margin-bottom: 16px;
+    }
+
+    .product-popout-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .product-popout-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-600);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-right: 6px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* 隐藏原有 overlay 当 popout 存在时 */
+    .product-card:hover .product-card-overlay {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* 隐藏 imageWrapper 当 popout 显示时 - 只针对有 popout 的卡片 */
+    .product-card:has(.product-card-popout):hover .product-card-image-wrapper {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+
+    /* 进入产品中心链接美化 - 柔和质感 */
+    .section-more-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(216, 211, 204, 0.35);
+      transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .section-more-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      border-radius: 100px;
+    }
+
+    .section-more-link span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-more-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(201, 169, 98, 0.3);
+    }
+
+    .section-more-link:hover::before {
+      opacity: 1;
+    }
+
+    .section-more-link::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E") no-repeat center/contain;
+      transition: transform 0.3s ease;
+    }
+
+    .section-more-link:hover::after {
+      transform: translateX(4px);
+    }
+
+    /* 悬停时的箭头指示器 - 柔和质感 */
+    .product-arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 50px;
+      height: 50px;
+      background: rgba(201, 169, 98, 0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+    }
+
+    .product-arrow::before {
+      content: '→';
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .product-card:hover .product-arrow {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .product-card-image-wrapper:hover .product-arrow {
+      opacity: 0;
+    }
+
+    /* 产品卡片链接包装器 */
+    .product-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    /* 视频章节 - 柔和质感 */
+    .video-section {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-section video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-section::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(45,44,42,0.7) 0%, rgba(45,44,42,0.5) 50%, rgba(45,44,42,0.65) 100%);
+    }
+
+    .video-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 24px;
+    }
+
+    .video-content h2 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    .video-content p {
+      font-size: clamp(18px, 2vw, 22px);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.8;
+    }
+
+    /* Footer - 柔和质感 */
+    #footer {
+      background: #fafaf9;
+      color: var(--text-primary);
+      padding: 80px 24px 40px;
+      position: relative;
+    }
+
+    #footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-300), transparent);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1.5fr;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto 60px;
+    }
+
+    .footer-logo {
+      margin-bottom: 20px;
+    }
+
+    .footer-logo img {
+      height: 44px;
+      filter: drop-shadow(0 2px 8px rgba(216, 211, 204, 0.3));
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    /* 正式数字样式 - 专业财务报表风格 */
+    .footer-text .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-heading {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    .footer-qr {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      list-style: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-contact li:hover {
+      color: var(--text-primary);
+    }
+
+    .footer-contact li svg {
+      flex-shrink: 0;
+      stroke: var(--primary-600);
+    }
+
+    /* 联系电话数字正式样式 */
+    .footer-contact .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-tertiary);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-bottom a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary-600);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1200px) {
+      .nav-inner { padding: 0 32px; }
+      .section-inner { grid-template-columns: 1fr; gap: 48px; }
+      .section-image { order: -1; }
+      .stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .coverage-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-h-item { width: 90px; }
+      .timeline-h-content { min-height: 60px; padding: 10px; }
+      .timeline-h-text { font-size: 10px; }
+    }
+
+    @media (max-width: 992px) {
+      .nav-links, .nav-btn { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-inner { padding: 0 20px; }
+      .coverage-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .cutout-title { font-size: 42px; }
+      .hero-subtitle { font-size: 16px; }
+      .content-section { padding: 80px 20px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .video-content h2 { font-size: 32px; }
+      .video-content p { font-size: 16px; }
+      .section-inner { grid-template-columns: 1fr; gap: 32px; }
+      .section-image { order: -1; }
+
+      /* 移动端 hero 调整 */
+      .slogan-logo { height: clamp(50px, 15vw, 100px); }
+      #hero { height: 100dvh; min-height: -webkit-fill-available; }
+      .scroll-hint { bottom: 30px; }
+      .scroll-hint-text .cn { font-size: 11px; }
+      .scroll-hint-text .en { font-size: 10px; }
+      .scroll-hint svg { width: 18px; height: 18px; }
+
+      /* 全球网络移动端适配 */
+      .global-section-wrapper { padding: 30px 16px 40px; }
+      .global-header { margin-bottom: 24px; }
+      .global-header h2 { font-size: 22px; }
+      .global-header .subtitle { font-size: 11px; }
+
+      /* 全球内容网格移动端 - 上下堆叠 */
+      .global-content-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .world-map-wrapper { width: 100%; }
+      .world-map-viz { aspect-ratio: 4/3; border-radius: 8px; }
+
+      /* 销售网络移动端适配 */
+      .global-sales-network { padding: 24px 16px; }
+      .sales-network-title { font-size: 18px; margin-bottom: 16px; }
+      .sales-regions-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .region-name { font-size: 13px; }
+      .region-countries { font-size: 11px; line-height: 1.5; }
+
+      .global-info-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .location-group-title { font-size: 10px; }
+      .location-item { padding: 8px 0; }
+      .location-badge { font-size: 9px; min-width: 38px; }
+      .location-city { font-size: 14px; }
+      .location-country { font-size: 12px; }
+
+      .subsidiary-name-text { font-size: 14px; }
+      .subsidiary-location { font-size: 12px; }
+      .subsidiary-link-simple { font-size: 11px; }
+
+      .marker-dot { width: 7px; height: 7px; }
+      .marker-pulse { width: 14px; height: 14px; }
+
+      /* 核心价值移动端适配 */
+      .core-values-grid { gap: 12px; }
+      .core-value-item { width: 150px; height: 170px; }
+      .core-value-hex-bg { transform: scale(0.85); }
+      .core-value-icon { width: 40px; height: 40px; }
+      .core-value-icon svg { width: 32px; height: 32px; }
+      .core-value-text { font-size: 14px; }
+      .core-value-en { font-size: 9px; }
+      .core-value-number { width: 24px; height: 24px; font-size: 11px; }
+
+      /* 发展历程移动端适配 - 极简挂线风格 */
+      .development-history { margin-top: 50px; }
+      .history-header { margin-bottom: 60px; }
+      .history-title { font-size: 32px; padding: 0 0 16px 0; }
+      .history-subtitle { font-size: 10px; }
+      .timeline-wave { padding: 40px 0 60px; }
+      .timeline-wave-axis { left: 40px; right: 40px; height: 1px; }
+      .timeline-item { width: 100px; }
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) { padding-top: 50px; padding-bottom: 50px; }
+      .timeline-year { font-size: 16px; }
+      .timeline-content { min-width: 120px; padding: 14px 16px; }
+      .timeline-text { font-size: 12px; }
+
+      /* 修复移动端视频 section 露出问题 */
+      body.locked .video-section {
+        visibility: hidden;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cutout-title { font-size: 36px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-number { font-size: 32px; }
+      .stat-label { font-size: 11px; }
+      .content-section { padding: 60px 16px; }
+      .products-grid { grid-template-columns: 1fr 1fr; }
+
+      /* 核心价值超移动端适配 */
+      .core-values-grid { gap: 8px; }
+      .core-value-item { width: 130px; height: 150px; }
+      .core-value-hex-bg { transform: scale(0.75); }
+      .core-value-text { font-size: 13px; }
+      .core-value-en { font-size: 8px; }
+
+      /* 横向时间线超移动端适配 */
+      .timeline-horizontal { padding: 35px 15px 15px; }
+      .timeline-axis { top: 12px; left: 60px; }
+      .timeline-h-item { width: 75px; }
+      .timeline-h-year { font-size: 13px; padding: 3px 8px; }
+      .timeline-h-content { min-height: 50px; padding: 8px 10px; }
+      .timeline-h-text { font-size: 9px; }
+      .timeline-h-dot { width: 10px; height: 10px; }
+    }
+  </style>
+</head>
+<body class="locked">
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index-en.html" class="nav-logo">
+      <img src="images/logo.png" alt="tranSnovo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index-en.html" data-i18n="nav-home">首页</a></li>
+      <li>
+        <a href="products-en.html" class="has-submenu" data-i18n="nav-products">产品中心</a>
+        <ul class="sub-menu">
+          <li><a href="solutions-en.html" data-i18n="nav-solutions">解决方案</a></li>
+          <li>
+            <a href="products.html#devices" class="has-submenu" data-i18n="nav-products-all">产品</a>
+            <ul class="sub-menu-2">
+              <li>
+                <a href="products.html#devices" class="has-submenu" data-i18n="nav-devices">器械</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title" data-i18n="product-mechanical-perfusion">机械灌注</div>
+                    <a href="machine-perfusion-en.html" class="product-item">LifePort®肾脏灌注转运箱</a>
+                    <a href="liver-perfusion-en.html" class="product-item">LifePort®肝脏灌注转运箱</a>
+                    <a href="organ-preservation-en.html" class="product-item">KPS-1®器官保存液</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title" data-i18n="product-static-cold">静态冷藏</div>
+                    <a href="organ-preservation-en.html" class="product-item">SPS-1®器官保存液</a>
+                    <a href="machine-perfusion-en.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="products.html#drugs" class="has-submenu" data-i18n="nav-drugs">药品</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title" data-i18n="product-immunosuppressant">免疫抑制剂</div>
+                    <a href="immunosuppressant-en.html" class="product-item">他克莫司胶囊</a>
+                    <a href="immunosuppressant-en.html" class="product-item">麦考酚钠肠溶片</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title" data-i18n="product-anti-infective">抗感染药</div>
+                    <a href="immunosuppressant-en.html" class="product-item">盐酸缬更昔洛韦片</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="products.html#ivd" class="has-submenu" data-i18n="nav-ivd">体外诊断</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title" data-i18n="product-tdm">治疗药物监测（TDM）</div>
+                    <a href="tdm-en.html" class="product-item">他克莫司测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">环孢霉素测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">雷帕霉素测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">霉酚酸测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">全自动生化分析仪</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title" data-i18n="product-hla">人类白细胞抗原和抗体检测</div>
+                    <a href="hla-dna-en.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
+                    <a href="products.html#ivd" class="product-item learn-more-item" data-i18n="learn-more">了解更多 ›</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="innovation-en.html" data-i18n="nav-innovation">研发创新</a></li>
+      <li>
+        <a href="#" class="has-submenu" data-i18n="nav-user-service">用户服务</a>
+        <ul class="sub-menu">
+          <li><a href="operation-videos-en.html" data-i18n="nav-operation-videos">操作视频</a></li>
+          <li><a href="training-videos-en.html" data-i18n="nav-training-videos">培训视频</a></li>
+          <li><a href="investment-en.html" data-i18n="nav-investment">招商服务</a></li>
+        </ul>
+      </li>
+      <li><a href="patients-en.html" data-i18n="nav-patients">关爱患者</a></li>
+      <li><a href="talent-en.html" data-i18n="nav-talent">人才中心</a></li>
+    </ul>
+    <a href="contact-en.html" class="nav-btn"><span data-i18n="nav-contact">联系我们</span></a>
+    <!-- 移动端汉堡菜单按钮 -->
+    <div class="nav-toggle" id="navToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- 移动端导航面板 -->
+<div class="mobile-nav-panel" id="mobileNavPanel">
+  <ul class="mobile-nav-links">
+    <li><a href="index-en.html" data-i18n="nav-home">首页</a></li>
+    <li>
+      <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-products')">
+        <a href="products-en.html" data-i18n="nav-products">产品中心</a>
+      </div>
+      <ul class="mobile-sub-menu" id="mobile-products">
+        <li><a href="solutions-en.html" data-i18n="nav-solutions">解决方案</a></li>
+        <li>
+          <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-devices')">
+            <a href="products.html#devices" data-i18n="nav-products-all">产品</a>
+          </div>
+          <ul class="mobile-sub-menu" id="mobile-devices">
+            <li>
+              <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-equipment')">
+                <a href="products.html#devices" data-i18n="nav-devices">器械</a>
+              </div>
+              <ul class="mobile-sub-menu" id="mobile-equipment">
+                <li><a href="machine-perfusion-en.html">LifePort®肾脏灌注转运箱</a></li>
+                <li><a href="liver-perfusion-en.html">LifePort®肝脏灌注转运箱</a></li>
+                <li><a href="machine-perfusion-en.html">莱拓®医用冷藏转运箱</a></li>
+                <li><a href="organ-preservation-en.html">KPS-1®器官保存液</a></li>
+                <li><a href="organ-preservation-en.html">SPS-1®器官保存液</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-drugs')">
+                <a href="products.html#drugs" data-i18n="nav-drugs">药品</a>
+              </div>
+              <ul class="mobile-sub-menu" id="mobile-drugs">
+                <li><a href="immunosuppressant-en.html">他克莫司胶囊</a></li>
+                <li><a href="immunosuppressant-en.html">麦考酚钠肠溶片</a></li>
+                <li><a href="immunosuppressant-en.html">盐酸缬更昔洛韦片</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-ivd')">
+                <a href="products.html#ivd" data-i18n="nav-ivd">体外诊断</a>
+              </div>
+              <ul class="mobile-sub-menu" id="mobile-ivd">
+                <li><a href="tdm-en.html">治疗药物监测（TDM）</a></li>
+                <li><a href="products.html#ivd">人类白细胞抗原和抗体检测</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="innovation-en.html" data-i18n="nav-innovation">研发创新</a></li>
+    <li>
+      <div class="mobile-menu-toggle" onclick="toggleMobileSubmenu('mobile-service')">
+        <a href="#" data-i18n="nav-user-service">用户服务</a>
+      </div>
+      <ul class="mobile-sub-menu" id="mobile-service">
+        <li><a href="operation-videos-en.html" data-i18n="nav-operation-videos">操作视频</a></li>
+        <li><a href="training-videos-en.html" data-i18n="nav-training-videos">培训视频</a></li>
+        <li><a href="investment-en.html" data-i18n="nav-investment">招商服务</a></li>
+      </ul>
+    </li>
+    <li><a href="patients-en.html" data-i18n="nav-patients">关爱患者</a></li>
+    <li><a href="talent-en.html" data-i18n="nav-talent">人才中心</a></li>
+  </ul>
+  <a href="contact-en.html" class="mobile-nav-btn" data-i18n="nav-contact">联系我们</a>
+</div>
+
+<!-- HERO: 初始锁定屏幕 - AI 背景图 -->
+<section id="hero">
+  <!-- 多层背景 -->
+  <div class="hero-background">
+    <!-- Canvas 粒子层 -->
+    <canvas class="particle-layer" id="techCanvas"></canvas>
+  </div>
+
+  <!-- 标题内容 -->
+  <div class="hero-content" id="heroContent">
+    <img src="images/logo-en-small-text.png" alt="tranSnovo" class="slogan-logo" />
+  </div>
+
+  <!-- 滚动提示 -->
+  <div class="scroll-hint">
+    <div class="scroll-hint-text">
+      <span class="cn" data-i18n="hero-scroll-hint-cn">滚动探索</span>
+      <span class="en" data-i18n="hero-scroll-hint-en">Scroll Down</span>
+    </div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- VIDEO SECTION - 解锁后首先显示 Hero 视频 -->
+<section class="video-section" id="section-video">
+  <video autoplay muted loop playsinline>
+    <source src="images/hero-video.mp4" type="video/mp4" />
+  </video>
+  <div class="video-content">
+    <h2 data-i18n="hero-title">为生命重塑未来</h2>
+    <p>
+      <span data-i18n="hero-desc-1">专注移植领域，围绕移植全程，</span><br/>
+      <span data-i18n="hero-desc-2">面向全球市场的医疗产品与专业服务提供者。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="content-section section-white" id="section-about">
+  <div class="section-inner">
+    <div class="section-content">
+      <h2 data-i18n="section-about-title">关于健耕</h2>
+      <p class="subtitle" data-i18n="section-about-subtitle">二十年深耕，专注器官移植领域</p>
+      <p>
+        成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人。
+      </p>
+      <p>
+        公司专注移植领域，围绕移植全程，是面向全球市场的医疗产品与专业服务提供者。
+      </p>
+      <p>
+        健耕医药专注于器官移植医生及患者需求，提供器官移植相关的医疗器械和专业服务，
+        产品远销全球约<span class="num">49</span> 个国家和地区。
+      </p>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" data-count="20">+</span>
+          <span class="stat-label" data-i18n="section-about-stat1-label">年深耕</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="200">+</span>
+          <span class="stat-label" data-i18n="section-about-stat2-label">全球员工</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="500">+</span>
+          <span class="stat-label" data-i18n="section-about-stat3-label">IP</span>
+        </div>
+      </div>
+    </div>
+    <div class="section-image">
+      <img src="images/about-m1.jpg" alt="健耕医药" />
+    </div>
+  </div>
+</section>
+
+<!-- 发展历程 - 波浪形交错时间线 -->
+<section class="content-section section-white">
+  <div class="development-history">
+    <div class="history-header">
+      <h3 class="history-title" data-i18n="history-title">发展历程</h3>
+      <p class="history-subtitle" data-i18n="history-subtitle">HISTORY</p>
+    </div>
+    <div class="timeline-wave">
+      <div class="timeline-wave-axis"></div>
+
+      <!-- 2004 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 0ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2004</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2004">公司成立</div>
+        </div>
+      </div>
+
+      <!-- 2005 - 偶数项，在上方 -->
+      <div class="timeline-item" style="animation-delay: 100ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2005</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2005">开展海外代理<br/>覆盖华东市场</div>
+        </div>
+      </div>
+
+      <!-- 2008 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 200ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2008</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2008">代理海正业务<br/>扩展全国销售</div>
+        </div>
+      </div>
+
+      <!-- 2013 - 偶数项，在上方 -->
+      <div class="timeline-item" style="animation-delay: 300ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2013</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2013">云泽移植 IVD<br/>生产建立</div>
+        </div>
+      </div>
+
+      <!-- 2015 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 400ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2015</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2015">新三板上市</div>
+        </div>
+      </div>
+
+      <!-- 2016 - 偶数项，在上方（高亮） -->
+      <div class="timeline-item" style="animation-delay: 500ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2016</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2016">完成收购 LSI<br/>布局全球市场</div>
+        </div>
+      </div>
+
+      <!-- 2018 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 600ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2018</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2018">研发生产中心<br/>落地</div>
+        </div>
+      </div>
+
+      <!-- 2019 - 偶数项，在上方 -->
+      <div class="timeline-item" style="animation-delay: 700ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2019</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2019">首个自研产品<br/>获中国注册证</div>
+        </div>
+      </div>
+
+      <!-- 2021 - 奇数项，在下方 -->
+      <div class="timeline-item" style="animation-delay: 800ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2021</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2021">TDM 全产品<br/>获 CE 证</div>
+        </div>
+      </div>
+
+      <!-- 2023 - 偶数项，在上方（高亮） -->
+      <div class="timeline-item" style="animation-delay: 900ms;">
+        <div class="timeline-year-wrapper">
+          <div class="timeline-year">2023</div>
+        </div>
+        <div class="timeline-content">
+          <div class="timeline-text" data-i18n="history-2023">他克莫司试剂盒<br/>完成 FDA 注册</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS SECTION -->
+<section class="content-section section-light" id="section-products">
+  <div class="section-inner" style="display: block;">
+    <div class="section-content" style="margin-bottom: 48px;">
+      <h2 style="display: inline; margin-right: 12px;" data-i18n="section-products-title">产品中心</h2>
+      <a href="products-en.html" class="section-more-link"><span data-i18n="section-products-more">进入产品中心</span></a>
+    </div>
+    <div class="products-grid">
+      <a href="machine-perfusion-en.html" class="product-card-link">
+        <div class="product-card">
+          <div class="product-card-image-wrapper">
+            <div class="product-bg-circle"></div>
+            <img src="images/product-lifeport.png" alt="机械灌注" class="product-img-medium" />
+            <div class="product-arrow"></div>
+          </div>
+          <div class="product-card-overlay">
+            <div class="product-card-name">机械灌注</div>
+            <div class="product-card-desc">MACHINE PERFUSION</div>
+          </div>
+          <div class="product-card-popout">
+            <div class="product-popout-content">
+              <div class="product-popout-text">
+                <p><span class="product-popout-label">产品用途</span>LifePort®肾脏灌注转运箱主要用于肾移植前对供肾的低温保存、灌注和运输。它可以保持肾脏在一个低温和无菌的环境中，进行持续的机械灌注。</p>
+                <p>LifePort®提供了一个标准的可视化的保存与运输环境，提供客观供肾评估参数，是除了肾脏活检之外的又一里程碑式的供肾评估方法，有效的提高了供肾的质量，减少移植失败风险，对提高患者长期生存率具有积极意义，是肾脏机械灌注的金标准。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="organ-preservation-en.html" class="product-card-link">
+        <div class="product-card">
+          <div class="product-card-image-wrapper">
+            <div class="product-bg-circle"></div>
+            <img src="images/product-sps.png" alt="器官保存" />
+            <div class="product-arrow"></div>
+          </div>
+          <div class="product-card-overlay">
+            <div class="product-card-name">器官保存</div>
+            <div class="product-card-desc">ORGAN PRESERVATION</div>
+          </div>
+          <div class="product-card-popout">
+            <div class="product-popout-content">
+              <div class="product-popout-text">
+                <p><span class="product-popout-label">产品用途</span>用于肾脏、肝脏和胰腺的原位冲洗、低温保存和运输。</p>
+                <p><span class="product-popout-label">临床获益</span>腹部器官保存的金标准</p>
+                <p>产品和威斯康辛大学 F.O.Belzer 和 James Southard 最初制定的器官冷藏液配方完全相同。</p>
+                <p>FDA 认可的与标准 UW 液等质的器官冷藏液，510 (K) number: K091656。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="tdm-en.html" class="product-card-link">
+        <div class="product-card">
+          <div class="product-card-image-wrapper">
+            <div class="product-bg-circle"></div>
+            <img src="images/product-tdm.png" alt="药物检测" />
+            <div class="product-arrow"></div>
+          </div>
+          <div class="product-card-overlay">
+            <div class="product-card-name">药物检测</div>
+            <div class="product-card-desc">TDM</div>
+          </div>
+          <div class="product-card-popout">
+            <div class="product-popout-content">
+              <div class="product-popout-text">
+                <p><span class="product-popout-label">产品用途</span>用于体外定量检测人全血中的他克莫司 (FK506) 的药物浓度，做辅助诊断用。</p>
+                <p><span class="product-popout-label">临床意义</span>他克莫司的用药浓度范围较窄，血药浓度监测可以指导移植术后患者临床用药，从而有效降低移植患者术后免疫排斥及药物毒副作用。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="immunosuppressant-en.html" class="product-card-link">
+        <div class="product-card">
+          <div class="product-card-image-wrapper">
+            <div class="product-bg-circle"></div>
+            <img src="images/immunosuppressant-pills.png" alt="免疫抑制剂" class="product-img-small" />
+            <div class="product-arrow"></div>
+          </div>
+          <div class="product-card-overlay">
+            <div class="product-card-name">免疫抑制剂</div>
+            <div class="product-card-desc">IMMUNOSUPPRESSANT</div>
+          </div>
+          <div class="product-card-popout">
+            <div class="product-popout-content">
+              <div class="product-popout-text">
+                <p><span class="product-popout-label">通用名称</span>他克莫司胶囊</p>
+                <p><span class="product-popout-label">适应症</span>预防肝脏或肾脏移植术后的移植物排斥反应。治疗肝脏或肾脏移植术后应用其他免疫抑制药物无法控制的移植物排斥反应。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL SECTION -->
+<section class="content-section section-white" id="section-global">
+  <div class="global-section-wrapper">
+    <!-- 标题 -->
+    <div class="global-header">
+      <h2 data-i18n="section-global-title">全球网络</h2>
+      <p class="subtitle" data-i18n="section-global-subtitle">覆盖全球的销售和服务网络</p>
+    </div>
+
+    <!-- 地图和销售网络并排布局 -->
+    <div class="global-content-grid">
+      <!-- 世界地图 -->
+      <div class="world-map-wrapper">
+        <div class="world-map-viz">
+          <img src="images/world-map.jpg" alt="世界地图" class="world-map-bg" />
+          <canvas id="worldMapCanvas"></canvas>
+          <!-- 办公室标记点 -->
+          <div class="office-marker marker-shanghai" data-city="上海" data-type="总部">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+          <div class="office-marker marker-guangzhou" data-city="广州" data-type="办事处">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+          <div class="office-marker marker-chicago" data-city="芝加哥" data-type="办事处">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+          <div class="office-marker marker-brussels" data-city="布鲁塞尔" data-type="办事处">
+            <div class="marker-pulse"></div>
+            <div class="marker-dot"></div>
+          </div>
+        </div>
+
+        <!-- 办公地点信息 -->
+        <div class="global-info-content">
+          <div class="office-location-group">
+            <div class="location-group-title" data-i18n="section-global-offices-title">Global Offices</div>
+            <div class="location-item">
+              <span class="location-badge" data-i18n="location-headq">HEADQ</span>
+              <span class="location-city" data-i18n="location-shanghai">上海</span>
+              <span class="location-country" data-i18n="location-china">中国</span>
+            </div>
+            <div class="location-item">
+              <span class="location-badge" data-i18n="location-office">OFFICE</span>
+              <span class="location-city" data-i18n="location-guangzhou">广州</span>
+              <span class="location-country" data-i18n="location-china">中国</span>
+            </div>
+            <div class="location-item">
+              <span class="location-badge" data-i18n="location-office">OFFICE</span>
+              <span class="location-city" data-i18n="location-chicago">芝加哥</span>
+              <span class="location-country" data-i18n="location-usa">美国</span>
+            </div>
+            <div class="location-item">
+              <span class="location-badge" data-i18n="location-office">OFFICE</span>
+              <span class="location-city" data-i18n="location-brussels">布鲁塞尔</span>
+              <span class="location-country" data-i18n="location-belgium">比利时</span>
+            </div>
+          </div>
+
+          <div class="subsidiary-location-group">
+            <div class="location-group-title" data-i18n="section-global-subsidiary-title">Subsidiary</div>
+            <div class="subsidiary-item">
+              <span class="subsidiary-name-text"><span data-i18n="section-global-subsidiary-name">Lifeline Scientific, Inc.</span><span class="subsidiary-badge" data-i18n="section-global-subsidiary-badge">子公司</span></span>
+              <span class="subsidiary-location" data-i18n="location-usa">美国</span>
+              <a href="https://www.organ-recovery.com/" target="_blank" class="subsidiary-link-simple">
+                <span data-i18n="section-global-visit-site">访问官网</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 全球销售网络 -->
+      <div class="global-sales-network">
+        <div class="sales-network-title" data-i18n="section-global-network-title">全球销售网络 - 覆盖 <span class="num">49</span> 个国家</div>
+        <div class="sales-regions-list">
+          <div class="sales-region">
+            <span class="region-name" data-i18n="section-global-region-asia">亚洲</span>
+            <span class="region-countries">中国、菲律宾、泰国、新加坡、印度、韩国</span>
+          </div>
+          <div class="sales-region">
+            <span class="region-name" data-i18n="section-global-region-europe">欧洲</span>
+            <span class="region-countries">英国、德国、法国、荷兰、瑞士、西班牙、意大利、波兰、奥地利、比利时、丹麦、挪威、瑞典、芬兰、葡萄牙、捷克、匈牙利、罗马尼亚、克罗地亚、斯洛文尼亚、土耳其、爱沙尼亚、拉脱维亚、立陶宛</span>
+          </div>
+          <div class="sales-region">
+            <span class="region-name" data-i18n="section-global-region-americas">美洲</span>
+            <span class="region-countries">美国、加拿大、巴西、墨西哥、阿根廷、智利、哥伦比亚、秘鲁、乌拉圭、巴拿马</span>
+          </div>
+          <div class="sales-region">
+            <span class="region-name" data-i18n="section-global-region-me">中东及大洋洲</span>
+            <span class="region-countries">澳大利亚、以色列、沙特阿拉伯、阿联酋</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORE VALUES SECTION - 核心价值 -->
+<section class="core-values-section" id="section-core-values">
+  <!-- 标题 -->
+  <div class="core-values-header">
+    <h2 class="core-values-title" data-i18n="core-values-title">核心价值观</h2>
+    <p class="core-values-subtitle" data-i18n="core-values-subtitle">CORE VALUES</p>
+  </div>
+
+  <!-- 六边形网格 -->
+  <div class="core-values-grid">
+    <!-- SVG 渐变定义 - 柔和有机质感 -->
+    <svg width="0" height="0" style="position: absolute;">
+      <defs>
+        <linearGradient id="coreValueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#6d6962"/>
+          <stop offset="50%" style="stop-color:#7a7670"/>
+          <stop offset="100%" style="stop-color:#8a8680"/>
+        </linearGradient>
+        <linearGradient id="hexBgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#fefefe"/>
+          <stop offset="50%" style="stop-color:#f9f8f6"/>
+          <stop offset="100%" style="stop-color:#f3f1ed"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- 价值观 1: 敬畏生命 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">01</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <!-- 爱心 - 象征敬畏生命 -->
+            <path d="M24 42s-14-9-14-20c0-6 5-10 10-10 3 0 5 2 7 4 2-2 4-4 7-4 5 0 10 4 10 10 0 11-14 20-14 20z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text" data-i18n="core-value-1">敬畏生命</h3>
+        <p class="core-value-en" data-i18n="core-value-1-en">Reverence For Life</p>
+      </div>
+    </div>
+
+    <!-- 价值观 2: 专注移植 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">02</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <!-- 左侧人形轮廓 -->
+            <circle cx="18" cy="12" r="5" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M18 18c-6 0-10 4-10 10v10h20V28c0-6-4-10-10-10z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+
+            <!-- 右侧人形轮廓 -->
+            <circle cx="30" cy="12" r="5" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M30 18c-6 0-10 4-10 10v10h20V28c0-6-4-10-10-10z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+
+            <!-- 心脏 -->
+            <path d="M24 42s-10-6-10-14c0-4 3-7 7-7 2 0 3 1 4 2 1-1 2-2 4-2 4 0 7 3 7 7 0 8-10 14-10 14z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- 双向箭头 -->
+            <path d="M18 30h12M18 30l3-3M30 30l-3 3" stroke="url(#coreValueGradient)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text" data-i18n="core-value-2">专注移植</h3>
+        <p class="core-value-en" data-i18n="core-value-2-en">Commitment To Transplantation</p>
+      </div>
+    </div>
+
+    <!-- 价值观 3: 精益求精 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">03</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 2L4 12l4 18 16 10 16-10 4-18L24 2z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M24 10l-8 4 2 10 6 4 6-4 2-10-8-4z" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="24" cy="22" r="4" fill="url(#coreValueGradient)"/>
+            <path d="M24 28v8" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M20 40h8" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text" data-i18n="core-value-3">精益求精</h3>
+        <p class="core-value-en" data-i18n="core-value-3-en">Pursuit For Excellence</p>
+      </div>
+    </div>
+
+    <!-- 价值观 4: 以人为本 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">04</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="14" r="5" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="32" cy="14" r="5" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M8 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M24 38c0-6.63 5.37-12 12-12s12 5.37 12 12" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M16 20c-4.42 0-8 3.58-8 8v4h4v-4c0-2.21 1.79-4 4-4" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text" data-i18n="core-value-4">以人为本</h3>
+        <p class="core-value-en" data-i18n="core-value-4-en">Care For People</p>
+      </div>
+    </div>
+
+    <!-- 价值观 5: 持续创新 -->
+    <div class="core-value-item">
+      <svg class="core-value-hex-bg" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="90,5 171,52.5 171,147.5 90,195 9,147.5 9,52.5"/>
+      </svg>
+      <div class="core-value-content">
+        <span class="core-value-number">05</span>
+        <div class="core-value-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4v6M24 38v6M8 24h6M34 24h6" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <circle cx="24" cy="24" r="10" fill="none" stroke="url(#coreValueGradient)" stroke-width="2"/>
+            <path d="M24 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="url(#coreValueGradient)"/>
+            <path d="M12 12l4 4M32 32l4 4M12 36l4-4M32 16l4-4" stroke="url(#coreValueGradient)" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3 class="core-value-text" data-i18n="core-value-5">持续创新</h3>
+        <p class="core-value-en" data-i18n="core-value-5-en">Never Stop Innovation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="images/logo.png" alt="健耕医药" />
+      </div>
+      <p class="footer-text">
+        成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人，其中研发人员 <span class="num">26</span> 名。
+      </p>
+    </div>
+    <div class="footer-section">
+      <h4 class="footer-heading" data-i18n="footer-follow-us">关注我们</h4>
+      <img src="images/qcode.png" alt="二维码" class="footer-qr" />
+    </div>
+    <div class="footer-section">
+      <h4 class="footer-heading" data-i18n="footer-contact-us">联系我们</h4>
+      <ul class="footer-contact">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <span class="num">021-61763507</span>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+          <span class="num">021-52370879</span>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>上海市闵行区浦江镇陈行公路<span class="num">2388</span>号 科技广场<span class="num">2</span>号楼<span class="num">1101</span>室</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; <span class="num">2014</span> - <span class="num">2026</span> <span data-i18n="footer-copyright">上海健耕医药科技股份有限公司</span></div>
+    <div><a href="https://beian.miit.gov.cn/" target="_blank" style="color:inherit;" data-i18n="footer-icp">沪 ICP 备 <span class="num">12033151</span> 号</a></div>
+  </div>
+</footer>
+
+<script>
+  // =============================================
+  // Canvas 背景动画 - 柔和有机质感粒子
+  // 温暖奶油色/金色粒子 + 动态连接线 + 脉动光晕
+  // =============================================
+  const canvas = document.getElementById('techCanvas');
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let particles = [];
+  let connectionLines = [];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  // 柔和质感粒子 - 温暖奶油色/金色
+  class Particle {
+    constructor() {
+      this.reset();
+      // 初始随机位置
+      this.y = Math.random() * height;
+    }
+
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + 10;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = -Math.random() * 0.5 - 0.3; // 向上浮动
+      this.radius = Math.random() * 2 + 1;
+      // 奶油色或金色
+      this.isGold = Math.random() > 0.6;
+      this.baseAlpha = Math.random() * 0.5 + 0.3;
+      this.pulseSpeed = Math.random() * 0.03 + 0.02;
+      this.phase = Math.random() * Math.PI * 2;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.phase += this.pulseSpeed;
+
+      // 轻微左右摆动
+      this.x += Math.sin(this.phase) * 0.3;
+
+      // 超出边界重置
+      if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+        this.reset();
+      }
+    }
+
+    draw() {
+      const alpha = this.baseAlpha * (0.6 + 0.4 * Math.sin(this.phase));
+      const color = this.isGold
+        ? `rgba(201, 169, 98, ${alpha})`
+        : `rgba(216, 211, 204, ${alpha})`;
+
+      // 发光效果
+      const gradient = ctx.createRadialGradient(
+        this.x, this.y, 0,
+        this.x, this.y, this.radius * 3
+      );
+      gradient.addColorStop(0, color);
+      gradient.addColorStop(0.5, color.replace(/[\d.]+\)$/, '0.3)'));
+      gradient.addColorStop(1, 'transparent');
+
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // 核心
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+    }
+  }
+
+  // 初始化粒子
+  function initParticles() {
+    particles = [];
+    const particleCount = Math.min(100, Math.floor((width * height) / 15000));
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  // 绘制连接线 - 柔和质感
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 150) {
+          const alpha = (1 - dist / 150) * 0.4;
+          const isGold = particles[i].isGold && particles[j].isGold;
+          const color = isGold
+            ? `rgba(201, 169, 98, ${alpha})`
+            : `rgba(216, 211, 204, ${alpha})`;
+
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  // 动画循环
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    // 绘制连接线
+    drawConnections();
+
+    // 更新和绘制粒子
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  resize();
+  initParticles();
+  animate();
+
+  window.addEventListener('resize', () => {
+    resize();
+    initParticles();
+  });
+
+  // =============================================
+  // 滚动解锁逻辑 (Genentech 风格 - 双向滚动)
+  // =============================================
+  const hero = document.getElementById('hero');
+  const heroContent = document.getElementById('heroContent');
+  const progressBar = document.querySelector('.scroll-progress');
+  const firstSection = document.getElementById('section-about');
+
+  let isUnlocked = false;
+  let scrollAccumulator = 0;
+  const UNLOCK_THRESHOLD = 500; // 需要累积滚动多少像素才解锁
+  let heroScale = 1;
+  let heroOpacity = 1;
+  let canvasOpacity = 0.8;
+
+  // 监听鼠标滚轮 - 双向滚动
+  window.addEventListener('wheel', (e) => {
+    const isScrollingDown = e.deltaY > 0;
+    const scrollAmount = Math.abs(e.deltaY);
+    const scrollTop = window.scrollY;
+
+    if (!isUnlocked) {
+      // 向下滚动：累积解锁
+      if (isScrollingDown) {
+        e.preventDefault();
+        scrollAccumulator += scrollAmount;
+
+        // 计算滚动进度 (0 到 1)
+        const scrollProgress = Math.min(scrollAccumulator / UNLOCK_THRESHOLD, 1);
+
+        // 标题放大效果
+        heroScale = 1 + scrollProgress * 3;
+        heroOpacity = Math.max(0, 1 - scrollProgress * 0.8);
+        canvasOpacity = 0.8 * (1 - scrollProgress);
+
+        if (heroContent) {
+          heroContent.style.transform = `scale(${heroScale})`;
+          heroContent.style.opacity = heroOpacity;
+        }
+
+        if (canvas) {
+          canvas.style.opacity = canvasOpacity;
+        }
+
+        // 达到阈值，解锁页面
+        if (scrollProgress >= 0.95) {
+          unlockPage();
+        }
+      }
+      // 向上滚动：减少累积值，实现回滚
+      else {
+        e.preventDefault();
+        scrollAccumulator -= scrollAmount;
+
+        // 确保不小于 0
+        if (scrollAccumulator < 0) {
+          scrollAccumulator = 0;
+        }
+
+        // 计算滚动进度 (0 到 1)
+        const scrollProgress = Math.min(scrollAccumulator / UNLOCK_THRESHOLD, 1);
+
+        // 标题恢复效果
+        heroScale = 1 + scrollProgress * 3;
+        heroOpacity = Math.max(0, 1 - scrollProgress * 0.8);
+        canvasOpacity = 0.8 * (1 - scrollProgress);
+
+        if (heroContent) {
+          heroContent.style.transform = `scale(${heroScale})`;
+          heroContent.style.opacity = heroOpacity;
+        }
+
+        if (canvas) {
+          canvas.style.opacity = canvasOpacity;
+        }
+      }
+    } else {
+      // 已解锁状态：检查是否需要重新锁定
+      // 如果滚动到 video section 顶部附近且继续向上滚动，重新锁定
+      if (scrollTop < window.innerHeight * 0.3) {
+        if (!isScrollingDown) {
+          // 向上滚动，重新锁定
+          e.preventDefault();
+          relockPage();
+        }
+      }
+    }
+  }, { passive: false });
+
+  function unlockPage() {
+    isUnlocked = true;
+
+    // 平滑过渡到最终状态
+    if (heroContent) {
+      heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      heroContent.style.transform = 'scale(5)';
+      heroContent.style.opacity = '0';
+    }
+
+    // 背景完全淡出
+    if (canvas) {
+      canvas.style.transition = 'opacity 0.6s ease';
+      canvas.style.opacity = '0';
+    }
+
+    // Hero 层淡出
+    if (hero) {
+      hero.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      hero.style.opacity = '0';
+    }
+
+    // 显示滚动进度条
+    if (progressBar) {
+      progressBar.classList.add('visible');
+    }
+
+    // 显示导航栏
+    if (nav) {
+      nav.classList.add('visible');
+    }
+
+    // 稍后移除锁定类，让过渡完成
+    setTimeout(() => {
+      document.body.classList.remove('locked');
+      if (hero) {
+        hero.classList.add('hidden');
+      }
+      checkSections();
+    }, 500);
+  }
+
+  function relockPage() {
+    isUnlocked = false;
+    scrollAccumulator = 0;
+
+    // 重新显示 Hero 层
+    if (hero) {
+      hero.classList.remove('hidden');
+      hero.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+      hero.style.opacity = '1';
+    }
+
+    // 恢复标题状态
+    if (heroContent) {
+      heroContent.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+      heroContent.style.transform = 'scale(1)';
+      heroContent.style.opacity = '1';
+    }
+
+    // 恢复 Canvas 背景
+    if (canvas) {
+      canvas.style.transition = 'opacity 0.6s ease';
+      canvas.style.opacity = '0.8';
+    }
+
+    // 隐藏滚动进度条
+    if (progressBar) {
+      progressBar.classList.remove('visible');
+    }
+
+    // 隐藏导航栏
+    if (nav) {
+      nav.classList.remove('visible');
+    }
+
+    // 重新锁定页面
+    document.body.classList.add('locked');
+
+    // 滚动到顶部
+    window.scrollTo(0, 0);
+  }
+
+  // =============================================
+  // 移动端触摸滚动支持
+  // =============================================
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isUnlocked) {
+      const touchY = e.touches[0].clientY;
+      const touchX = e.touches[0].clientX;
+      const deltaY = touchStartY - touchY;
+      const deltaX = touchX - touchStartX;
+
+      // 只处理垂直滑动，忽略水平滑动
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        e.preventDefault();
+
+        const isScrollingDown = deltaY < 0;
+        const scrollAmount = Math.abs(deltaY) * 1.5; // 增加灵敏度
+
+        if (isScrollingDown) {
+          scrollAccumulator += scrollAmount;
+        } else {
+          scrollAccumulator -= scrollAmount;
+          if (scrollAccumulator < 0) scrollAccumulator = 0;
+        }
+
+        // 计算滚动进度 (0 到 1)
+        const scrollProgress = Math.min(scrollAccumulator / UNLOCK_THRESHOLD, 1);
+
+        // 标题放大效果
+        heroScale = 1 + scrollProgress * 3;
+        heroOpacity = Math.max(0, 1 - scrollProgress * 0.8);
+        canvasOpacity = 0.8 * (1 - scrollProgress);
+
+        if (heroContent) {
+          heroContent.style.transform = `scale(${heroScale})`;
+          heroContent.style.opacity = heroOpacity;
+        }
+
+        if (canvas) {
+          canvas.style.opacity = canvasOpacity;
+        }
+
+        // 达到阈值，解锁页面
+        if (scrollProgress >= 0.95) {
+          unlockPage();
+        }
+      }
+
+      // 更新起始位置用于下次计算
+      touchStartY = touchY;
+      touchStartX = touchX;
+    }
+  }, { passive: false });
+
+  // =============================================
+  // 移动端导航菜单切换
+  // =============================================
+  const navToggle = document.getElementById('navToggle');
+  const mobileNavPanel = document.getElementById('mobileNavPanel');
+
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('active');
+      mobileNavPanel.classList.toggle('active');
+      document.body.style.overflow = mobileNavPanel.classList.contains('active') ? 'hidden' : '';
+    });
+  }
+
+  // 点击菜单项后关闭菜单
+  document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navToggle) navToggle.classList.remove('active');
+      if (mobileNavPanel) mobileNavPanel.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // 移动端子菜单切换函数
+  function toggleMobileSubmenu(id) {
+    const submenu = document.getElementById(id);
+    const toggle = submenu?.previousElementSibling || submenu?.parentElement;
+    if (submenu) {
+      submenu.classList.toggle('open');
+      if (toggle && toggle.classList.contains('mobile-menu-toggle')) {
+        toggle.classList.toggle('open');
+      }
+    }
+    return false; // 阻止默认行为
+  }
+  window.toggleMobileSubmenu = toggleMobileSubmenu;
+
+  // =============================================
+  // Nav background on scroll
+  // =============================================
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // =============================================
+  // Section 滚动揭示效果
+  // =============================================
+  const sections = document.querySelectorAll('.content-section, .video-section');
+  const statNumbers = document.querySelectorAll('.stat-number');
+  const animatedStats = new Set();
+
+  function animateStat(stat) {
+    const target = parseInt(stat.dataset.count);
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(currentTime) {
+      const elapsed = currentTime - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 4);
+      const currentValue = Math.floor(target * easeOut);
+      stat.textContent = currentValue + '+';
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        stat.textContent = target + '+';
+      }
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  function checkSections() {
+    const windowHeight = window.innerHeight;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const triggerPoint = windowHeight * 0.75;
+
+      if (rect.top <= triggerPoint) {
+        section.classList.add('visible');
+
+        // 触发数字动画
+        const statsInView = section.querySelectorAll('.stat-number');
+        statsInView.forEach(stat => {
+          if (!animatedStats.has(stat)) {
+            animatedStats.add(stat);
+            animateStat(stat);
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(checkSections);
+  });
+
+  // =============================================
+  // Scroll Progress Bar
+  // =============================================
+  window.addEventListener('scroll', () => {
+    if (!isUnlocked) return;
+
+    const scrollY = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = scrollY / docHeight;
+
+    if (progressBar) {
+      progressBar.style.transform = `scaleY(${Math.max(0.01, scrollPercent)})`;
+    }
+
+    // 检测是否滚动到接近顶部，准备重新锁定
+    if (scrollY < window.innerHeight * 0.3) {
+      // 用户滚动回顶部，但不立即锁定，等待向上滚动意图
+      window.isNearTop = true;
+    } else {
+      window.isNearTop = false;
+    }
+  });
+
+  // =============================================
+  // 页面加载时初始化状态
+  // =============================================
+  relockPage();
+
+  // =============================================
+  // 发展历程 - 波浪形时间线滚动动画
+  // =============================================
+  document.addEventListener('DOMContentLoaded', () => {
+    const timelineItems = document.querySelectorAll('.timeline-item');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1
+    };
+
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          timelineObserver.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    timelineItems.forEach((item) => {
+      timelineObserver.observe(item);
+    });
+  });
+
+  // =============================================
+  // 全球网络 - 世界地图粒子动画 + 办公室高亮
+  // =============================================
+  function initWorldMapCanvas() {
+    const canvas = document.getElementById('worldMapCanvas');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    // 办公室坐标（百分比）
+    const officeLocations = [
+      { x: 83, y: 38, name: '上海' },
+      { x: 81, y: 43, name: '广州' },
+      { x: 20, y: 22, name: '芝加哥' },
+      { x: 48, y: 16, name: '布鲁塞尔' }
+    ];
+
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      width = canvas.width = rect.width;
+      height = canvas.height = rect.height;
+    }
+
+    // 粒子类
+    class MapParticle {
+      constructor() {
+        this.reset();
+        this.y = Math.random() * height;
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = height + 10;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = -Math.random() * 0.3 - 0.2;
+        this.radius = Math.random() * 2 + 1;
+        this.isGold = Math.random() > 0.5;
+        this.baseAlpha = Math.random() * 0.5 + 0.3;
+        this.pulseSpeed = Math.random() * 0.02 + 0.01;
+        this.phase = Math.random() * Math.PI * 2;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.phase += this.pulseSpeed;
+        this.x += Math.sin(this.phase) * 0.2;
+
+        if (this.y < -10 || this.x < -10 || this.x > width + 10) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        const alpha = this.baseAlpha * (0.6 + 0.4 * Math.sin(this.phase));
+        const color = this.isGold
+          ? `rgba(201, 169, 98, ${alpha + 0.4})`
+          : `rgba(216, 211, 204, ${alpha + 0.3})`;
+
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.radius * 3
+        );
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(0.5, color.replace(/[\d.]+\)$/, '0.4)'));
+        gradient.addColorStop(1, 'transparent');
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius * 3, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      const particleCount = Math.floor((width * height) / 12000);
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new MapParticle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    resize();
+    initParticles();
+    animate();
+
+    window.addEventListener('resize', () => {
+      resize();
+      initParticles();
+    });
+  }
+
+  // 初始化世界地图
+  document.addEventListener('DOMContentLoaded', () => {
+    initWorldMapCanvas();
+  });
+</script>
+<script src="js/lang-switch.js"></script>
+
+</body>
+</html>
