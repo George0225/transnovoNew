@@ -253,18 +253,22 @@
     'apply.html': 'apply-en.html'
   };
 
-  // 获取当前语言
+  // 获取当前语言 - 根据 URL 判断
   function getCurrentLang() {
+    const currentPage = getCurrentPage();
+    if (currentPage.includes('-en.html')) {
+      return 'en';
+    }
+    // 也检查 localStorage 作为 fallback
     return localStorage.getItem('transnovo_lang') || 'zh';
   }
 
-  // 设置语言
+  // 设置语言 - 保存到 localStorage
   function setLanguage(lang) {
     if (!translations[lang]) {
       lang = 'zh';
     }
     localStorage.setItem('transnovo_lang', lang);
-    applyLanguage(lang);
   }
 
   // 检查是否为英文页面
@@ -307,11 +311,28 @@
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
   }
 
-  // 切换语言
+  // 获取当前页面文件名
+  function getCurrentPage() {
+    const path = window.location.pathname;
+    const parts = path.split('/');
+    return parts[parts.length - 1] || 'index.html';
+  }
+
+  // 切换语言 - 跳转到对应语言的页面
   function toggleLanguage() {
-    const currentLang = getCurrentLang();
-    const newLang = currentLang === 'zh' ? 'en' : 'zh';
-    setLanguage(newLang);
+    const currentPage = getCurrentPage();
+    const isEnglish = currentPage.includes('-en.html');
+
+    if (isEnglish) {
+      // 当前是英文页面，跳转到中文页面
+      const zhPage = currentPage.replace('-en.html', '.html');
+      window.location.href = zhPage;
+    } else {
+      // 当前是中文页面，跳转到英文页面
+      const pageName = currentPage.replace('.html', '');
+      const enPage = pageName + '-en.html';
+      window.location.href = enPage;
+    }
   }
 
   // 初始化语言切换按钮

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>产品中心 - tranSnovo 健耕医药</title>
-  <meta name="description" content="提供创新的医疗器械、药品、诊断试剂与服务，覆盖器官保存、运输、评估及修复全程。" />
+  <title>免疫抑制剂 - tranSnovo 健耕医药</title>
+  <meta name="description" content="提供他克莫司、环孢素等免疫抑制剂产品，预防器官移植排斥反应。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,7 +16,6 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* 主色调 - 深度奶油色（更浓郁护眼）」 */
       --primary-50: #fdfdfc;
       --primary-100: #f7f5f0;
       --primary-200: #efede6;
@@ -25,13 +24,9 @@
       --primary-500: #c4bdae;
       --primary-600: #b5ac9d;
       --primary-700: #a39a8b;
-
-      /* 强调色 - 深度温暖金棕（更低饱和度）」 */
       --accent-400: #b89654;
       --accent-500: #a48546;
       --accent-600: #92743a;
-
-      /* 中性色 - 深度温暖灰」 */
       --slate-50: #f8f7f5;
       --slate-100: #f0efeb;
       --slate-200: #e0ded8;
@@ -42,8 +37,6 @@
       --slate-700: #45433f;
       --slate-800: #2a2926;
       --slate-900: #161513;
-
-      /* 语义色 - 更柔和护眼」 */
       --bg-primary: #fdfdfc;
       --bg-secondary: var(--slate-50);
       --bg-tertiary: var(--slate-100);
@@ -54,8 +47,6 @@
       --text-secondary: #3a3732;
       --text-tertiary: #6a6660;
       --text-light: #ffffff;
-
-      /* 效果色 - 深度温暖质感」 */
       --warm-stone: #c4bdae;
       --warm-sand: #d6d0c4;
       --shadow-sm: 0 1px 3px rgba(61, 61, 61, 0.05);
@@ -78,7 +69,6 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* 精致滚动条 - 柔和质感 */
     ::-webkit-scrollbar { width: 10px; }
     ::-webkit-scrollbar-track { background: var(--slate-100); }
     ::-webkit-scrollbar-thumb {
@@ -89,7 +79,27 @@
       background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
     }
 
-    /* 关键帧动画 */
+      /* 效果色 */
+      --shadow-sm: 0 1px 3px rgba(15, 63, 181, 0.06);
+      --shadow-md: 0 4px 12px rgba(15, 63, 181, 0.08);
+      --shadow-lg: 0 8px 30px rgba(15, 63, 181, 0.12);
+      --shadow-xl: 0 20px 60px rgba(15, 63, 181, 0.16);
+      --glow-primary: 0 0 40px rgba(26, 89, 224, 0.25);
+      --glow-accent: 0 0 40px rgba(230, 30, 108, 0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(32px); }
       to { opacity: 1; transform: translateY(0); }
@@ -124,7 +134,6 @@
     .delay-2 { animation-delay: 0.2s; }
     .delay-3 { animation-delay: 0.35s; }
 
-    /* ===== NAVIGATION ===== */
     #nav {
       position: fixed;
       top: 0;
@@ -158,7 +167,6 @@
       align-items: center;
       gap: 14px;
       text-decoration: none;
-      group: logo;
     }
 
     .nav-logo img {
@@ -292,13 +300,14 @@
     .nav-mobile {
       display: none;
       position: fixed;
-      top: 80px;
+      top: 84px;
       left: 0;
       right: 0;
       background: #fff;
       padding: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       z-index: 999;
+      border-top: 1px solid var(--border);
     }
 
     .nav-mobile.open {
@@ -312,6 +321,13 @@
       text-decoration: none;
       font-size: 16px;
       border-bottom: 1px solid var(--border);
+      transition: all 0.25s ease;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--primary-600);
+      background: var(--primary-50);
+      padding-left: 24px;
     }
 
     /* ===== DROPDOWN MENUS ===== */
@@ -457,7 +473,6 @@
       transform: translateX(8px);
       transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       box-shadow: 0 20px 60px rgba(15, 63, 181, 0.12), 0 0 0 1px rgba(15, 63, 181, 0.04);
-      white-space: nowrap;
       max-height: min(500px, 85vh);
       overflow-y: auto;
       overflow-x: hidden;
@@ -484,117 +499,76 @@
       transform: translateX(0);
     }
 
+    .nav-links .sub-menu-2 li > a.has-submenu::after {
+      content: '›';
+      font-size: 18px;
+      line-height: 1;
+      color: var(--slate-400);
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links .sub-menu-2 li > a.has-submenu:hover::after {
+      transform: translateX(4px);
+      color: var(--primary-500);
+    }
+
+    .nav-links .sub-menu-3 li > a {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .nav-links .sub-menu-3 li > a:hover {
+      color: var(--primary-600);
+      background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+      transform: translateX(4px);
+    }
+
+    /* 产品分组样式 */
     .sub-menu-3 .product-group-title {
       font-size: 11px;
       font-weight: 700;
-      color: var(--slate-400);
-      padding: 10px 14px 6px;
+      color: var(--text-tertiary);
+      padding: 8px 16px 6px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      position: relative;
-    }
-
-    .sub-menu-3 .product-group-title::before {
-      content: '';
-      position: absolute;
-      left: 14px;
-      bottom: 0;
-      width: 12px;
-      height: 1px;
-      background: linear-gradient(90deg, var(--primary-400), transparent);
-    }
-
-    .sub-menu-3 .product-group {
-      margin-bottom: 4px;
-      list-style: none;
+      letter-spacing: 0.8px;
     }
 
     .sub-menu-3 .product-item {
-      padding: 10px 14px 10px 26px;
+      padding: 10px 16px 10px 20px;
       font-size: 13px;
       color: var(--text-secondary);
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: all 0.2s;
       display: block;
       list-style: none;
-      white-space: nowrap;
-      border-radius: 8px;
-      text-decoration: none;
-      position: relative;
-    }
-
-    .sub-menu-3 .product-item::before {
-      content: '';
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 4px;
-      height: 4px;
-      background: var(--slate-300);
-      border-radius: 50%;
-      transition: all 0.2s ease;
     }
 
     .sub-menu-3 .product-item:hover {
       color: var(--primary-600);
       background: var(--primary-50);
-      transform: translateX(6px);
     }
 
-    .sub-menu-3 .product-item:hover::before {
-      background: var(--primary-500);
-      width: 6px;
-      height: 6px;
-    }
-
-    /* ===== PAGE HEADER ===== */
+    /* Page Header */
     .page-header {
       margin-top: 84px;
-      padding: 120px 24px 100px;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      padding: 60px 24px;
+      background: linear-gradient(135deg, var(--primary-50) 0%, var(--slate-100) 100%);
       text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* 装饰性背景元素 */
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--primary-100) 0%, transparent 70%);
-      opacity: 0.5;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .page-header::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -5%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, var(--accent-100) 0%, transparent 70%);
-      opacity: 0.3;
-      border-radius: 50%;
-      pointer-events: none;
     }
 
     .page-header h1 {
-      font-size: clamp(42px, 6vw, 72px);
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-      position: relative;
-      background: linear-gradient(135deg, var(--primary-600) 0%, var(--accent-500) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 700;
+      color: var(--slate-800);
+      margin-bottom: 16px;
     }
 
     .page-header p {
@@ -602,240 +576,322 @@
       color: var(--text-secondary);
       max-width: 600px;
       margin: 0 auto;
-      position: relative;
-      line-height: 1.7;
     }
 
-    /* ===== PRODUCTS SECTION ===== */
-    #products {
-      padding: 100px 24px;
+    /* Product Detail Section */
+    .product-detail-section {
+      padding: 60px 0;
       background: var(--bg-primary);
     }
 
-    .products-inner {
-      max-width: 1400px;
+    .product-detail-inner {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section-label {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--primary-50);
+      border: 1px solid var(--primary-500);
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary-600);
+      margin-bottom: 20px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .section-description {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 48px;
+      max-width: 800px;
+    }
+
+    .product-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    .product-showcase-img {
+      background: var(--bg-secondary);
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .product-showcase-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .product-showcase-content h3 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+
+    .product-showcase-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .showcase-btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      color: #fff;
+      border-radius: 100px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 15px rgba(26, 89, 224, 0.3), 0 1px 3px rgba(26, 89, 224, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .showcase-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      border-radius: 100px;
+    }
+
+    .showcase-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .showcase-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(26, 89, 224, 0.4), 0 2px 6px rgba(26, 89, 224, 0.25);
+    }
+
+    .showcase-btn:hover::before {
+      opacity: 1;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 60px;
+    }
+
+    .product-card {
+      position: relative;
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary-400);
+    }
+
+    .product-card .product-image {
+      height: 180px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+
+    .product-card .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.08);
+    }
+
+    .product-card .product-info {
+      padding: 24px;
+    }
+
+    .product-card .product-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .product-card .product-desc {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+      text-align: center;
+    }
+
+    .cta-content {
+      max-width: 800px;
       margin: 0 auto;
     }
 
-    /* Category Sections */
-    .category-section {
-      margin-bottom: 120px;
-    }
-
-    .category-section:last-child {
-      margin-bottom: 0;
-    }
-
-    .category-title {
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
       font-size: clamp(32px, 4vw, 48px);
       font-weight: 700;
-      margin-bottom: 48px;
-      padding-left: 24px;
-      border-left: none;
-      position: relative;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 16px;
     }
 
-    /* 精致的左侧指示器 */
-    .category-title::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 60%;
-      min-height: 40px;
-      background: linear-gradient(180deg, var(--primary-500) 0%, var(--accent-500) 100%);
-      border-radius: 4px;
-      box-shadow: 0 0 20px rgba(26, 89, 224, 0.4);
+    .cta-section p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 32px;
     }
 
-    .category-title::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -16px;
-      width: 40px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-300), transparent);
-      border-radius: 2px;
-    }
-
-    /* Sub Category Grid */
-    .sub-category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-      gap: 36px;
-      margin-bottom: 40px;
-    }
-
-    .sub-category-card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(249,250,252,0.8) 100%);
-      border-radius: 24px;
-      padding: 36px;
-      box-shadow: 0 4px 24px rgba(26, 89, 224, 0.06), 0 2px 8px rgba(0, 0, 0, 0.02);
-      transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-      border: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* 光晕背景效果 */
-    .sub-category-card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(26, 89, 224, 0.04) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      pointer-events: none;
-    }
-
-    .sub-category-card:hover::before {
-      opacity: 1;
-    }
-
-    /* 卡片顶部装饰线 */
-    .sub-category-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-500), var(--accent-500), var(--primary-500));
-      background-size: 200% 100%;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .sub-category-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 20px 60px rgba(26, 89, 224, 0.15), 0 8px 24px rgba(0, 0, 0, 0.04);
-      background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(240,244,255,0.9) 100%);
-    }
-
-    .sub-category-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .sub-category-name {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      letter-spacing: -0.01em;
-    }
-
-    /* 精致的圆点装饰 */
-    .sub-category-name::before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: linear-gradient(135deg, var(--primary-500), var(--accent-500));
-      border-radius: 50%;
-      box-shadow: 0 0 20px rgba(26, 89, 224, 0.5);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    .product-list {
-      list-style: none;
-    }
-
-    .product-list li {
-      padding: 18px 20px;
-      margin-bottom: 12px;
-      background: transparent;
-      border-radius: 16px;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-      border: none;
-      cursor: pointer;
-      position: relative;
-    }
-
-    /* 左侧装饰条 */
-    .product-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 3px;
-      height: 0%;
-      background: linear-gradient(180deg, var(--primary-500), var(--accent-500));
-      border-radius: 0 4px 4px 0;
-      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .product-list li:hover {
-      background: linear-gradient(135deg, rgba(26, 89, 224, 0.04) 0%, rgba(230, 30, 108, 0.03) 100%);
-      transform: translateX(12px);
-      box-shadow: 0 4px 16px rgba(26, 89, 224, 0.08);
-    }
-
-    .product-list li:hover::before {
-      height: 60%;
-    }
-
-    .product-list li a {
-      color: var(--primary-600);
+    .cta-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+      color: #fff;
+      border-radius: 100px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 14px;
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 14px;
-      border-radius: 100px;
-      background: linear-gradient(135deg, var(--primary-100), var(--primary-50));
-      box-shadow: 0 2px 8px rgba(26, 89, 224, 0.1);
+      font-size: 16px;
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 15px rgba(26, 89, 224, 0.3), 0 1px 3px rgba(26, 89, 224, 0.2);
       position: relative;
       overflow: hidden;
     }
 
-    /* 箭头 */
-    .product-list li a::after {
-      content: '→';
-      font-size: 14px;
-      font-weight: 700;
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-500), var(--accent-400));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      border-radius: 100px;
     }
 
-    .product-list li:hover a {
+    .cta-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(26, 89, 224, 0.4), 0 2px 6px rgba(26, 89, 224, 0.25);
+    }
+
+    .cta-btn:hover::before {
       opacity: 1;
-      transform: translateX(0);
     }
 
-    .product-list li:hover a:hover {
-      background: linear-gradient(135deg, var(--primary-200), var(--primary-100));
-      box-shadow: 0 4px 12px rgba(26, 89, 224, 0.2);
+    /* Partners */
+    #partners {
+      padding: 80px 24px;
+      background: var(--bg-secondary);
     }
 
-    .product-list li a:hover::after {
-      transform: translateX(4px);
+    .partners-inner {
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    /* ===== FOOTER ===== */
+    .partners-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+    }
+
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .partner-logo {
+      opacity: 0.6;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .partner-logo:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .partner-logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Footer */
     #footer {
-      background: linear-gradient(180deg, var(--slate-50) 0%, var(--slate-100) 100%);
+      background: var(--bg-primary);
       border-top: 1px solid var(--border);
-      padding: 80px 24px 48px;
+      padding: 80px 24px 40px;
     }
 
     .footer-inner {
@@ -846,25 +902,20 @@
     .footer-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1.5fr;
-      gap: 80px;
+      gap: 60px;
       margin-bottom: 60px;
     }
 
     .footer-brand .logo {
       height: 48px;
       margin-bottom: 24px;
-      transition: filter 0.3s ease;
-    }
-
-    .footer-brand .logo:hover {
-      filter: drop-shadow(0 4px 12px rgba(26, 89, 224, 0.2));
     }
 
     .footer-brand p {
       font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.9;
-      margin-bottom: 0;
+      color: var(--text-tertiary);
+      line-height: 1.8;
+      margin-bottom: 20px;
     }
     /* 正式数字样式 - 专业财务报表风格 */
     .footer-brand p .num {
@@ -875,75 +926,50 @@
     }
 
     .footer-section h4 {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
       margin-bottom: 24px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
     }
 
     .footer-qrcodes {
       display: flex;
-      gap: 24px;
+      gap: 20px;
     }
 
     .footer-qr {
       text-align: center;
-      transition: transform 0.3s ease;
-    }
-
-    .footer-qr:hover {
-      transform: scale(1.05);
     }
 
     .footer-qr img {
-      width: 130px;
-      height: 130px;
-      border-radius: 16px;
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.3s ease;
-    }
-
-    .footer-qr:hover img {
-      box-shadow: var(--shadow-md), 0 0 0 3px var(--primary-50);
     }
 
     .footer-qr span {
       display: block;
       font-size: 12px;
       color: var(--text-tertiary);
-      margin-top: 10px;
-      font-weight: 500;
+      margin-top: 8px;
     }
 
     .footer-contact li {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 12px;
       font-size: 14px;
       color: var(--text-secondary);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       list-style: none;
-      transition: transform 0.2s ease;
-    }
-
-    .footer-contact li:hover {
-      transform: translateX(4px);
-      color: var(--primary-600);
     }
 
     .footer-contact svg {
       width: 20px;
       height: 20px;
-      color: var(--primary-500);
+      color: var(--tech-blue);
       flex-shrink: 0;
-      transition: transform 0.3s ease;
-    }
-
-    .footer-contact li:hover svg {
-      transform: scale(1.1);
     }
 
     .footer-bottom {
@@ -951,7 +977,7 @@
       justify-content: space-between;
       align-items: center;
       padding-top: 40px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-light);
     }
 
     .footer-copyright {
@@ -967,69 +993,50 @@
     .footer-icp a {
       color: var(--text-secondary);
       text-decoration: none;
-      transition: color 0.2s ease;
-      position: relative;
-    }
-
-    .footer-icp a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--primary-500);
-      transition: width 0.2s ease;
     }
 
     .footer-icp a:hover {
-      color: var(--primary-600);
+      color: var(--tech-blue);
     }
 
-    .footer-icp a:hover::after {
-      width: 100%;
-    }
-
-    /* ===== RESPONSIVE ===== */
+    /* Responsive */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .sub-category-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 48px; }
+      .product-showcase { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .partners-grid { grid-template-columns: repeat(3, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
       .footer-qrcodes { justify-content: center; }
-      .category-title::after { display: none; }
     }
 
-    @media (max-width: 992px) {
-      .nav-links, .nav-btn { display: none; }
-      .nav-toggle { display: flex; }
-      .nav-inner { height: 72px; padding: 0 20px; }
-      .page-header { padding: 80px 20px; }
-      .page-header h1 { font-size: clamp(36px, 8vw, 56px); }
-      #products { padding: 80px 20px; }
-      .sub-category-grid { grid-template-columns: 1fr; gap: 24px; }
-      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .footer-qrcodes { display: none; }
-      .category-section { margin-bottom: 80px; }
+    /* 产品图片样式 - 适配屏幕 */
+    .product-image-full {
+      max-width: 100vw;
+      margin: 0 auto 0;
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .product-image-full img {
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+      box-shadow: none;
+      display: block;
     }
 
     @media (max-width: 768px) {
-      .page-header { margin-top: 72px; padding: 60px 20px 50px; }
-      .sub-category-card { padding: 24px; }
-      .sub-category-name { font-size: 18px; }
-      .product-list li { padding: 14px 16px; }
-      .product-list li a {
-        opacity: 1;
-        transform: none;
-        background: transparent;
-        padding: 6px 8px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .page-header h1 { font-size: 28px; }
-      .page-header p { font-size: 15px; }
-      .category-title { font-size: 22px; margin-bottom: 32px; }
-      .sub-category-grid { gap: 16px; }
+      .nav-links, .nav-btn { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-inner { height: 72px; padding: 0 20px; }
+      .page-header { padding: 60px 20px; }
+      .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
+      .product-detail-section { padding: 80px 20px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .footer-qrcodes { display: none; }
     }
   
     /* 联系电话数字正式样式 */
@@ -1055,66 +1062,66 @@
 <!-- NAVIGATION -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
+    <a href="index-en.html" class="nav-logo">
       <img src="images/logo.png" alt="tranSnovo 健耕医药" />
     </a>
 
-    <ul class="nav-links">
-      <li><a href="index.html" data-i18n="nav-home">首页</a></li>
+        <ul class="nav-links">
+      <li><a href="index-en.html" data-i18n="nav-home">首页</a></li>
       <li>
-        <a href="products.html" class="active has-submenu" data-i18n="nav-products">产品中心</a>
+        <a href="products-en.html" class="has-submenu" data-i18n="nav-products">产品中心</a>
         <ul class="sub-menu">
-          <li><a href="solutions.html" data-i18n="nav-solutions">解决方案</a></li>
+          <li><a href="solutions-en.html" data-i18n="nav-solutions">解决方案</a></li>
           <li>
-            <a href="products.html#devices" class="has-submenu" data-i18n="nav-products-all">产品</a>
+            <a href="products-en.html#devices" class="has-submenu" data-i18n="nav-products-all">产品</a>
             <ul class="sub-menu-2">
               <li>
-                <a href="products.html#devices" class="has-submenu" data-i18n="nav-devices">器械</a>
+                <a href="products-en.html#devices" class="has-submenu" data-i18n="nav-devices">器械</a>
                 <ul class="sub-menu-3">
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-mechanical-perfusion">机械灌注</div>
-                    <a href="machine-perfusion.html" class="product-item">LifePort®肾脏灌注转运箱</a>
-                    <a href="liver-perfusion.html" class="product-item">LifePort®肝脏灌注转运箱</a>
-                    <a href="organ-preservation.html" class="product-item">KPS-1®器官保存液</a>
+                    <a href="machine-perfusion-en.html" class="product-item">LifePort®肾脏灌注转运箱</a>
+                    <a href="liver-perfusion-en.html" class="product-item">LifePort®肝脏灌注转运箱</a>
+                    <a href="organ-preservation-en.html" class="product-item">KPS-1®器官保存液</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-static-cold">静态冷藏</div>
-                    <a href="organ-preservation.html" class="product-item">SPS-1®器官保存液</a>
-                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                    <a href="organ-preservation-en.html" class="product-item">SPS-1®器官保存液</a>
+                    <a href="machine-perfusion-en.html" class="product-item">莱拓®医用冷藏转运箱</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="products.html#drugs" class="has-submenu" data-i18n="nav-drugs">药品</a>
+                <a href="products-en.html#drugs" class="has-submenu" data-i18n="nav-drugs">药品</a>
                 <ul class="sub-menu-3">
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-immunosuppressant">免疫抑制剂</div>
-                    <a href="immunosuppressant.html" class="product-item">他克莫司胶囊</a>
-                    <a href="immunosuppressant.html" class="product-item">麦考酚钠肠溶片</a>
+                    <a href="immunosuppressant-en.html" class="product-item">他克莫司胶囊</a>
+                    <a href="immunosuppressant-en.html" class="product-item">麦考酚钠肠溶片</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-anti-infective">抗感染药</div>
-                    <a href="immunosuppressant.html" class="product-item">盐酸缬更昔洛韦片</a>
+                    <a href="immunosuppressant-en.html" class="product-item">盐酸缬更昔洛韦片</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="products.html#ivd" class="has-submenu" data-i18n="nav-ivd">体外诊断</a>
+                <a href="products-en.html#ivd" class="has-submenu" data-i18n="nav-ivd">体外诊断</a>
                 <ul class="sub-menu-3">
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-tdm">治疗药物监测（TDM）</div>
-                    <a href="tdm.html" class="product-item">他克莫司测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">环孢霉素测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">雷帕霉素测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">霉酚酸测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">全自动生化分析仪</a>
+                    <a href="tdm-en.html" class="product-item">他克莫司测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">环孢霉素测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">雷帕霉素测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">霉酚酸测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">全自动生化分析仪</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-hla">人类白细胞抗原和抗体检测</div>
-                    <a href="hla-dna.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
-                    <a href="hla-antibody.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
-                    <a href="hla-class1.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
-                    <a href="hla-class2.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-dna-en.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
+                    <a href="hla-antibody-en.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
+                    <a href="hla-class1-en.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-class2-en.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
                   </li>
                 </ul>
               </li>
@@ -1122,19 +1129,18 @@
           </li>
         </ul>
       </li>
+      <li><a href="innovation-en.html" data-i18n="nav-innovation">研发创新</a></li>
       <li>
         <a href="#" class="has-submenu" data-i18n="nav-user-service">用户服务</a>
         <ul class="sub-menu">
-          <li><a href="operation-videos.html" data-i18n="nav-operation-videos">操作视频</a></li>
-          <li><a href="training-videos.html" data-i18n="nav-training-videos">培训视频</a></li>
-          <li><a href="investment.html" data-i18n="nav-investment">招商服务</a></li>
+          <li><a href="operation-videos-en.html" data-i18n="nav-operation-videos">操作视频</a></li>
+          <li><a href="training-videos-en.html" data-i18n="nav-training-videos">培训视频</a></li>
+          <li><a href="investment-en.html" data-i18n="nav-investment">招商服务</a></li>
         </ul>
       </li>
-      <li><a href="patients.html" data-i18n="nav-patients">关爱患者</a></li>
-      <li><a href="talent.html" data-i18n="nav-talent">人才中心</a></li>
-    </ul>
-
-    <a href="contact.html" class="nav-btn"><span data-i18n="nav-contact">联系我们</span></a>
+      <li><a href="patients-en.html" data-i18n="nav-patients">关爱患者</a></li>
+      <li><a href="talent-en.html" data-i18n="nav-talent">人才中心</a></li>
+    </ul><a href="contact-en.html" class="nav-btn" data-i18n="nav-contact">联系我们</a>
 
     <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1142,107 +1148,37 @@
   </div>
 
   <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html" onclick="closeMenu()" data-i18n="nav-home">首页</a>
-    <a href="products.html" onclick="closeMenu()" data-i18n="nav-products">产品中心</a>
-    <a href="innovation.html" onclick="closeMenu()" data-i18n="nav-innovation">研发创新</a>
+    <a href="index-en.html" onclick="closeMenu()" data-i18n="nav-home">首页</a>
+    <a href="products-en.html" onclick="closeMenu()" data-i18n="nav-products">产品中心</a>
+    <a href="innovation-en.html" onclick="closeMenu()" data-i18n="nav-innovation">研发创新</a>
+      <li>
+        <a href="innovation-en.html" data-i18n="nav-innovation">研发创新</a>
+      </li>
     <a href="#" onclick="closeMenu()" data-i18n="nav-user-service">用户服务</a>
-    <a href="patients.html" onclick="closeMenu()" data-i18n="nav-patients">关爱患者</a>
-    <a href="talent.html" onclick="closeMenu()" data-i18n="nav-talent">人才中心</a>
-    <a href="contact.html" onclick="closeMenu()" data-i18n="nav-contact">联系我们</a>
+    <a href="patients-en.html" onclick="closeMenu()" data-i18n="nav-patients">关爱患者</a>
+    <a href="talent-en.html" onclick="closeMenu()" data-i18n="nav-talent">人才中心</a>
+    <a href="contact-en.html" onclick="closeMenu()" data-i18n="nav-contact">联系我们</a>
   </div>
 </nav>
 
 <!-- PAGE HEADER -->
 <section class="page-header">
-  <h1 data-i18n="nav-products">产品中心</h1>
-  <p>创新器械 药品 诊断试剂 服务</p>
+  <h1>他克莫司胶囊（FK506）</h1>
+  <p>国内首个全规格基于一致性评价审批通过的他克莫司胶囊</p>
 </section>
 
-<!-- PRODUCTS SECTION -->
-<section id="products">
-  <div class="products-inner">
+<!-- PRODUCT DETAIL SECTION -->
+<section class="product-detail-section">
+  <div class="product-detail-inner">
 
-    <!-- 器械 -->
-    <div class="category-section animate-on-scroll" id="devices">
-      <h2 class="category-title" data-i18n="nav-devices">器械</h2>
-      <div class="sub-category-grid">
-
-        <!-- 机械灌注 -->
-        <div class="sub-category-card">
-          <h3 class="sub-category-name" data-i18n="product-mechanical-perfusion">机械灌注</h3>
-          <ul class="product-list">
-            <li>LifePort®肾脏灌注转运箱 <a href="machine-perfusion.html">进入彩页</a></li>
-            <li>LifePort®肝脏灌注转运箱 <a href="liver-perfusion.html">进入彩页</a></li>
-            <li>KPS-1®器官保存液 <a href="organ-preservation.html">进入彩页</a></li>
-          </ul>
-        </div>
-
-        <!-- 静态冷藏 -->
-        <div class="sub-category-card">
-          <h3 class="sub-category-name" data-i18n="product-static-cold">静态冷藏</h3>
-          <ul class="product-list">
-            <li>SPS-1®器官保存液 <a href="organ-preservation.html">进入彩页</a></li>
-            <li>莱拓®医用冷藏转运箱 <a href="machine-perfusion.html">进入彩页</a></li>
-          </ul>
-        </div>
-
-      </div>
+    <!-- 图片 1：产品介绍和处方信息 -->
+    <div class="product-image-full animate-on-scroll">
+      <img src="images/immu1.jpg" alt="他克莫司胶囊产品介绍" />
     </div>
 
-    <!-- 药品 -->
-    <div class="category-section animate-on-scroll" id="drugs">
-      <h2 class="category-title" data-i18n="nav-drugs">药品</h2>
-      <div class="sub-category-grid">
-
-        <!-- 免疫抑制剂 -->
-        <div class="sub-category-card">
-          <h3 class="sub-category-name" data-i18n="product-immunosuppressant">免疫抑制剂</h3>
-          <ul class="product-list">
-            <li>他克莫司胶囊 <a href="immunosuppressant.html">进入彩页</a></li>
-            <li>麦考酚钠肠溶片 <a href="immunosuppressant.html">进入彩页</a></li>
-          </ul>
-        </div>
-
-        <!-- 抗感染药 -->
-        <div class="sub-category-card">
-          <h3 class="sub-category-name" data-i18n="product-anti-infective">抗感染药</h3>
-          <ul class="product-list">
-            <li>盐酸缬更昔洛韦片 <a href="immunosuppressant.html">进入彩页</a></li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- 体外诊断 -->
-    <div class="category-section animate-on-scroll" id="ivd">
-      <h2 class="category-title" data-i18n="nav-ivd">体外诊断</h2>
-      <div class="sub-category-grid">
-
-        <!-- 治疗药物监测 (TDM) -->
-        <div class="sub-category-card">
-          <h3 class="sub-category-name" data-i18n="product-tdm">治疗药物监测（TDM）</h3>
-          <ul class="product-list">
-            <li>他克莫司测定试剂盒 <a href="tdm.html">进入彩页</a></li>
-            <li>环孢霉素测定试剂盒 <a href="tdm.html">进入彩页</a></li>
-            <li>雷帕霉素测定试剂盒 <a href="tdm.html">进入彩页</a></li>
-            <li>霉酚酸测定试剂盒 <a href="tdm.html">进入彩页</a></li>
-            <li>全自动生化分析仪 <a href="tdm.html">进入彩页</a></li>
-          </ul>
-        </div>
-
-        <!-- 人类白细胞抗原和抗体检测 -->
-        <div class="sub-category-card">
-          <h3 class="sub-category-name" data-i18n="product-hla">人类白细胞抗原和抗体检测</h3>
-          <ul class="product-list">
-            <li>人类白细胞抗原-DNA 分型试剂盒 <a href="hla-dna.html">进入彩页</a></li>
-            <li>HLA 特异性抗体检测试剂盒 <a href="hla-antibody.html">进入彩页</a></li>
-            <li>HLA I 类单抗原特异性抗体检测试剂 <a href="hla-class1.html">进入彩页</a></li>
-            <li>HLA II 类单抗原特异性抗体检测试剂 <a href="hla-class2.html">进入彩页</a></li>
-          </ul>
-        </div>
-
-      </div>
+    <!-- 图片 2：质量体系和药代动力学数据 -->
+    <div class="product-image-full animate-on-scroll">
+      <img src="images/immu2.jpg" alt="他克莫司胶囊质量体系和药代动力学数据" />
     </div>
 
   </div>

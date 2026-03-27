@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>关爱患者 - tranSnovo 健耕医药</title>
-  <meta name="description" content="健耕医药专注移植患者全程管理，提供术后康复指导、用药咨询、随访管理等服务。" />
+  <title>SPS-1® 器官保存液（腹部器官） - tranSnovo 健耕医药</title>
+  <meta name="description" content="SPS-1® 器官保存液，腹部器官保存的金标准，适用于肾脏、肝脏和胰腺的低温保存和运输。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -78,19 +78,7 @@
       background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-
+    /* 导航栏 */
     #nav {
       position: fixed;
       top: 0;
@@ -122,10 +110,6 @@
       align-items: center;
     }
 
-    .nav-links > li {
-      position: relative;
-    }
-
     .nav-links > li > a {
       display: block;
       padding: 12px 20px;
@@ -140,90 +124,76 @@
     .nav-links > li > a:hover,
     .nav-links > li > a.active {
       color: var(--tech-blue);
-      background: var(--accent-soft);
+      background: rgba(91, 143, 249, 0.08);
     }
 
 
 
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
+    /* 下拉菜单样式 */
+    .nav-links > li { position: relative; }
+
+    .nav-links > li > a.has-submenu::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 6px;
+      vertical-align: middle;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
+      transition: transform 0.3s;
     }
 
-    .nav-toggle span {
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
+    .nav-links > li > a.has-submenu:hover::after {
+      transform: rotate(180deg);
     }
 
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      top: 80px;
-      left: 0;
-      right: 0;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      z-index: 999;
-    }
-
-    .nav-mobile.open { display: block; }
-
-    .nav-mobile a {
-      display: block;
-      padding: 16px;
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sub-menu {
+    .nav-links .sub-menu {
       position: absolute;
       top: 100%;
-      left: 0;
-      min-width: 200px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 220px;
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 12px;
-      list-style: none;
       padding: 12px 0;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      z-index: 1001;
+      list-style: none;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(10px);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      z-index: 1001;
     }
 
-    .nav-links > li:hover .sub-menu {
+    .nav-links > li:hover > .sub-menu {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
 
-    .sub-menu li a {
+    .nav-links .sub-menu > li {
+      list-style: none;
+    }
+
+    .nav-links .sub-menu > li > a {
+      padding: 12px 20px;
       display: block;
-      padding: 10px 20px;
-      color: var(--text-secondary);
-      text-decoration: none;
+      color: var(--text-primary);
       font-size: 14px;
+      text-decoration: none;
+      border-radius: 8px;
       transition: all 0.2s;
     }
 
-    .sub-menu li a:hover {
+    .nav-links .sub-menu > li > a:hover {
       color: var(--tech-blue);
-      background: var(--bg-secondary);
+      background: rgba(91, 143, 249, 0.08);
     }
 
     /* 二级下拉菜单 */
-    .nav-links .sub-menu li {
+    .nav-links .sub-menu > li {
       position: relative;
       list-style: none;
     }
@@ -373,49 +343,149 @@
       background: rgba(91, 143, 249, 0.05);
     }
 
-    /* Dropdown arrow using CSS */
-    .nav-links > li > a.has-submenu::after {
-      content: '';
-      display: inline-block;
-      width: 0;
-      height: 0;
-      margin-left: 6px;
-      vertical-align: middle;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid currentColor;
-      transition: transform 0.3s;
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
     }
 
-    .nav-links > li > a.has-submenu:hover::after {
-      transform: rotate(180deg);
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
     }
 
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 页面标题 */
     .page-header {
       margin-top: 80px;
-      padding: 100px 24px;
+      padding: 60px 24px;
       background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
       text-align: center;
     }
 
     .page-header h1 {
-      font-size: clamp(40px, 5vw, 64px);
-      font-weight: 800;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+      font-family: 'Plus Jakarta Sans', 'Noto Serif SC', sans-serif;
+      font-variant-numeric: lining-nums proportional;
     }
 
     .page-header p {
-      font-size: 18px;
+      font-size: 16px;
       color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
     }
 
+    /* 产品内容区 */
+    .product-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .product-image-full {
+      width: 100%;
+      margin-bottom: 40px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-image-full img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* 产品详情 */
+    .product-detail-section {
+      padding: 60px 0;
+    }
+
+    .detail-card {
+      background: var(--bg-secondary);
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 40px;
+    }
+
+    .detail-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .detail-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 24px;
+      background: var(--tech-blue);
+      border-radius: 2px;
+    }
+
+    .detail-list {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    .detail-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .detail-list li::before {
+      content: '△';
+      position: absolute;
+      left: 0;
+      color: var(--tech-blue);
+      font-size: 12px;
+    }
+
+    /* 页脚 */
     #footer {
       background: var(--bg-primary);
       border-top: 1px solid var(--border);
-      padding: 80px 24px 40px;
+      padding: 60px 24px 40px;
+      margin-top: 80px;
     }
 
     .footer-inner {
@@ -427,41 +497,38 @@
       display: grid;
       grid-template-columns: 1.5fr 1fr 1.5fr;
       gap: 60px;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
-    .footer-brand .logo {
-      height: 48px;
-      margin-bottom: 24px;
+    .footer-brand img {
+      height: 42px;
+      margin-bottom: 20px;
     }
 
     .footer-brand p {
       font-size: 14px;
       color: var(--text-tertiary);
       line-height: 1.8;
-      margin-bottom: 20px;
+    }
+    /* 正式数字样式 - 专业财务报表风格 */
+    .footer-brand p .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
     }
 
     .footer-section h4 {
       font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 24px;
-    }
-
-    .footer-qrcodes {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-qr {
-      text-align: center;
+      margin-bottom: 20px;
     }
 
     .footer-qr img {
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
       border: 1px solid var(--border);
     }
 
@@ -470,6 +537,11 @@
       font-size: 12px;
       color: var(--text-tertiary);
       margin-top: 8px;
+      text-align: center;
+    }
+
+    .footer-contact {
+      list-style: none;
     }
 
     .footer-contact li {
@@ -479,7 +551,6 @@
       font-size: 14px;
       color: var(--text-secondary);
       margin-bottom: 16px;
-      list-style: none;
     }
 
     .footer-contact svg {
@@ -493,43 +564,37 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 40px;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .footer-copyright {
+      padding-top: 30px;
+      border-top: 1px solid rgba(91, 143, 249, 0.1);
       font-size: 13px;
       color: var(--text-tertiary);
     }
 
-    .footer-icp {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    .footer-icp a {
+    .footer-bottom a {
       color: var(--text-secondary);
       text-decoration: none;
     }
 
-    .footer-icp a:hover {
+    .footer-bottom a:hover {
       color: var(--tech-blue);
     }
 
+    /* 响应式 */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-      .footer-qrcodes { justify-content: center; }
+      .detail-card { padding: 30px 24px; }
     }
 
     @media (max-width: 768px) {
       .nav-inner { height: 72px; padding: 0 20px; }
-      .page-header { padding: 60px 20px; }
-      .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
+      .page-header { padding: 40px 20px; }
+      .page-header h1 { font-size: 28px; }
+      .product-content { padding: 40px 20px; }
+      .detail-card { padding: 24px 20px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
-      .footer-qrcodes { display: none; }
     }
-
+  
     /* 联系电话数字正式样式 */
     .footer-contact .num {
       font-family: 'Playfair Display', 'Noto Serif SC', serif;
@@ -546,87 +611,72 @@
       letter-spacing: 0.02em;
     }
 
-    /* 关爱患者 Banner 样式 */
-    .patients-banner {
-      margin-top: 80px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-
-    .patients-banner img {
-      max-width: 800px;
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
     </style>
 </head>
 <body>
 
 <nav id="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
+    <a href="index-en.html" class="nav-logo">
       <img src="images/logo.png" alt="tranSnovo 健耕医药" />
     </a>
 
         <ul class="nav-links">
-      <li><a href="index.html" data-i18n="nav-home">首页</a></li>
+      <li><a href="index-en.html" data-i18n="nav-home">首页</a></li>
       <li>
-        <a href="products.html" class="has-submenu" data-i18n="nav-products">产品中心</a>
+        <a href="products-en.html" class="has-submenu" data-i18n="nav-products">产品中心</a>
         <ul class="sub-menu">
-          <li><a href="solutions.html" data-i18n="nav-solutions">解决方案</a></li>
+          <li><a href="solutions-en.html" data-i18n="nav-solutions">解决方案</a></li>
           <li>
-            <a href="products.html#devices" class="has-submenu" data-i18n="nav-products-all">产品</a>
+            <a href="products-en.html#devices" class="has-submenu" data-i18n="nav-products-all">产品</a>
             <ul class="sub-menu-2">
               <li>
-                <a href="products.html#devices" class="has-submenu" data-i18n="nav-devices">器械</a>
+                <a href="products-en.html#devices" class="has-submenu" data-i18n="nav-devices">器械</a>
                 <ul class="sub-menu-3">
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-mechanical-perfusion">机械灌注</div>
-                    <a href="machine-perfusion.html" class="product-item">LifePort®肾脏灌注转运箱</a>
-                    <a href="liver-perfusion.html" class="product-item">LifePort®肝脏灌注转运箱</a>
-                    <a href="organ-preservation.html" class="product-item">KPS-1®器官保存液</a>
+                    <a href="machine-perfusion-en.html" class="product-item">LifePort®肾脏灌注转运箱</a>
+                    <a href="liver-perfusion-en.html" class="product-item">LifePort®肝脏灌注转运箱</a>
+                    <a href="organ-preservation-en.html" class="product-item">KPS-1®器官保存液</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-static-cold">静态冷藏</div>
-                    <a href="organ-preservation.html" class="product-item">SPS-1®器官保存液</a>
-                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                    <a href="organ-preservation-en.html" class="product-item">SPS-1®器官保存液</a>
+                    <a href="machine-perfusion-en.html" class="product-item">莱拓®医用冷藏转运箱</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="products.html#drugs" class="has-submenu" data-i18n="nav-drugs">药品</a>
+                <a href="products-en.html#drugs" class="has-submenu" data-i18n="nav-drugs">药品</a>
                 <ul class="sub-menu-3">
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-immunosuppressant">免疫抑制剂</div>
-                    <a href="immunosuppressant.html" class="product-item">他克莫司胶囊</a>
-                    <a href="immunosuppressant.html" class="product-item">麦考酚钠肠溶片</a>
+                    <a href="immunosuppressant-en.html" class="product-item">他克莫司胶囊</a>
+                    <a href="immunosuppressant-en.html" class="product-item">麦考酚钠肠溶片</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-anti-infective">抗感染药</div>
-                    <a href="immunosuppressant.html" class="product-item">盐酸缬更昔洛韦片</a>
+                    <a href="immunosuppressant-en.html" class="product-item">盐酸缬更昔洛韦片</a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="products.html#ivd" class="has-submenu" data-i18n="nav-ivd">体外诊断</a>
+                <a href="products-en.html#ivd" class="has-submenu" data-i18n="nav-ivd">体外诊断</a>
                 <ul class="sub-menu-3">
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-tdm">治疗药物监测（TDM）</div>
-                    <a href="tdm.html" class="product-item">他克莫司测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">环孢霉素测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">雷帕霉素测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">霉酚酸测定试剂盒</a>
-                    <a href="tdm.html" class="product-item">全自动生化分析仪</a>
+                    <a href="tdm-en.html" class="product-item">他克莫司测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">环孢霉素测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">雷帕霉素测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">霉酚酸测定试剂盒</a>
+                    <a href="tdm-en.html" class="product-item">全自动生化分析仪</a>
                   </li>
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-hla">人类白细胞抗原和抗体检测</div>
-                    <a href="hla-dna.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
-                    <a href="hla-antibody.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
-                    <a href="hla-class1.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
-                    <a href="hla-class2.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-dna-en.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
+                    <a href="hla-antibody-en.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
+                    <a href="hla-class1-en.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-class2-en.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
                   </li>
                 </ul>
               </li>
@@ -634,18 +684,18 @@
           </li>
         </ul>
       </li>
-      <li><a href="innovation.html" data-i18n="nav-innovation">研发创新</a></li>
+      <li><a href="innovation-en.html" data-i18n="nav-innovation">研发创新</a></li>
       <li>
         <a href="#" class="has-submenu" data-i18n="nav-user-service">用户服务</a>
         <ul class="sub-menu">
-          <li><a href="operation-videos.html" data-i18n="nav-operation-videos">操作视频</a></li>
-          <li><a href="training-videos.html" data-i18n="nav-training-videos">培训视频</a></li>
-          <li><a href="investment.html" data-i18n="nav-investment">招商服务</a></li>
+          <li><a href="operation-videos-en.html" data-i18n="nav-operation-videos">操作视频</a></li>
+          <li><a href="training-videos-en.html" data-i18n="nav-training-videos">培训视频</a></li>
+          <li><a href="investment-en.html" data-i18n="nav-investment">招商服务</a></li>
         </ul>
       </li>
-      <li><a href="patients.html" data-i18n="nav-patients">关爱患者</a></li>
-      <li><a href="talent.html" data-i18n="nav-talent">人才中心</a></li>
-    </ul><a href="contact.html" class="nav-btn" data-i18n="nav-contact">联系我们</a>
+      <li><a href="patients-en.html" data-i18n="nav-patients">关爱患者</a></li>
+      <li><a href="talent-en.html" data-i18n="nav-talent">人才中心</a></li>
+    </ul><a href="contact-en.html" class="nav-btn" data-i18n="nav-contact">联系我们</a>
 
     <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -653,38 +703,49 @@
   </div>
 
   <div class="nav-mobile" id="mobileMenu">
-    <a href="index.html" onclick="closeMenu()" data-i18n="nav-home">首页</a>
-    <a href="products.html" onclick="closeMenu()" data-i18n="nav-products">产品中心</a>
-    <a href="innovation.html" onclick="closeMenu()" data-i18n="nav-innovation">研发创新</a>
+    <a href="index-en.html" onclick="closeMenu()" data-i18n="nav-home">首页</a>
+    <a href="products-en.html" onclick="closeMenu()" data-i18n="nav-products">产品中心</a>
+    <a href="innovation-en.html" onclick="closeMenu()" data-i18n="nav-innovation">研发创新</a>
+      <li>
+        <a href="innovation-en.html" data-i18n="nav-innovation">研发创新</a>
+      </li>
     <a href="#" onclick="closeMenu()" data-i18n="nav-user-service">用户服务</a>
-    <a href="patients.html" onclick="closeMenu()" data-i18n="nav-patients">关爱患者</a>
-    <a href="talent.html" onclick="closeMenu()" data-i18n="nav-talent">人才中心</a>
-    <a href="contact.html" onclick="closeMenu()" data-i18n="nav-contact">联系我们</a>
+    <a href="patients-en.html" onclick="closeMenu()" data-i18n="nav-patients">关爱患者</a>
+    <a href="talent-en.html" onclick="closeMenu()" data-i18n="nav-talent">人才中心</a>
+    <a href="contact-en.html" onclick="closeMenu()" data-i18n="nav-contact">联系我们</a>
   </div>
 </nav>
 
-<section class="patients-banner">
-  <img src="images/newTransplant.jpg" alt="新耕植患者服务" />
+<section class="page-header">
+  <h1>SPS-1&reg; 器官保存液（腹部器官）</h1>
+  <p>腹部器官保存的金标准</p>
 </section>
+
+<main class="product-content">
+  <!-- 产品图片 - SPS-1 完整宣传页 -->
+  <div class="product-image-full">
+    <img src="images/SPS-1.png" alt="SPS-1® 器官保存液（腹部器官）产品介绍" />
+  </div>
+</main>
 
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="images/logo.png" alt="健耕医药" class="logo" />
+        <img src="images/logo.png" alt="健耕医药" />
         <p>成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人，其中研发人员 <span class="num">26</span> 名。</p>
       </div>
 
       <div class="footer-section">
         <h4>关注我们</h4>
-        <div class="footer-qrcodes">
+        <div style="display: flex; gap: 16px; justify-content: center;">
           <div class="footer-qr">
             <img src="images/qcode.png" alt="官网二维码" />
-            <span>官网二维码</span>
+            <span>官网</span>
           </div>
           <div class="footer-qr">
             <img src="images/wechat-2.png" alt="微信公众号" />
-            <span>微信公众号</span>
+            <span>微信</span>
           </div>
         </div>
       </div>
@@ -709,26 +770,13 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copyright">
-        &copy; <span class="num">2014</span> - <span class="num">2026</span> 上海健耕医药科技股份有限公司
-      </div>
-      <div class="footer-icp">
-        <a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 <span class="num">12033151</span> 号</a>
-      </div>
+      <div>&copy; <span class="num">2014</span> - <span class="num">2026</span> 上海健耕医药科技股份有限公司</div>
+      <div><a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 <span class="num">12033151</span> 号</a></div>
     </div>
   </div>
 </footer>
 
 <script>
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
-
   function toggleMenu() {
     document.getElementById('mobileMenu').classList.toggle('open');
   }
