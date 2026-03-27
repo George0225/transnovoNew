@@ -148,7 +148,7 @@
       // 首页 - Hero
       'hero-scroll-hint-cn': '滚动探索',
       'hero-scroll-hint-en': 'Scroll Down',
-      'hero-title': 'Reshaping the Future for Life',
+      'hero-title': 'Reshape the Future for Life',
       'hero-desc-1': 'Focused on transplantation, covering the entire journey,',
       'hero-desc-2': 'A global provider of medical products and professional services.',
 
