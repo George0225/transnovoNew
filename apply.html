@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>申请职位 - tranSnovo 健耕医药</title>
+  <meta name="description" content="加入健耕医药，共同参与器官移植事业，为生命重塑未来。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary-50: #fdfdfc;
+      --primary-100: #f7f5f0;
+      --primary-200: #efede6;
+      --primary-300: #e6e2d9;
+      --primary-400: #d6d0c4;
+      --primary-500: #c4bdae;
+      --primary-600: #b5ac9d;
+      --primary-700: #a39a8b;
+      --accent-400: #b89654;
+      --accent-500: #a48546;
+      --accent-600: #92743a;
+      --slate-50: #f8f7f5;
+      --slate-100: #f0efeb;
+      --slate-200: #e0ded8;
+      --slate-300: #c8c5be;
+      --slate-400: #a5a29a;
+      --slate-500: #827f78;
+      --slate-600: #63605a;
+      --slate-700: #45433f;
+      --slate-800: #2a2926;
+      --slate-900: #161513;
+      --bg-primary: #fdfdfc;
+      --bg-secondary: var(--slate-50);
+      --bg-tertiary: var(--slate-100);
+      --bg-light: #f7f5f0;
+      --bg-dark: #2a2926;
+      --border: var(--slate-200);
+      --text-primary: #1a1a1a;
+      --text-secondary: #3a3732;
+      --text-tertiary: #6a6660;
+      --text-light: #ffffff;
+      --warm-stone: #c4bdae;
+      --warm-sand: #d6d0c4;
+      --shadow-sm: 0 1px 3px rgba(61, 61, 61, 0.05);
+      --shadow-md: 0 4px 12px rgba(61, 61, 61, 0.08);
+      --shadow-lg: 0 8px 30px rgba(61, 61, 61, 0.10);
+      --shadow-xl: 0 20px 60px rgba(61, 61, 61, 0.12);
+      --gold: #d4af37;
+      --gold-light: #b89654;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cormorant Garamond', 'Noto Serif SC', 'Plus Jakarta Sans', serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.75;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--slate-100); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--primary-400), var(--primary-600));
+      border-radius: 5px;
+    }
+
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 99999;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links > li > a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .nav-links > li > a:hover {
+      color: var(--gold);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header {
+      margin-top: 80px;
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      letter-spacing: 0.05em;
+    }
+
+    .page-header p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .apply-section {
+      padding: 100px 24px;
+      background: linear-gradient(180deg, #f8f7f5 0%, #f0efeb 100%);
+    }
+
+    .apply-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .apply-card {
+      background: #ffffff;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 8px;
+      padding: 48px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .apply-card h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+    }
+
+    .apply-card > p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .form-group label .required {
+      color: #c44;
+      margin-left: 4px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--text-primary);
+      background: #fff;
+      border: 1px solid var(--slate-300);
+      border-radius: 6px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2363605a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 44px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--slate-200);
+    }
+
+    .btn-submit {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #e5c54a 0%, #c9a85c 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
+    }
+
+    .btn-submit svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s;
+    }
+
+    .btn-submit:hover svg {
+      transform: translateX(4px);
+    }
+
+    .btn-cancel {
+      padding: 16px 32px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--slate-300);
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-cancel:hover {
+      background: var(--slate-100);
+      border-color: var(--slate-400);
+    }
+
+    #footer {
+      background: var(--bg-primary);
+      border-top: 1px solid var(--border);
+      padding: 80px 24px 40px;
+    }
+
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1.5fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-brand .logo {
+      height: 48px;
+      margin-bottom: 24px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-tertiary);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .footer-brand p .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-section h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .footer-qrcodes {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-qr {
+      text-align: center;
+    }
+
+    .footer-qr img {
+      width: 120px;
+      height: 120px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .footer-qr span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+    }
+
+    .footer-contact li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      list-style: none;
+    }
+
+    .footer-contact svg {
+      width: 20px;
+      height: 20px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-icp a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-icp a:hover {
+      color: var(--gold);
+    }
+
+    .footer-contact .num,
+    .footer-bottom .num {
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { height: 72px; padding: 0 20px; }
+      .page-header { padding: 60px 20px; }
+      .apply-section { padding: 60px 20px; }
+      .apply-card { padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .form-actions { flex-direction: column; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .footer-qrcodes { justify-content: center; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" alt="tranSnovo 健耕医药" />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">首页</a></li>
+      <li>
+        <a href="products.html" class="has-submenu">产品中心</a>
+        <ul class="sub-menu">
+          <li><a href="solutions.html">解决方案</a></li>
+          <li>
+            <a href="products.html#devices" class="has-submenu">产品</a>
+            <ul class="sub-menu-2">
+              <li>
+                <a href="products.html#devices" class="has-submenu">器械</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title">机械灌注</div>
+                    <a href="machine-perfusion.html" class="product-item">LifePort®肾脏灌注转运箱</a>
+                    <a href="liver-perfusion.html" class="product-item">LifePort®肝脏灌注转运箱</a>
+                    <a href="organ-preservation.html" class="product-item">KPS-1®器官保存液</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title">静态冷藏</div>
+                    <a href="organ-preservation.html" class="product-item">SPS-1®器官保存液</a>
+                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="products.html#drugs" class="has-submenu">药品</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title">免疫抑制剂</div>
+                    <a href="immunosuppressant.html" class="product-item">他克莫司胶囊</a>
+                    <a href="immunosuppressant.html" class="product-item">麦考酚钠肠溶片</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title">抗感染药</div>
+                    <a href="immunosuppressant.html" class="product-item">盐酸缬更昔洛韦片</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="products.html#ivd" class="has-submenu">体外诊断</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title">治疗药物监测（TDM）</div>
+                    <a href="tdm.html" class="product-item">他克莫司测定试剂盒</a>
+                    <a href="tdm.html" class="product-item">环孢霉素测定试剂盒</a>
+                    <a href="tdm.html" class="product-item">雷帕霉素测定试剂盒</a>
+                    <a href="tdm.html" class="product-item">霉酚酸测定试剂盒</a>
+                    <a href="tdm.html" class="product-item">全自动生化分析仪</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title">人类白细胞抗原和抗体检测</div>
+                    <a href="hla-dna.html" class="product-item">人类白细胞抗原-DNA 分型试剂盒</a>
+                    <a href="hla-antibody.html" class="product-item">HLA 特异性抗体检测试剂盒</a>
+                    <a href="hla-class1.html" class="product-item">HLA I 类单抗原特异性抗体检测试剂</a>
+                    <a href="hla-class2.html" class="product-item">HLA II 类单抗原特异性抗体检测试剂</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="innovation.html">研发创新</a></li>
+      <li>
+        <a href="research.html" class="has-submenu">用户服务</a>
+        <ul class="sub-menu">
+          <li><a href="operation-videos.html">操作视频</a></li>
+          <li><a href="training-videos.html">培训视频</a></li>
+          <li><a href="investment.html">招商服务</a></li>
+        </ul>
+      </li>
+      <li><a href="patients.html">关爱患者</a></li>
+      <li><a href="talent.html">人才中心</a></li>
+    </ul>
+
+    <a href="contact.html" class="nav-btn">联系我们</a>
+
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index.html" onclick="closeMenu()">首页</a>
+    <a href="products.html" onclick="closeMenu()">产品中心</a>
+    <a href="innovation.html" onclick="closeMenu()">研发创新</a>
+    <a href="research.html" onclick="closeMenu()">用户服务</a>
+    <a href="patients.html" onclick="closeMenu()">关爱患者</a>
+    <a href="talent.html" onclick="closeMenu()">人才中心</a>
+    <a href="contact.html" onclick="closeMenu()">联系我们</a>
+  </div>
+</nav>
+
+<section class="page-header">
+  <h1>申请职位</h1>
+  <p>期待你的加入，共创医疗未来</p>
+</section>
+
+<section class="apply-section">
+  <div class="apply-container">
+    <div class="apply-card">
+      <h2 id="position-title">职位申请</h2>
+      <p>请填写以下信息，我们将尽快与您联系</p>
+
+      <form id="apply-form" action="#" method="POST">
+        <input type="hidden" id="position" name="position" value="" />
+
+        <div class="form-group">
+          <label for="name">姓名 <span class="required">*</span></label>
+          <input type="text" id="name" name="name" required placeholder="请输入您的姓名" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">手机号码 <span class="required">*</span></label>
+            <input type="tel" id="phone" name="phone" required placeholder="请输入手机号码" pattern="[0-9]{11}" />
+          </div>
+          <div class="form-group">
+            <label for="email">电子邮箱 <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required placeholder="请输入邮箱地址" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="education">最高学历</label>
+            <select id="education" name="education">
+              <option value="">请选择</option>
+              <option value="high-school">高中/中专</option>
+              <option value="college">大专</option>
+              <option value="bachelor">本科</option>
+              <option value="master">硕士</option>
+              <option value="doctor">博士及以上</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="experience">工作年限</label>
+            <select id="experience" name="experience">
+              <option value="">请选择</option>
+              <option value="fresh">应届毕业生</option>
+              <option value="1-3">1-3 年</option>
+              <option value="3-5">3-5 年</option>
+              <option value="5-10">5-10 年</option>
+              <option value="10+">10 年以上</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="resume">简历附件</label>
+          <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" />
+          <small style="color: var(--text-tertiary); font-size: 13px; display: block; margin-top: 6px;">支持 PDF、Word 格式，最大 10MB</small>
+        </div>
+
+        <div class="form-group">
+          <label for="cover-letter">自荐信</label>
+          <textarea id="cover-letter" name="cover-letter" placeholder="请简单介绍一下自己，以及为什么想加入我们..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">
+            提交申请
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+          <a href="talent.html" class="btn-cancel">返回列表</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="健耕医药" class="logo" />
+        <p>成立于 <span class="num">2004</span> 年，注册资本 <span class="num">7118.7</span> 万元人民币，全球员工人数 <span class="num">200+</span> 人，其中研发人员 <span class="num">26</span> 名。</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>关注我们</h4>
+        <div class="footer-qrcodes">
+          <div class="footer-qr">
+            <img src="images/qcode.png" alt="官网二维码" />
+            <span>官网</span>
+          </div>
+          <div class="footer-qr">
+            <img src="images/wechat-2.png" alt="微信公众号" />
+            <span>微信</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>联系我们</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span class="num">021-61763507</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+            <span class="num">021-52370879</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>上海市闵行区浦江镇陈行公路<span class="num">2388</span>号 科技广场<span class="num">2</span>号楼<span class="num">1101</span>室</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        &copy; <span class="num">2014</span> - <span class="num">2026</span> 上海健耕医药科技股份有限公司
+      </div>
+      <div class="footer-icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank">沪 ICP 备 <span class="num">12033151</span> 号</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // 从 URL 参数获取职位名称
+  function getPositionFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const position = params.get('position');
+    return position ? decodeURIComponent(position) : null;
+  }
+
+  // 页面加载时设置职位名称
+  document.addEventListener('DOMContentLoaded', function() {
+    const position = getPositionFromURL();
+    const positionField = document.getElementById('position');
+    const positionTitle = document.getElementById('position-title');
+
+    if (position) {
+      positionField.value = position;
+      positionTitle.textContent = '申请职位：' + position;
+    }
+
+    // 表单提交处理
+    document.getElementById('apply-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // 收集表单数据
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      // 这里可以添加实际的提交逻辑
+      // 目前仅做演示，显示成功提示
+      alert('感谢您的申请！我们已收到您的申请信息，会尽快与您联系。');
+
+      // 清空表单
+      this.reset();
+
+      // 返回人才中心页面
+      window.location.href = 'talent.html';
+    });
+  });
+</script>
+
+</body>
+</html>
