@@ -1808,24 +1808,39 @@
       align-items: center;
     }
 
-    /* 中央时间轴线 - 清晰醒目 */
+    /* 中央时间轴线 - 清晰实线 */
     .timeline-wave-axis {
       position: absolute;
       top: 50%;
       left: 280px;
       right: 400px;
-      height: 3px;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(26, 26, 26, 0.3) 10%,
-        rgba(26, 26, 26, 0.6) 30%,
-        rgba(26, 26, 26, 0.8) 50%,
-        rgba(26, 26, 26, 0.6) 70%,
-        rgba(26, 26, 26, 0.3) 90%,
-        transparent 100%);
-      border-radius: 2px;
+      height: 2px;
+      background: rgba(26, 26, 26, 0.8);
       transform: translateY(-50%);
-      box-shadow: 0 0 20px rgba(26, 26, 26, 0.1);
+    }
+
+    /* 时间轴左端垂直封口线 */
+    .timeline-wave-axis::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 40px;
+      background: rgba(26, 26, 26, 0.8);
+    }
+
+    /* 时间轴右端垂直封口线 */
+    .timeline-wave-axis::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 40px;
+      background: rgba(26, 26, 26, 0.8);
     }
 
     /* 时间线节点 - 交错布局 */
@@ -1901,30 +1916,16 @@
       transform: translate(-50%, -50%);
       width: 10px;
       height: 10px;
-      background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+      background: #1a1a1a;
       border-radius: 50%;
       border: 2px solid #fff;
-      box-shadow: 0 2px 8px rgba(26, 26, 26, 0.3);
       z-index: 3;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* 偶数项（上方）的圆点位置调整 */
-    .timeline-item:nth-child(even) .timeline-dot {
-      top: 100%;
-      margin-top: -5px;
-    }
-
-    /* 奇数项（下方）的圆点位置调整 */
-    .timeline-item:nth-child(odd) .timeline-dot {
-      top: 0;
-      margin-top: -5px;
-    }
-
     .timeline-item:hover .timeline-dot {
       transform: translate(-50%, -50%) scale(1.4);
-      box-shadow: 0 4px 16px rgba(26, 26, 26, 0.5);
-      background: linear-gradient(135deg, #2a2a2a 0%, #5a5a5a 100%);
+      background: #2a2a2a;
     }
 
     /* 年份挂线容器 */
@@ -1935,7 +1936,7 @@
       position: relative;
     }
 
-    /* 偶数项挂线向上 - 清晰可见 */
+    /* 偶数项挂线向上 - 实线 */
     .timeline-item:nth-child(even) .timeline-year-wrapper::before {
       content: '';
       position: absolute;
@@ -1943,14 +1944,11 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 24px;
-      background: linear-gradient(to bottom,
-        rgba(26, 26, 26, 0) 0%,
-        rgba(26, 26, 26, 0.5) 20%,
-        rgba(26, 26, 26, 0.7) 100%);
+      height: 30px;
+      background: rgba(26, 26, 26, 0.8);
     }
 
-    /* 奇数项挂线向下 - 清晰可见 */
+    /* 奇数项挂线向下 - 实线 */
     .timeline-item:nth-child(odd) .timeline-year-wrapper::after {
       content: '';
       position: absolute;
@@ -1958,24 +1956,21 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 24px;
-      background: linear-gradient(to bottom,
-        rgba(26, 26, 26, 0.7) 0%,
-        rgba(26, 26, 26, 0.5) 80%,
-        rgba(26, 26, 26, 0) 100%);
+      height: 30px;
+      background: rgba(26, 26, 26, 0.8);
     }
 
-    /* 年份标签 - 专业衬线字体，带背景框突出显示 */
+    /* 年份标签 - 纯文本无背景框 */
     .timeline-year {
       font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
       color: #1a1a1a;
-      padding: 6px 16px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(249,248,246,0.9) 100%);
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(26, 26, 26, 0.1), 0 1px 3px rgba(26, 26, 26, 0.05);
-      border: 1px solid rgba(26, 26, 26, 0.1);
+      padding: 0;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       white-space: nowrap;
       position: relative;
@@ -1987,17 +1982,15 @@
     .timeline-item:hover .timeline-year {
       color: #1a1a1a;
       transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(26, 26, 26, 0.15), 0 2px 6px rgba(26, 26, 26, 0.1);
-      border-color: rgba(26, 26, 26, 0.2);
     }
 
-    /* 内容卡片 - 清晰边框 */
+    /* 内容卡片 - 实线边框 */
     .timeline-content {
       padding: 18px 22px;
       background: transparent;
       border-radius: 0;
       box-shadow: none;
-      border-left: 2px solid rgba(26, 26, 26, 0.3);
+      border-left: 2px solid rgba(26, 26, 26, 0.8);
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
       min-width: 160px;
@@ -2006,20 +1999,19 @@
 
     .timeline-item:nth-child(even) .timeline-content {
       border-left: none;
-      border-right: 2px solid rgba(26, 26, 26, 0.3);
+      border-right: 2px solid rgba(26, 26, 26, 0.8);
     }
 
     .timeline-item:hover .timeline-content {
-      border-color: rgba(26, 26, 26, 0.6);
-      box-shadow: 0 4px 12px rgba(26, 26, 26, 0.05);
+      border-color: rgba(26, 26, 26, 1);
     }
 
     .timeline-item:nth-child(even) .timeline-content:hover {
-      border-right-color: rgba(26, 26, 26, 0.6);
+      border-right-color: rgba(26, 26, 26, 1);
     }
 
     .timeline-item:nth-child(odd) .timeline-content:hover {
-      border-left-color: rgba(26, 26, 26, 0.6);
+      border-left-color: rgba(26, 26, 26, 1);
     }
 
     .timeline-text {
