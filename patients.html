@@ -412,157 +412,6 @@
       margin: 0 auto;
     }
 
-    .care-section {
-      padding: 100px 24px;
-    }
-
-    .care-section.alt {
-      background: var(--bg-secondary);
-    }
-
-    .care-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      display: inline-block;
-      padding: 8px 20px;
-      background: var(--accent-soft);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 20px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .care-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 60px;
-    }
-
-    .care-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 40px 32px;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      text-align: center;
-    }
-
-    .care-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-      border-color: var(--tech-blue);
-    }
-
-    .care-icon {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 24px;
-      background: var(--accent-soft);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .care-icon svg {
-      width: 40px;
-      height: 40px;
-      color: var(--accent);
-    }
-
-    .care-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-    }
-
-    .care-card p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-    }
-
-    .content-section {
-      padding: 80px 24px;
-      background: var(--bg-primary);
-    }
-
-    .content-inner {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .content-section h2 {
-      font-size: 32px;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 24px;
-    }
-
-    .content-section p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.9;
-      margin-bottom: 20px;
-    }
-
-    #partners {
-      padding: 80px 24px;
-      background: var(--bg-secondary);
-    }
-
-    .partners-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .partners-title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-    }
-
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
-
-    .partner-logo {
-      opacity: 0.6;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    .partner-logo:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .partner-logo img {
-      width: 100%;
-      height: auto;
-    }
-
     #footer {
       background: var(--bg-primary);
       border-top: 1px solid var(--border);
@@ -591,13 +440,6 @@
       color: var(--text-tertiary);
       line-height: 1.8;
       margin-bottom: 20px;
-    }
-    /* 正式数字样式 - 专业财务报表风格 */
-    .footer-brand p .num {
-      font-family: 'Playfair Display', 'Noto Serif SC', serif;
-      font-variant-numeric: tabular-nums lining-nums;
-      font-feature-settings: 'tnum' 1, 'lnum' 1;
-      letter-spacing: 0.02em;
     }
 
     .footer-section h4 {
@@ -676,8 +518,6 @@
 
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .care-grid { grid-template-columns: repeat(2, 1fr); }
-      .partners-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
       .footer-qrcodes { justify-content: center; }
     }
@@ -686,13 +526,10 @@
       .nav-inner { height: 72px; padding: 0 20px; }
       .page-header { padding: 60px 20px; }
       .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
-      .care-section { padding: 80px 20px; }
-      .care-grid { grid-template-columns: 1fr; }
-      .partners-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .footer-qrcodes { display: none; }
     }
-  
+
     /* 联系电话数字正式样式 */
     .footer-contact .num {
       font-family: 'Playfair Display', 'Noto Serif SC', serif;
@@ -707,6 +544,18 @@
       font-variant-numeric: tabular-nums lining-nums;
       font-feature-settings: 'tnum' 1, 'lnum' 1;
       letter-spacing: 0.02em;
+    }
+
+    /* 关爱患者 Banner 样式 */
+    .patients-banner {
+      margin-top: 80px;
+      width: 100%;
+    }
+
+    .patients-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     </style>
@@ -804,9 +653,6 @@
     <a href="index.html" onclick="closeMenu()">首页</a>
     <a href="products.html" onclick="closeMenu()">产品中心</a>
     <a href="innovation.html" onclick="closeMenu()">研发创新</a>
-      <li>
-        <a href="innovation.html">研发创新</a>
-      </li>
     <a href="research.html" onclick="closeMenu()">用户服务</a>
     <a href="patients.html" onclick="closeMenu()">关爱患者</a>
     <a href="talent.html" onclick="closeMenu()">人才中心</a>
@@ -814,61 +660,8 @@
   </div>
 </nav>
 
-<section class="page-header">
-  <h1>关爱患者</h1>
-  <p>专注移植患者全程管理 助力术后长期存活</p>
-</section>
-
-<section class="care-section">
-  <div class="care-inner">
-    <div class="care-grid">
-      <div class="care-card animate-on-scroll">
-        <div class="care-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/><path d="M12 19l7-7-7-7"/></svg>
-        </div>
-        <h3>术后康复指导</h3>
-        <p>提供专业的术后康复指导，帮助患者科学恢复，提高生活质量。</p>
-      </div>
-
-      <div class="care-card animate-on-scroll delay-1">
-        <div class="care-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3>随访管理</h3>
-        <p>定期随访跟踪，监测患者术后恢复情况，及时调整治疗方案。</p>
-      </div>
-
-      <div class="care-card animate-on-scroll delay-2">
-        <div class="care-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>用药咨询</h3>
-        <p>专业药师提供用药指导，确保患者正确、安全使用免疫抑制剂。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="content-section">
-  <div class="content-inner">
-    <h2>患者支持服务</h2>
-    <p>健耕医药致力于为移植患者提供全方位的支持服务。我们理解移植手术只是治疗的开始，术后的长期管理和康复同样重要。</p>
-    <p>通过建立完善的患者管理体系，我们为每位患者提供个性化的随访计划，定期监测各项指标，及时发现并处理可能出现的问题。</p>
-    <p>我们的专业团队包括医生、护士、药师等多学科人员，共同为患者提供全面的医疗支持和健康指导。</p>
-  </div>
-</section>
-
-<section id="partners">
-  <div class="partners-inner">
-    <h3 class="partners-title">合作伙伴</h3>
-    <div class="partners-grid">
-      <div class="partner-logo"><img src="images/part-1.jpg" alt="合作伙伴 1" /></div>
-      <div class="partner-logo"><img src="images/part2.png" alt="合作伙伴 2" /></div>
-      <div class="partner-logo"><img src="images/part4.png" alt="合作伙伴 4" /></div>
-      <div class="partner-logo"><img src="images/part5.png" alt="合作伙伴 5" /></div>
-      <div class="partner-logo"><img src="images/part6.png" alt="合作伙伴 6" /></div>
-    </div>
-  </div>
+<section class="patients-banner">
+  <img src="images/newTransplant.jpg" alt="新耕植患者服务" />
 </section>
 
 <footer id="footer">
@@ -940,24 +733,6 @@
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
   }
-
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    el.style.animationPlayState = 'paused';
-    observer.observe(el);
-  });
 </script>
 
 </body>
