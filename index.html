@@ -1797,25 +1797,25 @@
       text-transform: uppercase;
     }
 
-    /* 波浪形时间线容器 - 极简挂线风格 */
+    /* 波浪形时间线容器 - 乳酪色主题，参考 Dell 截图风格 */
     .timeline-wave {
       position: relative;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 60px 0 80px;
+      padding: 80px 0 100px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    /* 中央时间轴线 - 清晰实线 */
+    /* 中央时间轴线 - 乳酪色实线 */
     .timeline-wave-axis {
       position: absolute;
       top: 50%;
-      left: 280px;
-      right: 400px;
+      left: 80px;
+      right: 80px;
       height: 2px;
-      background: rgba(26, 26, 26, 0.8);
+      background: #c4bdae;
       transform: translateY(-50%);
     }
 
@@ -1827,8 +1827,8 @@
       top: 50%;
       transform: translateY(-50%);
       width: 2px;
-      height: 40px;
-      background: rgba(26, 26, 26, 0.8);
+      height: 20px;
+      background: #c4bdae;
     }
 
     /* 时间轴右端垂直封口线 */
@@ -1839,15 +1839,15 @@
       top: 50%;
       transform: translateY(-50%);
       width: 2px;
-      height: 40px;
-      background: rgba(26, 26, 26, 0.8);
+      height: 20px;
+      background: #c4bdae;
     }
 
     /* 时间线节点 - 交错布局 */
     .timeline-item {
       position: relative;
       flex: 0 0 auto;
-      width: 120px;
+      width: 140px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1857,48 +1857,40 @@
       z-index: 2;
     }
 
-    /* 偶数项在上方 */
+    /* 偶数项：年份在上，内容在下 */
     .timeline-item:nth-child(even) {
-      align-items: flex-end;
+      align-items: center;
       padding-top: 0;
-      padding-bottom: 70px;
+      padding-bottom: 100px;
     }
 
     .timeline-item:nth-child(even) .timeline-year-wrapper {
-      justify-content: flex-end;
-    }
-
-    .timeline-item:nth-child(even) .timeline-year {
-      margin-top: 0;
+      order: 1;
       margin-bottom: 0;
     }
 
     .timeline-item:nth-child(even) .timeline-content {
-      margin-top: 16px;
-      align-items: flex-end;
-      text-align: right;
+      order: 2;
+      margin-top: 20px;
+      text-align: center;
     }
 
-    /* 奇数项在下方 */
+    /* 奇数项：内容在上，年份在下 */
     .timeline-item:nth-child(odd) {
-      align-items: flex-start;
-      padding-top: 70px;
+      align-items: center;
+      padding-top: 100px;
       padding-bottom: 0;
     }
 
     .timeline-item:nth-child(odd) .timeline-year-wrapper {
-      justify-content: flex-start;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-year {
+      order: 2;
       margin-top: 0;
-      margin-bottom: 0;
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
-      margin-top: 16px;
-      align-items: flex-start;
-      text-align: left;
+      order: 1;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     @keyframes timeline-reveal {
@@ -1907,25 +1899,26 @@
       }
     }
 
-    /* 节点圆点 - 醒目标记，位于时间轴线上 */
+    /* 节点圆点 - 乳酪色实心，位于时间轴线上 */
     .timeline-dot {
       display: block;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 10px;
-      height: 10px;
-      background: #1a1a1a;
+      width: 12px;
+      height: 12px;
+      background: #c4bdae;
       border-radius: 50%;
-      border: 2px solid #fff;
       z-index: 3;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 0 0 4px rgba(196, 189, 174, 0.2);
     }
 
     .timeline-item:hover .timeline-dot {
-      transform: translate(-50%, -50%) scale(1.4);
-      background: #2a2a2a;
+      transform: translate(-50%, -50%) scale(1.3);
+      background: #b5ac9d;
+      box-shadow: 0 0 0 6px rgba(196, 189, 174, 0.3);
     }
 
     /* 年份挂线容器 */
@@ -1936,7 +1929,7 @@
       position: relative;
     }
 
-    /* 偶数项挂线向上 - 实线 */
+    /* 偶数项挂线向上连接时间轴 */
     .timeline-item:nth-child(even) .timeline-year-wrapper::before {
       content: '';
       position: absolute;
@@ -1944,11 +1937,11 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 30px;
-      background: rgba(26, 26, 26, 0.8);
+      height: 24px;
+      background: #c4bdae;
     }
 
-    /* 奇数项挂线向下 - 实线 */
+    /* 奇数项挂线向下连接时间轴 */
     .timeline-item:nth-child(odd) .timeline-year-wrapper::after {
       content: '';
       position: absolute;
@@ -1956,16 +1949,16 @@
       left: 50%;
       transform: translateX(-50%);
       width: 2px;
-      height: 30px;
-      background: rgba(26, 26, 26, 0.8);
+      height: 24px;
+      background: #c4bdae;
     }
 
-    /* 年份标签 - 纯文本无背景框 */
+    /* 年份标签 - 大号 serif 字体，乳酪色主题 */
     .timeline-year {
       font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 700;
-      color: #1a1a1a;
+      color: #c4bdae;
       padding: 0;
       background: none;
       border-radius: 0;
@@ -1975,52 +1968,39 @@
       white-space: nowrap;
       position: relative;
       z-index: 2;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       font-variant-numeric: lining-nums;
     }
 
     .timeline-item:hover .timeline-year {
-      color: #1a1a1a;
+      color: #b5ac9d;
       transform: scale(1.05);
     }
 
-    /* 内容卡片 - 实线边框 */
+    /* 内容卡片 - 无边框，纯文本 */
     .timeline-content {
-      padding: 18px 22px;
+      padding: 0 10px;
       background: transparent;
       border-radius: 0;
       box-shadow: none;
-      border-left: 2px solid rgba(26, 26, 26, 0.8);
+      border: none;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
       min-width: 160px;
-      text-align: left;
-    }
-
-    .timeline-item:nth-child(even) .timeline-content {
-      border-left: none;
-      border-right: 2px solid rgba(26, 26, 26, 0.8);
+      text-align: center;
     }
 
     .timeline-item:hover .timeline-content {
-      border-color: rgba(26, 26, 26, 1);
-    }
-
-    .timeline-item:nth-child(even) .timeline-content:hover {
-      border-right-color: rgba(26, 26, 26, 1);
-    }
-
-    .timeline-item:nth-child(odd) .timeline-content:hover {
-      border-left-color: rgba(26, 26, 26, 1);
+      transform: translateY(-2px);
     }
 
     .timeline-text {
       font-size: 14px;
-      color: #3a3a3a;
-      line-height: 1.75;
+      color: #5a5a5a;
+      line-height: 1.8;
       position: relative;
       z-index: 1;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     /* 产品中心网格 - 柔和有机质感 */
@@ -2639,7 +2619,7 @@
       .core-value-en { font-size: 9px; }
       .core-value-number { width: 24px; height: 24px; font-size: 11px; }
 
-      /* 发展历程移动端适配 - 极简挂线风格 */
+      /* 发展历程移动端适配 - 乳酪色主题 */
       .development-history { margin-top: 50px; }
       .history-header { margin-bottom: 60px; }
       .history-title { font-size: 32px; padding: 0 0 16px 0; }
@@ -2650,7 +2630,7 @@
       .timeline-item:nth-child(odd),
       .timeline-item:nth-child(even) { padding-top: 50px; padding-bottom: 50px; }
       .timeline-year { font-size: 16px; }
-      .timeline-content { min-width: 120px; padding: 14px 16px; }
+      .timeline-content { min-width: 120px; }
       .timeline-text { font-size: 12px; }
 
       /* 修复移动端视频 section 露出问题 */
