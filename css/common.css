@@ -649,3 +649,67 @@ body {
     padding: 0 20px;
   }
 }
+
+/* ============================================
+   语言切换按钮
+   ============================================ */
+.lang-switch-btn {
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--primary-400);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-switch-btn:hover {
+  border-color: var(--primary-600);
+  color: var(--primary-600);
+  background: var(--primary-50);
+  transform: translateY(-1px);
+}
+
+.lang-switch-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 移动端语言切换 */
+.mobile-lang-switch {
+  display: none;
+  margin: 24px;
+  padding: 14px 28px;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-300);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.mobile-lang-switch:hover {
+  background: var(--primary-100);
+  border-color: var(--primary-500);
+  color: var(--primary-700);
+}
+
+@media (max-width: 992px) {
+  .lang-switch-btn {
+    display: none;
+  }
+
+  .mobile-lang-switch {
+    display: block;
+  }
+}
