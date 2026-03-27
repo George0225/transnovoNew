@@ -742,6 +742,253 @@
       letter-spacing: 0.02em;
     }
 
+    /* ========== 奢华职位卡片样式 ========== */
+    .jobs-section {
+      padding: 100px 24px;
+      background: linear-gradient(180deg, #f8f7f5 0%, #f0efeb 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .jobs-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b89654' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .jobs-section .talent-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .jobs-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .jobs-title h2 {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 700;
+      color: #1a1816;
+      margin-bottom: 12px;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      letter-spacing: 0.05em;
+    }
+
+    .jobs-title p {
+      font-size: 16px;
+      color: var(--slate-500);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .job-card {
+      background: #ffffff;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .job-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, #d4af37 0%, #b89654 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .job-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 0 40px rgba(212, 175, 55, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .job-card:hover::before {
+      opacity: 1;
+    }
+
+    .job-card-header {
+      padding: 28px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .job-card-main h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1816;
+      margin-bottom: 14px;
+      font-family: 'Plus Jakarta Sans', 'Noto Serif SC', serif;
+      letter-spacing: 0.02em;
+    }
+
+    .job-salary {
+      display: inline-block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(184, 150, 84, 0.08) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 100px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #b89654;
+      font-family: 'Playfair Display', 'Noto Serif SC', serif;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: 'tnum' 1, 'lnum' 1;
+      letter-spacing: 0.03em;
+    }
+
+    .job-card-expand {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(184, 150, 84, 0.12);
+      border-radius: 50%;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .job-card-expand svg {
+      width: 20px;
+      height: 20px;
+      color: #b89654;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .job-card.expanded .job-card-expand svg {
+      transform: rotate(180deg);
+    }
+
+    .job-card-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s ease;
+      opacity: 0;
+      background: linear-gradient(180deg, #faf9f7 0%, #ffffff 100%);
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .job-card.expanded .job-card-details {
+      max-height: 2000px;
+      opacity: 1;
+    }
+
+    .job-card-body {
+      padding: 24px 32px 32px;
+    }
+
+    .job-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #b89654;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .job-section-label:first-child {
+      padding-top: 0;
+      border-top: none;
+      margin-top: 0;
+    }
+
+    .job-detail-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .job-detail-list li {
+      position: relative;
+      padding-left: 20px;
+      font-size: 14px;
+      color: var(--slate-600);
+      line-height: 1.9;
+      margin-bottom: 10px;
+    }
+
+    .job-detail-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: #d4af37;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .job-detail-list strong {
+      color: var(--slate-700);
+      font-weight: 600;
+    }
+
+    .job-apply-section {
+      padding: 20px 32px 32px;
+    }
+
+    .job-apply-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #d4af37 0%, #b89654 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .job-apply-btn:hover {
+      background: linear-gradient(135deg, #e5c54a 0%, #c9a85c 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
+    }
+
+    .job-apply-btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.3s;
+    }
+
+    .job-apply-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .jobs-section { padding: 60px 20px; }
+      .jobs-grid { grid-template-columns: 1fr; }
+      .job-card-header { padding: 20px; }
+      .job-card-body { padding: 0 20px 24px; }
+      .job-card-main h3 { font-size: 18px; }
+    }
+
     </style>
 </head>
 <body>
@@ -858,6 +1105,250 @@
   <p>携手共进 推动移植未来</p>
 </section>
 
+<section class="jobs-section">
+  <div class="talent-inner">
+    <div class="jobs-title">
+      <h2>加入我们</h2>
+      <p>与卓越同行，共创医疗未来</p>
+    </div>
+
+    <div class="jobs-grid">
+      <!-- 职位 1: 财务经理 -->
+      <div class="job-card" onclick="toggleJobCard(this)">
+        <div class="job-card-header">
+          <div class="job-card-main">
+            <h3>财务经理</h3>
+            <span class="job-salary">18-25k·16 薪</span>
+          </div>
+          <div class="job-card-expand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="job-card-details">
+          <div class="job-card-body">
+            <div class="job-section-label">岗位职责</div>
+            <ul class="job-detail-list">
+              <li>独立处理日常全盘账务，并熟练处理会计核算与税务全盘账务工作</li>
+              <li>独立处理境内及全球合并报表的编制及基础分析，判断经营情况</li>
+              <li>熟悉公司预决算管理及内控管理，熟悉各种会计核算以及税务政策等</li>
+              <li>具有 5 年以上企业全盘会计核算与税务管理工作经验</li>
+              <li>确保公司财务体系的高效运转</li>
+              <li>组织并具体推动公司年度经营/预算计划程序，包括对资金的需求规划及正常运作</li>
+              <li>深入了解公司营销模式及盈利分析等规范及指导业务合规运营</li>
+            </ul>
+
+            <div class="job-section-label">岗位要求</div>
+            <ul class="job-detail-list">
+              <li>本科及以上学历，财务或经济相关专业优先</li>
+              <li>至少 5 年财务工作经验</li>
+              <li>熟悉税法、财务准则，对法律法规、财务合规有一定的了解</li>
+            </ul>
+
+            <div class="job-section-label">其他信息</div>
+            <ul class="job-detail-list">
+              <li>行业要求：医疗健康</li>
+            </ul>
+          </div>
+          <div class="job-apply-section">
+            <a href="contact.html" class="job-apply-btn">
+              申请职位
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 职位 2: 高级结构设计工程师 -->
+      <div class="job-card" onclick="toggleJobCard(this)">
+        <div class="job-card-header">
+          <div class="job-card-main">
+            <h3>高级结构设计工程师</h3>
+            <span class="job-salary">25-35k·15 薪</span>
+          </div>
+          <div class="job-card-expand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="job-card-details">
+          <div class="job-card-body">
+            <div class="job-section-label">岗位职责</div>
+            <ul class="job-detail-list">
+              <li><strong>产品开发与设计：</strong>负责有源/无源医疗器械产品的结构设计、机械传动系统设计及整机堆叠，确保设计符合医疗法规及产品临床需求</li>
+              <li>负责从概念设计、手板验证到试产的全过程，主导技术评审，确保设计输出文件的完整性</li>
+              <li><strong>技术分析与仿真：</strong>利用有限元分析（FEA）工具对关键结构件、传动机构及外壳进行力学分析、模态分析和热分析，优化产品可靠性与耐用性</li>
+              <li><strong>工程图纸与技术文档：</strong>熟练运用 SolidWorks 或 Pro/E 进行复杂 3D 建模，输出高质量的 2D 工程图纸，确保 GD&T 标注的准确性与合理性</li>
+              <li><strong>跨部门协作：</strong>与硬件、嵌入式软件、工业设计及工艺工程师紧密合作，解决样机组装、模具开发及量产导入过程中的结构工艺问题</li>
+              <li><strong>合规与风险管理：</strong>深刻理解医疗器械设计控制流程，参与风险管理活动，识别结构设计相关的潜在危害并制定措施</li>
+            </ul>
+
+            <div class="job-section-label">岗位要求</div>
+            <ul class="job-detail-list">
+              <li>本科及以上学历，机械设计、精密仪器、材料成型或相关专业优先</li>
+              <li>精通 SolidWorks 或 Pro/E（Creo），能高效处理复杂曲面及大型装配体</li>
+              <li>具有 FEA 有限元仿真使用经验者优先</li>
+              <li>必须具有 10 年以上结构开发经验，其中至少 5 年以上专注于二类或三类医疗器械产品</li>
+              <li>英语可作工作语言</li>
+            </ul>
+          </div>
+          <div class="job-apply-section">
+            <a href="contact.html" class="job-apply-btn">
+              申请职位
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 职位 3: 高级嵌入式开发工程师 -->
+      <div class="job-card" onclick="toggleJobCard(this)">
+        <div class="job-card-header">
+          <div class="job-card-main">
+            <h3>高级嵌入式开发工程师</h3>
+            <span class="job-salary">25-35k·15 薪</span>
+          </div>
+          <div class="job-card-expand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="job-card-details">
+          <div class="job-card-body">
+            <div class="job-section-label">岗位职责</div>
+            <ul class="job-detail-list">
+              <li><strong>系统架构与设计：</strong>负责有源医疗器械产品的嵌入式系统架构设计，包括 MCU 选型、外设接口定义及电源管理方案制定，确保系统满足 IEC 60601 系列标准要求</li>
+              <li>主导产品需求分析，将临床需求转化为嵌入式软件技术规格</li>
+              <li><strong>软硬件协同开发：</strong>基于 RTOS 或 Linux 进行底层驱动开发、应用层逻辑编写及通信协议栈的实现</li>
+              <li><strong>医疗器械合规与文档：</strong>严格遵循医疗器械软件开发生命周期，依据 ISO 62304 执行软件计划、需求分析、设计、编码、集成、验证及发布</li>
+              <li><strong>测试与验证：</strong>设计单元测试用例及集成测试用例，搭建自动化测试框架，确保代码覆盖率及功能稳定性</li>
+            </ul>
+
+            <div class="job-section-label">岗位要求</div>
+            <ul class="job-detail-list">
+              <li>电子工程、计算机科学、自动化、生物医学工程或相关专业，本科及以上学历</li>
+              <li>必须具有 10 年以上嵌入式软硬件开发经验，其中至少 5 年以上专注于二类或三类有源医疗器械产品</li>
+              <li>精通 C/C++ 编程，具备良好的代码风格及注释习惯</li>
+              <li>熟悉主流 MCU 架构（如 ARM Cortex-M 系列，STM32, NXP, TI 等）</li>
+              <li>深刻理解并实际应用过医疗器械软件开发生命周期，熟悉 ISO 62304 标准</li>
+              <li>英语读写流利，能够熟练阅读英文技术手册、芯片 datasheet 及国际标准原文</li>
+            </ul>
+          </div>
+          <div class="job-apply-section">
+            <a href="contact.html" class="job-apply-btn">
+              申请职位
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 职位 4: 区域销售总监 -->
+      <div class="job-card" onclick="toggleJobCard(this)">
+        <div class="job-card-header">
+          <div class="job-card-main">
+            <h3>区域销售总监</h3>
+            <span class="job-salary">薪资面议</span>
+          </div>
+          <div class="job-card-expand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="job-card-details">
+          <div class="job-card-body">
+            <div class="job-section-label">职责描述</div>
+            <ul class="job-detail-list">
+              <li><strong>大客户开发及管理：</strong>开发新客户，负责落实辖区内终端大客户年度销售计划；建立终端大客户信息档案，开发并维护好终端大客户</li>
+              <li>制定完成区域专家的定期拜访及学术沟通，筛选区域学术带头人，策划完成区域学术会议</li>
+              <li><strong>制定销售计划及策略：</strong>分解销售指标，制定区域市场开发计划及策略，并组织实施确保区域目标达成</li>
+              <li><strong>销售过程管理：</strong>辅导代表完成区域年度、月度计划制定及落地执行；跟进代表周计划、日拜访反馈，及时发现并解决问题</li>
+              <li>协访、帮带、培养销售代表及实验员，提升下属技能及核心能力</li>
+              <li><strong>市场活动管理：</strong>组织代表收集、整理市场信息为市场部策划活动提供依据</li>
+              <li>有肿瘤、肝病、移植相关领域经验者优先；有大客户进院经验者优先</li>
+            </ul>
+
+            <div class="job-section-label">其他信息</div>
+            <ul class="job-detail-list">
+              <li>行业要求：医疗健康</li>
+            </ul>
+          </div>
+          <div class="job-apply-section">
+            <a href="contact.html" class="job-apply-btn">
+              申请职位
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 职位 5: 跨境资本重组项目经理 -->
+      <div class="job-card" onclick="toggleJobCard(this)">
+        <div class="job-card-header">
+          <div class="job-card-main">
+            <h3>跨境资本重组项目经理</h3>
+            <span class="job-salary">薪资面议</span>
+          </div>
+          <div class="job-card-expand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+        </div>
+        <div class="job-card-details">
+          <div class="job-card-body">
+            <div class="job-section-label">岗位职责</div>
+            <ul class="job-detail-list">
+              <li>全面负责开曼红筹架构搭建、境内外重组、中美业务分拆项目整体推进、计划制定与节点管控</li>
+              <li>协调 FA、律师（境内 + 境外）、会计师、评估机构、银行等所有中介机构</li>
+              <li>对接境内外股东、实控人、董事会、股东会，负责沟通、方案解释、异议处理、表决配合</li>
+              <li>负责老股东转让退出、新股东引入的流程落地、文件配合、工商及境外登记</li>
+              <li>中英文双语沟通，对接美方团队、境外机构，处理英文文件、会议、谈判支持</li>
+              <li>把控项目合规风险，跟进 37 号文登记、外汇、税务、商务备案等关键合规事项</li>
+              <li>定期向董事会/管理层汇报项目进度、风险、问题及解决方案</li>
+            </ul>
+
+            <div class="job-section-label">岗位要求</div>
+            <ul class="job-detail-list">
+              <li>法律、金融、财务、投融资相关专业本科及以上</li>
+              <li>必须有红筹重组/开曼架构/跨境分拆/境外上市重组实操经验（医疗行业优先）</li>
+              <li>完整操盘过境内企业翻红筹至开曼项目经验，懂整体路径</li>
+              <li>熟悉中美业务分拆、境内外股权调整、老股转让、股东重组流程</li>
+              <li>英语流利（听说读写），能独立开英文会议、审英文协议、对接美方人员</li>
+              <li>有 FA、投行、跨境律所、四大会计师事务所背景</li>
+            </ul>
+          </div>
+          <div class="job-apply-section">
+            <a href="contact.html" class="job-apply-btn">
+              申请职位
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="partners">
   <div class="partners-inner">
     <h3 class="partners-title">合作伙伴</h3>
@@ -939,6 +1430,21 @@
 
   function closeMenu() {
     document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // 职位卡片展开/收起功能
+  function toggleJobCard(card) {
+    const isExpanded = card.classList.contains('expanded');
+
+    // 先关闭所有其他卡片
+    document.querySelectorAll('.job-card').forEach(c => {
+      c.classList.remove('expanded');
+    });
+
+    // 如果之前没有展开，则展开当前卡片
+    if (!isExpanded) {
+      card.classList.add('expanded');
+    }
   }
 
   const observerOptions = {
