@@ -124,7 +124,7 @@
       'nav-solutions': 'Solutions',
       'nav-products-all': 'Products',
       'nav-devices': 'Devices',
-      'nav-drugs': 'Drugs',
+      'nav-drugs': 'Medicine',
       'nav-ivd': 'IVD',
       'nav-innovation': 'R&D Innovation',
       'nav-user-service': 'User Services',
