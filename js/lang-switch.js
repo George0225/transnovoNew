@@ -44,11 +44,20 @@
       'hero-desc-2': '面向全球市场的医疗产品与专业服务提供者。',
 
       // 首页 - About
-      'section-about-title': '关于健耕',
-      'section-about-subtitle': '二十年深耕，专注器官移植领域',
-      'section-about-stat1-label': '年深耕',
-      'section-about-stat2-label': '全球员工',
-      'section-about-stat3-label': 'IP',
+      'section-about-title': '公司介绍',
+      'section-about-subtitle': 'Company Profile',
+      'section-about-vision-title': '公司愿景 Company Vision',
+      'section-about-vision-zh': '构筑器官移植全新生态，让生命契机触手可及。',
+      'section-about-vision-en': 'To build a new ecology of organ transplantation and bring life opportunities within reach.',
+      'section-about-mission-title': '公司使命 Company Mission',
+      'section-about-mission-zh': '提供创新的器械、药品、诊断试剂和服务，改善移植器官的保存、评估、运输，助力移植患者长期存活，推动移植领域创新与发展。',
+      'section-about-mission-en': 'To provide innovative devices, drugs, diagnostic reagents and services to improve the preservation, evaluation and transportation of human organs, to help transplant patients survive over the long term, and to promote innovation and development in the field of transplantation.',
+      'section-about-intro-title': '公司简介 Company Introduction',
+      'section-about-intro-zh1': '上海健耕医药科技股份有限公司成立于2004年，注册资本7040万元人民币，全球员工人数<span class="num">192</span>人，其中研发人员26名。公司专注器官移植领域，围绕器官移植全程，提供器官移植相关的医疗器械和专业服务，产品远销全球49个国家和地区。',
+      'section-about-intro-zh2': '公司凭借卓越的技术创新能力，荣获工信部"专精特新小巨人"企业、上海市高新技术企业及上海市"专精特新"中小企业等多项资质认证，持续引领器官移植行业技术发展。',
+      'section-about-intro-en1': 'The company was founded in 2004 with a registered capital of RMB 70.4 million and <span class="num">192</span> employees worldwide, including 26 dedicated R&amp;D professionals.',
+      'section-about-intro-en2': 'The company focuses on organ transplantation as a provider of medical products and professional services. We have developped the products around the entire transplant process, which have been exported to about 49 countries and regions globally.',
+      'section-about-intro-en3': 'Recognized for propriety technological innovations, we hold several accreditations, such as Shanghai High-Tech Enterprise and the a National Specialized, Sophisticated, and Innovative \'Little Giant\' Enterprise by the Ministry of Industry and Information Technology (MIIT). Committed to industry leadership, we remain at the forefront of driving technological breakthroughs in transplant disease area.',
 
       // 首页 - 发展历程
       'history-title': '发展历程',
@@ -154,11 +163,20 @@
       'hero-desc-2': 'A global provider of medical products and professional services.',
 
       // 首页 - About
-      'section-about-title': 'About Transnovo',
-      'section-about-subtitle': '20+ Years of Dedication to Organ Transplantation',
-      'section-about-stat1-label': 'Years',
-      'section-about-stat2-label': 'Employees',
-      'section-about-stat3-label': 'IP Rights',
+      'section-about-title': 'Company Profile',
+      'section-about-subtitle': 'Company Profile',
+      'section-about-vision-title': '公司愿景 Company Vision',
+      'section-about-vision-zh': '构筑器官移植全新生态，让生命契机触手可及。',
+      'section-about-vision-en': 'To build a new ecology of organ transplantation and bring life opportunities within reach.',
+      'section-about-mission-title': '公司使命 Company Mission',
+      'section-about-mission-zh': '提供创新的器械、药品、诊断试剂和服务，改善移植器官的保存、评估、运输，助力移植患者长期存活，推动移植领域创新与发展。',
+      'section-about-mission-en': 'To provide innovative devices, drugs, diagnostic reagents and services to improve the preservation, evaluation and transportation of human organs, to help transplant patients survive over the long term, and to promote innovation and development in the field of transplantation.',
+      'section-about-intro-title': '公司简介 Company Introduction',
+      'section-about-intro-zh1': '上海健耕医药科技股份有限公司成立于2004年，注册资本7040万元人民币，全球员工人数<span class="num">192</span>人，其中研发人员26名。公司专注器官移植领域，围绕器官移植全程，提供器官移植相关的医疗器械和专业服务，产品远销全球49个国家和地区。',
+      'section-about-intro-zh2': '公司凭借卓越的技术创新能力，荣获工信部"专精特新小巨人"企业、上海市高新技术企业及上海市"专精特新"中小企业等多项资质认证，持续引领器官移植行业技术发展。',
+      'section-about-intro-en1': 'The company was founded in 2004 with a registered capital of RMB 70.4 million and <span class="num">192</span> employees worldwide, including 26 dedicated R&amp;D professionals.',
+      'section-about-intro-en2': 'The company focuses on organ transplantation as a provider of medical products and professional services. We have developped the products around the entire transplant process, which have been exported to about 49 countries and regions globally.',
+      'section-about-intro-en3': 'Recognized for propriety technological innovations, we hold several accreditations, such as Shanghai High-Tech Enterprise and the a National Specialized, Sophisticated, and Innovative \'Little Giant\' Enterprise by the Ministry of Industry and Information Technology (MIIT). Committed to industry leadership, we remain at the forefront of driving technological breakthroughs in transplant disease area.',
 
       // 首页 - 发展历程
       'history-title': 'History',
