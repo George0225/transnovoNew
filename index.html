@@ -1065,6 +1065,40 @@
       margin-bottom: 10px;
     }
 
+    /* 公司架构 */
+    .org-chart-section { padding: 80px 40px; background: var(--bg-light); }
+    .org-chart-section .section-header { max-width: 1200px; margin: 0 auto 48px; }
+    .org-chart-section .section-header h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; font-family: 'Playfair Display','Noto Serif SC',serif; color: var(--text-primary); margin-bottom: 8px; }
+    .org-chart-section .section-header p { font-size: 15px; color: var(--text-secondary); opacity: 0.7; }
+    .org-chart-wrap { max-width: 1100px; margin: 0 auto; }
+    .org-root { display: flex; justify-content: center; }
+    .org-box { border-radius: 8px; padding: 14px 20px; text-align: center; min-width: 140px; }
+    .org-box.root { background: var(--slate-800); color: #fff; min-width: 320px; padding: 18px 32px; }
+    .org-box.root .cn { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .org-box.root .en { font-size: 13px; opacity: 0.75; }
+    .org-box.child { background: #fff; border: 1.5px solid var(--slate-200); color: var(--text-primary); }
+    .org-box.child .cn { font-size: 13px; font-weight: 600; line-height: 1.4; margin-bottom: 3px; }
+    .org-box.child .en { font-size: 11px; color: var(--text-tertiary); line-height: 1.3; }
+    .org-box.child .role { font-size: 11px; color: var(--text-tertiary); margin-top: 6px; border-top: 1px solid var(--slate-100); padding-top: 5px; }
+    .org-box.overseas { background: var(--slate-50); border: 1.5px solid var(--slate-200); }
+    .org-connector-row { display: flex; justify-content: center; }
+    .org-connector-row .vline { width: 2px; height: 32px; background: var(--slate-300); margin: 0 auto; }
+    .org-children-row { display: flex; justify-content: center; gap: 16px; align-items: flex-start; }
+    .org-child-col { display: flex; flex-direction: column; align-items: center; }
+    .org-pct { font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px; }
+    .org-vline-top { width: 2px; height: 24px; background: var(--slate-300); }
+    .org-divider { max-width: 1100px; margin: 32px auto 8px; display: flex; align-items: center; gap: 12px; }
+    .org-divider-line { flex: 1; border-top: 1.5px dashed var(--slate-300); }
+    .org-divider-label { font-size: 13px; color: var(--text-tertiary); white-space: nowrap; }
+    .org-overseas-row { display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 8px; }
+    .org-sub-col { display: flex; flex-direction: column; align-items: center; }
+    .org-sub-vline { width: 2px; height: 24px; background: var(--slate-300); }
+    @media (max-width: 768px) {
+      .org-children-row { gap: 8px; flex-wrap: wrap; }
+      .org-box.root { min-width: 240px; }
+      .org-box.child { min-width: 100px; }
+    }
+
     .section-image {
       position: relative;
       border-radius: 24px;
@@ -2844,6 +2878,92 @@
     </div>
     <div class="section-image">
       <img src="images/about-m1.jpg" alt="健耕医药" />
+    </div>
+  </div>
+</section>
+
+<!-- 公司架构 -->
+<section class="org-chart-section" id="section-structure">
+  <div class="section-header">
+    <h2>公司架构</h2>
+    <p>Company Structure</p>
+  </div>
+  <div class="org-chart-wrap">
+    <!-- 根节点 -->
+    <div class="org-root">
+      <div class="org-box root">
+        <div class="cn">上海健耕医药科技股份有限公司</div>
+        <div class="en">Shanghai Transnovo Pharmaceutical Technology Co., Ltd.</div>
+      </div>
+    </div>
+    <!-- 连接线 -->
+    <div class="org-connector-row"><div class="vline"></div></div>
+    <!-- 子公司行 -->
+    <div class="org-children-row">
+      <div class="org-child-col">
+        <div class="org-pct">100%</div>
+        <div class="org-vline-top"></div>
+        <div class="org-box child">
+          <div class="cn">广东健耕药业<br/>有限公司</div>
+          <div class="en">Guangdong Genext<br/>Pharmaceutical Co., Ltd.</div>
+          <div class="role">药品销售</div>
+        </div>
+      </div>
+      <div class="org-child-col">
+        <div class="org-pct">90%</div>
+        <div class="org-vline-top"></div>
+        <div class="org-box child">
+          <div class="cn">上海云泽生物科技<br/>有限公司</div>
+          <div class="en">Shanghai Yunze<br/>Biotechnology Co., Ltd.</div>
+          <div class="role">IVD研发/生产</div>
+        </div>
+      </div>
+      <div class="org-child-col">
+        <div class="org-pct">100%</div>
+        <div class="org-vline-top"></div>
+        <div class="org-box child">
+          <div class="cn">上海耘沃科技<br/>有限公司</div>
+          <div class="en">Shanghai Yunvo Medical<br/>Co., Ltd.</div>
+        </div>
+      </div>
+      <div class="org-child-col">
+        <div class="org-pct">100%</div>
+        <div class="org-vline-top"></div>
+        <div class="org-box child">
+          <div class="cn">上海耘唛生物<br/>科技有限公司</div>
+          <div class="en">Shanghai Yunmai Biological<br/>Technology Co., Ltd.</div>
+          <div class="role">医药电商</div>
+        </div>
+      </div>
+      <div class="org-child-col">
+        <div class="org-pct">90%</div>
+        <div class="org-vline-top"></div>
+        <div class="org-box child">
+          <div class="cn">上海耘翌医院<br/>管理有限公司</div>
+          <div class="en">Shanghai Yunyi Hospital<br/>Management Co., Ltd.</div>
+          <div class="role">移植术后医疗服务</div>
+        </div>
+      </div>
+    </div>
+    <!-- 境内/海外分隔 -->
+    <div class="org-divider">
+      <div class="org-divider-line"></div>
+      <span class="org-divider-label">境内 China &nbsp;|&nbsp; 海外 Overseas</span>
+      <div class="org-divider-line"></div>
+    </div>
+    <!-- 海外子公司 -->
+    <div class="org-overseas-row">
+      <div class="org-sub-col">
+        <div class="org-sub-vline"></div>
+        <div class="org-box child overseas">
+          <div class="cn">Lifeline Scientific, Inc.</div>
+        </div>
+        <div class="org-sub-vline"></div>
+        <div class="org-box child overseas">
+          <div class="cn">Organ Recovery Systems</div>
+          <div class="role">全球医疗器械设计/研发/生产/营销</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
