@@ -1767,22 +1767,29 @@
     }
 
     /* 波浪形时间线容器 - 乳酪色主题，参考 Dell 截图风格 */
+    .timeline-wave-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 40px;
+    }
+
     .timeline-wave {
       position: relative;
-      max-width: 1400px;
+      min-width: max-content;
       margin: 0 auto;
       padding: 80px 0 100px;
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
+      gap: 0;
     }
 
     /* 中央时间轴线 - 乳酪色实线 */
     .timeline-wave-axis {
       position: absolute;
       top: 50%;
-      left: 80px;
-      right: 80px;
+      left: 0;
+      right: 0;
       height: 2px;
       background: #c4bdae;
       transform: translateY(-50%);
@@ -2854,6 +2861,7 @@
       <h3 class="history-title" data-i18n="history-title">发展历程</h3>
       <p class="history-subtitle" data-i18n="history-subtitle">HISTORY</p>
     </div>
+    <div class="timeline-wave-scroll">
     <div class="timeline-wave">
       <div class="timeline-wave-axis"></div>
 
@@ -2966,6 +2974,7 @@
           <div class="timeline-text" data-i18n="history-2025">莱拓低温冷藏箱<br/>通过 NMPA 注册</div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
