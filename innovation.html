@@ -545,82 +545,146 @@
       letter-spacing: 0.02em;
     }
 
-    /* 研发文字内容区 */
+    /* 诊断试剂板块 */
     .rd-section {
-      margin-top: 60px;
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(61,61,61,0.07), 0 0 0 1px var(--border);
     }
 
-    .rd-section-header {
-      margin-bottom: 48px;
+    .rd-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
     }
 
-    .rd-section-label {
+    /* 左侧文字区 */
+    .rd-text {
+      padding: 56px 52px 56px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .rd-text::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    }
+
+    .rd-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .rd-eyebrow-line {
+      width: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-400), var(--accent-600));
+      flex-shrink: 0;
+    }
+
+    .rd-eyebrow-text {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent-500);
-      margin-bottom: 16px;
     }
 
-    .rd-section-title {
-      font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 4vw, 42px);
+    .rd-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 34px;
       font-weight: 700;
       color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .rd-subsection {
-      padding: 48px 56px;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .rd-subsection::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--accent-400), var(--accent-600));
-    }
-
-    .rd-subsection-title {
-      font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--text-primary);
+      line-height: 1.15;
       margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+
+    .rd-divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-400), transparent);
+      border-radius: 2px;
+      margin-bottom: 28px;
     }
 
     .rd-paragraphs {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
     .rd-paragraphs p {
       font-family: 'Noto Serif SC', serif;
-      font-size: 16px;
-      line-height: 2;
+      font-size: 15px;
+      line-height: 1.95;
       color: var(--text-secondary);
       text-indent: 2em;
     }
 
-    @media (max-width: 768px) {
-      .rd-subsection {
-        padding: 32px 24px;
+    /* 右侧图片区 */
+    .rd-image {
+      position: relative;
+      overflow: hidden;
+      background: #0f0f0f;
+    }
+
+    .rd-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.92;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
+    }
+
+    .rd-image:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    .rd-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,20,10,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .rd-image-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 900px) {
+      .rd-inner {
+        grid-template-columns: 1fr;
+      }
+      .rd-text::after { display: none; }
+      .rd-image {
+        min-height: 280px;
+        order: -1;
+      }
+      .rd-text {
+        padding: 40px 28px;
       }
     }
     </style>
@@ -734,15 +798,24 @@
 <main class="product-content">
   <!-- 公司研发 - 诊断试剂 -->
   <div class="rd-section">
-    <div class="rd-section-header">
-      <div class="rd-section-label">公司研发</div>
-    </div>
-    <div class="rd-subsection">
-      <div class="rd-subsection-title">诊断试剂</div>
-      <div class="rd-paragraphs">
-        <p>公司目前应用于产品开发的IVD技术平台包括高效液相串联质谱（LC-MS/MS）分析平台、免疫检测平台、核酸检测平台；会进一步开设POCT和微流控技术平台，用于家庭化诊断产品的研发。</p>
-        <p>公司拥有先进的原料自研能力，具备大分子蛋白表达技术平台、多克隆抗体和单克隆抗体制备技术平台，自研产品高度自主化，竞争力强。</p>
-        <p>公司研发的胶乳比浊免疫分析（LETIA）检测平台具有灵敏、通用于大/小分子检测、基质干扰小等特点，该平台所研发的TDM系列检测产品已经通过NMPA、CE、ISO13485及FDA认证，并获得国内多家三甲医院认可与运用。</p>
+    <div class="rd-inner">
+      <div class="rd-text">
+        <div class="rd-eyebrow">
+          <span class="rd-eyebrow-line"></span>
+          <span class="rd-eyebrow-text">公司研发</span>
+        </div>
+        <h2 class="rd-title">诊断试剂</h2>
+        <div class="rd-divider"></div>
+        <div class="rd-paragraphs">
+          <p>公司目前应用于产品开发的IVD技术平台包括高效液相串联质谱（LC-MS/MS）分析平台、免疫检测平台、核酸检测平台；会进一步开设POCT和微流控技术平台，用于家庭化诊断产品的研发。</p>
+          <p>公司拥有先进的原料自研能力，具备大分子蛋白表达技术平台、多克隆抗体和单克隆抗体制备技术平台，自研产品高度自主化，竞争力强。</p>
+          <p>公司研发的胶乳比浊免疫分析（LETIA）检测平台具有灵敏、通用于大/小分子检测、基质干扰小等特点，该平台所研发的TDM系列检测产品已经通过NMPA、CE、ISO13485及FDA认证，并获得国内多家三甲医院认可与运用。</p>
+        </div>
+      </div>
+      <div class="rd-image">
+        <img src="images/diagnostic-lab.png" alt="诊断试剂研发实验室" />
+        <div class="rd-image-overlay"></div>
+        <div class="rd-image-caption">研发实验室</div>
       </div>
     </div>
   </div>

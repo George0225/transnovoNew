@@ -545,82 +545,144 @@
       letter-spacing: 0.02em;
     }
 
-    /* 研发文字内容区 */
+    /* Diagnostic Reagents Section */
     .rd-section {
-      margin-top: 60px;
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
+      margin-top: 48px;
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(61,61,61,0.07), 0 0 0 1px var(--border);
     }
 
-    .rd-section-header {
-      margin-bottom: 48px;
+    .rd-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
     }
 
-    .rd-section-label {
+    .rd-text {
+      padding: 56px 52px 56px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #ffffff;
+      position: relative;
+    }
+
+    .rd-text::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    }
+
+    .rd-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .rd-eyebrow-line {
+      width: 32px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-400), var(--accent-600));
+      flex-shrink: 0;
+    }
+
+    .rd-eyebrow-text {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent-500);
-      margin-bottom: 16px;
     }
 
-    .rd-section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .rd-subsection {
-      padding: 48px 56px;
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .rd-subsection::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--accent-400), var(--accent-600));
-    }
-
-    .rd-subsection-title {
+    .rd-title {
       font-family: 'Cormorant Garamond', 'Playfair Display', serif;
-      font-size: 26px;
+      font-size: 38px;
       font-weight: 700;
       color: var(--text-primary);
+      line-height: 1.15;
       margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+
+    .rd-divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-400), transparent);
+      border-radius: 2px;
+      margin-bottom: 28px;
     }
 
     .rd-paragraphs {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 18px;
     }
 
     .rd-paragraphs p {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.9;
+      font-size: 15px;
+      line-height: 1.85;
       color: var(--text-secondary);
       text-align: justify;
     }
 
-    @media (max-width: 768px) {
-      .rd-subsection {
-        padding: 32px 24px;
+    .rd-image {
+      position: relative;
+      overflow: hidden;
+      background: #0f0f0f;
+    }
+
+    .rd-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.92;
+      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
+    }
+
+    .rd-image:hover img {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+
+    .rd-image-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,20,10,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .rd-image-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 900px) {
+      .rd-inner {
+        grid-template-columns: 1fr;
+      }
+      .rd-text::after { display: none; }
+      .rd-image {
+        min-height: 280px;
+        order: -1;
+      }
+      .rd-text {
+        padding: 40px 28px;
       }
     }
     </style>
@@ -734,15 +796,24 @@
 <main class="product-content">
   <!-- Company R&D - Diagnostic Reagents -->
   <div class="rd-section">
-    <div class="rd-section-header">
-      <div class="rd-section-label">Company R&amp;D</div>
-    </div>
-    <div class="rd-subsection">
-      <div class="rd-subsection-title">Diagnostic Reagents</div>
-      <div class="rd-paragraphs">
-        <p>The company's current IVD technology platforms for product development include high performance liquid chromatography-tandem mass spectrometry (LC-MS/MS) analysis platform, immunoassay platform, and nucleic acid detection platform. The Company will further establish POCT and microfluidic technology platforms in the future for the development of home-based diagnostic products.</p>
-        <p>The Company has advanced self-research capability for raw materials, a large molecule protein expression technology platform, polyclonal antibody and monoclonal antibody preparation technology platforms, achieving a high degree of autonomy of self-research products with strong competitiveness.</p>
-        <p>The latex-enhanced turbidimetric immunoassay (LETIA) developed by the Company is characterized by high sensitivity, universal application in large/small molecule detection, low matrix interference. The TDM series test products developed using the platform have passed the NMPA, CE, ISO13485 and FDA certification, and have been approved and applied by many tertiary hospitals in China.</p>
+    <div class="rd-inner">
+      <div class="rd-text">
+        <div class="rd-eyebrow">
+          <span class="rd-eyebrow-line"></span>
+          <span class="rd-eyebrow-text">Company R&amp;D</span>
+        </div>
+        <h2 class="rd-title">Diagnostic Reagents</h2>
+        <div class="rd-divider"></div>
+        <div class="rd-paragraphs">
+          <p>The company's current IVD technology platforms for product development include high performance liquid chromatography-tandem mass spectrometry (LC-MS/MS) analysis platform, immunoassay platform, and nucleic acid detection platform. The Company will further establish POCT and microfluidic technology platforms in the future for the development of home-based diagnostic products.</p>
+          <p>The Company has advanced self-research capability for raw materials, a large molecule protein expression technology platform, polyclonal antibody and monoclonal antibody preparation technology platforms, achieving a high degree of autonomy of self-research products with strong competitiveness.</p>
+          <p>The latex-enhanced turbidimetric immunoassay (LETIA) developed by the Company is characterized by high sensitivity, universal application in large/small molecule detection, low matrix interference. The TDM series test products developed using the platform have passed the NMPA, CE, ISO13485 and FDA certification, and have been approved and applied by many tertiary hospitals in China.</p>
+        </div>
+      </div>
+      <div class="rd-image">
+        <img src="images/diagnostic-lab.png" alt="Diagnostic Reagents Research Laboratory" />
+        <div class="rd-image-overlay"></div>
+        <div class="rd-image-caption">R&amp;D Laboratory</div>
       </div>
     </div>
   </div>
