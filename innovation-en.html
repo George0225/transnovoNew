@@ -557,7 +557,6 @@
     .rd-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 480px;
     }
 
     .rd-text {
@@ -636,40 +635,33 @@
 
     .rd-image {
       position: relative;
-      overflow: hidden;
-      background: #0f0f0f;
+      background: #f5f5f3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
 
     .rd-image img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
-      opacity: 0.92;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
 
-    .rd-image:hover img {
-      transform: scale(1.04);
-      opacity: 1;
-    }
-
-    .rd-image-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(26,20,10,0.18) 0%, transparent 60%);
-      pointer-events: none;
-    }
+    .rd-image-overlay { display: none; }
 
     .rd-image-caption {
       position: absolute;
-      bottom: 20px;
-      left: 20px;
-      right: 20px;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 12px;
-      color: rgba(255,255,255,0.75);
+      font-size: 11px;
+      color: var(--text-tertiary);
       letter-spacing: 0.08em;
+      white-space: nowrap;
     }
 
     @media (max-width: 900px) {
