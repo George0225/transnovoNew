@@ -545,6 +545,84 @@
       letter-spacing: 0.02em;
     }
 
+    /* 研发文字内容区 */
+    .rd-section {
+      margin-top: 60px;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .rd-section-header {
+      margin-bottom: 48px;
+    }
+
+    .rd-section-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-500);
+      margin-bottom: 16px;
+    }
+
+    .rd-section-title {
+      font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .rd-subsection {
+      padding: 48px 56px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 50%, var(--bg-secondary) 100%);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rd-subsection::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--accent-400), var(--accent-600));
+    }
+
+    .rd-subsection-title {
+      font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .rd-paragraphs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .rd-paragraphs p {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 16px;
+      line-height: 2;
+      color: var(--text-secondary);
+      text-indent: 2em;
+    }
+
+    @media (max-width: 768px) {
+      .rd-subsection {
+        padding: 32px 24px;
+      }
+    }
     </style>
 </head>
 <body>
@@ -667,6 +745,21 @@
   <!-- 研发创新图片 3 -->
   <div class="product-image-full">
     <img src="images/innovation-content-3.png" alt="研发创新内容 3" />
+  </div>
+
+  <!-- 公司研发 - 诊断试剂 -->
+  <div class="rd-section">
+    <div class="rd-section-header">
+      <div class="rd-section-label">公司研发</div>
+    </div>
+    <div class="rd-subsection">
+      <div class="rd-subsection-title">诊断试剂</div>
+      <div class="rd-paragraphs">
+        <p>公司目前应用于产品开发的IVD技术平台包括高效液相串联质谱（LC-MS/MS）分析平台、免疫检测平台、核酸检测平台；会进一步开设POCT和微流控技术平台，用于家庭化诊断产品的研发。</p>
+        <p>公司拥有先进的原料自研能力，具备大分子蛋白表达技术平台、多克隆抗体和单克隆抗体制备技术平台，自研产品高度自主化，竞争力强。</p>
+        <p>公司研发的胶乳比浊免疫分析（LETIA）检测平台具有灵敏、通用于大/小分子检测、基质干扰小等特点，该平台所研发的TDM系列检测产品已经通过NMPA、CE、ISO13485及FDA认证，并获得国内多家三甲医院认可与运用。</p>
+      </div>
+    </div>
   </div>
 </main>
 
