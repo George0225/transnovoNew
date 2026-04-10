@@ -1065,40 +1065,6 @@
       margin-bottom: 10px;
     }
 
-    /* 公司架构 */
-    .org-chart-section { padding: 80px 40px; background: var(--bg-light); }
-    .org-chart-section .section-header { max-width: 1200px; margin: 0 auto 48px; }
-    .org-chart-section .section-header h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; font-family: 'Playfair Display','Noto Serif SC',serif; color: var(--text-primary); margin-bottom: 8px; }
-    .org-chart-section .section-header p { font-size: 15px; color: var(--text-secondary); opacity: 0.7; }
-    .org-chart-wrap { max-width: 1100px; margin: 0 auto; }
-    .org-root { display: flex; justify-content: center; }
-    .org-box { border-radius: 8px; padding: 14px 20px; text-align: center; min-width: 140px; }
-    .org-box.root { background: var(--slate-800); color: #fff; min-width: 320px; padding: 18px 32px; }
-    .org-box.root .cn { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-    .org-box.root .en { font-size: 13px; opacity: 0.75; }
-    .org-box.child { background: #fff; border: 1.5px solid var(--slate-200); color: var(--text-primary); }
-    .org-box.child .cn { font-size: 13px; font-weight: 600; line-height: 1.4; margin-bottom: 3px; }
-    .org-box.child .en { font-size: 11px; color: var(--text-tertiary); line-height: 1.3; }
-    .org-box.child .role { font-size: 11px; color: var(--text-tertiary); margin-top: 6px; border-top: 1px solid var(--slate-100); padding-top: 5px; }
-    .org-box.overseas { background: var(--slate-50); border: 1.5px solid var(--slate-200); }
-    .org-connector-row { display: flex; justify-content: center; }
-    .org-connector-row .vline { width: 2px; height: 32px; background: var(--slate-300); margin: 0 auto; }
-    .org-children-row { display: flex; justify-content: center; gap: 16px; align-items: flex-start; }
-    .org-child-col { display: flex; flex-direction: column; align-items: center; }
-    .org-pct { font-size: 12px; color: var(--text-tertiary); margin-bottom: 4px; }
-    .org-vline-top { width: 2px; height: 24px; background: var(--slate-300); }
-    .org-divider { max-width: 1100px; margin: 32px auto 8px; display: flex; align-items: center; gap: 12px; }
-    .org-divider-line { flex: 1; border-top: 1.5px dashed var(--slate-300); }
-    .org-divider-label { font-size: 13px; color: var(--text-tertiary); white-space: nowrap; }
-    .org-overseas-row { display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 8px; }
-    .org-sub-col { display: flex; flex-direction: column; align-items: center; }
-    .org-sub-vline { width: 2px; height: 24px; background: var(--slate-300); }
-    @media (max-width: 768px) {
-      .org-children-row { gap: 8px; flex-wrap: wrap; }
-      .org-box.root { min-width: 240px; }
-      .org-box.child { min-width: 100px; }
-    }
-
     .section-image {
       position: relative;
       border-radius: 24px;
@@ -1756,6 +1722,7 @@
     .development-history {
       margin-top: 120px;
       padding: 0 24px;
+      overflow: hidden;
     }
 
     .history-header {
@@ -1808,11 +1775,14 @@
       text-transform: uppercase;
     }
 
-    /* 波浪形时间线容器 - 乳酪色主题，参考 Dell 截图风格 */
+    /* 时间线容器 */
     .timeline-wave-scroll {
       overflow-x: auto;
+      overflow-y: visible;
       -webkit-overflow-scrolling: touch;
       padding: 0 40px;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .timeline-wave {
@@ -1826,7 +1796,7 @@
       gap: 0;
     }
 
-    /* 中央时间轴线 - 乳酪色实线 */
+    /* 中央时间轴线 */
     .timeline-wave-axis {
       position: absolute;
       top: 50%;
@@ -1837,7 +1807,6 @@
       transform: translateY(-50%);
     }
 
-    /* 时间轴左端垂直封口线 */
     .timeline-wave-axis::before {
       content: '';
       position: absolute;
@@ -1849,7 +1818,6 @@
       background: #c4bdae;
     }
 
-    /* 时间轴右端垂直封口线 */
     .timeline-wave-axis::after {
       content: '';
       position: absolute;
@@ -1861,11 +1829,12 @@
       background: #c4bdae;
     }
 
-    /* 时间线节点 - 交错布局 */
+    /* 时间线节点 */
     .timeline-item {
       position: relative;
       flex: 0 0 auto;
-      width: 140px;
+      width: 160px;
+      padding: 0 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1911,13 +1880,53 @@
       text-align: center;
     }
 
-    @keyframes timeline-reveal {
-      to {
-        opacity: 1;
-      }
+    /* 移除旧挂线（原本从年份连到轴线的竖线） */
+    .timeline-item:nth-child(even) .timeline-year-wrapper::before,
+    .timeline-item:nth-child(odd) .timeline-year-wrapper::after {
+      display: none;
     }
 
-    /* 年份挂线容器 */
+    /* 分隔竖线 —— 每个条目右侧，渐变淡出 */
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #c4bdae 15%,
+        #c4bdae 85%,
+        transparent 100%
+      );
+    }
+
+    /* 分隔线与轴线交点的菱形装饰 */
+    .timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      right: -3.5px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 7px;
+      height: 7px;
+      background: #c4bdae;
+      z-index: 3;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .timeline-item:hover::before {
+      background: #a09585;
+      transform: translateY(-50%) rotate(45deg) scale(1.3);
+    }
+
+    @keyframes timeline-reveal {
+      to { opacity: 1; }
+    }
+
+    /* 年份容器 */
     .timeline-year-wrapper {
       display: flex;
       flex-direction: column;
@@ -1925,31 +1934,7 @@
       position: relative;
     }
 
-    /* 偶数项挂线向上连接时间轴 */
-    .timeline-item:nth-child(even) .timeline-year-wrapper::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 40px;
-      background: #c4bdae;
-    }
-
-    /* 奇数项挂线向下连接时间轴 */
-    .timeline-item:nth-child(odd) .timeline-year-wrapper::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 2px;
-      height: 40px;
-      background: #c4bdae;
-    }
-
-    /* 年份标签 - 大号 serif 字体，乳酪色主题 */
+    /* 年份标签 */
     .timeline-year {
       font-family: 'Playfair Display', 'Noto Serif SC', Georgia, serif;
       font-size: 24px;
@@ -1969,11 +1954,11 @@
     }
 
     .timeline-item:hover .timeline-year {
-      color: #b5ac9d;
-      transform: scale(1.05);
+      color: #8a7d6e;
+      transform: scale(1.06);
     }
 
-    /* 内容卡片 - 无边框，纯文本 */
+    /* 内容区域 */
     .timeline-content {
       padding: 0 10px;
       background: transparent;
@@ -1982,7 +1967,7 @@
       border: none;
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
-      min-width: 160px;
+      min-width: 150px;
       text-align: center;
     }
 
@@ -1991,7 +1976,7 @@
     }
 
     .timeline-text {
-      font-size: 14px;
+      font-size: 13px;
       color: #5a5a5a;
       line-height: 1.8;
       position: relative;
@@ -2616,18 +2601,18 @@
       .core-value-en { font-size: 9px; }
       .core-value-number { width: 24px; height: 24px; font-size: 11px; }
 
-      /* 发展历程移动端适配 - 乳酪色主题 */
+      /* 发展历程移动端适配 */
       .development-history { margin-top: 50px; }
       .history-header { margin-bottom: 60px; }
       .history-title { font-size: 32px; padding: 0 0 16px 0; }
       .history-subtitle { font-size: 10px; }
       .timeline-wave { padding: 40px 0 60px; }
       .timeline-wave-axis { left: 40px; right: 40px; height: 1px; }
-      .timeline-item { width: 100px; }
+      .timeline-item { width: 120px; padding: 0 18px; }
       .timeline-item:nth-child(odd),
       .timeline-item:nth-child(even) { padding-top: 50px; padding-bottom: 50px; }
       .timeline-year { font-size: 16px; }
-      .timeline-content { min-width: 120px; }
+      .timeline-content { min-width: 110px; }
       .timeline-text { font-size: 12px; }
 
       /* 修复移动端视频 section 露出问题 */
@@ -2882,84 +2867,6 @@
   </div>
 </section>
 
-<!-- 公司架构 -->
-<section class="org-chart-section" id="section-structure">
-  <div class="section-header">
-    <h2>公司架构</h2>
-  </div>
-  <div class="org-chart-wrap">
-    <!-- 根节点 -->
-    <div class="org-root">
-      <div class="org-box root">
-        <div class="cn">上海健耕医药科技股份有限公司</div>
-      </div>
-    </div>
-    <!-- 连接线 -->
-    <div class="org-connector-row"><div class="vline"></div></div>
-    <!-- 子公司行 -->
-    <div class="org-children-row">
-      <div class="org-child-col">
-        <div class="org-pct">100%</div>
-        <div class="org-vline-top"></div>
-        <div class="org-box child">
-          <div class="cn">广东健耕药业<br/>有限公司</div>
-          <div class="role">药品销售</div>
-        </div>
-      </div>
-      <div class="org-child-col">
-        <div class="org-pct">90%</div>
-        <div class="org-vline-top"></div>
-        <div class="org-box child">
-          <div class="cn">上海云泽生物科技<br/>有限公司</div>
-          <div class="role">IVD研发/生产</div>
-        </div>
-      </div>
-      <div class="org-child-col">
-        <div class="org-pct">100%</div>
-        <div class="org-vline-top"></div>
-        <div class="org-box child">
-          <div class="cn">上海耘沃科技<br/>有限公司</div>
-        </div>
-      </div>
-      <div class="org-child-col">
-        <div class="org-pct">100%</div>
-        <div class="org-vline-top"></div>
-        <div class="org-box child">
-          <div class="cn">上海耘唛生物<br/>科技有限公司</div>
-          <div class="role">医药电商</div>
-        </div>
-      </div>
-      <div class="org-child-col">
-        <div class="org-pct">90%</div>
-        <div class="org-vline-top"></div>
-        <div class="org-box child">
-          <div class="cn">上海耘翌医院<br/>管理有限公司</div>
-          <div class="role">移植术后医疗服务</div>
-        </div>
-      </div>
-    </div>
-    <!-- 境内/海外分隔 -->
-    <div class="org-divider">
-      <div class="org-divider-line"></div>
-      <span class="org-divider-label">境内 &nbsp;|&nbsp; 海外</span>
-      <div class="org-divider-line"></div>
-    </div>
-    <!-- 海外子公司 -->
-    <div class="org-overseas-row">
-      <div class="org-sub-col">
-        <div class="org-sub-vline"></div>
-        <div class="org-box child overseas">
-          <div class="cn">Lifeline Scientific, Inc.</div>
-        </div>
-        <div class="org-sub-vline"></div>
-        <div class="org-box child overseas">
-          <div class="cn">Organ Recovery Systems</div>
-          <div class="role">全球医疗器械设计/研发/生产/营销</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- 发展历程 - 波浪形交错时间线 -->
 <section class="content-section section-white">
