@@ -633,36 +633,53 @@
       text-align: justify;
     }
 
+    /* Right image zone — dual stacked panels */
     .rd-image {
       position: relative;
-      background: #f5f5f3;
+      background: #e8e4dd;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      flex-direction: column;
+      gap: 6px;
+      padding: 16px;
     }
 
-    .rd-image img {
+    .rd-img-slot {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      flex: 1;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.14);
+    }
+
+    .rd-img-slot img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       display: block;
-      border-radius: 10px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .rd-img-slot:hover img {
+      transform: scale(1.05);
+    }
+
+    .rd-img-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 14px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.12em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      border-radius: 0 0 10px 10px;
     }
 
     .rd-image-overlay { display: none; }
-
-    .rd-image-caption {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11px;
-      color: var(--text-tertiary);
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
+    .rd-image-caption { display: none; }
 
     @media (max-width: 900px) {
       .rd-inner {
@@ -670,8 +687,14 @@
       }
       .rd-text::after { display: none; }
       .rd-image {
-        min-height: 280px;
+        min-height: 360px;
         order: -1;
+        flex-direction: row;
+        gap: 6px;
+        padding: 14px;
+      }
+      .rd-img-slot {
+        flex: 1;
       }
       .rd-text {
         padding: 40px 28px;
@@ -802,9 +825,14 @@
         </div>
       </div>
       <div class="rd-image">
-        <img src="images/diagnostic-lab.png" alt="Diagnostic Reagents Research Laboratory" />
-        <div class="rd-image-overlay"></div>
-        <div class="rd-image-caption">R&amp;D Laboratory</div>
+        <div class="rd-img-slot">
+          <img src="images/lab2.png" alt="Diagnostic Reagents Research Laboratory" />
+          <div class="rd-img-label">Testing Laboratory</div>
+        </div>
+        <div class="rd-img-slot">
+          <img src="images/lab1.png" alt="R&D Center" />
+          <div class="rd-img-label">R&amp;D Center</div>
+        </div>
       </div>
     </div>
   </div>
