@@ -388,12 +388,17 @@
       overflow: hidden;
       background: var(--bg-secondary);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: center;
     }
 
     .product-image-full img {
       width: 100%;
+      max-width: 1200px;
       height: auto;
       display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: high-quality;
     }
 
     /* 页脚 */
