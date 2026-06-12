@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rapamycin Assay Kit - tranSnovo</title>
+  <meta name="description" content="Rapamycin Assay Kit — under development and registration, expected launch in 2027." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary-50: #fdfdfc;
+      --primary-100: #f7f5f0;
+      --primary-200: #efede6;
+      --primary-300: #e6e2d9;
+      --primary-400: #d6d0c4;
+      --primary-500: #c4bdae;
+      --primary-600: #b5ac9d;
+      --primary-700: #a39a8b;
+      --accent-400: #b89654;
+      --accent-500: #a48546;
+      --accent-600: #92743a;
+      --slate-50: #f8f7f5;
+      --slate-100: #f0efeb;
+      --slate-200: #e0ded8;
+      --slate-300: #c8c5be;
+      --slate-400: #a5a29a;
+      --slate-500: #827f78;
+      --slate-600: #63605a;
+      --slate-700: #45433f;
+      --slate-800: #2a2926;
+      --slate-900: #161513;
+      --bg-primary: #fdfdfc;
+      --bg-secondary: var(--slate-50);
+      --bg-tertiary: var(--slate-100);
+      --bg-light: #f7f5f0;
+      --bg-dark: #2a2926;
+      --border: var(--slate-200);
+      --text-primary: #1a1a1a;
+      --text-secondary: #3a3732;
+      --text-tertiary: #6a6660;
+      --text-light: #ffffff;
+      --warm-stone: #c4bdae;
+      --warm-sand: #d6d0c4;
+      --shadow-sm: 0 1px 3px rgba(61, 61, 61, 0.05);
+      --shadow-md: 0 4px 12px rgba(61, 61, 61, 0.08);
+      --shadow-lg: 0 8px 30px rgba(61, 61, 61, 0.10);
+      --shadow-xl: 0 20px 60px rgba(61, 61, 61, 0.12);
+      --glow-soft: 0 0 40px rgba(196, 189, 174, 0.35);
+      --glow-warm: 0 0 40px rgba(184, 150, 84, 0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', 'Cormorant Garamond', serif;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.75;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--slate-100); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-400), var(--primary-600)); border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--primary-500), var(--primary-700)); }
+
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 99999;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo img { height: 42px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .nav-links > li > a {
+      display: block;
+      padding: 12px 20px;
+      color: var(--text-primary);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .nav-links > li > a:hover { color: var(--tech-blue); background: rgba(91, 143, 249, 0.08); }
+    .nav-links > li { position: relative; }
+
+    .nav-links > li > a.has-submenu::after {
+      content: ''; display: inline-block;
+      width: 0; height: 0; margin-left: 6px;
+      vertical-align: middle;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
+      transition: transform 0.3s;
+    }
+    .nav-links > li > a.has-submenu:hover::after { transform: rotate(180deg); }
+
+    .nav-links .sub-menu {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 220px; background: #fff;
+      border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 0; list-style: none;
+      opacity: 0; visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15); z-index: 1001;
+    }
+    .nav-links > li:hover > .sub-menu { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+    .nav-links .sub-menu > li { list-style: none; }
+    .nav-links .sub-menu > li > a { padding: 12px 20px; display: block; color: var(--text-primary); font-size: 14px; text-decoration: none; border-radius: 8px; transition: all 0.2s; }
+    .nav-links .sub-menu > li > a:hover { color: var(--tech-blue); background: rgba(91, 143, 249, 0.08); }
+    .nav-links .sub-menu > li { position: relative; list-style: none; }
+    .nav-links .sub-menu li .sub-menu-2 { position: absolute; left: 100%; top: 0; min-width: 220px; opacity: 0; visibility: hidden; transform: translateX(10px); }
+    .nav-links .sub-menu li:hover > .sub-menu-2 { opacity: 1; visibility: visible; transform: translateX(0); }
+    .nav-links .sub-menu li > a.has-submenu { display: flex; justify-content: space-between; align-items: center; }
+    .nav-links .sub-menu li > a.has-submenu::after { content: '›'; font-size: 20px; line-height: 1; margin-left: 8px; color: currentColor; }
+    .nav-links .sub-menu-2 { padding: 12px 0; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); white-space: nowrap; }
+    .nav-links .sub-menu-2 li { list-style: none; }
+    .nav-links .sub-menu-2 li > a { padding: 12px 20px; display: block; color: var(--text-primary); font-size: 14px; text-decoration: none; border-radius: 8px; transition: all 0.2s; }
+    .nav-links .sub-menu-2 li > a:hover { color: var(--tech-blue); background: rgba(91, 143, 249, 0.08); }
+    .nav-links .sub-menu-2 li .sub-menu-3 { position: absolute; left: 100%; top: 0; min-width: 280px; max-width: 320px; opacity: 0; visibility: hidden; transform: translateX(10px); white-space: nowrap; max-height: min(400px, 70vh); overflow-y: auto; overflow-x: hidden; }
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar { width: 5px; }
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track { background: var(--slate-100); border-radius: 3px; }
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-300), var(--primary-500)); border-radius: 3px; }
+    .nav-links .sub-menu-2 li:hover > .sub-menu-3 { opacity: 1; visibility: visible; transform: translateX(0); }
+    .nav-links .sub-menu-2 li > a.has-submenu { display: flex; justify-content: space-between; align-items: center; }
+    .nav-links .sub-menu-2 li > a.has-submenu::after { content: '›'; font-size: 20px; line-height: 1; margin-left: 8px; color: currentColor; }
+    .sub-menu-3 { padding: 12px 0; background: #fff; border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .sub-menu-3 .product-group-title { font-size: 12px; font-weight: 600; color: var(--text-tertiary); padding: 8px 20px 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sub-menu-3 .product-group { margin-bottom: 8px; list-style: none; }
+    .sub-menu-3 .product-item { padding: 10px 20px 10px 28px; font-size: 13px; color: var(--text-secondary); transition: all 0.2s; display: block; list-style: none; }
+    .sub-menu-3 .product-item:hover { color: var(--tech-blue); background: rgba(91, 143, 249, 0.05); }
+
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-toggle span { width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s; }
+    .nav-mobile { display: none; position: fixed; top: 80px; left: 0; right: 0; background: #fff; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 999; }
+    .nav-mobile.open { display: block; }
+    .nav-mobile a { display: block; padding: 16px; color: var(--text-primary); text-decoration: none; font-size: 16px; border-bottom: 1px solid var(--border); }
+
+    .page-header {
+      margin-top: 80px;
+      padding: 80px 24px 60px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      text-align: center;
+    }
+
+    .page-header h1 { font-size: clamp(24px, 3.5vw, 40px); font-weight: 700; color: var(--accent); margin-bottom: 12px; }
+    .page-header p { font-size: 16px; color: var(--text-secondary); }
+
+    .coming-soon-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 100px 24px 120px;
+      text-align: center;
+    }
+
+    .coming-soon-icon {
+      width: 80px; height: 80px;
+      margin: 0 auto 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .coming-soon-icon svg { width: 36px; height: 36px; color: var(--accent-500); }
+
+    .coming-soon-title { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--text-primary); margin-bottom: 20px; line-height: 1.4; }
+    .coming-soon-message { font-size: 17px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 40px; }
+
+    .coming-soon-year {
+      display: inline-block;
+      padding: 10px 28px;
+      background: linear-gradient(135deg, var(--accent-400), var(--accent-500));
+      color: #fff;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 40px; padding: 12px 24px;
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 14px; border: 1px solid var(--border);
+      border-radius: 8px; transition: all 0.2s;
+    }
+    .back-link:hover { color: var(--tech-blue); border-color: var(--tech-blue); background: rgba(91, 143, 249, 0.04); }
+
+    #footer { background: var(--bg-primary); border-top: 1px solid var(--border); padding: 60px 24px 40px; }
+    .footer-inner { max-width: 1400px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1.5fr; gap: 60px; margin-bottom: 40px; }
+    .footer-brand img { height: 42px; margin-bottom: 20px; }
+    .footer-brand p { font-size: 14px; color: var(--text-tertiary); line-height: 1.8; }
+    .footer-brand p .num, .footer-contact .num, .footer-bottom .num { font-family: 'Playfair Display', 'Noto Serif SC', serif; font-variant-numeric: tabular-nums lining-nums; font-feature-settings: 'tnum' 1, 'lnum' 1; letter-spacing: 0.02em; }
+    .footer-section h4 { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 20px; }
+    .footer-qrcodes { display: flex; gap: 20px; }
+    .footer-qr img { width: 100px; height: 100px; border-radius: 8px; border: 1px solid var(--border); }
+    .footer-qr span { display: block; font-size: 12px; color: var(--text-tertiary); margin-top: 8px; text-align: center; }
+    .footer-contact { list-style: none; }
+    .footer-contact li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+    .footer-contact svg { width: 20px; height: 20px; color: var(--tech-blue); flex-shrink: 0; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 30px; border-top: 1px solid rgba(91, 143, 249, 0.1); font-size: 13px; color: var(--text-tertiary); }
+    .footer-bottom a { color: var(--text-secondary); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--tech-blue); }
+
+    @media (max-width: 1200px) { .nav-inner { padding: 0 32px; } .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; } }
+    @media (max-width: 768px) { .nav-inner { height: 72px; padding: 0 20px; } .nav-links { display: none; } .nav-toggle { display: flex; } .page-header { padding: 60px 20px 40px; } .coming-soon-wrapper { padding: 60px 20px 80px; } .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } .footer-qrcodes { display: none; } }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index-en.html" class="nav-logo">
+      <img src="images/logo.png" alt="tranSnovo" />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index-en.html" data-i18n="nav-home">Home</a></li>
+      <li>
+        <a href="products-en.html" class="has-submenu" data-i18n="nav-products">Products</a>
+        <ul class="sub-menu">
+          <li><a href="solutions-en.html" data-i18n="nav-solutions">Solutions</a></li>
+          <li>
+            <a href="products-en.html#devices" class="has-submenu" data-i18n="nav-products-all">All Products</a>
+            <ul class="sub-menu-2">
+              <li>
+                <a href="products-en.html#devices" class="has-submenu" data-i18n="nav-devices">Devices</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title">Machine Perfusion</div>
+                    <a href="machine-perfusion-en.html" class="product-item">LifePort® Kidney Transporter</a>
+                    <a href="liver-perfusion-en.html" class="product-item">LifePort® Liver Transporter</a>
+                    <a href="kps-1-en.html" class="product-item">KPS-1®: Kidney Perfusion Solution</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title">Static Cold Storage</div>
+                    <a href="static-cold-storage-en.html" class="product-item">Laituo® Refrigerated Transport Box</a>
+                    <a href="organ-preservation-en.html" class="product-item">SPS-1®: Static Preservation Solution</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="products-en.html#drugs" class="has-submenu" data-i18n="nav-drugs">Drugs</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title">Immunosuppressants</div>
+                    <a href="immunosuppressant-en.html" class="product-item">Tacrolimus Capsules</a>
+                    <a href="immunosuppressant-en.html" class="product-item">Mycophenolate Sodium Tablets</a>
+                    <a href="immunosuppressant-en.html" class="product-item">Valganciclovir HCl Tablets</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title">Anti-infectives</div>
+                    <a href="immunosuppressant-en.html" class="product-item">Trimethoprim/Sulfamethoxazole</a>
+                    <a href="immunosuppressant-en.html" class="product-item">Valganciclovir Tablets</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="products-en.html#ivd" class="has-submenu" data-i18n="nav-ivd">IVD</a>
+                <ul class="sub-menu-3">
+                  <li class="product-group">
+                    <div class="product-group-title">Therapeutic Drug Monitoring (TDM)</div>
+                    <a href="tdm-en.html" class="product-item">Tacrolimus Assay Kit</a>
+                    <a href="rapamycin-kit-en.html" class="product-item">Rapamycin Assay Kit</a>
+                    <a href="rapamycin-kit-en.html" class="product-item">Rapamycin Assay Kit</a>
+                    <a href="mycophenolic-acid-kit-en.html" class="product-item">Mycophenolic Acid Assay Kit</a>
+                    <a href="biochemistry-analyzer-en.html" class="product-item">Automated Biochemistry Analyzer</a>
+                  </li>
+                  <li class="product-group">
+                    <div class="product-group-title">HLA Typing &amp; Antibody Detection</div>
+                    <a href="hla-dna-en.html" class="product-item">HLA-DNA Typing Kit</a>
+                    <a href="hla-antibody-en.html" class="product-item">HLA-Specific Antibody Detection Kit</a>
+                    <a href="hla-class1-en.html" class="product-item">HLA Class I Single-Antigen Antibody</a>
+                    <a href="hla-class2-en.html" class="product-item">HLA Class II Single-Antigen Antibody</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="innovation-en.html" data-i18n="nav-innovation">R&amp;D</a></li>
+      <li>
+        <a href="#" class="has-submenu" data-i18n="nav-user-service">Services</a>
+        <ul class="sub-menu">
+          <li><a href="operation-videos-en.html">Operation Videos</a></li>
+          <li><a href="training-videos-en.html">Training Videos</a></li>
+          <li><a href="investment-en.html">Distribution</a></li>
+        </ul>
+      </li>
+      <li><a href="patients-en.html" data-i18n="nav-patients">Patients</a></li>
+      <li><a href="talent-en.html" data-i18n="nav-talent">Careers</a></li>
+    </ul>
+    <a href="contact-en.html" class="nav-btn" data-i18n="nav-contact">Contact Us</a>
+
+    <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="index-en.html" onclick="closeMenu()">Home</a>
+    <a href="products-en.html" onclick="closeMenu()">Products</a>
+    <a href="innovation-en.html" onclick="closeMenu()">R&amp;D</a>
+    <a href="#" onclick="closeMenu()">Services</a>
+    <a href="patients-en.html" onclick="closeMenu()">Patients</a>
+    <a href="talent-en.html" onclick="closeMenu()">Careers</a>
+    <a href="contact-en.html" onclick="closeMenu()">Contact Us</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Rapamycin Assay Kit</h1>
+  <p>Therapeutic Drug Monitoring (TDM)</p>
+</section>
+
+<!-- COMING SOON -->
+<main>
+  <div class="coming-soon-wrapper">
+    <div class="coming-soon-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    <h2 class="coming-soon-title">Under Development &amp; Registration</h2>
+    <p class="coming-soon-message">This product is currently in the R&amp;D and registration phase.<br />Expected commercial launch in 2027 — stay tuned.</p>
+    <span class="coming-soon-year">Expected Launch: 2027</span>
+    <br />
+    <a href="products-en.html#ivd" class="back-link">
+      ← Back to Products
+    </a>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="tranSnovo" class="logo" />
+        <p>Founded in <span class="num">2004</span>, registered capital <span class="num">71.187</span>M RMB, <span class="num">200+</span> employees worldwide including <span class="num">26</span> R&amp;D staff. Focused on the full transplant journey, serving global markets with medical products and professional services.</p>
+      </div>
+
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="footer-qrcodes">
+          <div class="footer-qr">
+            <img src="images/qcode.png" alt="Website QR" />
+            <span>Website QR</span>
+          </div>
+          <div class="footer-qr">
+            <img src="images/wechat-2.png" alt="WeChat" />
+            <span>WeChat</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <ul class="footer-contact">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <span class="num">021-61763507</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2H2l10 10 10-10z"/><path d="M12 12v10"/></svg>
+            <span class="num">021-52370879</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Room <span class="num">1101</span>, Bldg <span class="num">2</span>, Science &amp; Technology Plaza, <span class="num">2388</span> Chenxing Rd, Pujiang, Minhang, Shanghai</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        &copy; <span class="num">2014</span> – <span class="num">2026</span> Shanghai Jiangeng Medical Technology Co., Ltd.
+      </div>
+      <div class="footer-icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank">ICP <span class="num">12033151</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+</script>
+<script src="js/lang-switch.js"></script>
+
+</body>
+</html>

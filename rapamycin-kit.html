@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>药物浓度检测 - tranSnovo 健耕医药</title>
-  <meta name="description" content="提供免疫抑制剂血药浓度检测产品与服务，实现个体化用药指导。" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <title>雷帕霉素测定试剂盒 - tranSnovo 健耕医药</title>
+  <meta name="description" content="雷帕霉素测定试剂盒，研发注册中，预计2027年上市。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -58,7 +56,6 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Cormorant Garamond', 'Noto Serif SC', 'Plus Jakarta Sans', serif;
       color: var(--text-primary);
@@ -79,29 +76,10 @@
       background: linear-gradient(180deg, var(--primary-500), var(--primary-700));
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .animate-on-scroll {
-      opacity: 0;
-      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .delay-1 { animation-delay: 0.15s; }
-    .delay-2 { animation-delay: 0.3s; }
-
+    /* 导航栏 */
     #nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 99999;
       background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(20px) saturate(180%);
@@ -119,20 +97,13 @@
       justify-content: space-between;
     }
 
-    .nav-logo img {
-      height: 42px;
-      width: auto;
-    }
+    .nav-logo img { height: 42px; width: auto; }
 
     .nav-links {
       display: flex;
       list-style: none;
       gap: 8px;
       align-items: center;
-    }
-
-    .nav-links > li {
-      position: relative;
     }
 
     .nav-links > li > a {
@@ -149,110 +120,76 @@
     .nav-links > li > a:hover,
     .nav-links > li > a.active {
       color: var(--tech-blue);
-      background: var(--accent-soft);
+      background: rgba(91, 143, 249, 0.08);
     }
 
+    .nav-links > li { position: relative; }
 
-
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
+    .nav-links > li > a.has-submenu::after {
+      content: '';
+      display: inline-block;
+      width: 0; height: 0;
+      margin-left: 6px;
+      vertical-align: middle;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid currentColor;
+      transition: transform 0.3s;
     }
 
-    .nav-toggle span {
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      transition: all 0.3s;
-    }
+    .nav-links > li > a.has-submenu:hover::after { transform: rotate(180deg); }
 
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      top: 80px;
-      left: 0;
-      right: 0;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      z-index: 999;
-    }
-
-    .nav-mobile.open {
-      display: block;
-    }
-
-    .nav-mobile a {
-      display: block;
-      padding: 16px;
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 16px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sub-menu {
+    .nav-links .sub-menu {
       position: absolute;
-      top: 100%;
-      left: 0;
-      min-width: 200px;
+      top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 220px;
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 12px;
-      list-style: none;
       padding: 12px 0;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      z-index: 1001;
+      list-style: none;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(10px);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      z-index: 1001;
     }
 
-    .nav-links > li:hover .sub-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
+    .nav-links > li:hover > .sub-menu {
+      opacity: 1; visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
-    .sub-menu li a {
+    .nav-links .sub-menu > li { list-style: none; }
+
+    .nav-links .sub-menu > li > a {
+      padding: 12px 20px;
       display: block;
-      padding: 10px 20px;
-      color: var(--text-secondary);
-      text-decoration: none;
+      color: var(--text-primary);
       font-size: 14px;
+      text-decoration: none;
+      border-radius: 8px;
       transition: all 0.2s;
     }
 
-    .sub-menu li a:hover {
+    .nav-links .sub-menu > li > a:hover {
       color: var(--tech-blue);
-      background: var(--bg-secondary);
+      background: rgba(91, 143, 249, 0.08);
     }
 
-    /* 二级下拉菜单 */
-    .nav-links .sub-menu li {
-      position: relative;
-      list-style: none;
-    }
+    .nav-links .sub-menu > li { position: relative; list-style: none; }
 
     .nav-links .sub-menu li .sub-menu-2 {
       position: absolute;
-      left: 100%;
-      top: 0;
+      left: 100%; top: 0;
       min-width: 220px;
-      opacity: 0;
-      visibility: hidden;
+      opacity: 0; visibility: hidden;
       transform: translateX(10px);
     }
 
     .nav-links .sub-menu li:hover > .sub-menu-2 {
-      opacity: 1;
-      visibility: visible;
+      opacity: 1; visibility: visible;
       transform: translateX(0);
     }
 
@@ -270,7 +207,6 @@
       color: currentColor;
     }
 
-    /* 三级下拉菜单 */
     .nav-links .sub-menu-2 {
       padding: 12px 0;
       background: #fff;
@@ -280,9 +216,7 @@
       white-space: nowrap;
     }
 
-    .nav-links .sub-menu-2 li {
-      list-style: none;
-    }
+    .nav-links .sub-menu-2 li { list-style: none; }
 
     .nav-links .sub-menu-2 li > a {
       padding: 12px 20px;
@@ -301,12 +235,10 @@
 
     .nav-links .sub-menu-2 li .sub-menu-3 {
       position: absolute;
-      left: 100%;
-      top: 0;
+      left: 100%; top: 0;
       min-width: 280px;
       max-width: 320px;
-      opacity: 0;
-      visibility: hidden;
+      opacity: 0; visibility: hidden;
       transform: translateX(10px);
       white-space: nowrap;
       max-height: min(400px, 70vh);
@@ -314,24 +246,12 @@
       overflow-x: hidden;
     }
 
-    /* 三级菜单滚动条样式 */
-    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track {
-      background: var(--slate-100);
-      border-radius: 3px;
-    }
-
-    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, var(--primary-300), var(--primary-500));
-      border-radius: 3px;
-    }
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar { width: 5px; }
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-track { background: var(--slate-100); border-radius: 3px; }
+    .nav-links .sub-menu-2 li .sub-menu-3::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--primary-300), var(--primary-500)); border-radius: 3px; }
 
     .nav-links .sub-menu-2 li:hover > .sub-menu-3 {
-      opacity: 1;
-      visibility: visible;
+      opacity: 1; visibility: visible;
       transform: translateX(0);
     }
 
@@ -366,10 +286,7 @@
       letter-spacing: 0.5px;
     }
 
-    .sub-menu-3 .product-group {
-      margin-bottom: 8px;
-      list-style: none;
-    }
+    .sub-menu-3 .product-group { margin-bottom: 8px; list-style: none; }
 
     .sub-menu-3 .product-item {
       padding: 10px 20px 10px 28px;
@@ -385,363 +302,162 @@
       background: rgba(91, 143, 249, 0.05);
     }
 
-    /* Dropdown arrow using CSS */
-    .nav-links > li > a.has-submenu::after {
-      content: '';
-      display: inline-block;
-      width: 0;
-      height: 0;
-      margin-left: 6px;
-      vertical-align: middle;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid currentColor;
-      transition: transform 0.3s;
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
     }
 
-    .nav-links > li > a.has-submenu:hover::after {
-      transform: rotate(180deg);
+    .nav-toggle span {
+      width: 24px; height: 2px;
+      background: var(--text-primary);
+      transition: all 0.3s;
     }
 
-    /* Page Header */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 80px; left: 0; right: 0;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      z-index: 999;
+    }
+
+    .nav-mobile.open { display: block; }
+
+    .nav-mobile a {
+      display: block;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 页面标题 */
     .page-header {
       margin-top: 80px;
-      padding: 100px 24px;
+      padding: 80px 24px 60px;
       background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
       text-align: center;
     }
 
     .page-header h1 {
-      font-size: clamp(40px, 5vw, 64px);
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    .page-header p {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Product Content */
-    .product-content {
-      max-width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    .product-image-full {
-      width: 100%;
-      border-radius: 0;
-      overflow: hidden;
-      background: var(--bg-secondary);
-      box-shadow: none;
-    }
-
-    .product-image-full img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Product Detail Section */
-    .product-detail-section {
-      padding: 120px 24px;
-      background: var(--bg-primary);
-    }
-
-    .product-detail-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      display: inline-block;
-      padding: 8px 20px;
-      background: var(--accent-soft);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 20px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-
-    .section-description {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.9;
-      margin-bottom: 48px;
-      max-width: 800px;
-    }
-
-    .product-showcase {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      margin-bottom: 80px;
-    }
-
-    .product-showcase-img {
-      background: var(--bg-secondary);
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .product-showcase-img img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .product-showcase-content h3 {
-      font-size: 28px;
+      font-size: clamp(28px, 4vw, 42px);
       font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 20px;
-    }
-
-    .product-showcase-content p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 24px;
-    }
-
-    .feature-list {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .feature-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 15px;
-      color: var(--text-primary);
+      color: var(--accent);
       margin-bottom: 12px;
     }
 
-    .feature-list li::before {
-      content: "✓";
+    .page-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    /* Coming Soon 区域 */
+    .coming-soon-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 100px 24px 120px;
+      text-align: center;
+    }
+
+    .coming-soon-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+      border: 2px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 20px;
-      height: 20px;
-      background: var(--tech-blue);
-      color: #fff;
-      border-radius: 50%;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
     }
 
-    .showcase-btn {
-      display: inline-block;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-      color: #fff;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.3s;
+    .coming-soon-icon svg {
+      width: 36px;
+      height: 36px;
+      color: var(--accent-500);
     }
 
-    .showcase-btn:hover {
-      background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px var(--tech-glow);
-    }
-
-    /* Products Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 60px;
-    }
-
-    .product-card {
-      position: relative;
-      background: #fff;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-      border-color: var(--tech-blue);
-    }
-
-    .product-card .product-image {
-      height: 180px;
-      overflow: hidden;
-      background: var(--bg-secondary);
-    }
-
-    .product-card .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .product-card:hover .product-image img {
-      transform: scale(1.1);
-    }
-
-    .product-card .product-info {
-      padding: 24px;
-    }
-
-    .product-card .product-title {
-      font-size: 16px;
+    .coming-soon-title {
+      font-size: clamp(22px, 3vw, 32px);
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 8px;
+      margin-bottom: 20px;
+      line-height: 1.4;
     }
 
-    .product-card .product-desc {
-      font-size: 14px;
-      color: var(--text-tertiary);
-      line-height: 1.6;
-    }
-
-    /* CTA Section */
-    .cta-section {
-      padding: 100px 24px;
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
-      text-align: center;
-    }
-
-    .cta-content {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .cta-section p {
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 32px;
-    }
-
-    .cta-btn {
-      display: inline-block;
-      padding: 16px 40px;
-      background: #fff;
-      color: var(--accent);
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 16px;
-      transition: all 0.3s;
-    }
-
-    .cta-btn:hover {
-      background: var(--bg-secondary);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Partners */
-    #partners {
-      padding: 80px 24px;
-      background: var(--bg-secondary);
-    }
-
-    .partners-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .partners-title {
-      text-align: center;
-      font-size: 28px;
-      font-weight: 700;
+    .coming-soon-message {
+      font-size: 17px;
       color: var(--text-secondary);
-      margin-bottom: 48px;
+      line-height: 1.9;
+      margin-bottom: 40px;
     }
 
-    .partners-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 32px;
+    .coming-soon-year {
+      display: inline-block;
+      padding: 10px 28px;
+      background: linear-gradient(135deg, var(--accent-400), var(--accent-500));
+      color: #fff;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .back-link {
+      display: inline-flex;
       align-items: center;
+      gap: 8px;
+      margin-top: 40px;
+      padding: 12px 24px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: all 0.2s;
     }
 
-    .partner-logo {
-      opacity: 0.6;
-      transition: opacity 0.3s, transform 0.3s;
+    .back-link:hover {
+      color: var(--tech-blue);
+      border-color: var(--tech-blue);
+      background: rgba(91, 143, 249, 0.04);
     }
 
-    .partner-logo:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .partner-logo img {
-      width: 100%;
-      height: auto;
-    }
-
-    /* Footer */
+    /* 页脚 */
     #footer {
       background: var(--bg-primary);
       border-top: 1px solid var(--border);
-      padding: 80px 24px 40px;
+      padding: 60px 24px 40px;
     }
 
-    .footer-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+    .footer-inner { max-width: 1400px; margin: 0 auto; }
 
     .footer-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1.5fr;
       gap: 60px;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
-    .footer-brand .logo {
-      height: 48px;
-      margin-bottom: 24px;
-    }
+    .footer-brand img { height: 42px; margin-bottom: 20px; }
 
     .footer-brand p {
       font-size: 14px;
       color: var(--text-tertiary);
       line-height: 1.8;
-      margin-bottom: 20px;
     }
-    /* 正式数字样式 - 专业财务报表风格 */
-    .footer-brand p .num {
+
+    .footer-brand p .num,
+    .footer-contact .num,
+    .footer-bottom .num {
       font-family: 'Playfair Display', 'Noto Serif SC', serif;
       font-variant-numeric: tabular-nums lining-nums;
       font-feature-settings: 'tnum' 1, 'lnum' 1;
@@ -752,7 +468,7 @@
       font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .footer-qrcodes {
@@ -760,14 +476,9 @@
       gap: 20px;
     }
 
-    .footer-qr {
-      text-align: center;
-    }
-
     .footer-qr img {
-      width: 120px;
-      height: 120px;
-      border-radius: 12px;
+      width: 100px; height: 100px;
+      border-radius: 8px;
       border: 1px solid var(--border);
     }
 
@@ -776,7 +487,10 @@
       font-size: 12px;
       color: var(--text-tertiary);
       margin-top: 8px;
+      text-align: center;
     }
+
+    .footer-contact { list-style: none; }
 
     .footer-contact li {
       display: flex;
@@ -785,12 +499,10 @@
       font-size: 14px;
       color: var(--text-secondary);
       margin-bottom: 16px;
-      list-style: none;
     }
 
     .footer-contact svg {
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       color: var(--tech-blue);
       flex-shrink: 0;
     }
@@ -799,67 +511,34 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 40px;
-      border-top: 1px solid var(--border-light);
-    }
-
-    .footer-copyright {
+      padding-top: 30px;
+      border-top: 1px solid rgba(91, 143, 249, 0.1);
       font-size: 13px;
       color: var(--text-tertiary);
     }
 
-    .footer-icp {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    .footer-icp a {
+    .footer-bottom a {
       color: var(--text-secondary);
       text-decoration: none;
     }
 
-    .footer-icp a:hover {
-      color: var(--tech-blue);
-    }
+    .footer-bottom a:hover { color: var(--tech-blue); }
 
-    /* Responsive */
     @media (max-width: 1200px) {
       .nav-inner { padding: 0 32px; }
-      .product-showcase { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .partners-grid { grid-template-columns: repeat(3, 1fr); }
       .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
-      .footer-qrcodes { justify-content: center; }
     }
 
     @media (max-width: 768px) {
       .nav-inner { height: 72px; padding: 0 20px; }
-      .page-header { padding: 60px 20px; }
-      .page-header h1 { font-size: clamp(32px, 8vw, 48px); }
-      .product-detail-section { padding: 80px 20px; }
-      .products-grid { grid-template-columns: 1fr; }
-      .partners-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .page-header { padding: 60px 20px 40px; }
+      .coming-soon-wrapper { padding: 60px 20px 80px; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
       .footer-qrcodes { display: none; }
     }
-  
-    /* 联系电话数字正式样式 */
-    .footer-contact .num {
-      font-family: 'Playfair Display', 'Noto Serif SC', serif;
-      font-variant-numeric: tabular-nums lining-nums;
-      font-feature-settings: 'tnum' 1, 'lnum' 1;
-      letter-spacing: 0.02em;
-    }
-
-    /* 页脚底部数字正式样式 */
-    .footer-bottom .num {
-      font-family: 'Playfair Display', 'Noto Serif SC', serif;
-      font-variant-numeric: tabular-nums lining-nums;
-      font-feature-settings: 'tnum' 1, 'lnum' 1;
-      letter-spacing: 0.02em;
-    }
-
-    </style>
+  </style>
 </head>
 <body>
 
@@ -870,7 +549,7 @@
       <img src="images/logo.png" alt="tranSnovo 健耕医药" />
     </a>
 
-        <ul class="nav-links">
+    <ul class="nav-links">
       <li><a href="index.html" data-i18n="nav-home">首页</a></li>
       <li>
         <a href="products.html" class="has-submenu" data-i18n="nav-products">产品中心</a>
@@ -889,7 +568,8 @@
                     <a href="kps-1.html" class="product-item">KPS-1®器官保存液</a>
                   </li>
                   <li class="product-group">
-                    <div class="product-group-title" data-i18n="product-static-cold">静态冷藏</div>                    <a href="machine-perfusion.html" class="product-item">莱拓®医用冷藏转运箱</a>
+                    <div class="product-group-title" data-i18n="product-static-cold">静态冷藏</div>
+                    <a href="static-cold-storage.html" class="product-item">莱拓®医用冷藏转运箱</a>
                     <a href="organ-preservation.html" class="product-item">SPS-1®器官保存液</a>
                   </li>
                 </ul>
@@ -916,7 +596,7 @@
                   <li class="product-group">
                     <div class="product-group-title" data-i18n="product-tdm">治疗药物监测（TDM）</div>
                     <a href="tdm.html" class="product-item">他克莫司测定试剂盒</a>
-                    <a href="cyclosporine-kit.html" class="product-item">环孢霉素测定试剂盒</a>
+                    <a href="rapamycin-kit.html" class="product-item">雷帕霉素测定试剂盒</a>
                     <a href="rapamycin-kit.html" class="product-item">雷帕霉素测定试剂盒</a>
                     <a href="mycophenolic-acid-kit.html" class="product-item">霉酚酸测定试剂盒</a>
                     <a href="biochemistry-analyzer.html" class="product-item">全自动生化分析仪</a>
@@ -945,7 +625,8 @@
       </li>
       <li><a href="patients.html" data-i18n="nav-patients">关爱患者</a></li>
       <li><a href="talent.html" data-i18n="nav-talent">人才中心</a></li>
-    </ul><a href="contact.html" class="nav-btn" data-i18n="nav-contact">联系我们</a>
+    </ul>
+    <a href="contact.html" class="nav-btn" data-i18n="nav-contact">联系我们</a>
 
     <button class="nav-toggle" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -956,9 +637,6 @@
     <a href="index.html" onclick="closeMenu()" data-i18n="nav-home">首页</a>
     <a href="products.html" onclick="closeMenu()" data-i18n="nav-products">产品中心</a>
     <a href="innovation.html" onclick="closeMenu()" data-i18n="nav-innovation">研发创新</a>
-      <li>
-        <a href="innovation.html" data-i18n="nav-innovation">研发创新</a>
-      </li>
     <a href="#" onclick="closeMenu()" data-i18n="nav-user-service">用户服务</a>
     <a href="patients.html" onclick="closeMenu()" data-i18n="nav-patients">关爱患者</a>
     <a href="talent.html" onclick="closeMenu()" data-i18n="nav-talent">人才中心</a>
@@ -968,14 +646,26 @@
 
 <!-- PAGE HEADER -->
 <section class="page-header">
-  <h1>药物浓度检测</h1>
-  <p>精准血药浓度监测，实现个体化用药指导</p>
+  <h1>雷帕霉素测定试剂盒</h1>
+  <p>治疗药物监测（TDM）</p>
 </section>
 
-<!-- PRODUCT IMAGE SECTION -->
-<main class="product-content">
-  <div class="product-image-full">
-    <img src="images/tdm.png" alt="TDM 药物浓度检测产品介绍" />
+<!-- COMING SOON -->
+<main>
+  <div class="coming-soon-wrapper">
+    <div class="coming-soon-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    <h2 class="coming-soon-title">研发注册中</h2>
+    <p class="coming-soon-message">该产品目前正处于研发注册阶段，<br />预计 2027 年正式上市，敬请期待。</p>
+    <span class="coming-soon-year">预计 2027 年上市</span>
+    <br />
+    <a href="products.html#ivd" class="back-link">
+      ← 返回产品中心
+    </a>
   </div>
 </main>
 
@@ -1035,22 +725,11 @@
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    nav.classList.toggle('scrolled', window.scrollY > 50);
   });
-
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  function closeMenu() {
-    document.getElementById('mobileMenu').classList.remove('open');
-  }
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
 </script>
-
 <script src="js/lang-switch.js"></script>
 
 </body>
