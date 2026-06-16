@@ -873,14 +873,91 @@
       .nav-links, .nav-btn { display: none; }
       .nav-toggle { display: flex; }
       .nav-inner { height: 72px; padding: 0 20px; }
-      .video-container { grid-template-columns: 1fr; }
-      .sidebar { position: relative; top: 0; max-height: none; }
-      .category-tabs { flex-wrap: wrap; }
-      .category-tab { padding: 10px 20px; }
-      .search-box input { width: 200px; }
-      .content-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+
+      /* 主容器：单列，减小内边距 */
+      .video-container {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 16px;
+      }
+
+      /* 分类标签：恢复跨全列，全宽显示 */
+      .category-tabs {
+        grid-column: 1;
+        width: 100%;
+        justify-content: stretch;
+      }
+
+      .category-tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px 8px;
+        font-size: 14px;
+      }
+
+      /* 侧边栏：取消 sticky，自然流 */
+      .sidebar {
+        position: relative;
+        top: 0;
+        max-height: none;
+      }
+
+      /* 内容区：减小内边距 */
+      .content-area {
+        padding: 16px;
+        min-height: auto;
+      }
+
+      /* 标题行：竖排 */
+      .content-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+      }
+
+      .content-title {
+        font-size: 18px;
+      }
+
+      /* 搜索框：全宽 */
+      .search-box {
+        width: 100%;
+      }
+
+      .search-box input {
+        width: 100%;
+      }
+
+      /* 视频网格：单列 */
+      .video-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      /* 弹窗 */
       .video-modal-content { width: 95%; padding: 16px; }
       .video-modal-title { font-size: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .category-tab {
+        padding: 8px 6px;
+        font-size: 13px;
+      }
+
+      .content-area {
+        padding: 12px;
+      }
+
+      .video-info {
+        padding: 12px;
+      }
+
+      .video-title {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
